@@ -5,6 +5,7 @@ import { Card, FormField, Loader } from '../components';
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
+  const [searchText, setSearchText] = useState('');
 
   return (
     <section className='max-w-7xl mx-auto'>
@@ -20,12 +21,18 @@ const Home = () => {
       </div>
 
       <div className='mt-10'>
-        {!loading ? (
+        {loading ? (
           <div className='flex justify-center items-center'>
             <Loader />
           </div>
         ) : (
-          <></>
+          <>
+            {searchText && (
+              <h2 className='font-medium text-[#666e75] text-xl mb-3'>
+                Showing results for <span className='text-[#4a6d88]'>{searchText}</span>
+              </h2>
+            )}
+          </>
         )}
       </div>
     </section>
