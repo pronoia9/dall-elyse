@@ -15,6 +15,8 @@ const CreatePost = () => {
 
   const handleSurpriseMe = (e) => {};
 
+  const generateImage = () => {};
+
   const handleSubmit = () => {};
 
   return (
@@ -62,7 +64,11 @@ const CreatePost = () => {
           </div>
         </div>
 
-        <div></div>
+        <div className='mt-5 flex gap-5'>
+          <button type='button' onClick={generateImage}>
+            {generatingImg ? 'Generating...' : 'Generate'}
+          </button>
+        </div>
       </form>
     </section>
   );
