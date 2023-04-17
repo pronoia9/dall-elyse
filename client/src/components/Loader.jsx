@@ -1,11 +1,13 @@
 import './Loader.css';
 
-const Loader = () => (
+const Loader = ({ text }) => (
   <>
     <div className='arc'></div>
-    <h1 className='loading-text'>
-      <span>LOADING</span>
-    </h1>
+    {text && (
+      <h1 className='loading-text'>
+        <span>LOADING</span>
+      </h1>
+    )}
   </>
 );
 
