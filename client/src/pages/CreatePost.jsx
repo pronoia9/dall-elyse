@@ -65,7 +65,10 @@ const CreatePost = () => {
         </div>
 
         <div className='mt-5 flex gap-5'>
-          <button type='button' onClick={generateImage}>
+          <button
+            type='button'
+            onClick={generateImage}
+            className='text-[#d5d9e0] bg-[#4a6d88] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'>
             {generatingImg ? 'Generating...' : 'Generate'}
           </button>
         </div>
