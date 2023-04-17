@@ -21,7 +21,7 @@ const FormField = ({ labelName, type, name, placeholder, value, handleChange, is
         placeholder={placeholder}
         value={value}
         onChange={handleChange}
-        className='bg-[#0b0b14] border border-[#001e38] text-[#d5d9e0] text-sm rounded-lg focus:ring-[#4a6d88] focus:border-[#4a6d88] outline-none block w-full p-3'
+        className='bg-[#0b0b14] border border-[#001e38] text-[#c6cdd7] text-sm rounded-lg focus:ring-[#4a6d88] focus:border-[#4a6d88] outline-none block w-full p-3'
       />
     </div>
   );
