@@ -47,20 +47,22 @@ const CreatePost = () => {
             handleSurpriseMe={handleSurpriseMe}
           />
 
-          <div className='relative bg-[#001e3850] border border-[#001e38] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center'>
+          <div className='relative bg-[#0b0b14] border border-[#001e38] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center'>
             {form.photo ? (
               <img src={form.photo} alt={form.photo} className='w-full h-full object-contain' />
             ) : (
               <img src={preview} alt={preview} className='w-9/12 h-9/12 object-contain opacity-50' />
             )}
 
-            {!generatingImg && (
+            {generatingImg && (
               <div className='absolute inset-0 z-0 flex justify-center items-center bg-[rgba(0,0,0,0.5)] rounded-lg'>
-                <Loader text='' />
+                <Loader text={false} />
               </div>
             )}
           </div>
         </div>
+
+        <div></div>
       </form>
     </section>
   );
