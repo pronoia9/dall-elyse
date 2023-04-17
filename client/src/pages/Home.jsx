@@ -8,7 +8,7 @@ const RenderCards = ({ data, title }) =>
   ) : (
     <h2 className='mt-5 font-bold text-[#4a6d88] uppercase'>{title}</h2>
   );
-  
+
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
@@ -39,7 +39,12 @@ const Home = () => {
                 Showing results for <span className='text-[#4a6d88]'>{searchText}</span>
               </h2>
             )}
-            <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3'></div>
+            <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3'>
+              <RenderCards
+                data={searchText ? [] : []}
+                title={searchText ? 'No search results found' : 'No posts found'}
+              />
+            </div>
           </>
         )}
       </div>
