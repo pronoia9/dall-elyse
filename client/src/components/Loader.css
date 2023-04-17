@@ -80,7 +80,7 @@ body {
   letter-spacing: 0.1em;
   font-size: 14px;
   font-weight: lighter;
-  /* color: white; */
+  color: white;
 }
 .loading-text span {
   display: none;
@@ -111,9 +111,12 @@ body {
 }
 @keyframes txt {
   0% {
+    content: 'LOADING';
+  }
+  33% {
     content: 'LOADING.';
   }
-  50% {
+  66% {
     content: 'LOADING..';
   }
   100% {
