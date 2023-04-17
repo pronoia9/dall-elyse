@@ -80,7 +80,7 @@ const CreatePost = () => {
           <button
             type='submit'
             className='mt-3 text-[#c6cdd7] bg-[#001e38] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'>
-            {loading ? 'Sharing...' : 'Share'}
+            {loading ? 'Sharing...' : 'Share with the community'}
           </button>
         </div>
       </form>
