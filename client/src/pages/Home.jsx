@@ -4,39 +4,58 @@ import { Card, FormField, Loader } from '../components';
 
 const RenderCards = ({ data, title }) =>
   data?.length > 0 ? (
-    data.map((post) => <Card key={post._id} {...post}></Card>)
+    data.map((post) => <Card key={post._id} {...post} />)
   ) : (
-    <h2 className='mt-5 font-bold text-[#4a6d88] uppercase'>{title}</h2>
+    <h2 className='mt-5 font-bold text-[#4a6d88] text-xl uppercase'>{title}</h2>
   );
 
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
   const [searchText, setSearchText] = useState('');
+  const [searchedResults, setSearchedResults] = useState(null);
+  const [searchTimeout, setSearchTimeout] = useState(null);
+
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const result = await response.json();
+        setAllPosts(result.data.reverse());
+      }
+    } catch (error) {
+      alert('Something went wrong getting posts.');
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(import.meta.env.VITE_POSTS_URL, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-          const result = await response.json();
-          setAllPosts(result.data.reverse());
-        }
-      } catch (error) {
-        alert('Something went wrong getting posts.')
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    }
     fetchPosts();
-  }, [])
+  }, []);
+
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = allPosts.filter(
+          (post) =>
+            post.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            post.prompt.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  };
 
   return (
     <section className='max-w-7xl mx-auto'>
@@ -48,7 +67,14 @@ const Home = () => {
       </div>
 
       <div className='mt-16'>
-        <FormField />
+        <FormField
+          labelName='Search Posts'
+          type='text'
+          name='text'
+          placeholder='Search Something...'
+          value={searchText}
+          handleChange={handleSearchChange}
+        />
       </div>
 
       <div className='mt-10'>
@@ -60,12 +86,12 @@ const Home = () => {
           <>
             {searchText && (
               <h2 className='font-medium text-[#666e75] text-xl mb-3'>
-                Showing results for <span className='text-[#4a6d88]'>{searchText}</span>
+                Showing resuls for <span className='text-[#4a6d88]'>{searchText}</span>
               </h2>
             )}
             <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3'>
               <RenderCards
-                data={searchText ? allPosts : allPosts}
+                data={searchText ? searchedResults : allPosts}
                 title={searchText ? 'No search results found' : 'No posts found'}
               />
             </div>
