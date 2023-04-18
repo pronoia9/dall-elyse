@@ -15,7 +15,7 @@ const CreatePost = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSurpriseMe = (e) => {
+  const handleSurpriseMe = () => {
     setForm({ ...form, prompt: getRandomPrompt(form.prompt) });
   };
 
@@ -70,7 +70,7 @@ const CreatePost = () => {
       <div>
         <h1 className='font-extrabold text-[#d5d9e0] text-[32px]'>Create</h1>
         <p className='mt-2 text-[#c6cdd7] text-[14px] max-w-[500px]'>
-          Create imaginative and visually stunning images through DALL-E AI and share them with the community.
+          Generate an imaginative image through DALL-E AI and share it with the community
         </p>
       </div>
 
@@ -80,7 +80,7 @@ const CreatePost = () => {
             labelName='Your Name'
             type='text'
             name='name'
-            placeholder='Jane Doe'
+            placeholder='Ex: Jane Doe'
             value={form.name}
             handleChange={handleChange}
           />
@@ -97,9 +97,9 @@ const CreatePost = () => {
 
           <div className='relative bg-[#0b0b14] border border-[#001e38] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center'>
             {form.photo ? (
-              <img src={form.photo} alt={form.photo} className='w-full h-full object-contain' />
+              <img src={form.photo} alt={form.prompt} className='w-full h-full object-contain' />
             ) : (
-              <img src={preview} alt={preview} className='w-9/12 h-9/12 object-contain opacity-50' />
+              <img src={preview} alt='preview' className='w-9/12 h-9/12 object-contain opacity-40' />
             )}
 
             {generatingImg && (
@@ -122,13 +122,13 @@ const CreatePost = () => {
 
         <div className='mt-10'>
           <p className='mt-2 text-[#c6cdd7] text-[14px]'>
-            Once you have created the image you want, you can share it with others in the community.
+            Once you have created the image you want, you can share it with others in the community
           </p>
           <button
             type='submit'
             className='mt-3 text-[#c6cdd7] bg-[#001e38] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'
           >
-            {loading ? 'Sharing...' : 'Share with the community'}
+            {loading ? 'Sharing...' : 'Share with the Community'}
           </button>
         </div>
       </form>
