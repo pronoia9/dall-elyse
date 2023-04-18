@@ -46,7 +46,7 @@ const CreatePost = () => {
     if (form.name && form.prompt && form.photo) {
       setLoading(true);
       try {
-        const response = await fetch(import.meta.env.VITE_POST_URL, {
+        const response = await fetch(import.meta.env.VITE_POSTS_URL, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
