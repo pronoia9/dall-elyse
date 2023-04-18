@@ -41,7 +41,29 @@ const CreatePost = () => {
     } else alert('Please enter a prompt.');
   };
 
-  const handleSubmit = () => {};
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (form.name && form.prompt && form.photo) {
+      setLoading(true);
+      try {
+        const response = await fetch(import.meta.env.VITE_POST_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        });
+        await response.json();
+        navigate('/');
+      } catch (error) {
+        alert('Something went wrong posting image.');
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    else alert('Please enter all the form fields.')
+  };
 
   return (
     <section className='max-w-7xl mx-auto'>
