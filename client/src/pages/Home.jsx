@@ -14,6 +14,30 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState(null);
   const [searchText, setSearchText] = useState('');
 
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const result = await response.json();
+          setAllPosts(result.data.reverse());
+        }
+      } catch (error) {
+        alert('Something went wrong getting posts.')
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPosts();
+  }, [])
+
   return (
     <section className='max-w-7xl mx-auto'>
       <div>
@@ -41,7 +65,7 @@ const Home = () => {
             )}
             <div className='grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3'>
               <RenderCards
-                data={searchText ? [] : []}
+                data={searchText ? allPosts : allPosts}
                 title={searchText ? 'No search results found' : 'No posts found'}
               />
             </div>
