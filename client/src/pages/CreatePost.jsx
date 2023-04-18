@@ -11,11 +11,35 @@ const CreatePost = () => {
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => { setForm({ ...form, [e.target.name]: e.target.value }); };
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-  const handleSurpriseMe = (e) => { setForm({ ...form, prompt: getRandomPrompt(form.prompt) }); };
+  const handleSurpriseMe = (e) => {
+    setForm({ ...form, prompt: getRandomPrompt(form.prompt) });
+  };
 
-  const generateImage = () => {};
+  const generateImage = async () => {
+    if (form.prompt) {
+      try {
+        setGeneratingImg(true);
+        const response = await fetch(import.meta.env.VITE_OPENAI_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt: form.prompt }),
+        });
+        const data = await response.json();
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+      } catch (error) {
+        console.error(error);
+        alert('There was an error getting a response from OpenAI.');
+      } finally {
+        setGeneratingImg(false);
+      }
+    } else alert('Please enter a prompt.');
+  };
 
   const handleSubmit = () => {};
 
@@ -68,7 +92,8 @@ const CreatePost = () => {
           <button
             type='button'
             onClick={generateImage}
-            className='text-[#d5d9e0] bg-[#4a6d88] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'>
+            className='text-[#d5d9e0] bg-[#4a6d88] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+          >
             {generatingImg ? 'Generating...' : 'Generate'}
           </button>
         </div>
@@ -79,7 +104,8 @@ const CreatePost = () => {
           </p>
           <button
             type='submit'
-            className='mt-3 text-[#c6cdd7] bg-[#001e38] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'>
+            className='mt-3 text-[#c6cdd7] bg-[#001e38] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center'
+          >
             {loading ? 'Sharing...' : 'Share with the community'}
           </button>
         </div>
