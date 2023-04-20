@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import MenuItem from './MenuItem';
 import { navLinks } from '../utils';
@@ -22,8 +22,21 @@ const NavbarButtons = ({ styles }) => (
   </>
 );
 
-const Navbar = ({ isMobile }) => {
+const Navbar = () => {
+  const [isMobile, setIsMobile] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 991px)'); // Add a listener for changes to the screen size
+    setIsMobile(mediaQuery.matches); // Set the initial value of the `isMobile` state variable
+    const handleMediaQueryChange = (event) => {
+      setIsMobile(event.matches);
+    }; // Define a callback function to handle changes to the media query
+    mediaQuery.addEventListener('change', handleMediaQueryChange); // Add the callback function as a listener for changes to the media query
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaQueryChange);
+    }; // Remove the listener when the component is unmounted
+  }, []);
 
   return (
     <header id='brx-header' className='sticky'>
