@@ -11,13 +11,7 @@ const RenderCards = ({ data, title }) =>
 
 const Gallery = ({ allPosts, searchText, searchedResults }) => {
   const [postsRendered, setPostsRendered] = useState(9);
-
-  useEffect(() => {
-    console.log('posts rendered', postsRendered);
-  }, postsRendered);
-  console.log('allPosts', allPosts?.length > postsRendered, allPosts);
-  console.log('searchedResults', searchedResults);
-
+  
   return (
     <section id='brxe-mfscie' className='brxe-section'>
       {/* SECTION WRAPPER */}
