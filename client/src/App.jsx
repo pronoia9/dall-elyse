@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Navbar, Hero, Gallery, About, Create, Contact, Footer } from './components';
+import { Navbar, Hero, Gallery, About, Contact, Footer, LearnMore } from './components';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
@@ -39,7 +39,7 @@ const App = () => {
         <Hero allPosts={allPosts} searchText={searchText} setSearchText={setSearchText} setSearchedResults={setSearchedResults} />
         <Gallery allPosts={allPosts} searchText={searchText} searchedResults={searchedResults} />
         <About />
-        <Create />
+        <LearnMore />
         <Contact />
       </main>
       <Footer />
