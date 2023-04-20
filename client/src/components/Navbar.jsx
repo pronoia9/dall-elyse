@@ -1,5 +1,3 @@
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-
 import icon from '../assets/icon.png';
 import { navLinks } from '../utils';
 
@@ -16,7 +14,7 @@ const Navbar = () => {
     <header id='brx-header' className='sticky'>
       <div id='brxe-xgfsbz' className='brxe-section'>
         <div id='brxe-blwmxr' className='brxe-container'>
-          <Link to='/' id='brxe-lnamba' className='brxe-div'>
+          <a href='/' id='brxe-lnamba' className='brxe-div'>
             <img id='brxe-ihhrdb' className='brxe-image css-filter size-full' src={icon} alt='' />
             <div id='brxe-rjutxq' className='brxe-div'>
               <div id='brxe-ssgcac' className='brxe-text-basic'>
@@ -26,7 +24,7 @@ const Navbar = () => {
                 </span>
               </div>
             </div>
-          </Link>
+          </a>
 
           <div id='brxe-ufdlom' className='brxe-div'>
             <div id='brxe-flwdpe' className='brxe-nav-menu'>
