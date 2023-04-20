@@ -1,6 +1,6 @@
 import NavbarItem from './NavbarItem';
+import { logo } from '../assets';
 import { footerLinks } from '../utils/index';
-import logo from '../assets/icon.png';
 
 const FooterNav = ({ id, menu, title, data }) => (
   <div id={`brxe-${id[0]}`} className='brxe-block'>

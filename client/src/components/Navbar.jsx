@@ -2,9 +2,7 @@ import { useState, useEffect } from 'react';
 
 import NavbarItem from './NavbarItem';
 import { navLinks } from '../utils';
-import icon from '../assets/icon.png';
-import close from '../assets/close-circle-white.svg';
-import menu from '../assets/menu.svg';
+import { logo, menu, close } from '../assets';
 
 const NavbarButtons = ({ styles }) => (
   <>
@@ -43,7 +41,7 @@ const Navbar = () => {
       <div id='brxe-xgfsbz' className='brxe-section'>
         <div id='brxe-blwmxr' className='brxe-container'>
           <a href='/' id='brxe-lnamba' className='brxe-div'>
-            <img id='brxe-ihhrdb' className='brxe-image css-filter size-full' src={icon} alt='' />
+            <img id='brxe-ihhrdb' className='brxe-image css-filter size-full' src={logo} alt='' />
             <div id='brxe-rjutxq' className='brxe-div'>
               <div id='brxe-ssgcac' className='brxe-text-basic'>
                 Open{' '}
