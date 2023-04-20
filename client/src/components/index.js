@@ -6,8 +6,9 @@ import FormField from './FormField';
 import Gallery from './Gallery';
 import GalleryCard from './GalleryCard';
 import Hero from './Hero';
+import HeroCanvas from './HeroCanvas';
 import Loader from './Loader';
 import Navbar from './Navbar';
 import NavbarItem from './NavbarItem';
 
-export { About, Contact, Create, Footer, FormField, Gallery, GalleryCard, Hero, Loader, Navbar, NavbarItem };
+export { About, Contact, Create, Footer, FormField, Gallery, GalleryCard, Hero, HeroCanvas, Loader, Navbar, NavbarItem };
