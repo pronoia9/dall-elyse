@@ -1,5 +1,5 @@
 import FileSaver from 'file-saver';
-
+import { artist, ideate, creative } from '../assets';
 import { surpriseMePrompts } from '../constants';
 
 export function getRandomPrompt(prompt) {
@@ -43,9 +43,27 @@ export const footerLinks = {
     { title: 'LinkedIn', url: 'https://www.linkedin.com/company/openai' },
     { title: 'Discord', url: 'https://discord.com/invite/openai' },
   ],
-  // about: [
-  //   { title: 'Learn More', url: 'https://openai.com/about' },
-  //   { title: 'Terms & Policies', url: 'https://openai.com/policies' },
-  //   { title: 'Privacy Policy', url: 'https://openai.com/policies/privacy-policy' },
-  // ],
 };
+
+export const about = [
+  {
+    title: 'Artist Tooling',
+    description:
+      'We’re building market-leading features that will give you greater control over your generations.',
+    image: artist,
+    id: ['vqkelr', 'zwhzqp', 'ifjbmw', 'hmevve']
+  },
+  {
+    title: 'Rapidly Ideate',
+    description: 'Create unique production-ready assets from pre-trained AI models or train your own.',
+    image: ideate,
+    id: ['xhfnjy', 'kvpuuw', 'bzrwgl', 'xnmkig']
+  },
+  {
+    title: 'Creative Studio',
+    description:
+      'We’re building an entire generative content production platform, visual assets are just the start.',
+    image: creative,
+    id: ['idwbik', 'edoidc', 'kjrbjn', 'zancjk']
+  },
+];
