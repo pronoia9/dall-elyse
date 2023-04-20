@@ -1,15 +1,8 @@
 import { useState } from 'react';
 
-import icon from '../assets/icon.png';
+import MenuItem from './MenuItem';
 import { navLinks } from '../utils';
-
-const NavbarLink = ({ index, link, title }) => (
-  <li id='menu-item-19' className='menu-item menu-item-type-custom menu-item-object-custom bricks-menu-item'>
-    <a href={link} target='_blank'>
-      {title}
-    </a>
-  </li>
-);
+import icon from '../assets/icon.png';
 
 const NavbarButtons = ({ styles }) => (
   <>
@@ -52,7 +45,7 @@ const Navbar = ({ isMobile }) => {
                 <nav className='bricks-nav-menu-wrapper mobile_landscape'>
                   <ul id='menu-main-menu' className='bricks-nav-menu'>
                     {navLinks.map((link, index) => (
-                      <NavbarLink key={link.title} index={index} {...link} />
+                      <MenuItem key={link.title} index={index} {...link} />
                     ))}
                   </ul>
                 </nav>
@@ -90,7 +83,7 @@ const Navbar = ({ isMobile }) => {
                         <nav className='bricks-nav-menu-wrapper never'>
                           <ul id='menu-main-menu-2' className='bricks-nav-menu'>
                             {navLinks.map((link, index) => (
-                              <NavbarLink key={link.title} index={index} {...link} />
+                              <MenuItem key={link.title} index={index} {...link} />
                             ))}
                           </ul>
                         </nav>
