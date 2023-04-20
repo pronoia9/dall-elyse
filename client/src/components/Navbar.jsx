@@ -3,6 +3,8 @@ import { useState } from 'react';
 import MenuItem from './MenuItem';
 import { navLinks } from '../utils';
 import icon from '../assets/icon.png';
+import close from '../assets/close-circle-white.svg';
+import menu from '../assets/menu.svg';
 
 const NavbarButtons = ({ styles }) => (
   <>
@@ -53,10 +55,8 @@ const Navbar = ({ isMobile }) => {
             </div>
 
             {isMobile && !isOpen && (
-              <div id='brxe-zwuywn' class='brxe-code' onClick={() => setIsOpen(true)}>
-                <svg viewBox='0 0 10 8' width='22'>
-                  <path d='M1 1h8M1 4h 8M1 7h8' stroke='#fff' stroke-width='1' stroke-linecap='round'></path>
-                </svg>
+              <div id='brxe-zwuywn' className='brxe-code' onClick={() => setIsOpen(true)}>
+                <img src={menu} />
               </div>
             )}
 
@@ -67,17 +67,7 @@ const Navbar = ({ isMobile }) => {
                   <section id='brxe-rhpqbi' className='brxe-section'>
                     <div id='brxe-kpnzsk' className='brxe-container'>
                       <div id='brxe-thaeqo' className='brxe-code' onClick={() => setIsOpen(false)}>
-                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'>
-                          <g
-                            fill='none'
-                            stroke='#000'
-                            stroke-linecap='round'
-                            stroke-miterlimit='10'
-                            stroke-width='10'
-                          >
-                            <path d='m10 10 45 45M10 55l45-45'></path>
-                          </g>
-                        </svg>
+                        <img src={close} alt='close-button' />
                       </div>
                       <div id='brxe-lbwvkh' className='brxe-nav-menu'>
                         <nav className='bricks-nav-menu-wrapper never'>
