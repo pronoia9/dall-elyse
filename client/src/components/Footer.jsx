@@ -22,7 +22,7 @@ const FooterNav = ({ id, menu, title, data }) => (
 const Footer = () => {
   const { company, products, tuned } = footerLinks;
   return (
-    <footer id='brx-footer' style={{ marginTop: 400 }}>
+    <footer id='brx-footer'>
       <section id='brxe-fczqkj' className='brxe-section'>
         <div id='brxe-uvadjh' className='brxe-container'>
           {/* Logo */}
