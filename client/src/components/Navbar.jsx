@@ -28,10 +28,10 @@ const NavbarButtons = ({ styles }) => (
 );
 
 const Navbar = () => {
-  const [isMobile, setisMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
-  return !isMobile ? (
-    // Web Menu
+  return (
     <header id='brx-header' className='sticky'>
       <div id='brxe-xgfsbz' className='brxe-section'>
         <div id='brxe-blwmxr' className='brxe-container'>
@@ -60,39 +60,55 @@ const Navbar = () => {
               )}
             </div>
 
-            <NavbarButtons styles={['brxe-nzeybc', 'brxe-aohtdi']} />
+            {isMobile && !isOpen && (
+              <div id='brxe-zwuywn' class='brxe-code' onClick={() => setIsOpen(true)}>
+                <svg viewBox='0 0 10 8' width='22'>
+                  <path d='M1 1h8M1 4h 8M1 7h8' stroke='#fff' stroke-width='1' stroke-linecap='round'></path>
+                </svg>
+              </div>
+            )}
+
+            {/* Mobile Menu */}
+            {isMobile && isOpen && (
+              <div className='brx-popup brxe-popup-2206 listening'>
+                <div className='brx-popup-content'>
+                  <section id='brxe-rhpqbi' className='brxe-section'>
+                    <div id='brxe-kpnzsk' className='brxe-container'>
+                      <div id='brxe-thaeqo' className='brxe-code' onClick={() => setIsOpen(false)}>
+                        <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'>
+                          <g
+                            fill='none'
+                            stroke='#000'
+                            stroke-linecap='round'
+                            stroke-miterlimit='10'
+                            stroke-width='10'
+                          >
+                            <path d='m10 10 45 45M10 55l45-45'></path>
+                          </g>
+                        </svg>
+                      </div>
+                      <div id='brxe-lbwvkh' className='brxe-nav-menu'>
+                        <nav className='bricks-nav-menu-wrapper never'>
+                          <ul id='menu-main-menu-2' className='bricks-nav-menu'>
+                            {navLinks.map((link, index) => (
+                              <NavbarLink key={link.title} index={index} {...link} />
+                            ))}
+                          </ul>
+                        </nav>
+                      </div>
+
+                      <NavbarButtons styles={['brxe-ruwtte', 'brxe-smrgev']} />
+                    </div>
+                  </section>
+                </div>
+              </div>
+            )}
+
+            {!isMobile && <NavbarButtons styles={['brxe-nzeybc', 'brxe-aohtdi']} />}
           </div>
         </div>
       </div>
     </header>
-  ) : (
-    // Mobile Menu
-    <div className='brx-popup brxe-popup-2206 listening'>
-      <div className='brx-popup-content'>
-        <section id='brxe-rhpqbi' className='brxe-section'>
-          <div id='brxe-kpnzsk' className='brxe-container'>
-            <div id='brxe-thaeqo' className='brxe-code'>
-              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'>
-                <g fill='none' stroke='#000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='10'>
-                  <path d='m10 10 45 45M10 55l45-45'></path>
-                </g>
-              </svg>
-            </div>
-            <div id='brxe-lbwvkh' className='brxe-nav-menu'>
-              <nav className='bricks-nav-menu-wrapper never'>
-                <ul id='menu-main-menu-2' className='bricks-nav-menu'>
-                  {navLinks.map((link, index) => (
-                    <NavbarLink key={link.title} index={index} {...link} />
-                  ))}
-                </ul>
-              </nav>
-            </div>
-
-            <NavbarButtons styles={['brxe-ruwtte', 'brxe-smrgev']} />
-          </div>
-        </section>
-      </div>
-    </div>
   );
 };
 export default Navbar;
