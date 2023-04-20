@@ -10,3 +10,9 @@ export function getRandomPrompt(prompt) {
 }
 
 export async function downloadImage(_id, photo) { FileSaver.saveAs(photo, `download-${_id}.jpg`); }
+
+export const navLinks = [
+  { title: 'Vite', url: 'https://vitejs.dev' },
+  { title: 'Vercel', url: 'https://vercel.com' },
+  { title: 'Render', url: 'https://render.com' },
+];
