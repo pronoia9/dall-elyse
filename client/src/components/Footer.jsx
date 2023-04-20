@@ -1,4 +1,4 @@
-import MenuItem from './MenuItem';
+import NavbarItem from './NavbarItem';
 import { footerLinks } from '../utils/index';
 import logo from '../assets/icon.png';
 
@@ -11,7 +11,7 @@ const FooterNav = ({ id, menu, title, data }) => (
       <nav className='bricks-nav-menu-wrapper never'>
         <ul id={`menu-menu-footer-brxe-${menu}`} className='bricks-nav-menu'>
           {data.map((link, index) => (
-            <MenuItem key={link.title} index={index} {...link} />
+            <NavbarItem key={link.title} index={index} {...link} />
           ))}
         </ul>
       </nav>

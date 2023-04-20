@@ -1,4 +1,4 @@
-const MenuItem = ({ index, link, title }) => (
+const NavbarItem = ({ index, link, title }) => (
   <li id='menu-item-19' className='menu-item menu-item-type-custom menu-item-object-custom bricks-menu-item'>
     <a href={link} target='_blank'>
       {title}
@@ -6,4 +6,4 @@ const MenuItem = ({ index, link, title }) => (
   </li>
 );
 
-export default MenuItem;
+export default NavbarItem;

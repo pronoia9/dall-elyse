@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import MenuItem from './MenuItem';
+import NavbarItem from './NavbarItem';
 import { navLinks } from '../utils';
 import icon from '../assets/icon.png';
 import close from '../assets/close-circle-white.svg';
@@ -60,7 +60,7 @@ const Navbar = () => {
                 <nav className='bricks-nav-menu-wrapper mobile_landscape'>
                   <ul id='menu-main-menu' className='bricks-nav-menu'>
                     {navLinks.map((link, index) => (
-                      <MenuItem key={link.title} index={index} {...link} />
+                      <NavbarItem key={link.title} index={index} {...link} />
                     ))}
                   </ul>
                 </nav>
@@ -86,7 +86,7 @@ const Navbar = () => {
                         <nav className='bricks-nav-menu-wrapper never'>
                           <ul id='menu-main-menu-2' className='bricks-nav-menu'>
                             {navLinks.map((link, index) => (
-                              <MenuItem key={link.title} index={index} {...link} />
+                              <NavbarItem key={link.title} index={index} {...link} />
                             ))}
                           </ul>
                         </nav>
