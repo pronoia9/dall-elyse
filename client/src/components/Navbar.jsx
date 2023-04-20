@@ -1,5 +1,8 @@
+import { useState } from 'react';
+
 import icon from '../assets/icon.png';
 import { navLinks } from '../utils';
+import './Navbar.css';
 
 const NavbarLink = ({ index, link, title }) => (
   <li id='menu-item-19' className='menu-item menu-item-type-custom menu-item-object-custom bricks-menu-item'>
@@ -9,8 +12,27 @@ const NavbarLink = ({ index, link, title }) => (
   </li>
 );
 
+const NavbarButtons = ({ styles }) => (
+  <>
+    <div id={styles[0]} className='brxe-button menu-request-btn bricks-button md bricks-background-primary'>
+      Create 🪄
+    </div>
+    <a
+      id={styles[1]}
+      className='brxe-button menu-launch-btn bricks-button'
+      href='https://openai.com/product/dall-e-2'
+      target='_blank'
+    >
+      DALLE-E
+    </a>
+  </>
+);
+
 const Navbar = () => {
-  return (
+  const [isMobile, setisMobile] = useState(false);
+
+  return !isMobile ? (
+    // Web Menu
     <header id='brx-header' className='sticky'>
       <div id='brxe-xgfsbz' className='brxe-section'>
         <div id='brxe-blwmxr' className='brxe-container'>
@@ -28,79 +50,50 @@ const Navbar = () => {
 
           <div id='brxe-ufdlom' className='brxe-div'>
             <div id='brxe-flwdpe' className='brxe-nav-menu'>
-              <nav className='bricks-nav-menu-wrapper mobile_landscape'>
-                <ul id='menu-main-menu' className='bricks-nav-menu'>
-                  {/*  */}
+              {!isMobile && (
+                <nav className='bricks-nav-menu-wrapper mobile_landscape'>
+                  <ul id='menu-main-menu' className='bricks-nav-menu'>
+                    {navLinks.map((link, index) => (
+                      <NavbarLink key={link.title} index={index} {...link} />
+                    ))}
+                  </ul>
+                </nav>
+              )}
+            </div>
+
+            <NavbarButtons styles={['brxe-nzeybc', 'brxe-aohtdi']} />
+          </div>
+        </div>
+      </div>
+    </header>
+  ) : (
+    // Mobile Menu
+    <div data-popup-id='2206' class='brx-popup brxe-popup-2206 listening'>
+      <div class='brx-popup-content'>
+        <section id='brxe-rhpqbi' class='brxe-section'>
+          <div id='brxe-kpnzsk' class='brxe-container'>
+            <div id='brxe-thaeqo' class='brxe-code'>
+              <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'>
+                <g fill='none' stroke='#000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='10'>
+                  <path d='m10 10 45 45M10 55l45-45'></path>
+                </g>
+              </svg>
+            </div>
+            <div id='brxe-lbwvkh' class='brxe-nav-menu'>
+              <nav class='bricks-nav-menu-wrapper never'>
+                <ul id='menu-main-menu-2' class='bricks-nav-menu'>
                   {navLinks.map((link, index) => (
                     <NavbarLink key={link.title} index={index} {...link} />
                   ))}
                 </ul>
               </nav>
-
-              {/* Mobile Menu */}
-              {/* <button
-                className='bricks-mobile-menu-toggle'
-                aria-haspopup='true'
-                aria-label='Mobile menu'
-                aria-pressed='false'
-              >
-                <span className='bar-top'></span>
-                <span className='bar-center'></span>
-                <span className='bar-bottom'></span>
-              </button>
-              <nav className='bricks-mobile-menu-wrapper right'>
-                <ul id='menu-main-menu-1' className='bricks-mobile-menu' role='menubar'>
-                  <li
-                    className='menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-19 bricks-menu-item'
-                    role='menuitem'
-                    data-top-index='0'
-                  >
-                    <a href='/#learn-more' aria-current='page'>
-                      Learn more
-                    </a>
-                  </li>
-                  <li
-                    className='menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-20 bricks-menu-item'
-                    role='menuitem'
-                    data-top-index='1'
-                  >
-                    <a href='/#examples' aria-current='page'>
-                      Examples
-                    </a>
-                  </li>
-                  <li
-                    className='menu-item menu-item-type-custom menu-item-object-custom menu-item-21 bricks-menu-item'
-                    role='menuitem'
-                    data-top-index='2'
-                  >
-                    <a href='https://leonardo.ai/contact-us/'>Contact</a>
-                  </li>
-                </ul>
-              </nav>
-              <div className='bricks-mobile-menu-overlay'></div> */}
             </div>
 
-            {/* Create Button */}
-            <div
-              id='brxe-nzeybc'
-              className='brxe-button menu-request-btn bricks-button md bricks-background-primary'
-            >
-              Create 🪄
-            </div>
-
-            {/* DALLE Link */}
-            <a
-              id='brxe-aohtdi'
-              className='brxe-button menu-launch-btn bricks-button'
-              href='https://openai.com/product/dall-e-2'
-              target='_blank'
-            >
-              DALLE-E
-            </a>
+            <NavbarButtons styles={['brxe-ruwtte', 'brxe-smrgev']} />
           </div>
-        </div>
+        </section>
       </div>
-    </header>
+    </div>
   );
 };
 export default Navbar;
