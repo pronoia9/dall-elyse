@@ -19,6 +19,29 @@ export const navLinks = [
   { title: 'Render', url: 'https://render.com' },
 ];
 
+export const aboutCols = [
+  {
+    title: 'Artist Tooling',
+    description:
+      'We’re building market-leading features that will give you greater control over your generations.',
+    image: artist,
+    id: ['vqkelr', 'zwhzqp', 'ifjbmw', 'hmevve']
+  },
+  {
+    title: 'Rapidly Ideate',
+    description: 'Create unique production-ready assets from pre-trained AI models or train your own.',
+    image: ideate,
+    id: ['xhfnjy', 'kvpuuw', 'bzrwgl', 'xnmkig']
+  },
+  {
+    title: 'Creative Studio',
+    description:
+      'We’re building an entire generative content production platform, visual assets are just the start.',
+    image: creative,
+    id: ['idwbik', 'edoidc', 'kjrbjn', 'zancjk']
+  },
+];
+
 export const footerLinks = {
   company: [
     { title: 'About', url: 'https://openai.com/about' },
@@ -44,26 +67,3 @@ export const footerLinks = {
     { title: 'Discord', url: 'https://discord.com/invite/openai' },
   ],
 };
-
-export const about = [
-  {
-    title: 'Artist Tooling',
-    description:
-      'We’re building market-leading features that will give you greater control over your generations.',
-    image: artist,
-    id: ['vqkelr', 'zwhzqp', 'ifjbmw', 'hmevve']
-  },
-  {
-    title: 'Rapidly Ideate',
-    description: 'Create unique production-ready assets from pre-trained AI models or train your own.',
-    image: ideate,
-    id: ['xhfnjy', 'kvpuuw', 'bzrwgl', 'xnmkig']
-  },
-  {
-    title: 'Creative Studio',
-    description:
-      'We’re building an entire generative content production platform, visual assets are just the start.',
-    image: creative,
-    id: ['idwbik', 'edoidc', 'kjrbjn', 'zancjk']
-  },
-];
