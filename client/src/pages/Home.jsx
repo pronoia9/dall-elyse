@@ -3,13 +3,6 @@ import { useState, useEffect } from 'react';
 import { Card, FormField, Loader } from '../components';
 import { download } from '../assets';
 
-const RenderCards = ({ data, title }) =>
-  data?.length > 0 ? (
-    data.map((post) => <Card key={post._id} {...post} />)
-  ) : (
-    <h2 className='mt-5 font-bold text-[#4a6d88] text-xl uppercase'>{title}</h2>
-  );
-
 const Home = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState(null);
@@ -17,27 +10,27 @@ const Home = () => {
   const [searchedResults, setSearchedResults] = useState(null);
   const [searchTimeout, setSearchTimeout] = useState(null);
 
-  const fetchPosts = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(import.meta.env.VITE_POSTS_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.ok) {
-        const result = await response.json();
-        setAllPosts(result.data.reverse());
-      }
-    } catch (error) {
-      // alert('Something went wrong getting posts.');
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
   useEffect(() => {
+     const fetchPosts = async () => {
+       setLoading(true);
+       try {
+         const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+           method: 'GET',
+           headers: {
+             'Content-Type': 'application/json',
+           },
+         });
+         if (response.ok) {
+           const result = await response.json();
+           setAllPosts(result.data.reverse());
+         }
+       } catch (error) {
+         // alert('Something went wrong getting posts.');
+         console.error(error);
+       } finally {
+         setLoading(false);
+       }
+     };
     fetchPosts();
   }, []);
 
@@ -57,10 +50,8 @@ const Home = () => {
     );
   };
 
-  console.log(allPosts);
-
   return (
-    <main id='brx-content' style={{ marginTop: 200 }}>
+    <main id='brx-content'>
       {/* HERO SECTION */}
       {/* GALLERY */}
       <section id='brxe-mfscie' className='brxe-section'>
@@ -77,32 +68,14 @@ const Home = () => {
           <div id='brxe-vmjrln' className='brxe-shortcode'>
             <div className='vp-portfolio vp-uid-1019295b vp-id-1098 vp-portfolio__ready'>
               {/* GALLERY ITEMS */}
-              {allPosts?.map((post, index) => (
-                <div
-                  key={post._id}
-                  className='vp-portfolio__item-wrap vp-portfolio__item-uid-70aca6ce'
-                  style={{ padding: '10px 15px', borderRadius: '20px' }}
-                >
-                  {/* <div className='vp-portfolio__item-popup'></div> */}
-                  <figure className='vp-portfolio__item'>
-                    <div className='vp-portfolio__item-img-wrap'>
-                      <div className='vp-portfolio__item-img'>
-                        <img src={post.photo} className='' alt='' />
-                        {/* <div className='vp-portfolio__item-img-overlay'></div> */}
-                      </div>
-                    </div>
-
-                    {/* <figcaption className='vp-portfolio__item-overlay vp-portfolio__item-align-center'></figcaption> */}
-                  </figure>
-                </div>
-              ))}
+              {allPosts?.map((post, index) => (<Card key={post._id} {...post} />))}
 
               {/* BUTTON */}
               <div className='vp-portfolio__layout-elements vp-portfolio__layout-elements-bottom vp-portfolio__layout-elements-align-center'>
                 <div className='vp-portfolio__pagination-wrap'>
                   <div className='vp-pagination vp-pagination__style-minimal'>
                     <div className='vp-pagination__item'>
-                      <a className='vp-pagination__load-more' href='/?vp_page=2'>
+                      <div className='vp-pagination__load-more' href='/?vp_page=2'>
                         <span>Show more cool stuff 👀</span>
                         <span className='vp-pagination__load-more-loading'>
                           <span className='vp-spinner'></span>
@@ -111,7 +84,7 @@ const Home = () => {
                         <span className='vp-pagination__load-more-no-more'>
                           You’ve reached the end of the list
                         </span>
-                      </a>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -125,7 +98,7 @@ const Home = () => {
       {/* CREATE */}
       {/* CONTACT */}
     </main>
-    
+
     // <section className='max-w-7xl mx-auto'>
     //   <div>
     //     <h1 className='font-extrabold text-[#d5d9e0] text-[32px]'>The Community Showcase</h1>
