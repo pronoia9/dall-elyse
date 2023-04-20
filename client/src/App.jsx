@@ -4,10 +4,9 @@ import { Navbar, Hero, Gallery, About, Create, Contact, Footer } from './compone
 
 const App = () => {
   const [loading, setLoading] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
+  const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState('');
-  const [searchedResults, setSearchedResults] = useState(null);
-  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchedResults, setSearchedResults] = useState([]);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -33,28 +32,12 @@ const App = () => {
     fetchPosts();
   }, []);
 
-  const handleSearchChange = (e) => {
-    clearTimeout(searchTimeout);
-    setSearchText(e.target.value);
-
-    setSearchTimeout(
-      setTimeout(() => {
-        const searchResult = allPosts.filter(
-          (post) =>
-            post.name.toLowerCase().includes(searchText.toLowerCase()) ||
-            post.prompt.toLowerCase().includes(searchText.toLowerCase())
-        );
-        setSearchedResults(searchResult);
-      }, 500)
-    );
-  };
-
   return (
     <>
       <Navbar />
       <main id='brx-content'>
-        <Hero searchText={searchText} setSearchText={setSearchText} />
-        <Gallery allPosts={allPosts} searchText={searchText} />
+        <Hero allPosts={allPosts} searchText={searchText} setSearchText={setSearchText} setSearchedResults={setSearchedResults} />
+        <Gallery allPosts={allPosts} searchText={searchText} searchedResults={searchedResults} />
         <About />
         <Create />
         <Contact />

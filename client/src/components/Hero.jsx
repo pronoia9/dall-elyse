@@ -2,23 +2,24 @@ import { useState } from 'react';
 
 import HeroCanvas from './HeroCanvas';
 
-const Hero = ({ searchText, setSearchText, setSearchedResults }) => {
+const Hero = ({ allPosts, searchText, setSearchText, setSearchedResults }) => {
   const [searchTimeout, setSearchTimeout] = useState(null);
 
+
+  const filterResults = () => {
+    setSearchedResults(
+      allPosts.filter(
+        (post) =>
+          post.name.toLowerCase().includes(searchText.toLowerCase()) ||
+          post.prompt.toLowerCase().includes(searchText.toLowerCase())
+      )
+    );
+  }
+  
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
-
-    setSearchTimeout(
-      setTimeout(() => {
-        const searchResult = allPosts.filter(
-          (post) =>
-            post.name.toLowerCase().includes(searchText.toLowerCase()) ||
-            post.prompt.toLowerCase().includes(searchText.toLowerCase())
-        );
-        setSearchedResults(searchResult);
-      }, 500)
-    );
+    setSearchTimeout(setTimeout(() => { filterResults(); }, 500));
   };
 
   return (
@@ -46,7 +47,7 @@ const Hero = ({ searchText, setSearchText, setSearchedResults }) => {
               />
             </div>
             <div className='form-group submit-button-wrapper'>
-              <button className='bricks-button bricks-background-primary'>
+              <button className='bricks-button bricks-background-primary' onClick={filterResults}>
                 <span className='text'>Search 🔍</span>
               </button>
             </div>

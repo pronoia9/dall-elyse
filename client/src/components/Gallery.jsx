@@ -1,6 +1,13 @@
-import GalleryCard from "./GalleryCard";
+import GalleryCard from './GalleryCard';
 
-const Gallery = ({ allPosts }) => {
+const RenderCards = ({ data, title }) =>
+  data?.length > 0 ? (
+    data.map((post, index) => <GalleryCard key={post._id} index={index} {...post} />)
+  ) : (
+    <></>
+  );
+
+const Gallery = ({ allPosts, searchText, searchedResults }) => {
   return (
     <section id='brxe-mfscie' className='brxe-section'>
       {/* SECTION WRAPPER */}
@@ -15,9 +22,19 @@ const Gallery = ({ allPosts }) => {
         <div id='brxe-vmjrln' className='brxe-shortcode'>
           <div className='vp-portfolio vp-uid-1019295b vp-id-1098 vp-portfolio__ready'>
             {/* GALLERY ITEMS */}
-            {allPosts?.map((post, index) => (
-              <GalleryCard key={post._id} {...post} />
-            ))}
+            {/* {allPosts
+              ?.filter(
+                (post) =>
+                  post.name.toLowerCase().includes(searchText.toLowerCase()) ||
+                  post.prompt.toLowerCase().includes(searchText.toLowerCase())
+              )
+              .map((post, index) => (
+                <GalleryCard key={post._id} index={index} {...post} />
+              ))} */}
+            <RenderCards
+              data={searchText ? searchedResults : allPosts}
+              title={searchText ? 'No search results found' : 'No posts found'}
+            />
             {/* BUTTON */}
             <div className='vp-portfolio__layout-elements vp-portfolio__layout-elements-bottom vp-portfolio__layout-elements-align-center'>
               <div className='vp-portfolio__pagination-wrap'>
