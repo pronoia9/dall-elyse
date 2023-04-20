@@ -1,6 +1,6 @@
-import HeroCanvas from "./HeroCanvas";
+import HeroCanvas from './HeroCanvas';
 
-const Hero = () => {
+const Hero = ({ searchText, setSearchText }) => {
   return (
     <section id='brxe-dayjhu' className='brxe-section'>
       <div id='brxe-czscpp' className='brxe-container'>
@@ -32,22 +32,11 @@ const Hero = () => {
           </form>
         </div>
       </div>
-      {/* <img width='200' height='406' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/Mask-group-2.png' className='brxe-image absolute rellax css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-ebtstk' data-rellax-speed='' sizes='(max-width: 200px) 100vw, 200px' /> */}
-      {/* <img width='337' height='557' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/Mask-group-1.png' className='brxe-image absolute rellax css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-txnhum' data-rellax-speed='-6' sizes='(max-width: 337px) 100vw, 337px' /> */}
+
       <div id='brxe-xbuoqc' className='brxe-block'>
         <HeroCanvas />
-        {/* <img width='286' height='281' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/removal-1.png' className='brxe-image absolute rellax css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-ggichk' data-rellax-horizontal-speed='3' data-rellax-vertical-scroll-axis='x' /> */}
-        {/* <img width='300' height='300' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/output-42-300x300.png' className='brxe-image absolute rellax css-filter size-medium' alt='' decoding='async' loading='eager' id='brxe-dwqanc' data-rellax-horizontal-speed='-1' data-rellax-vertical-scroll-axis='x' sizes='(max-width: 300px) 100vw, 300px' /> */}
-        {/* <img width='300' height='300' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/Axe-4x-Upscaled-16-300x300.png' className='brxe-image absolute rellax css-filter size-medium' alt='' decoding='async' loading='eager' id='brxe-ooohry' data-rellax-speed='2' sizes='(max-width: 300px) 100vw, 300px' /> */}
-        {/* <img width='300' height='300' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/grenade-300x300.png' className='brxe-image absolute rellax css-filter size-medium' alt='' decoding='async' loading='eager' id='brxe-ndxihg' data-rellax-speed='4' sizes='(max-width: 300px) 100vw, 300px' /> */}
-        {/* <img width='399' height='399' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/0-2022-12-02T012708.png' className='brxe-image absolute rellax css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-ueitjn' data-rellax-vertical-scroll-axis='xy' data-rellax-horizontal-speed='1' sizes='(max-width: 399px) 100vw, 399px' /> */}
-        <div id='brxe-merhif' className='brxe-div absolute'>
-          {/* <img width='324' height='324' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/output.png' className='brxe-image rellax css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-cxzugy' sizes='(max-width: 324px) 100vw, 324px' /> */}
-        </div>
-        {/* <img width='498' height='503' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/Axe-4x-Upscaled-17.png' className='brxe-image absolute rellax css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-oapgoi' data-rellax-vertical-scroll-axis='xy' data-rellax-horizontal-speed='-1' sizes='(max-width: 498px) 100vw, 498px' /> */}
+        {/* <div id='brxe-merhif' className='brxe-div absolute'></div> */}
       </div>
-      {/* <img width='965' height='453' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/lines-bg.png' className='brxe-image css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-ighqdo' sizes='(max-width: 965px) 100vw, 965px' /> */}
-      {/* <img width='1255' height='1314' src='https://leonardo-cdn.b-cdn.net/wp-content/uploads/2022/12/lines-bg2.png' className='brxe-image css-filter size-full' alt='' decoding='async' loading='eager' id='brxe-lmhywu' sizes='(max-width: 1255px) 100vw, 1255px'/> */}
     </section>
   );
 };
