@@ -53,7 +53,7 @@ const App = () => {
     <>
       <Navbar />
       <main id='brx-content'>
-        <Hero />
+        <Hero searchText={searchText} setSearchText={setSearchText} />
         <Gallery allPosts={allPosts} searchText={searchText} />
         <About />
         <Create />
