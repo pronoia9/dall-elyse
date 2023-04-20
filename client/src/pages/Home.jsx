@@ -87,53 +87,7 @@ const Home = () => {
                   <figure className='vp-portfolio__item'>
                     <div className='vp-portfolio__item-img-wrap'>
                       <div className='vp-portfolio__item-img'>
-                        <img src={post.photo} className='whitlisted' alt='' />
-                        {/*  */}
-                        <div
-                          // className='group-hover:flex flex-col max-h-[94.5%] hidden absolute top-0 left-0 right-0 bg-[#10131f] m-2 p-4 rounded-md'
-                          style={{
-                            display: 'flex',
-                            flexDirection: 'col',
-                            maxHeight: '94.5%',
-                            position: 'absolute',
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            background: 'black',
-                            marginTop: 2,
-                            padding: 4,
-                            borderRadius: '20px',
-                          }}
-                        >
-                          <p
-                            // className='text-white text-sm overflow-y-auto prompt'
-                            style={{ color: 'white', overflowY: 'auto' }}
-                          >
-                            {post.prompt}
-                          </p>
-
-                          <div className='mt-5 flex justify-between items-center gap-2'>
-                            <div className='flex items-center gap-2'>
-                              <div className='w-7 h-7 rounded-full object-cover bg-[#4a6d88] flex justify-center items-center text-white text-xs font-bold'>
-                                {post.name[0]}
-                              </div>
-                              <p className='text-white text-sm'>{post.name}</p>
-                            </div>
-                            <button
-                              type='button'
-                              onClick={() => downloadImage(post._id, post.photo)}
-                              className='outline-none bg-transparent border-none'
-                            >
-                              <img
-                                src={download}
-                                alt='download'
-                                // className='w-6 h-6 object-contain'
-                                style={{ width: '6px', height: '6px', objectFit: 'contain' }}
-                              />
-                            </button>
-                          </div>
-                        </div>
-                        {/*  */}
+                        <img src={post.photo} className='' alt='' />
                         {/* <div className='vp-portfolio__item-img-overlay'></div> */}
                       </div>
                     </div>
@@ -171,6 +125,7 @@ const Home = () => {
       {/* CREATE */}
       {/* CONTACT */}
     </main>
+    
     // <section className='max-w-7xl mx-auto'>
     //   <div>
     //     <h1 className='font-extrabold text-[#d5d9e0] text-[32px]'>The Community Showcase</h1>
