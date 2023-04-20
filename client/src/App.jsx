@@ -1,22 +1,65 @@
 import { useState, useEffect } from 'react';
 
-import { Navbar, Footer } from './components';
-import { Home, CreatePost } from './pages';
+import { Navbar, Hero, Gallery, About, Create, Contact, Footer } from './components';
+// import { download } from '../assets';
 
 const App = () => {
+  const [loading, setLoading] = useState(false);
+  const [allPosts, setAllPosts] = useState(null);
+  const [searchText, setSearchText] = useState('');
+  const [searchedResults, setSearchedResults] = useState(null);
+  const [searchTimeout, setSearchTimeout] = useState(null);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        if (response.ok) {
+          const result = await response.json();
+          setAllPosts(result.data.reverse());
+        }
+      } catch (error) {
+        // alert('Something went wrong getting posts.');
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
+
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = allPosts.filter(
+          (post) =>
+            post.name.toLowerCase().includes(searchText.toLowerCase()) ||
+            post.prompt.toLowerCase().includes(searchText.toLowerCase())
+        );
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  };
+
   return (
     <>
-      {/* Navbar */}
       <Navbar />
-
-      {/* Main */}
-      <Home />
-      {/* <main className='sm:p-8 px-4 py-8 w-full bg-[#0b0b14] text-[#d5d9e0] min-h-[calc(100vh-73px)]'>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/create-post' element={<CreatePost />} />
-      </Routes>
-    </main> */}
+      <main id='brx-content'>
+        <Hero />
+        <Gallery />
+        <About />
+        <Create />
+        <Contact />
+      </main>
       <Footer />
     </>
   );
