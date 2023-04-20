@@ -15,7 +15,7 @@ const Gallery = ({ allPosts, searchText, searchedResults }) => {
         {/* TITLE */}
         <div id='brxe-qyhmpn' className='brxe-code'>
           <h2 className='txt-center'>
-            Explore <span className='rad-color'>The Possible</span>
+            The Community <span className='rad-color'>Showcase</span>
           </h2>
         </div>
         {/* GALLERY */}
