@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { Navbar } from './components';
+import { Navbar, Footer } from './components';
 import { Home, CreatePost } from './pages';
 
 const App = () => {
@@ -17,6 +17,7 @@ const App = () => {
         <Route path='/create-post' element={<CreatePost />} />
       </Routes>
     </main> */}
+      <Footer />
     </>
   );
 };
