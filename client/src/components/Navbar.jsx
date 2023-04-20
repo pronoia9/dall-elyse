@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import icon from '../assets/icon.png';
 import { navLinks } from '../utils';
-import './Navbar.css';
 
 const NavbarLink = ({ index, link, title }) => (
   <li id='menu-item-19' className='menu-item menu-item-type-custom menu-item-object-custom bricks-menu-item'>
