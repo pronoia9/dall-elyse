@@ -1,7 +1,7 @@
 import { download } from '../assets';
 import { downloadImage } from '../utils';
 
-const Card = ({ _id, name, prompt, photo }) => {
+const GalleryCard = ({ _id, name, prompt, photo }) => {
   return (
     <div
       key={_id}
@@ -23,4 +23,4 @@ const Card = ({ _id, name, prompt, photo }) => {
   );
 };
 
-export default Card;
+export default GalleryCard;
