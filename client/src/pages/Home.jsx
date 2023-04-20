@@ -37,9 +37,9 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  // useEffect(() => {
+  //   fetchPosts();
+  // }, []);
 
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
