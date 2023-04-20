@@ -350,7 +350,7 @@ a.brxe-text-basic:hover {
 #brxe-zwuywn {
   width: auto;
   cursor: pointer;
-  display: none;
+  /* display: none; */
 }
 
 /* BREAKPOINT: Tablet portrait */
