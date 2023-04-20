@@ -20,10 +20,20 @@ export const navLinks = [
 ];
 
 export const footerLinks = {
-  about: [
-    { title: 'Learn More', url: 'https://openai.com/about' },
-    { title: 'Terms & Policies', url: 'https://openai.com/policies' },
-    { title: 'Privacy Policy', url: 'https://openai.com/policies/privacy-policy' },
+  company: [
+    { title: 'About', url: 'https://openai.com/about' },
+    { title: 'Blog', url: 'https://openai.com/blog' },
+    { title: 'Careers', url: 'https://openai.com/careers' },
+    { title: 'Charter', url: 'https://openai.com/charter' },
+    { title: 'Security', url: 'https://openai.com/security' },
+  ],
+  products: [
+    { title: 'Overview', url: 'https://openai.com/product' },
+    { title: 'GPT-4', url: 'https://openai.com/product/gpt-4' },
+    { title: 'DALL·E 2', url: 'https://openai.com/product/dall-e-2' },
+    { title: 'Customer stories', url: 'https://openai.com/customer-stories' },
+    { title: 'Safety standards', url: 'https://openai.com/safety-standards' },
+    { title: 'Pricing', url: 'https://openai.com/pricing' },
   ],
   tuned: [
     { title: 'Twitter', url: 'https://twitter.com/OpenAI' },
@@ -33,4 +43,9 @@ export const footerLinks = {
     { title: 'LinkedIn', url: 'https://www.linkedin.com/company/openai' },
     { title: 'Discord', url: 'https://discord.com/invite/openai' },
   ],
+  // about: [
+  //   { title: 'Learn More', url: 'https://openai.com/about' },
+  //   { title: 'Terms & Policies', url: 'https://openai.com/policies' },
+  //   { title: 'Privacy Policy', url: 'https://openai.com/policies/privacy-policy' },
+  // ],
 };
