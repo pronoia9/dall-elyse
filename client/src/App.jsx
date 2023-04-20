@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import { Navbar, Hero, Gallery, About, Create, Contact, Footer } from './components';
-// import { download } from '../assets';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
