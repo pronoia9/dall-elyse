@@ -23,7 +23,7 @@ const Hero = ({ allPosts, searchText, setSearchText, setSearchedResults }) => {
   };
 
   return (
-    <section id='brxe-dayjhu' className='brxe-section'>
+    <section id='brxe-dayjhu' className='brxe-section' style={{ paddingBottom: '5rem' }}>
       <div id='brxe-czscpp' className='brxe-container'>
         <div id='brxe-vnvqxd' data-script-id='vnvqxd' className='brxe-code'>
           <h1 align='center'>
