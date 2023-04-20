@@ -68,20 +68,20 @@ const Navbar = () => {
     </header>
   ) : (
     // Mobile Menu
-    <div data-popup-id='2206' class='brx-popup brxe-popup-2206 listening'>
-      <div class='brx-popup-content'>
-        <section id='brxe-rhpqbi' class='brxe-section'>
-          <div id='brxe-kpnzsk' class='brxe-container'>
-            <div id='brxe-thaeqo' class='brxe-code'>
+    <div className='brx-popup brxe-popup-2206 listening'>
+      <div className='brx-popup-content'>
+        <section id='brxe-rhpqbi' className='brxe-section'>
+          <div id='brxe-kpnzsk' className='brxe-container'>
+            <div id='brxe-thaeqo' className='brxe-code'>
               <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 60'>
                 <g fill='none' stroke='#000' stroke-linecap='round' stroke-miterlimit='10' stroke-width='10'>
                   <path d='m10 10 45 45M10 55l45-45'></path>
                 </g>
               </svg>
             </div>
-            <div id='brxe-lbwvkh' class='brxe-nav-menu'>
-              <nav class='bricks-nav-menu-wrapper never'>
-                <ul id='menu-main-menu-2' class='bricks-nav-menu'>
+            <div id='brxe-lbwvkh' className='brxe-nav-menu'>
+              <nav className='bricks-nav-menu-wrapper never'>
+                <ul id='menu-main-menu-2' className='bricks-nav-menu'>
                   {navLinks.map((link, index) => (
                     <NavbarLink key={link.title} index={index} {...link} />
                   ))}
