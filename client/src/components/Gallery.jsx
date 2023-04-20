@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 import GalleryCard from './GalleryCard';
 
 const RenderCards = ({ data, title }) =>
@@ -8,6 +10,14 @@ const RenderCards = ({ data, title }) =>
   );
 
 const Gallery = ({ allPosts, searchText, searchedResults }) => {
+  const [postsRendered, setPostsRendered] = useState(9);
+
+  useEffect(() => {
+    console.log('posts rendered', postsRendered);
+  }, postsRendered);
+  console.log('allPosts', allPosts?.length > postsRendered, allPosts);
+  console.log('searchedResults', searchedResults);
+
   return (
     <section id='brxe-mfscie' className='brxe-section'>
       {/* SECTION WRAPPER */}
@@ -22,31 +32,29 @@ const Gallery = ({ allPosts, searchText, searchedResults }) => {
         <div id='brxe-vmjrln' className='brxe-shortcode'>
           <div className='vp-portfolio vp-uid-1019295b vp-id-1098 vp-portfolio__ready'>
             {/* GALLERY ITEMS */}
-            {/* {allPosts
-              ?.filter(
-                (post) =>
-                  post.name.toLowerCase().includes(searchText.toLowerCase()) ||
-                  post.prompt.toLowerCase().includes(searchText.toLowerCase())
-              )
-              .map((post, index) => (
-                <GalleryCard key={post._id} index={index} {...post} />
-              ))} */}
             <RenderCards
-              data={searchText ? searchedResults : allPosts}
+              data={searchText ? searchedResults.slice(0, postsRendered) : allPosts.slice(0, postsRendered)}
               title={searchText ? 'No search results found' : 'No posts found'}
             />
             {/* BUTTON */}
-            <div className='vp-portfolio__layout-elements vp-portfolio__layout-elements-bottom vp-portfolio__layout-elements-align-center'>
-              <div className='vp-portfolio__pagination-wrap'>
-                <div className='vp-pagination vp-pagination__style-minimal'>
-                  <div className='vp-pagination__item'>
-                    <div className='vp-pagination__load-more'>
-                      <span>Show more cool stuff 👀</span>
+            {(allPosts?.length > postsRendered || searchedResults?.length > postsRendered) ? (
+              <div className='vp-portfolio__layout-elements vp-portfolio__layout-elements-bottom vp-portfolio__layout-elements-align-center'>
+                <div className='vp-portfolio__pagination-wrap'>
+                  <div className='vp-pagination vp-pagination__style-minimal'>
+                    <div
+                      className='vp-pagination__item'
+                      onClick={() => setPostsRendered((postsRendered) => postsRendered + 9)}
+                    >
+                      <div className='vp-pagination__load-more'>
+                        <span>Show more cool stuff 👀</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>
