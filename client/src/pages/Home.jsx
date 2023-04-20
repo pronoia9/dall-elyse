@@ -31,7 +31,7 @@ const Home = () => {
         setAllPosts(result.data.reverse());
       }
     } catch (error) {
-      alert('Something went wrong getting posts.');
+      // alert('Something went wrong getting posts.');
       console.error(error);
     } finally {
       setLoading(false);
