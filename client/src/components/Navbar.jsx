@@ -27,8 +27,7 @@ const NavbarButtons = ({ styles }) => (
   </>
 );
 
-const Navbar = () => {
-  const [isMobile, setIsMobile] = useState(true);
+const Navbar = ({ isMobile }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
