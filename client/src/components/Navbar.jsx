@@ -5,7 +5,7 @@ import { navLinks } from '../utils';
 
 const NavbarLink = ({ index, link, title }) => (
   <li id='menu-item-19' className='menu-item menu-item-type-custom menu-item-object-custom bricks-menu-item'>
-    <a href={link} aria-current='page'>
+    <a href={link} target='_blank'>
       {title}
     </a>
   </li>
@@ -70,7 +70,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isMobile && isOpen && (
-              <div className='brx-popup brxe-popup-2206 listening'>
+              <div className='brx-popup brxe-popup-2206'>
                 <div className='brx-popup-content'>
                   <section id='brxe-rhpqbi' className='brxe-section'>
                     <div id='brxe-kpnzsk' className='brxe-container'>
