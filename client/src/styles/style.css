@@ -84,7 +84,7 @@ input {
 .menu-request-btn.bricks-button:hover {
 	--_t: var(--h);
 }
-.bricks-button,
+/* .bricks-button, */
 .vp-pagination__load-more span:first-child {
 	--h: 2.2em;
 
