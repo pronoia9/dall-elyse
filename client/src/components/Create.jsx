@@ -18,6 +18,7 @@ const Create = ({ setIsOpen }) => {
   };
 
   const generateImage = async () => {
+    console.log('generating');
     if (form.prompt) {
       try {
         setGeneratingImg(true);
@@ -41,7 +42,7 @@ const Create = ({ setIsOpen }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.name && form.prompt && form.photo) {
+    if (form.prompt && form.photo) {
       setLoading(true);
       try {
         const response = await fetch(import.meta.env.VITE_POSTS_URL, {
@@ -52,14 +53,13 @@ const Create = ({ setIsOpen }) => {
           body: JSON.stringify(form),
         });
         await response.json();
-        navigate('/');
       } catch (error) {
         alert('Something went wrong posting image.');
         console.log(error);
       } finally {
         setLoading(false);
       }
-    } else alert('Please enter all the form fields.');
+    } else alert('Please enter a prompt.');
   };
 
   return (
@@ -135,8 +135,11 @@ const Create = ({ setIsOpen }) => {
           <div id='brxe-wujkiw' className='brxe-text-basic'>
             Once you have created the image you want, you can share it with others in the community.
           </div>
-          {/* Preview */}
-          <img src={preview} style={{ width: '250px', heigh: 'auto' }} />
+          {/* Preview / Image */}
+          <div style={{ position: 'relative' }}>
+            {generatingImg && <Loader />}
+            <img src={form.photo ? form.photo : preview} style={{ width: '250px', heigh: 'auto' }} />
+          </div>
           {/* Buttons */}
           <div
             id='brxe-liisel'
@@ -147,13 +150,13 @@ const Create = ({ setIsOpen }) => {
               flexDirection: 'row',
               gap: '5%',
               justifyContent: 'center',
-              maxWidth: '60%'
+              maxWidth: '60%',
             }}
           >
             {/* Generate Button */}
             <div id='brxe-nwxeps' className='brxe-form news-field' style={{ padding: 0, maxWidth: '200px' }}>
               <div className='form-group submit-button-wrapper'>
-                <button className='bricks-button bricks-background-primary'>
+                <button className='bricks-button bricks-background-primary' onClick={generateImage}>
                   <span className='text'>Generate</span>
                 </button>
               </div>
@@ -161,7 +164,7 @@ const Create = ({ setIsOpen }) => {
             {/* Share Button */}
             <div id='brxe-nwxeps' className='brxe-form news-field' style={{ padding: 0, maxWidth: '200px' }}>
               <div className='form-group submit-button-wrapper'>
-                <button className='bricks-button bricks-background-primary'>
+                <button className='bricks-button bricks-background-primary' onClick={handleSubmit}>
                   <span className='text'>Share</span>
                 </button>
               </div>
