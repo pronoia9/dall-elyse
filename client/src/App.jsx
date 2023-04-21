@@ -7,7 +7,7 @@ const App = () => {
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [searchedResults, setSearchedResults] = useState([]);
-  const [isOpen, setIsOpen] = useState(true);
+  const [createOverlay, setCreateOverlay] = useState(false)
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -35,8 +35,8 @@ const App = () => {
 
   return (
     <>
-      <Navbar setIsOpen={setIsOpen} />
-      {isOpen && <Create setIsOpen={setIsOpen} />}
+      <Navbar setCreateOverlay={setCreateOverlay} />
+      {createOverlay && <Create setCreateOverlay={setCreateOverlay} />}
       <main id='brx-content'>
         <Hero allPosts={allPosts} searchText={searchText} setSearchText={setSearchText} setSearchedResults={setSearchedResults} />
         <Gallery allPosts={allPosts} searchText={searchText} searchedResults={searchedResults} />

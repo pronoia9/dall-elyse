@@ -4,9 +4,13 @@ import NavbarItem from './NavbarItem';
 import { navLinks } from '../utils';
 import { logo, menu, close } from '../assets';
 
-const NavbarButtons = ({ styles }) => (
+const NavbarButtons = ({ styles, setCreateOverlay }) => (
   <>
-    <div id={styles[0]} className='brxe-button menu-request-btn bricks-button md bricks-background-primary'>
+    <div
+      id={styles[0]}
+      className='brxe-button menu-request-btn bricks-button md bricks-background-primary'
+      onClick={() => setCreateOverlay(true)}
+    >
       Create 🪄
     </div>
     <a
@@ -20,7 +24,7 @@ const NavbarButtons = ({ styles }) => (
   </>
 );
 
-const Navbar = () => {
+const Navbar = ({ setCreateOverlay }) => {
   const [isMobile, setIsMobile] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -90,14 +94,14 @@ const Navbar = () => {
                         </nav>
                       </div>
 
-                      <NavbarButtons styles={['brxe-ruwtte', 'brxe-smrgev']} />
+                      <NavbarButtons styles={['brxe-ruwtte', 'brxe-smrgev']} setCreateOverlay={setCreateOverlay} />
                     </div>
                   </section>
                 </div>
               </div>
             )}
 
-            {!isMobile && <NavbarButtons styles={['brxe-nzeybc', 'brxe-aohtdi']} />}
+            {!isMobile && <NavbarButtons styles={['brxe-nzeybc', 'brxe-aohtdi']} setCreateOverlay={setCreateOverlay} />}
           </div>
         </div>
       </div>

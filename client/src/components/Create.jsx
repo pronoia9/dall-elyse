@@ -4,7 +4,7 @@ import Loader from './Loader';
 import { close, preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 
-const Create = ({ setIsOpen }) => {
+const Create = ({ setCreateOverlay }) => {
   const [form, setForm] = useState({ name: '', prompt: '', photo: '' });
   const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -67,7 +67,7 @@ const Create = ({ setIsOpen }) => {
       <div className='brx-popup-content brxe-container'>
         <section id='brxe-inqzid' className='brxe-section'>
           {/* Close Icon */}
-          <div id='brxe-thaeqo' className='brxe-code' onClick={() => setIsOpen(false)}>
+          <div id='brxe-thaeqo' className='brxe-code' onClick={() => setCreateOverlay(false)}>
             <img src={close} alt='close-button' />
           </div>
           {/* Title */}
