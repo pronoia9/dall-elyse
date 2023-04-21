@@ -35,8 +35,8 @@ const App = () => {
 
   return (
     <>
-      <Navbar />
-      {isOpen && <Create />}
+      <Navbar setIsOpen={setIsOpen} />
+      {isOpen && <Create setIsOpen={setIsOpen} />}
       <main id='brx-content'>
         <Hero allPosts={allPosts} searchText={searchText} setSearchText={setSearchText} setSearchedResults={setSearchedResults} />
         <Gallery allPosts={allPosts} searchText={searchText} searchedResults={searchedResults} />
