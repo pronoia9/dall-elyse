@@ -137,8 +137,11 @@ const Create = ({ setIsOpen }) => {
           </div>
           {/* Preview / Image */}
           <div style={{ position: 'relative' }}>
-            {generatingImg && <Loader />}
-            <img src={form.photo ? form.photo : preview} style={{ width: '250px', heigh: 'auto' }} />
+            {(generatingImg || loading) && <Loader />}
+            <img
+              src={form.photo ? form.photo : preview}
+              style={{ width: '250px', heigh: 'auto', opacity: !form.photo ? '50%' : '100%' }}
+            />
           </div>
           {/* Buttons */}
           <div
@@ -154,18 +157,34 @@ const Create = ({ setIsOpen }) => {
             }}
           >
             {/* Generate Button */}
-            <div id='brxe-nwxeps' className='brxe-form news-field' style={{ padding: 0, maxWidth: '200px' }}>
+            <div
+              id='brxe-nwxeps'
+              className='brxe-form news-field'
+              style={{ padding: 0, maxWidth: '200px', opacity: generatingImg ? '50%' : '100%' }}
+            >
               <div className='form-group submit-button-wrapper'>
-                <button className='bricks-button bricks-background-primary' onClick={generateImage}>
-                  <span className='text'>Generate</span>
+                <button
+                  className='bricks-button bricks-background-primary'
+                  onClick={generateImage}
+                  disabled={generatingImg}
+                >
+                  <span className='text'>{!generatingImg ? 'Generate' : 'Generating...'}</span>
                 </button>
               </div>
             </div>
             {/* Share Button */}
-            <div id='brxe-nwxeps' className='brxe-form news-field' style={{ padding: 0, maxWidth: '200px' }}>
+            <div
+              id='brxe-nwxeps'
+              className='brxe-form news-field'
+              style={{ padding: 0, maxWidth: '200px', opacity: loading ? '50%' : '100%' }}
+            >
               <div className='form-group submit-button-wrapper'>
-                <button className='bricks-button bricks-background-primary' onClick={handleSubmit}>
-                  <span className='text'>Share</span>
+                <button
+                  className='bricks-button bricks-background-primary'
+                  onClick={handleSubmit}
+                  disabled={loading}
+                >
+                  <span className='text'>{!loading ? 'Share' : 'Sharing...'}</span>
                 </button>
               </div>
             </div>
