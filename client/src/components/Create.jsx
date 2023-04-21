@@ -59,7 +59,7 @@ const Create = ({ setCreateOverlay }) => {
       } finally {
         setLoading(false);
       }
-    } else alert('Please enter a prompt.');
+    } else alert('Please enter a prompt and generate an image.');
   };
 
   return (
