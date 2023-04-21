@@ -1,6 +1,67 @@
+import { useState } from 'react';
+
+import Loader from './Loader';
 import { close, preview } from '../assets';
+import { getRandomPrompt } from '../utils';
 
 const Create = ({ setIsOpen }) => {
+  const [form, setForm] = useState({ name: '', prompt: '', photo: '' });
+  const [generatingImg, setGeneratingImg] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSurpriseMe = () => {
+    setForm({ ...form, prompt: getRandomPrompt(form.prompt) });
+  };
+
+  const generateImage = async () => {
+    if (form.prompt) {
+      try {
+        setGeneratingImg(true);
+        const response = await fetch(import.meta.env.VITE_OPENAI_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt: form.prompt }),
+        });
+        const data = await response.json();
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+      } catch (error) {
+        console.error(error);
+        alert('There was an error getting a response from OpenAI.');
+      } finally {
+        setGeneratingImg(false);
+      }
+    } else alert('Please enter a prompt.');
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (form.name && form.prompt && form.photo) {
+      setLoading(true);
+      try {
+        const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        });
+        await response.json();
+        navigate('/');
+      } catch (error) {
+        alert('Something went wrong posting image.');
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    } else alert('Please enter all the form fields.');
+  };
+
   return (
     <div className='brx-popup brxe-popup-2159 brx-animated listening'>
       <div className='brx-popup-content brxe-container'>
@@ -27,11 +88,11 @@ const Create = ({ setIsOpen }) => {
                 <div className='form-group'>
                   <input
                     id='form-field-08e6c6'
-                    name='form-field-kmhhru'
-                    type='email'
-                    value=''
-                    placeholder='Email'
-                    required=''
+                    type='text'
+                    name='name'
+                    placeholder='Ex: Jane Doe'
+                    value={form.name}
+                    onChange={handleChange}
                   />
                 </div>
               </div>
@@ -40,17 +101,30 @@ const Create = ({ setIsOpen }) => {
                 <div className='form-group'>
                   <input
                     id='form-field-08e6c6'
-                    name='form-field-kmhhru'
-                    type='email'
-                    value=''
-                    placeholder='Email'
-                    required=''
+                    type='text'
+                    name='prompt'
+                    value={form.prompt}
+                    placeholder='A futuristic cyborg dance club, neon lights'
+                    onChange={handleChange}
                   />
                 </div>
                 <div className='form-group submit-button-wrapper'>
-                  <button className='bricks-button bricks-background-primary'>
-                    <span className='text'>Surprise Me 🎁</span>
-                  </button>
+                  <div
+                    className='bricks-button bricks-background-primary'
+                    onClick={handleSurpriseMe}
+                    style={{
+                      cursor: 'pointer',
+                      position: 'absolute',
+                      top: 0,
+                      right: 0,
+                      bottom: 0,
+                      fontSize: '13px',
+                      color: 'white',
+                      maxWidth: '100px',
+                    }}
+                  >
+                    <p className='text' style={{color: 'white'}}>Surprise Me 🎁</p>
+                  </div>
                 </div>
               </div>
             </form>
