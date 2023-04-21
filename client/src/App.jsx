@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 
-import { Navbar, Hero, Gallery, About, Contact, Footer, LearnMore } from './components';
+import { Navbar, Hero, Create, Gallery, About, Contact, Footer, LearnMore } from './components';
 
 const App = () => {
   const [loading, setLoading] = useState(false);
   const [allPosts, setAllPosts] = useState([]);
   const [searchText, setSearchText] = useState('');
   const [searchedResults, setSearchedResults] = useState([]);
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -35,6 +36,7 @@ const App = () => {
   return (
     <>
       <Navbar />
+      {isOpen && <Create />}
       <main id='brx-content'>
         <Hero allPosts={allPosts} searchText={searchText} setSearchText={setSearchText} setSearchedResults={setSearchedResults} />
         <Gallery allPosts={allPosts} searchText={searchText} searchedResults={searchedResults} />
