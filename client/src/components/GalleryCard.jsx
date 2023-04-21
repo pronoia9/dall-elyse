@@ -1,7 +1,7 @@
 import { download } from '../assets';
 import { downloadImage } from '../utils';
 
-const GalleryCard = ({ _id, name, prompt, photo }) => {
+const GalleryCard = ({ _id, name = 'Anonymous', prompt, photo }) => {
   return (
     <div
       key={_id}
