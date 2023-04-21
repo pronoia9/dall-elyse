@@ -67,7 +67,10 @@ const Create = ({ setCreateOverlay }) => {
       <div className='brx-popup-content brxe-container'>
         <section id='brxe-inqzid' className='brxe-section'>
           {/* Close Icon */}
-          <div id='brxe-thaeqo' className='brxe-code' onClick={() => setCreateOverlay(false)}>
+          <div id='brxe-thaeqo' className='brxe-code' onClick={() => {
+            setForm({ name: '', prompt: '', photo: '' });
+            setCreateOverlay(false);
+          }}>
             <img src={close} alt='close-button' />
           </div>
           {/* Title */}
