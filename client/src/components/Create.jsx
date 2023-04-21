@@ -1,27 +1,29 @@
-import { close } from '../assets';
+import { close, preview } from '../assets';
 
-const Create = () => {
+const Create = ({ setIsOpen }) => {
   return (
     <div className='brx-popup brxe-popup-2159 brx-animated listening'>
       <div className='brx-popup-content brxe-container'>
         <section id='brxe-inqzid' className='brxe-section'>
-          <p id='brxe-tzkqhm' className='brxe-icon ti-close'>
-            x
-          </p>
+          <div id='brxe-thaeqo' className='brxe-code' onClick={() => setIsOpen(false)}>
+            <img src={close} alt='close-button' />
+          </div>
           <div id='brxe-dekhcm' className='brxe-code'>
             <h1 align='center'>
               Use <span className='rad-color'>DALL-Elyse</span>
             </h1>
             <br />
-            <h3 className='txt-center'>
+            <h3 className='txt-center' style={{ marginBottom: '25px' }}>
               Create a stunning images with the help of AI and share it with the community.
             </h3>
-            <br />
-            <br />
           </div>
           <div id='brxe-liisel' className='brxe-block grid'>
             <form>
-              <div id='brxe-nwxeps' className='brxe-form news-field news-field-main'>
+              <div
+                id='brxe-nwxeps'
+                className='brxe-form news-field news-field-main'
+                style={{ marginBottom: '25px' }}
+              >
                 <div className='form-group'>
                   <input
                     id='form-field-08e6c6'
@@ -33,7 +35,7 @@ const Create = () => {
                   />
                 </div>
               </div>
-              <br />
+
               <div id='brxe-nwxeps' className='brxe-form news-field news-field-main'>
                 <div className='form-group'>
                   <input
@@ -56,8 +58,8 @@ const Create = () => {
           <div id='brxe-wujkiw' className='brxe-text-basic'>
             Once you have created the image you want, you can share it with others in the community.
           </div>
-          <br />
-          <div id='brxe-liisel' className='brxe-block grid'>
+          <img src={preview} style={{ width: '250px', heigh: 'auto' }} />
+          <div id='brxe-liisel' className='brxe-block grid' style={{ marginTop: '25px' }}>
             <div id='brxe-nwxeps' className='brxe-form news-field news-field-main' style={{ padding: 0 }}>
               <div className='form-group submit-button-wrapper'>
                 <button className='bricks-button bricks-background-primary'>
