@@ -147,6 +147,7 @@ const Create = ({ setIsOpen }) => {
               flexDirection: 'row',
               gap: '5%',
               justifyContent: 'center',
+              maxWidth: '60%'
             }}
           >
             {/* Generate Button */}
