@@ -1,5 +1,5 @@
 import FileSaver from 'file-saver';
-import { artist, ideate, creative } from '../assets';
+import { artist, ideate, creative, learn1, learn2, learn3 } from '../assets';
 import { surpriseMePrompts } from '../constants';
 
 export function getRandomPrompt(prompt) {
@@ -25,20 +25,44 @@ export const aboutCols = [
     description:
       'We’re building market-leading features that will give you greater control over your generations.',
     image: artist,
-    id: ['vqkelr', 'zwhzqp', 'ifjbmw', 'hmevve']
+    id: ['vqkelr', 'zwhzqp', 'ifjbmw', 'hmevve'],
   },
   {
     title: 'Rapidly Ideate',
     description: 'Create unique production-ready assets from pre-trained AI models or train your own.',
     image: ideate,
-    id: ['xhfnjy', 'kvpuuw', 'bzrwgl', 'xnmkig']
+    id: ['xhfnjy', 'kvpuuw', 'bzrwgl', 'xnmkig'],
   },
   {
     title: 'Creative Studio',
     description:
       'We’re building an entire generative content production platform, visual assets are just the start.',
     image: creative,
-    id: ['idwbik', 'edoidc', 'kjrbjn', 'zancjk']
+    id: ['idwbik', 'edoidc', 'kjrbjn', 'zancjk'],
+  },
+];
+
+export const learnMore = [
+  {
+    title: 'Use an Existing Model',
+    description: 'Use a general or fine-tuned model to generate all sorts of production-ready art assets.',
+    id: ['tqbtwq', 'xmewoc', 'pkkonv', 'wwscio', 'icsnit', 'hujvwo', 'ckxiqj', 'iffjce'],
+    image: learn1,
+  },
+  {
+    title: 'Train Your Own AI Models',
+    description:
+      "In just a few clicks, you can train your own AI model and generate thousands of variations and deviations from your training data. Iterate to your heart's content.",
+    id: ['kuozju', 'qnuneh', 'oajiol', 'smylyn', 'gpeteu', 'qakwbg', 'kuvfqz', 'xlxnrj'],
+    image: learn2,
+  },
+  {
+    title: 'Discover Unlimited Potential',
+    description:
+      'Create a universe with infinite possibilities in minutes. Rapidly iterate with ease while keeping a consistent look or style. This is a real Game Changer.',
+    id: ['kuozju', 'qnuneh', 'oajiol', 'smylyn', 'gpeteu', 'qakwbg', 'kuvfqz', 'xlxnrj'],
+    // id: ['hdalft', 'zbugrd', 'ehezic', 'joxxwz', 'zjehaq', 'dmldij', 'ukegzg', 'anaaee'],
+    image: learn3,
   },
 ];
 
