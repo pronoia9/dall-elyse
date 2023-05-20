@@ -1,4 +1,10 @@
+import { HomePage } from './pages';
+
 const App = () => {
-  return <div>App</div>;
+  return (
+    <>
+      <HomePage />
+    </>
+  );
 };
 export default App;
