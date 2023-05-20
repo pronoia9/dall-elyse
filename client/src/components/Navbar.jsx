@@ -20,7 +20,7 @@ export default function Navbar() {
         {/* Logo */}
         <Logo>
           <a>
-            <img />
+            <img src='/src/assets/logo.png' alt='logo' />
           </a>
         </Logo>
 
@@ -62,14 +62,63 @@ const Wrapper = styled.div`
   padding: 50px;
 `;
 
-const Logo = styled.div``;
+/* --- Logo --- */
+const Logo = styled.div`
+  a {
+    display: block;
+    max-width: 150px;
+    height: 100%;
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
 
-const NavWrapper = styled.div``;
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+`;
+
+/* --- Navigation --- */
+const NavWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 const Nav = styled.nav``;
 
-const NavList = styled.ul``;
+const NavList = styled.ul`
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+`;
 
-const NavListItem = styled.li``;
+const NavListItem = styled.li`
+  display: block;
+  position: relative;
+  padding: 0;
+  margin: 0 0 0 50px;
+  list-style: none;
+
+  a {
+    transition: color 0.3s;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    line-height: 29px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: block;
+    letter-spacing: 0.6px;
+  }
+
+  &:hover {
+    a {
+      color: rgba(255, 255, 255, 1);
+    }
+  }
+`;
 
 const MobileMenu = styled.div``;
