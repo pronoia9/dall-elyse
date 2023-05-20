@@ -43,7 +43,7 @@ export default function Navbar() {
             <Nav>
               <NavList>
                 {navbarData.navlinks.map((link, index) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.desktop(index) }} />
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.desktop(index + 1) }} />
                 ))}
               </NavList>
             </Nav>

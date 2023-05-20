@@ -4,7 +4,6 @@ import { easeInOut } from 'framer-motion';
 export const logoMotionInitial = { ...fadeIn() };
 export const logoMotionSlide = { ...slideInOut('left') };
 export const navbarMotion = {
-  desktop: {},
   mobile: (count) => ({
     initial: { x: 100, opacity: 0 },
     animate: { x: 0, opacity: 1, transition: { delay: 0, duration: 0.5, ease: easeInOut } },
@@ -12,7 +11,11 @@ export const navbarMotion = {
   }),
 };
 export const navlinksMotion = {
-  desktop: () => {},
+  desktop: (index) => ({
+    initial: { x: -10, y: -10, opacity: 0 },
+    animate: {x: 0, y: 0, opacity: 1, transition: { delay: 0.5, duration: 0.5 * index, ease: easeInOut } },
+    exit: { x: -10, y: -10, opacity: 0, transition: { delay: 0.5, duration: 0.5 * index, ease: easeInOut } },
+  }),
   mobile: (index) => ({
     initial: { y: 100, opacity: 0 },
     animate: { y: 0, opacity: 1, transition: { delay: 0.25, duration: 0.25 * index, ease: easeInOut } },
