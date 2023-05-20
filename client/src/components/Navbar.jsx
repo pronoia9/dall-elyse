@@ -213,6 +213,10 @@ const MobileMenuOverlay = styled.div`
     background-color: black;
     opacity: 0.25;
     pointer-events: auto;
+
+    @media only screen and (max-width: 425px) {
+      display: none;
+    }
   }
 `;
 
@@ -239,6 +243,10 @@ const MobileMenu = styled(motion.div)`
     background: #000000;
     display: block;
     z-index: 1000;
+  }
+
+  @media only screen and (max-width: 425px) {
+    width: 100%;
   }
 `;
 
