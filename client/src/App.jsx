@@ -1,5 +1,7 @@
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+
 import { Navbar } from './components';
-import { HomePage } from './pages';
+import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 
 const App = () => {
@@ -7,7 +9,13 @@ const App = () => {
     <>
       <GlobalStyles />
       <Navbar />
-      <HomePage />
+      <BrowserRouter>
+        <Routes>
+          <Route exact path='/' element={<HomePage />} />
+          <Route path='/gallery' element={<GalleryPage />} />
+          <Route path='/create' element={<CreatePage />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 };
