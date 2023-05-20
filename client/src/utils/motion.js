@@ -4,22 +4,22 @@ import { easeInOut } from 'framer-motion';
 export const logoMotionInitial = { ...fadeIn() };
 export const logoMotionSlide = { ...slideInOut('left') };
 export const navbarMotion = {
-  mobile: (count) => ({
+  mobile: (count, delay = 0, duration = 0.5, ease = easeInOut) => ({
     initial: { x: 100, opacity: 0 },
-    animate: { x: 0, opacity: 1, transition: { delay: 0, duration: 0.5, ease: easeInOut } },
-    exit: { x: 100, opacity: 0, transition: { delay: 1, duration: 0.5, ease: easeInOut } },
+    animate: { x: 0, opacity: 1, transition: { delay, duration, ease } },
+    exit: { x: 100, opacity: 0, transition: { delay: 1, duration, ease } },
   }),
 };
 export const navlinksMotion = {
-  desktop: (index) => ({
+  desktop: (index, delay = 0.5, duration = 0.5, ease = easeInOut) => ({
     initial: { x: -10, y: -10, opacity: 0 },
-    animate: {x: 0, y: 0, opacity: 1, transition: { delay: 0.5, duration: 0.5 * index, ease: easeInOut } },
-    exit: { x: -10, y: -10, opacity: 0, transition: { delay: 0.5, duration: 0.5 * index, ease: easeInOut } },
+    animate: { x: 0, y: 0, opacity: 1, transition: { delay, duration: duration * index, ease } },
+    exit: { x: -10, y: -10, opacity: 0, transition: { delay, duration: duration * index, ease } },
   }),
-  mobile: (index) => ({
+  mobile: (index, delay = 0.25, duration = 0.25, ease = easeInOut) => ({
     initial: { y: 100, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition: { delay: 0.25, duration: 0.25 * index, ease: easeInOut } },
-    exit: { y: 100, opacity: 0, transition: { delay: 0, duration: 0.25 * index, ease: easeInOut } },
+    animate: { y: 0, opacity: 1, transition: { delay, duration: duration * index, ease } },
+    exit: { y: 100, opacity: 0, transition: { delay, duration: duration * index, ease } },
   }),
 };
 
