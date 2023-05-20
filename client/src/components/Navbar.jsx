@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import { motion, easeInOut } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
 
@@ -12,53 +13,73 @@ const NavLink = ({ title, url }) => (
 );
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
 
   return (
-    <Container>
-      <Wrapper>
-        {/* Logo */}
-        <Logo>
-          <a>
-            <img src={navbarData.logo} alt='logo' />
-          </a>
-        </Logo>
-
-        {/* Navigation Links */}
-        {/* Desktop Menu */}
-        <NavWrapper>
-          <Nav>
-            <NavList>
-              {navbarData.navlinks.map((link) => (
-                <NavLink key={`navbar-${link.title}`} {...link} />
-              ))}
-            </NavList>
-          </Nav>
-          {/* Mobile Menu Hamburger Icon */}
+    <>
+      <Container id='navbar'>
+        <Wrapper>
+          {/* Logo */}
           {!mobileMenuOpen && (
-            <MobileMenuHamburger onClick={() => setMobileMenuOpen((prev) => !prev)}>
-              <i className='fa-solid fa-bars' />
-            </MobileMenuHamburger>
+            <Logo
+              initial={{ x: -100, opacity: 0 }}
+              animate={{ x: 0, opacity: 1, transition: { duration: 0.5, ease: easeInOut } }}
+              exit={{ x: -100, opacity: 0, transition: { duration: 0.5, ease: easeInOut } }}
+            >
+              <a>
+                <img src={navbarData.logo} alt='logo' />
+              </a>
+            </Logo>
           )}
-        </NavWrapper>
 
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <MobileMenu>
-            {navbarData.navlinks.map((link) => (
-              <NavLink key={`navbar-${link.title}`} {...link} />
-            ))}
+          {/* Navigation Links */}
+          {/* Desktop Menu */}
+          <NavWrapper>
+            <Nav>
+              <NavList>
+                {navbarData.navlinks.map((link) => (
+                  <NavLink key={`navbar-${link.title}`} {...link} />
+                ))}
+              </NavList>
+            </Nav>
+            {/* Mobile Menu Hamburger Icon */}
+            {!mobileMenuOpen && (
+              <MobileMenuHamburger onClick={() => setMobileMenuOpen((prev) => !prev)}>
+                <i className='fa-solid fa-bars' />
+              </MobileMenuHamburger>
+            )}
+          </NavWrapper>
+        </Wrapper>
+      </Container>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <MobileMenuOverlay id='mobile-menu'>
+          <div className='overlay' />
+          <MobileMenu
+            initial={{ x: 100, opacity: 0 }}
+            animate={{ x: 0, opacity: 1, transition: { duration: 0.5, ease: easeInOut } }}
+            exit={{ x: 100, opacity: 0, transition: { duration: 0.5, ease: easeInOut } }}
+          >
+            {/* Mobile Menu Close Icon */}
+            <MobileMenuClose onClick={() => setMobileMenuOpen(false)}>
+              <i className='fa-solid fa-xmark' />
+            </MobileMenuClose>
+            <MobileMenuLinksContainer>
+              <MobileMenuLinksWrapper>
+                {navbarData.navlinks.map((link) => (
+                  <NavLink key={`navbar-${link.title}`} {...link} />
+                ))}
+              </MobileMenuLinksWrapper>
+            </MobileMenuLinksContainer>
           </MobileMenu>
-        )}
-      </Wrapper>
-    </Container>
+        </MobileMenuOverlay>
+      )}
+    </>
   );
 }
 
 // STYLES
-// Animation
-
-// Styles
 const Container = styled.div`
   position: fixed;
   top: 0;
@@ -85,11 +106,11 @@ const Wrapper = styled.div`
 `;
 
 /* --- LOGO --- */
-const Logo = styled.div`
+const Logo = styled(motion.div)`
   a {
     display: block;
     max-width: 150px;
-    height: 100%;
+    height: 55px;
     opacity: 1;
     transform: translate(0px, 0px);
   }
@@ -153,6 +174,7 @@ const NavListItem = styled.li`
 /* --- MOBILE MENU --- */
 const MobileMenuHamburger = styled.div`
   @media only screen and (max-width: 960px) {
+    pointer-events: auto;
     display: block;
     width: 30px;
     height: 30px;
@@ -161,13 +183,46 @@ const MobileMenuHamburger = styled.div`
   }
 `;
 
-const MobileMenu = styled.div`
+const MobileMenuClose = styled.div`
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  width: 30px;
+  height: 30px;
+  z-index: 1001 !important;
+  transition: opacity 0.3s;
+  width: 30px;
+  height: 30px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 24px;
+  line-height: 30px;
+  transition: color 0.3s;
+  color: #fff;
+  text-align: right;
+`;
+
+const MobileMenuOverlay = styled.div`
+  width: 100%;
+  height: 100%;
+  min-height: 100vh;
+
+  .overlay {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    background-color: black;
+    opacity: 0.25;
+    pointer-events: auto;
+  }
+`;
+
+const MobileMenu = styled(motion.div)`
   display: none;
+  opacity: 1;
 
   a {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
-    color: #ffffff;
     text-transform: uppercase;
     font-size: 24px;
     line-height: 29px;
@@ -176,5 +231,57 @@ const MobileMenu = styled.div`
 
   @media only screen and (max-width: 960px) {
     display: block;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 384px;
+    height: 100%;
+    background: #000000;
+    display: block;
+    z-index: 1000;
+  }
+`;
+
+const MobileMenuLinksContainer = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+const MobileMenuLinksWrapper = styled.div`
+  max-width: 100%;
+  padding: 40px 40px;
+  margin: auto 0;
+  width: 100%;
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  ul > li {
+    padding-top: 10px;
+  }
+
+  li {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.5);
+    display: block;
+  }
+
+  li > a {
+    /* margin-bottom: 10px; */
   }
 `;
