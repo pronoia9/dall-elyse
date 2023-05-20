@@ -4,6 +4,10 @@ import { motion, easeInOut } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
 
+// TODO: Fix logo animation on start 'fade in' vs closing mobile menu 'slide in'
+// TODO: Animate desktop menu links 'fade slide right'
+// TODO: Animate mobile menu links 'slide up'
+
 const NavLink = ({ title, url }) => (
   <NavListItem>
     <a href={url} target='_blank'>
