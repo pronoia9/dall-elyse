@@ -1,15 +1,16 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { motion, easeInOut } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
+import { logoMotionInitial, logoMotionSlide, navbarMotion, navlinksMotion } from '../utils/motion';
 
 // TODO: Fix logo animation on start 'fade in' vs closing mobile menu 'slide in'
 // TODO: Animate desktop menu links 'fade slide right'
 // TODO: Animate mobile menu links 'slide up'
 
-const NavLink = ({ title, url }) => (
-  <NavListItem>
+const NavLink = ({ title, url, animation }) => (
+  <NavListItem {...animation}>
     <a href={url} target='_blank'>
       {title}
     </a>
@@ -18,17 +19,10 @@ const NavLink = ({ title, url }) => (
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [logoMotion, setLogoMotion] = useState({ initial: {}, animate: {}, exit: {}, });
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLogoMotion({
-        initial: { x: -100, opacity: 0 },
-        animate: { x: 0, opacity: 1, transition: { duration: 0.5, ease: easeInOut } },
-        exit: { x: -100, opacity: 0, transition: { duration: 0.5, ease: easeInOut } },
-      });
-    }, 1000)
-  }, []);
+  // Change logo's animation after render
+  const [logoMotion, setLogoMotion] = useState(logoMotionInitial); // initial fade in for rendering the first time
+  useEffect(() => { setLogoMotion(logoMotionSlide); }, []); // update to sliding for mobile menu open/close
 
   return (
     <>
@@ -36,11 +30,7 @@ export default function Navbar() {
         <Wrapper>
           {/* Logo */}
           {!mobileMenuOpen && (
-            <Logo
-              initial={logoMotion.initial}
-              animate={logoMotion.animate}
-              exit={logoMotion.exit}
-            >
+            <Logo {...logoMotion}>
               <a>
                 <img src={navbarData.logo} alt='logo' />
               </a>
@@ -52,8 +42,8 @@ export default function Navbar() {
           <NavWrapper>
             <Nav>
               <NavList>
-                {navbarData.navlinks.map((link) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} />
+                {navbarData.navlinks.map((link, index) => (
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.desktop(index) }} />
                 ))}
               </NavList>
             </Nav>
@@ -71,19 +61,15 @@ export default function Navbar() {
       {mobileMenuOpen && (
         <MobileMenuOverlay id='mobile-menu'>
           <div className='overlay' />
-          <MobileMenu
-            initial={{ x: 100, opacity: 0 }}
-            animate={{ x: 0, opacity: 1, transition: { duration: 0.5, ease: easeInOut } }}
-            exit={{ x: 100, opacity: 0, transition: { duration: 0.5, ease: easeInOut } }}
-          >
+          <MobileMenu {...navbarMotion.mobile()}>
             {/* Mobile Menu Close Icon */}
             <MobileMenuClose onClick={() => setMobileMenuOpen(false)}>
               <i className='fa-solid fa-xmark' />
             </MobileMenuClose>
             <MobileMenuLinks>
               <MobileMenuNavList>
-                {navbarData.navlinks.map((link) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} />
+                {navbarData.navlinks.map((link, index) => (
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index) }} />
                 ))}
               </MobileMenuNavList>
             </MobileMenuLinks>
