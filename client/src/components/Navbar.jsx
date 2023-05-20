@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { motion, easeInOut } from 'framer-motion';
 
@@ -18,6 +18,17 @@ const NavLink = ({ title, url }) => (
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [logoMotion, setLogoMotion] = useState({ initial: {}, animate: {}, exit: {}, });
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLogoMotion({
+        initial: { x: -100, opacity: 0 },
+        animate: { x: 0, opacity: 1, transition: { duration: 0.5, ease: easeInOut } },
+        exit: { x: -100, opacity: 0, transition: { duration: 0.5, ease: easeInOut } },
+      });
+    }, 1000)
+  }, []);
 
   return (
     <>
@@ -26,9 +37,9 @@ export default function Navbar() {
           {/* Logo */}
           {!mobileMenuOpen && (
             <Logo
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1, transition: { duration: 0.5, ease: easeInOut } }}
-              exit={{ x: -100, opacity: 0, transition: { duration: 0.5, ease: easeInOut } }}
+              initial={logoMotion.initial}
+              animate={logoMotion.animate}
+              exit={logoMotion.exit}
             >
               <a>
                 <img src={navbarData.logo} alt='logo' />
@@ -69,13 +80,13 @@ export default function Navbar() {
             <MobileMenuClose onClick={() => setMobileMenuOpen(false)}>
               <i className='fa-solid fa-xmark' />
             </MobileMenuClose>
-            <MobileMenuLinksContainer>
-              <MobileMenuLinksWrapper>
+            <MobileMenuLinks>
+              <MobileMenuNavList>
                 {navbarData.navlinks.map((link) => (
                   <NavLink key={`navbar-${link.title}`} {...link} />
                 ))}
-              </MobileMenuLinksWrapper>
-            </MobileMenuLinksContainer>
+              </MobileMenuNavList>
+            </MobileMenuLinks>
           </MobileMenu>
         </MobileMenuOverlay>
       )}
@@ -138,14 +149,14 @@ const Nav = styled.nav`
   }
 `;
 
-const NavList = styled.ul`
+const NavList = styled(motion.ul)`
   padding: 0;
   margin: 0;
   display: flex;
   flex-direction: row;
 `;
 
-const NavListItem = styled.li`
+const NavListItem = styled(motion.li)`
   display: block;
   position: relative;
   padding: 0;
@@ -256,7 +267,7 @@ const MobileMenu = styled(motion.div)`
   }
 `;
 
-const MobileMenuLinksContainer = styled.div`
+const MobileMenuLinks = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -269,7 +280,7 @@ const MobileMenuLinksContainer = styled.div`
   justify-content: flex-start;
 `;
 
-const MobileMenuLinksWrapper = styled.div`
+const MobileMenuNavList = styled(motion.ul)`
   max-width: 100%;
   padding: 40px 40px;
   margin: auto 0;
