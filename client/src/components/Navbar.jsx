@@ -13,7 +13,7 @@ const NavLink = ({ title, url }) => (
 );
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(true);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <>
@@ -173,6 +173,8 @@ const NavListItem = styled.li`
 
 /* --- MOBILE MENU --- */
 const MobileMenuHamburger = styled.div`
+  display: none;
+
   @media only screen and (max-width: 960px) {
     pointer-events: auto;
     display: block;
