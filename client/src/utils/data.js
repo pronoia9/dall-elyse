@@ -1,8 +1,15 @@
-export const navlinks = [
-  { title: 'Vite', url: 'https://vitejs.dev' },
-  { title: 'Vercel', url: 'https://vercel.com' },
-  { title: 'Render', url: 'https://render.com' },
-];
+import logo from '../assets/logo.png';
+import mobileMenu from '../assets/scribble final version-125.svg';
+
+const navbarData = {
+  logo,
+  mobileMenu,
+  navlinks: [
+    { title: 'Vite', url: 'https://vitejs.dev' },
+    { title: 'Vercel', url: 'https://vercel.com' },
+    { title: 'Render', url: 'https://render.com' },
+  ],
+};
 
 const surpriseMePrompts = [
   'an armchair in the shape of an avocado',
@@ -52,3 +59,5 @@ const surpriseMePrompts = [
   'A man wanders through the rainy streets of Tokyo, with bright neon signs, 50mm',
   'A Space Shuttle flying above Cape Town, digital art',
 ];
+
+export { navbarData, surpriseMePrompts };
