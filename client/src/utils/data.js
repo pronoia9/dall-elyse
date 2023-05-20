@@ -1,9 +1,7 @@
 import logo from '../assets/logo.png';
-import mobileMenu from '../assets/scribble final version-125.svg';
 
 const navbarData = {
   logo,
-  mobileMenu,
   navlinks: [
     { title: 'Vite', url: 'https://vitejs.dev' },
     { title: 'Vercel', url: 'https://vercel.com' },
