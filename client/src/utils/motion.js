@@ -1,7 +1,7 @@
 import { easeInOut } from 'framer-motion';
 
 // NAVBAR ANIMATIONS
-export const logoMotionInitial = { ...fadeIn() };
+export const logoMotionInitial = { ...fadeIn(0.5, 0, easeInOut) };
 export const logoMotionSlide = { ...slideInOut('left') };
 export const navbarMotion = {
   mobile: (count, delay = 0, duration = 0.5, ease = easeInOut) => ({
