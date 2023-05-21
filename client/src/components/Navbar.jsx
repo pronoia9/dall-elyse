@@ -22,7 +22,9 @@ export default function Navbar() {
 
   // Change logo's animation after render
   const [logoMotion, setLogoMotion] = useState(logoMotionInitial); // initial fade in for rendering the first time
-  useEffect(() => { setLogoMotion(logoMotionSlide); }, []); // update to sliding for mobile menu open/close
+  useEffect(() => {
+    setLogoMotion(logoMotionSlide);
+  }, []); // update to sliding for mobile menu open/close
 
   return (
     <>
@@ -205,6 +207,7 @@ const MobileMenuClose = styled.div`
 `;
 
 const MobileMenuOverlay = styled.div`
+  display: none;
   width: 100%;
   height: 100%;
   min-height: 100vh;
@@ -223,10 +226,13 @@ const MobileMenuOverlay = styled.div`
       display: none;
     }
   }
+
+  @media only screen and (max-width: 960px) {
+    display: block;
+  }
 `;
 
 const MobileMenu = styled(motion.div)`
-  display: none;
   opacity: 1;
 
   a {
@@ -239,7 +245,6 @@ const MobileMenu = styled(motion.div)`
   }
 
   @media only screen and (max-width: 960px) {
-    display: block;
     position: fixed;
     right: 0;
     top: 0;
