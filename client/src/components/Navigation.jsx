@@ -1,30 +1,31 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-// import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
-import { easeInOut, motion } from 'framer-motion';
-import { slideInOut } from '../utils/motion';
+import { fadeIn, slideInOut } from '../utils/motion';
 
 // TODO: Add animation
 
-export default function Navigation({ title, subtitle, path, position, margin }) {
+export default function Navigation({ title, subtitle, path, position, center }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
 
   return (
-    <LinkContainer position={position}>
-      <LinkWrapper margin={margin}>
-        <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
-          <NavigationSubtitle>{subtitle}</NavigationSubtitle>
-          <NavigationTitle>{title}</NavigationTitle>
-        </Link>
-      </LinkWrapper>
-    </LinkContainer>
+    <motion.div {...slideInOut('up')}>
+      <LinkContainer position={position}>
+        <LinkWrapper center={center}>
+          <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
+            <NavigationSubtitle>{subtitle}</NavigationSubtitle>
+            <NavigationTitle>{title}</NavigationTitle>
+          </Link>
+        </LinkWrapper>
+      </LinkContainer>
+    </motion.div>
   );
 }
 
-const LinkContainer = styled(motion.div)`
+const LinkContainer = styled.div`
   position: fixed;
   top: 100%;
   left: calc(100vw - 182px);
@@ -39,30 +40,26 @@ const LinkContainer = styled(motion.div)`
   /* text-align: center; */
   ${(props) =>
     css`
-    ${props.position}
+      ${props.position}
     `}
-    
-    &:hover {
-      z-index: 25;
-    }
-    
-    &:before {
-      content: '';
-      width: 100%;
-      height: 1px;
-      background: rgba(255, 255, 255, 0.15);
-      position: absolute;
-      left: 0;
-      top: 21px;
-    }
+
+  &:hover {
+    z-index: 25;
+  }
+
+  &:before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    position: absolute;
+    left: 0;
+    top: 21px;
+  }
 `;
 
 const LinkWrapper = styled.div`
-  ${(props) =>
-    props?.margin === 'center' &&
-    css`
-      margin: 0 auto;
-    `}
+  ${(props) => props?.center && css` margin: 0 auto; `}
 
   &:hover {
     span {
