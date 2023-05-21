@@ -44,7 +44,7 @@ export default function Navbar() {
           {/* Logo */}
           {!mobileMenuOpen && (
             <Logo {...navbarMotion.logo(navbarData.navlinks.length)}>
-              <a>
+              <a href='/'>
                 <img src={navbarData.logo} alt='logo' />
               </a>
             </Logo>
