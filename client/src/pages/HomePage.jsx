@@ -1,15 +1,18 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import Navigation from '../components/Navigation';
 import { navigationLinks } from '../utils/data';
+import { useStore } from '../store/useStore';
 
 // TODO: Change Background with Canvas (particles)
 
 export default function HomePage() {
+  const overlay = useStore((state) => state.overlay);
+
   return (
     <>
       {/* Background */}
-      <Background id='background' />
+      <Background id='background' overlay={overlay} />
       {/* Links */}
       {navigationLinks.map((link, index) => (
         <Navigation key={`navigation-${link.link}`} {...link} index={index} />
@@ -20,7 +23,7 @@ export default function HomePage() {
 
 // STYLES
 const Background = styled.div`
-  opacity: 0.75;
+  opacity: ${(props) => props.overlay ? 0.25 : 0.75};
   transition: left 0.5s;
   position: fixed;
   left: 0;
