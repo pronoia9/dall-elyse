@@ -4,9 +4,10 @@ import styled, { css } from 'styled-components';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
+import { easeInOut, motion } from 'framer-motion';
+import { slideInOut } from '../utils/motion';
 
 // TODO: Add animation
-// TODO: Separate text styles and make a TextStyles.js file
 
 export default function Navigation({ title, subtitle, path, position, margin }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
@@ -23,7 +24,7 @@ export default function Navigation({ title, subtitle, path, position, margin }) 
   );
 }
 
-const LinkContainer = styled.div`
+const LinkContainer = styled(motion.div)`
   position: fixed;
   top: 100%;
   left: calc(100vw - 182px);
@@ -38,22 +39,22 @@ const LinkContainer = styled.div`
   /* text-align: center; */
   ${(props) =>
     css`
-      ${props.position}
+    ${props.position}
     `}
-
-  &:hover {
-    z-index: 25;
-  }
-
-  &:before {
-    content: '';
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-    position: absolute;
-    left: 0;
-    top: 21px;
-  }
+    
+    &:hover {
+      z-index: 25;
+    }
+    
+    &:before {
+      content: '';
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.15);
+      position: absolute;
+      left: 0;
+      top: 21px;
+    }
 `;
 
 const LinkWrapper = styled.div`
