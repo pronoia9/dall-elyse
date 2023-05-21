@@ -21,7 +21,7 @@ export const navigationMotion = {
   subtitle: (center) =>
     bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
 };
-export const backgroundMotion = () => bigMotion({ delay: 1, duration: 0.75 });
+export const backgroundMotion = () => bigMotion({ delay: 1 });
 
 // NAVBAR ANIMATIONS
 export const navbarMotion = {
