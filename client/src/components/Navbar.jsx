@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
 import { logoMotionInitial, logoMotionSlide, navbarMotion, navlinksMotion } from '../utils/motion';
+import { useStore } from '../store/useStore';
 
 // TODO: Fix logo animation on start 'fade in' vs closing mobile menu 'slide in'
 // TODO: Animate desktop menu links 'fade slide right'
@@ -18,13 +19,12 @@ const NavLink = ({ title, url, animation }) => (
 );
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuOpen = useStore((state) => state.mobileMenuOpen),
+    toggleMobileMenu = useStore((state) => state.toggleMobileMenu);
 
   // Change logo's animation after render
   const [logoMotion, setLogoMotion] = useState(logoMotionInitial); // initial fade in for rendering the first time
-  useEffect(() => {
-    setLogoMotion(logoMotionSlide);
-  }, []); // update to sliding for mobile menu open/close
+  useEffect(() => { setLogoMotion(logoMotionSlide); }, []); // update to sliding for mobile menu open/close
 
   return (
     <>
@@ -51,7 +51,7 @@ export default function Navbar() {
             </Nav>
             {/* Mobile Menu Hamburger Icon */}
             {!mobileMenuOpen && (
-              <MobileMenuHamburger onClick={() => setMobileMenuOpen((prev) => !prev)}>
+              <MobileMenuHamburger onClick={toggleMobileMenu}>
                 <i className='fa-solid fa-bars' />
               </MobileMenuHamburger>
             )}
@@ -61,22 +61,19 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <MobileMenuOverlay id='mobile-menu'>
-          <div className='mobile-menu-overlay' />
-          <MobileMenu {...navbarMotion.mobile()}>
-            {/* Mobile Menu Close Icon */}
-            <MobileMenuClose onClick={() => setMobileMenuOpen(false)}>
-              <i className='fa-solid fa-xmark' />
-            </MobileMenuClose>
-            <MobileMenuLinks>
-              <MobileMenuNavList>
-                {navbarData.navlinks.map((link, index) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index) }} />
-                ))}
-              </MobileMenuNavList>
-            </MobileMenuLinks>
-          </MobileMenu>
-        </MobileMenuOverlay>
+        <MobileMenu {...navbarMotion.mobile()}>
+          {/* Mobile Menu Close Icon */}
+          <MobileMenuClose onClick={toggleMobileMenu}>
+            <i className='fa-solid fa-xmark' />
+          </MobileMenuClose>
+          <MobileMenuLinks>
+            <MobileMenuNavList>
+              {navbarData.navlinks.map((link, index) => (
+                <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index) }} />
+              ))}
+            </MobileMenuNavList>
+          </MobileMenuLinks>
+        </MobileMenu>
       )}
     </>
   );
@@ -206,33 +203,8 @@ const MobileMenuClose = styled.div`
   text-align: right;
 `;
 
-const MobileMenuOverlay = styled.div`
-  display: none;
-  width: 100%;
-  height: 100%;
-  min-height: 100vh;
-
-  .mobile-menu-overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    min-height: 100vh;
-    background-color: black;
-    opacity: 0.5;
-    z-index: 100;
-    pointer-events: auto;
-
-    @media only screen and (max-width: 425px) {
-      display: none;
-    }
-  }
-
-  @media only screen and (max-width: 960px) {
-    display: block;
-  }
-`;
-
 const MobileMenu = styled(motion.div)`
+  display: none;
   opacity: 1;
 
   a {
@@ -245,6 +217,7 @@ const MobileMenu = styled(motion.div)`
   }
 
   @media only screen and (max-width: 960px) {
+    display: block;
     position: fixed;
     right: 0;
     top: 0;
