@@ -6,8 +6,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Background */}
-      <Canvas />
       {/* Navigation */}
       <Navigation key='navigation-gallery' {...navigationData.gallery} {...{ position: leftMiddle, center: true }} />
       <Navigation key='navigation-create' {...navigationData.create} position={rightMiddle} />
