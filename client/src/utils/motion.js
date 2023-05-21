@@ -7,7 +7,7 @@ export const navbarMotion = {
   mobile: (count, delay = 0, duration = 0.5, ease = easeInOut) => ({
     initial: { x: 100, opacity: 0 },
     animate: { x: 0, opacity: 1, transition: { delay, duration, ease } },
-    exit: { x: 100, opacity: 0, transition: { delay: 1, duration, ease } },
+    exit: { x: 100, opacity: 0, transition: { delay: (count - 1) * 0.25, duration, ease } },
   }),
 };
 export const navlinksMotion = {
