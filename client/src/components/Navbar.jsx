@@ -76,7 +76,7 @@ export default function Navbar() {
             <MobileMenuWrapper ref={mobileMenuRef}>
               <MobileMenuNavList>
                 {navbarData.navlinks.map((link, index) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index) }} />
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index + 1) }} />
                 ))}
               </MobileMenuNavList>
             </MobileMenuWrapper>
