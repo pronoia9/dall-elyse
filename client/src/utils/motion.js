@@ -1,4 +1,4 @@
-import { easeInOut } from 'framer-motion';
+import { easeInOut, spring } from 'framer-motion';
 
 // DEFAULTS
 // x = 0, y = 0
@@ -18,21 +18,16 @@ export const navlinksMotion = {
 
 // NAVIGATION ANIMATIONS
 export const navigationMotion = {
-  container: (center) => bigMotion({
-    directionIn: { y: -window.screen.height * 0.25 * (center ? 1 : -1) },
-    directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1), },
-    duration: 1
-  }),
-  left: {
-    animation: {},
-    title1: {},
-    title2: {},
-  },
-  right: {
-    animation: {},
-    title1: {},
-    title2: {},
-  },
+  container: (center) =>
+    bigMotion({
+      directionIn: { y: -window.screen.height * 0.25 * (center ? 1 : -1) },
+      directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1) },
+      duration: 1,
+    }),
+  title: (center) =>
+    bigMotion({ directionIn: { x: 50 * (center ? 1 : -1) }, directionOut: { x: -50 * (center ? 1 : -1) }, delay: 1.5, ease: 'linear' }),
+  subtitle: (center) =>
+    bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 1.5, ease: 'linear' }),
 };
 
 // GENERAL ANIMATIONS

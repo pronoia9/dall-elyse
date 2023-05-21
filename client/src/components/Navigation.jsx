@@ -16,8 +16,8 @@ export default function Navigation({ title, subtitle, path, position, center }) 
       <LinkContainer position={position}>
         <LinkWrapper center={center}>
           <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
-            <NavigationSubtitle>{subtitle}</NavigationSubtitle>
-            <NavigationTitle>{title}</NavigationTitle>
+            <NavigationSubtitle {...navigationMotion.subtitle(center)}>{subtitle}</NavigationSubtitle>
+            <NavigationTitle {...navigationMotion.title(center)}>{title}</NavigationTitle>
           </Link>
         </LinkWrapper>
       </LinkContainer>
