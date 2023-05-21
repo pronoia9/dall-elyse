@@ -1,8 +1,8 @@
 import styled, { css } from 'styled-components';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import Navigation from '../components/Navigation';
-import { navigationLinks } from '../utils/data';
+import { navigationData } from '../utils/data';
 import { useStore } from '../store/useStore';
 import { backgroundMotion } from '../utils/motion';
 
@@ -12,14 +12,14 @@ export default function HomePage() {
   const overlay = useStore((state) => state.overlay);
 
   return (
-    <>
+    <AnimatePresence>
       {/* Background */}
-      <Background id='background' overlay={overlay} {...backgroundMotion()} />
+      <Background key='background-canvas' id='background' overlay={overlay} {...backgroundMotion()} />
       <div style={{ width: '75%', height: '100vh' }} />
       {/* Navigation */}
-      <Navigation key={`navigation-gallery`} {...navigationLinks.gallery} position={navigationLinks.positions.leftMiddle} center={true} />
-      <Navigation key={`navigation-create`} {...navigationLinks.create} position={navigationLinks.positions.rightMiddle} />
-    </>
+      <Navigation key='navigation-gallery' {...navigationData.gallery} position={navigationData.positions.leftMiddle} center={true} />
+      <Navigation key='navigation-create' {...navigationData.create} position={navigationData.positions.rightMiddle} />
+    </AnimatePresence>
   );
 }
 

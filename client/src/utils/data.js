@@ -9,7 +9,7 @@ export const navbarData = {
   ],
 };
 
-export const navigationLinks = {
+export const navigationData = {
   gallery: { link: 'gallery', title: 'Gallery', subtitle: 'Explore From DALL-E', path: '/gallery' },
   create: { link: 'create', title: 'Create', subtitle: 'Make Your Own AI Image', path: '/create' },
   positions: {
