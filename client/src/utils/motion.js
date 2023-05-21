@@ -1,5 +1,5 @@
-import { easeInOut, spring } from 'framer-motion';
 import merge from 'lodash.merge';
+import { easeInOut } from 'framer-motion';
 
 // DEFAULTS
 // x = 0, y = 0
@@ -7,26 +7,30 @@ import merge from 'lodash.merge';
 // duration = 0.5
 // ease = easeInOut
 
-// NAVBAR ANIMATIONS
-export const logoMotion = (count = 1) => bigMotion({ direction: 'left', delay: 1.1, duration: 0.5 });
-export const mobileMenuMotion = (count = 3) => bigMotion({ direction: { x: window.screen.width }, delayOut: (count - 1) * 0.5, opacity: 1 });
-export const navlinksMotion = {
-  desktop: (index) => bigMotion({ direction: -10, duration: 0.5 * index }),
-  mobile: (index) => bigMotion({ directionIn: 'up', directionOut: 'down', delay: 0.1, duration: 0.5 * index }),
-};
-
-// NAVIGATION ANIMATIONS
+// NAVIGATION ANIMATIONS - Total Duration: 0.5 + 0.5 = 1
 export const navigationMotion = {
   container: (center) =>
     bigMotion({
       directionIn: { y: -window.screen.height * 0.25 * (center ? 1 : -1) },
       directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1) },
-      duration: 1,
+      duration: 0.5,
     }),
   title: (center) =>
-    bigMotion({ directionIn: { x: 50 * (center ? 1 : -1) }, directionOut: { x: -50 * (center ? 1 : -1) }, delay: 1.5, ease: 'linear' }),
+    bigMotion({ directionIn: { x: 50 * (center ? 1 : -1) }, directionOut: { x: -50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
   subtitle: (center) =>
-    bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 1.5, ease: 'linear' }),
+    bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
+};
+
+// NAVBAR ANIMATIONS
+export const navbarMotion = {
+  logo: (count = 3) =>
+    bigMotion({ direction: 'left', delay: 0.25 * count, duration: 0.5 }),
+  desktopLinks: (index) =>
+    bigMotion({ direction: -10, delayIn: 1, duration: 0.25 * index }),
+  mobileMenu: (count = 3) =>
+    bigMotion({ direction: { x: window.screen.width }, delayOut: 0.25 * count, opacity: 1 }),
+  mobileLinks: (index) =>
+    bigMotion({ directionIn: 'up', directionOut: 'down', delayIn: 0.5, duration: 0.25 * index }),
 };
 
 // GENERAL ANIMATIONS

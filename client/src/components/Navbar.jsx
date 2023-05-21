@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
-import { logoMotion, mobileMenuMotion, navlinksMotion } from '../utils/motion';
+import { navbarMotion } from '../utils/motion';
 import { useStore } from '../store/useStore';
 
 // TODO: Fix logo animation on start 'fade in' vs closing mobile menu 'slide in'
@@ -43,7 +43,7 @@ export default function Navbar() {
         <Wrapper>
           {/* Logo */}
           {!mobileMenuOpen && (
-            <Logo {...logoMotion(navbarData.navlinks.length)}>
+            <Logo {...navbarMotion.logo(navbarData.navlinks.length)}>
               <a>
                 <img src={navbarData.logo} alt='logo' />
               </a>
@@ -56,7 +56,7 @@ export default function Navbar() {
             <Nav>
               <NavList>
                 {navbarData.navlinks.map((link, index) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.desktop(index + 1) }} />
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navbarMotion.desktopLinks(index + 1) }} />
                 ))}
               </NavList>
             </Nav>
@@ -73,7 +73,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...mobileMenuMotion(navbarData.navlinks.length)}>
+          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...navbarMotion.mobileMenu(navbarData.navlinks.length)}>
             {/* Mobile Menu Close Icon */}
             <MobileMenuClose onClick={closeMobileMenu}>
               <i className='fa-solid fa-xmark' />
@@ -82,7 +82,7 @@ export default function Navbar() {
             <MobileMenuWrapper ref={mobileMenuRef}>
               <MobileMenuNavList>
                 {navbarData.navlinks.map((link, index) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index + 1) }} />
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navbarMotion.mobileLinks(index + 1) }} />
                 ))}
               </MobileMenuNavList>
             </MobileMenuWrapper>
