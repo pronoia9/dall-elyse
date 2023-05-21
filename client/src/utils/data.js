@@ -9,10 +9,61 @@ export const navbarData = {
   ],
 };
 
-export const navigationLinks = [
-  { link: 'gallery', title: ['From DALL-E', 'Explore Gallery'], path: '/gallery' },
-  { link: 'create', title: ['How To Make Your Own', 'Create Image'], path: '/create' },
-];
+export const navigationLinks = {
+  gallery: { link: 'gallery', title: 'Explore Gallery', subtitle: 'From DALL-E', path: '/gallery' },
+  create: { link: 'create', title: 'Create Image', subtitle: 'Make Your Own', path: '/create' },
+  positions: {
+    left: ``,
+    leftMiddle: `
+          left: calc(66.66% + 21px);
+          text-align: left;
+
+          span {
+            &:first-child {
+              text-align: right;
+              margin: 0 0 3px 0;
+              transform: translateX(100px);
+              color: rgba(255, 255, 255, 0);
+              color: rgba(255, 255, 255, 0.6);
+              transform: translateX(50px);
+            }
+
+            &:last-child {
+              margin: 0;
+              color: rgba(255, 255, 255, 0);
+              transform: translateX(-50px);
+              color: rgba(255, 255, 255, 0.5);
+              transform: translateX(0px);
+            }
+          }
+        `,
+    right: ``,
+    rightMiddle: `
+          left: calc(33.33% - 21px);
+          text-align: center;
+          padding: 0;
+
+          span {
+            &:first-child {
+              text-align: left;
+              margin: 0 0 3px 0;
+              transform: translateX(-100px);
+              color: rgba(255, 255, 255, 0);
+              color: rgba(255, 255, 255, 0.6);
+              transform: translateX(-50px);
+            }
+
+            &:last-child {
+              margin: 0;
+              color: rgba(255, 255, 255, 0);
+              transform: translateX(50px);
+              color: rgba(255, 255, 255, 0.5);
+              transform: translateX(0px);
+            }
+          }
+        `,
+  },
+};
 
 export const surpriseMePrompts = [
   'an armchair in the shape of an avocado',
@@ -62,4 +113,3 @@ export const surpriseMePrompts = [
   'A man wanders through the rainy streets of Tokyo, with bright neon signs, 50mm',
   'A Space Shuttle flying above Cape Town, digital art',
 ];
-
