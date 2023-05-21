@@ -10,35 +10,11 @@ export const navbarData = {
 };
 
 export const navigationLinks = {
-  gallery: { link: 'gallery', title: 'Explore Gallery', subtitle: 'From DALL-E', path: '/gallery' },
-  create: { link: 'create', title: 'Create Image', subtitle: 'Make Your Own', path: '/create' },
+  gallery: { link: 'gallery', title: 'Gallery', subtitle: 'Explore From DALL-E', path: '/gallery' },
+  create: { link: 'create', title: 'Create', subtitle: 'Make Your Own AI Image', path: '/create' },
   positions: {
     left: ``,
     leftMiddle: `
-          left: calc(66.66% + 21px);
-          text-align: left;
-
-          span {
-            &:first-child {
-              text-align: right;
-              margin: 0 0 3px 0;
-              transform: translateX(100px);
-              color: rgba(255, 255, 255, 0);
-              color: rgba(255, 255, 255, 0.6);
-              transform: translateX(50px);
-            }
-
-            &:last-child {
-              margin: 0;
-              color: rgba(255, 255, 255, 0);
-              transform: translateX(-50px);
-              color: rgba(255, 255, 255, 0.5);
-              transform: translateX(0px);
-            }
-          }
-        `,
-    right: ``,
-    rightMiddle: `
           left: calc(33.33% - 21px);
           text-align: center;
           padding: 0;
@@ -57,6 +33,30 @@ export const navigationLinks = {
               margin: 0;
               color: rgba(255, 255, 255, 0);
               transform: translateX(50px);
+              color: rgba(255, 255, 255, 0.5);
+              transform: translateX(0px);
+            }
+          }
+        `,
+    right: ``,
+    rightMiddle: `
+          left: calc(66.66% + 21px);
+          text-align: left;
+
+          span {
+            &:first-child {
+              text-align: right;
+              margin: 0 0 3px 0;
+              transform: translateX(100px);
+              color: rgba(255, 255, 255, 0);
+              color: rgba(255, 255, 255, 0.6);
+              transform: translateX(50px);
+            }
+
+            &:last-child {
+              margin: 0;
+              color: rgba(255, 255, 255, 0);
+              transform: translateX(-50px);
               color: rgba(255, 255, 255, 0.5);
               transform: translateX(0px);
             }
