@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Navigation from '../components/Navigation';
 import { navigationLinks } from '../utils/data';
 
+// TODO: Change Background with Canvas (particles)
+
 export default function HomePage() {
   return (
     <>
