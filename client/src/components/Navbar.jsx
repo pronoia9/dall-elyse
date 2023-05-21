@@ -60,7 +60,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <MobileMenuOverlay id='mobile-menu'>
-          <div className='overlay' />
+          <div className='mobile-menu-overlay' />
           <MobileMenu {...navbarMotion.mobile()}>
             {/* Mobile Menu Close Icon */}
             <MobileMenuClose onClick={() => setMobileMenuOpen(false)}>
@@ -209,12 +209,14 @@ const MobileMenuOverlay = styled.div`
   height: 100%;
   min-height: 100vh;
 
-  .overlay {
+  .mobile-menu-overlay {
+    position: absolute;
     width: 100%;
     height: 100%;
     min-height: 100vh;
     background-color: black;
-    opacity: 0.25;
+    opacity: 0.5;
+    z-index: 100;
     pointer-events: auto;
 
     @media only screen and (max-width: 425px) {
