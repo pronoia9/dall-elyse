@@ -1,6 +1,6 @@
 import logo from '../assets/logo.png';
 
-const navbarData = {
+export const navbarData = {
   logo,
   navlinks: [
     { title: 'Vite', url: 'https://vitejs.dev' },
@@ -9,7 +9,12 @@ const navbarData = {
   ],
 };
 
-const surpriseMePrompts = [
+export const navigationLinks = [
+  { link: 'gallery', title: ['From DALL-E', 'Explore Gallery'], path: '/gallery' },
+  { link: 'create', title: ['How To Make Your Own', 'Create Image'], path: '/create' },
+];
+
+export const surpriseMePrompts = [
   'an armchair in the shape of an avocado',
   'a surrealist dream-like oil painting by Salvador Dalí of a cat playing checkers',
   'teddy bears shopping for groceries in Japan, ukiyo-e',
@@ -58,4 +63,3 @@ const surpriseMePrompts = [
   'A Space Shuttle flying above Cape Town, digital art',
 ];
 
-export { navbarData, surpriseMePrompts };
