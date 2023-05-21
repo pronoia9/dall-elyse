@@ -29,14 +29,15 @@ export const navigationMotion = {
 };
 
 // GENERAL ANIMATIONS
-export function bigMotion({
-  direction, directionIn, directionOut,
-  opacity, opacityIn, opacityOut,
-  type, typeIn, typeOut,
-  delay, delayIn, delayOut,
-  duration, durationIn, durationOut,
-  ease_, easeIn_, easeOut_,
-}) {
+export function bigMotion(props = {}, extra = {}) {
+  const {
+    direction, directionIn, directionOut,
+    opacity, opacityIn, opacityOut,
+    type, typeIn, typeOut,
+    delay, delayIn, delayOut,
+    duration, durationIn, durationOut,
+    ease_, easeIn_, easeOut_,
+  } = props;
   const options = {
     initial: { x: 0, y: 0, opacity: 0 },
     animate: { x: 0, y: 0, opacity: 1, transition: { type: '', delay: 0, duration: 0.5, ease: easeInOut } },
@@ -95,7 +96,7 @@ export function bigMotion({
   if (easeIn_) options.animate.transition.ease = easeIn_;
   if (easeOut_) options.exit.transition.ease = easeOut_;
 
-  return options;
+  return {...options, ...extra};
 }
 
 // export const textVariant = (delay) => {
