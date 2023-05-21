@@ -30,7 +30,7 @@ const Background = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background: url('https://images.unsplash.com/photo-1634128510033-a548c3456cad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=3318&q=80')
+  background: url('https://images.unsplash.com/photo-1579648999496-65a8fa8d77ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')
     no-repeat center;
   background-size: cover;
 `;
