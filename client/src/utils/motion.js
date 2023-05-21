@@ -1,14 +1,13 @@
 import { easeInOut } from 'framer-motion';
 
 // NAVBAR ANIMATIONS
-export const logoMotion = (count = 1) =>
-  slideInOut('left', 0.5 * count, 0.75, easeInOut);
+export const logoMotion = (count = 1) => slideInOut('left', 0.5 * count, 0.75, easeInOut);
 
 export const navbarMotion = {
   mobile: (count, delay = 0, duration = 0.5, ease = easeInOut) => ({
     initial: { x: 100, opacity: 0 },
-    animate: { x: 0, opacity: 1, transition: { delay, duration, ease } },
-    exit: { x: 100, opacity: 0, transition: { delay: (count - 1) * 0.25, duration, ease } },
+    animate: { x: 0, opacity: 1, transition: { delay: 0, duration, ease } },
+    exit: { x: 100, opacity: 0, transition: { delay: (count - 1) * 0.5, duration, ease } },
   }),
 };
 export const navlinksMotion = {
@@ -17,7 +16,7 @@ export const navlinksMotion = {
     animate: { x: 0, y: 0, opacity: 1, transition: { delay, duration: duration * index, ease } },
     exit: { x: -10, y: -10, opacity: 0, transition: { delay, duration: duration * index, ease } },
   }),
-  mobile: (index, delay = 0.25, duration = 0.25, ease = easeInOut) => ({
+  mobile: (index, delay = 0.1, duration = 0.5, ease = easeInOut) => ({
     initial: { y: 100, opacity: 0 },
     animate: { y: 0, opacity: 1, transition: { delay, duration: duration * index, ease } },
     exit: { y: -100, opacity: 0, transition: { delay, duration: duration * index, ease } },
