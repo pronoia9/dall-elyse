@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { AnimatePresence, motion } from 'framer-motion';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import Navigation from '../components/Navigation';
 import { useStore } from '../store/useStore';
@@ -13,14 +13,13 @@ export default function HomePage() {
   const { leftMiddle, rightMiddle } = navigationData.positions;
 
   return (
-    <AnimatePresence>
+    <>
       {/* Background */}
       <Background key='background-canvas' id='background' overlay={overlay} {...backgroundMotion()} />
-      <div style={{ width: '75%', height: '100vh' }} />
       {/* Navigation */}
       <Navigation key='navigation-gallery' {...navigationData.gallery} {...{ position: leftMiddle, center: true }} />
       <Navigation key='navigation-create' {...navigationData.create} position={rightMiddle} />
-    </AnimatePresence>
+    </>
   );
 }
 
