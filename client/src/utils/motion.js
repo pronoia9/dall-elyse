@@ -1,4 +1,5 @@
 import { easeInOut, spring } from 'framer-motion';
+import merge from 'lodash.merge';
 
 // DEFAULTS
 // x = 0, y = 0
@@ -7,7 +8,7 @@ import { easeInOut, spring } from 'framer-motion';
 // ease = easeInOut
 
 // NAVBAR ANIMATIONS
-export const logoMotion = (count = 1) => bigMotion({ direction: 'left', delay: 1, duration: 0.5 });
+export const logoMotion = (count = 1) => bigMotion({ direction: 'left', delay: 1.1, duration: 0.5 });
 export const mobileMenuMotion = (count = 3) => bigMotion({ direction: { x: window.screen.width }, delayOut: (count - 1) * 0.5, opacity: 1 });
 export const navlinksMotion = {
   desktop: (index) => bigMotion({ direction: -10, duration: 0.5 * index }),
@@ -96,7 +97,7 @@ export function bigMotion(props = {}, extra = {}) {
   if (easeIn_) options.animate.transition.ease = easeIn_;
   if (easeOut_) options.exit.transition.ease = easeOut_;
 
-  return {...options, ...extra};
+  return merge(options, extra);
 }
 
 // export const textVariant = (delay) => {
