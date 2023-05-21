@@ -121,7 +121,7 @@ const Logo = styled(motion.div)`
     max-width: 150px;
     height: 55px;
     opacity: 1;
-    transform: translate(0px, 0px);
+    /* transform: translate(0px, 0px); */
   }
 
   img {
