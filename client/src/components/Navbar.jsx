@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
 import { logoMotionInitial, logoMotionSlide, navbarMotion, navlinksMotion } from '../utils/motion';
@@ -20,7 +20,8 @@ const NavLink = ({ title, url, animation }) => (
 
 export default function Navbar() {
   const mobileMenuOpen = useStore((state) => state.mobileMenuOpen),
-    toggleMobileMenu = useStore((state) => state.toggleMobileMenu);
+    openMobileMenu = useStore((state) => state.openMobileMenu),
+    closeMobileMenu = useStore((state) => state.closeMobileMenu);
   const mobileMenuRef = useRef();
 
   // Change logo's animation after render
@@ -34,7 +35,7 @@ export default function Navbar() {
     // Handle click outside of ref/mobilemenu
     const handleClick = (e) => {
       const { mobileMenuOpen } = useStore.getState();
-      if (mobileMenuOpen && mobileMenuRef?.current !== e.target) toggleMobileMenu();
+      if (mobileMenuOpen && mobileMenuRef?.current !== e.target) closeMobileMenu();
     };
     document.addEventListener('mousedown', handleClick);
     return () => {
@@ -67,7 +68,7 @@ export default function Navbar() {
             </Nav>
             {/* Mobile Menu Hamburger Icon */}
             {!mobileMenuOpen && (
-              <MobileMenuHamburger onClick={toggleMobileMenu}>
+              <MobileMenuHamburger onClick={openMobileMenu}>
                 <i className='fa-solid fa-bars' />
               </MobileMenuHamburger>
             )}
@@ -76,22 +77,24 @@ export default function Navbar() {
       </Container>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <MobileMenuContainer {...navbarMotion.mobile()} id='mobile-menu'>
-          {/* Mobile Menu Close Icon */}
-          <MobileMenuClose onClick={toggleMobileMenu}>
-            <i className='fa-solid fa-xmark' />
-          </MobileMenuClose>
-          {/* Mobile Menu Links List */}
-          <MobileMenuWrapper ref={mobileMenuRef}>
-            <MobileMenuNavList>
-              {navbarData.navlinks.map((link, index) => (
-                <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index) }} />
-              ))}
-            </MobileMenuNavList>
-          </MobileMenuWrapper>
-        </MobileMenuContainer>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...navbarMotion.mobile(navbarData.navlinks.length)}>
+            {/* Mobile Menu Close Icon */}
+            <MobileMenuClose onClick={closeMobileMenu}>
+              <i className='fa-solid fa-xmark' />
+            </MobileMenuClose>
+            {/* Mobile Menu Links List */}
+            <MobileMenuWrapper ref={mobileMenuRef}>
+              <MobileMenuNavList>
+                {navbarData.navlinks.map((link, index) => (
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index) }} />
+                ))}
+              </MobileMenuNavList>
+            </MobileMenuWrapper>
+          </MobileMenuContainer>
+        )}
+      </AnimatePresence>
     </>
   );
 }
