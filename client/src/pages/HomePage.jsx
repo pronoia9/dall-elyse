@@ -2,14 +2,15 @@ import styled, { css } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import Navigation from '../components/Navigation';
-import { navigationData } from '../utils/data';
 import { useStore } from '../store/useStore';
+import { navigationData } from '../utils/data';
 import { backgroundMotion } from '../utils/motion';
 
 // TODO: Change Background with Canvas (particles)
 
 export default function HomePage() {
   const overlay = useStore((state) => state.overlay);
+  const { leftMiddle, rightMiddle } = navigationData.positions;
 
   return (
     <AnimatePresence>
@@ -17,8 +18,8 @@ export default function HomePage() {
       <Background key='background-canvas' id='background' overlay={overlay} {...backgroundMotion()} />
       <div style={{ width: '75%', height: '100vh' }} />
       {/* Navigation */}
-      <Navigation key='navigation-gallery' {...navigationData.gallery} position={navigationData.positions.leftMiddle} center={true} />
-      <Navigation key='navigation-create' {...navigationData.create} position={navigationData.positions.rightMiddle} />
+      <Navigation key='navigation-gallery' {...navigationData.gallery} {...{ position: leftMiddle, center: true }} />
+      <Navigation key='navigation-create' {...navigationData.create} position={rightMiddle} />
     </AnimatePresence>
   );
 }
