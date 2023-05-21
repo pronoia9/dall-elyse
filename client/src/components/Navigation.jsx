@@ -129,7 +129,7 @@ const LinkWrapper = styled.div`
     &:last-child {
       font-family: 'Roboto', sans-serif;
       font-weight: 700;
-      color: #ffffff;
+      /* color: #ffffff; */
       text-transform: uppercase;
       font-size: 50px;
       line-height: 55px;
