@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 export const useStore = create((set) => ({
-  overlay: true,
+  overlay: false,
   toggleOverlay: () => set((state) => ({ overlay: !state.overlay })),
   mobileMenuOpen: false,
   enableMobileMenu: () => set({ mobileMenuOpen: true, overlay: true }),
