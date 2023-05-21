@@ -59,20 +59,22 @@ const LinkContainer = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-  ${(props) => props?.center && css` margin: 0 auto; `}
+  ${(props) =>
+    props?.center &&
+    css`
+      margin: 0 auto;
+    `}
 
   &:hover {
     span {
       &:first-child {
         color: rgba(255, 255, 255, 0.8);
-        transform: translateX(-40px);
-        transform: translateX(40px);
+        transform: translateX(${(props) => props?.center ? -40 : 40}px);
       }
 
       &:last-child {
         color: #fff;
-        transform: translateX(-10px);
-        transform: translateX(10px);
+        transform: translateX(${(props) => props?.center ? -10 : 10}px);
       }
     }
   }
