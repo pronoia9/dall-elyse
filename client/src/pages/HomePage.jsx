@@ -15,7 +15,7 @@ export default function HomePage() {
       <Background id='background' overlay={overlay} />
       <div style={{ width: '75%', height: '100vh' }} />
       {/* Navigation */}
-      <Navigation key={`navigation-gallery`} {...navigationLinks.gallery} position={navigationLinks.positions.leftMiddle} />
+      <Navigation key={`navigation-gallery`} {...navigationLinks.gallery} position={navigationLinks.positions.leftMiddle} margin='center' />
       <Navigation key={`navigation-create`} {...navigationLinks.create} position={navigationLinks.positions.rightMiddle} />
     </>
   );

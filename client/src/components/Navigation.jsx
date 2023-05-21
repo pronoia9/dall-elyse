@@ -8,12 +8,12 @@ import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
 // TODO: Add animation
 // TODO: Separate text styles and make a TextStyles.js file
 
-export default function Navigation({ title, subtitle, path, position }) {
+export default function Navigation({ title, subtitle, path, position, margin }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
 
   return (
     <LinkContainer position={position}>
-      <LinkWrapper>
+      <LinkWrapper margin={margin}>
         <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
           <NavigationSubtitle>{subtitle}</NavigationSubtitle>
           <NavigationTitle>{title}</NavigationTitle>
@@ -33,11 +33,13 @@ const LinkContainer = styled.div`
   transform-origin: 0% 0%;
   transform: rotate(-90deg) translate(0, 0);
   z-index: 15;
-  cursor: default;
-  text-align: right;
+  /* cursor: default; */
   padding-left: 100px;
-
-  ${(props) => css`${props.position}`}
+  /* text-align: center; */
+  ${(props) =>
+    css`
+      ${props.position}
+    `}
 
   &:hover {
     z-index: 25;
@@ -55,5 +57,9 @@ const LinkContainer = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-  margin: 0 auto;
+  ${(props) =>
+    props?.margin === 'center' &&
+    css`
+      margin: 0 auto;
+    `}
 `;
