@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -21,10 +21,27 @@ const NavLink = ({ title, url, animation }) => (
 export default function Navbar() {
   const mobileMenuOpen = useStore((state) => state.mobileMenuOpen),
     toggleMobileMenu = useStore((state) => state.toggleMobileMenu);
+  const mobileMenuRef = useRef();
 
   // Change logo's animation after render
   const [logoMotion, setLogoMotion] = useState(logoMotionInitial); // initial fade in for rendering the first time
-  useEffect(() => { setLogoMotion(logoMotionSlide); }, []); // update to sliding for mobile menu open/close
+  useEffect(() => {
+    setLogoMotion(logoMotionSlide);
+  }, []); // update to sliding for mobile menu open/close
+
+  // Add click event listener
+  useEffect(() => {
+    // Handle click outside of ref/mobilemenu
+    const handleClick = (e) => {
+      const { mobileMenuOpen } = useStore.getState();
+      if (mobileMenuOpen) console.log('[NAVBAR] MOBILE MENU OPEN', mobileMenuOpen);
+      if (mobileMenuOpen && mobileMenuRef?.current !== e.target) toggleMobileMenu();
+    };
+    document.addEventListener('mousedown', handleClick);
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
+  }, []);
 
   return (
     <>
@@ -61,19 +78,19 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <MobileMenu {...navbarMotion.mobile()}>
+        <MobileMenuContainer {...navbarMotion.mobile()} id='mobile-menu'>
           {/* Mobile Menu Close Icon */}
           <MobileMenuClose onClick={toggleMobileMenu}>
             <i className='fa-solid fa-xmark' />
           </MobileMenuClose>
-          <MobileMenuLinks>
+          <MobileMenuWrapper ref={mobileMenuRef}>
             <MobileMenuNavList>
               {navbarData.navlinks.map((link, index) => (
                 <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navlinksMotion.mobile(index) }} />
               ))}
             </MobileMenuNavList>
-          </MobileMenuLinks>
-        </MobileMenu>
+          </MobileMenuWrapper>
+        </MobileMenuContainer>
       )}
     </>
   );
@@ -203,7 +220,7 @@ const MobileMenuClose = styled.div`
   text-align: right;
 `;
 
-const MobileMenu = styled(motion.div)`
+const MobileMenuContainer = styled(motion.div)`
   display: none;
   opacity: 1;
 
@@ -233,7 +250,7 @@ const MobileMenu = styled(motion.div)`
   }
 `;
 
-const MobileMenuLinks = styled.div`
+const MobileMenuWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
