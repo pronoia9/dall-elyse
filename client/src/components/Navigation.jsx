@@ -2,13 +2,18 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 // import { motion } from 'framer-motion';
 
+import { useStore } from '../store/useStore';
+
 // TODO: Add animation
+// TODO: Separate text styles and make a TextStyles.js file
 
 export default function Navigation({ title, path, index }) {
+  const toggleOverlay = useStore((state) => state.toggleOverlay);
+
   return (
     <LinkContainer index={index}>
       <LinkWrapper>
-        <Link to={path}>
+        <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
           <span>{title[0]}</span>
           <span>{title[1]}</span>
         </Link>
