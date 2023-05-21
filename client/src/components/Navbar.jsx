@@ -11,7 +11,7 @@ import { useStore } from '../store/useStore';
 // TODO: Animate mobile menu links 'slide up'
 
 const NavLink = ({ title, url, animation }) => (
-  <NavListItem {...animation}>
+  <NavListItem className='navlist-item' {...animation}>
     <a href={url} target='_blank'>
       {title}
     </a>
@@ -34,7 +34,6 @@ export default function Navbar() {
     // Handle click outside of ref/mobilemenu
     const handleClick = (e) => {
       const { mobileMenuOpen } = useStore.getState();
-      if (mobileMenuOpen) console.log('[NAVBAR] MOBILE MENU OPEN', mobileMenuOpen);
       if (mobileMenuOpen && mobileMenuRef?.current !== e.target) toggleMobileMenu();
     };
     document.addEventListener('mousedown', handleClick);
@@ -83,6 +82,7 @@ export default function Navbar() {
           <MobileMenuClose onClick={toggleMobileMenu}>
             <i className='fa-solid fa-xmark' />
           </MobileMenuClose>
+          {/* Mobile Menu Links List */}
           <MobileMenuWrapper ref={mobileMenuRef}>
             <MobileMenuNavList>
               {navbarData.navlinks.map((link, index) => (
@@ -96,6 +96,7 @@ export default function Navbar() {
   );
 }
 
+// STYLED COMPONENTS
 // STYLES
 const Container = styled.div`
   position: fixed;
