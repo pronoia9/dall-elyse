@@ -1,9 +1,9 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
-import { logoMotionInitial, logoMotionSlide, navbarMotion, navlinksMotion } from '../utils/motion';
+import { logoMotion, navbarMotion, navlinksMotion } from '../utils/motion';
 import { useStore } from '../store/useStore';
 
 // TODO: Fix logo animation on start 'fade in' vs closing mobile menu 'slide in'
@@ -24,12 +24,6 @@ export default function Navbar() {
     closeMobileMenu = useStore((state) => state.closeMobileMenu);
   const mobileMenuRef = useRef();
 
-  // Change logo's animation after render
-  const [logoMotion, setLogoMotion] = useState(logoMotionInitial); // initial fade in for rendering the first time
-  useEffect(() => {
-    setLogoMotion(logoMotionSlide);
-  }, []); // update to sliding for mobile menu open/close
-
   // Add click event listener
   useEffect(() => {
     // Handle click outside of ref/mobilemenu
@@ -48,13 +42,7 @@ export default function Navbar() {
       <Container id='navbar'>
         <Wrapper>
           {/* Logo */}
-          {!mobileMenuOpen && (
-            <Logo {...logoMotion}>
-              <a>
-                <img src={navbarData.logo} alt='logo' />
-              </a>
-            </Logo>
-          )}
+          {!mobileMenuOpen && (<Logo {...logoMotion()}><a><img src={navbarData.logo} alt='logo' /></a></Logo>)}
 
           {/* Navigation Links */}
           {/* Desktop Menu */}

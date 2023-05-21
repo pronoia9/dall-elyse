@@ -1,8 +1,9 @@
 import { easeInOut } from 'framer-motion';
 
 // NAVBAR ANIMATIONS
-export const logoMotionInitial = { ...fadeIn(0.5, 0, easeInOut) };
-export const logoMotionSlide = { ...slideInOut('left') };
+export const logoMotion = (count = 1) =>
+  slideInOut('left', 0.5 * count, 0.75, easeInOut);
+
 export const navbarMotion = {
   mobile: (count, delay = 0, duration = 0.5, ease = easeInOut) => ({
     initial: { x: 100, opacity: 0 },
@@ -22,6 +23,18 @@ export const navlinksMotion = {
     exit: { y: -100, opacity: 0, transition: { delay, duration: duration * index, ease } },
   }),
 };
+export const navigationMotion = {
+  left: {
+    animation: {},
+    title1: {},
+    title2: {}
+  },
+  right: {
+    animation: {},
+    title1: {},
+    title2: {}
+  }
+}
 
 // GENERAL ANIMATIONS
 export function fadeIn(delay = 0, duration = 0.5, ease = easeInOut) {
