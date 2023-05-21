@@ -19,7 +19,7 @@ export const navlinksMotion = {
   mobile: (index, delay = 0.25, duration = 0.25, ease = easeInOut) => ({
     initial: { y: 100, opacity: 0 },
     animate: { y: 0, opacity: 1, transition: { delay, duration: duration * index, ease } },
-    exit: { y: 100, opacity: 0, transition: { delay, duration: duration * index, ease } },
+    exit: { y: -100, opacity: 0, transition: { delay, duration: duration * index, ease } },
   }),
 };
 
