@@ -7,10 +7,8 @@ import { easeInOut, spring } from 'framer-motion';
 // ease = easeInOut
 
 // NAVBAR ANIMATIONS
-export const logoMotion = (count = 1) => bigMotion({ direction: 'left', delay: 0.5 * count, duration: 0.75 });
-export const navbarMotion = {
-  mobile: (count) => bigMotion({ delayOut: (count - 1) * 0.5 }),
-};
+export const logoMotion = (count = 1) => bigMotion({ direction: 'left', delay: 1, duration: 0.5 });
+export const mobileMenuMotion = (count = 3) => bigMotion({ direction: { x: window.screen.width }, delayOut: (count - 1) * 0.5, opacity: 1 });
 export const navlinksMotion = {
   desktop: (index) => bigMotion({ direction: -10, duration: 0.5 * index }),
   mobile: (index) => bigMotion({ directionIn: 'up', directionOut: 'down', delay: 0.1, duration: 0.5 * index }),
@@ -75,6 +73,7 @@ export function bigMotion({
   }
 
   // OPACITY
+  if (opacity) options.initial.opacity = opacity, options.animate.opacity = opacity, options.exit.opacity = opacity;
 
   // TYPE
   if (type) options.animate.transition.type = type, options.exit.transition.type = type;

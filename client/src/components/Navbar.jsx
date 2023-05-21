@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
-import { logoMotion, navbarMotion, navlinksMotion } from '../utils/motion';
+import { logoMotion, mobileMenuMotion, navlinksMotion } from '../utils/motion';
 import { useStore } from '../store/useStore';
 
 // TODO: Fix logo animation on start 'fade in' vs closing mobile menu 'slide in'
@@ -42,7 +42,13 @@ export default function Navbar() {
       <Container id='navbar'>
         <Wrapper>
           {/* Logo */}
-          {!mobileMenuOpen && (<Logo {...logoMotion()}><a><img src={navbarData.logo} alt='logo' /></a></Logo>)}
+          {!mobileMenuOpen && (
+            <Logo {...logoMotion(navbarData.navlinks.length)}>
+              <a>
+                <img src={navbarData.logo} alt='logo' />
+              </a>
+            </Logo>
+          )}
 
           {/* Navigation Links */}
           {/* Desktop Menu */}
@@ -67,7 +73,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...navbarMotion.mobile(navbarData.navlinks.length)}>
+          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...mobileMenuMotion(navbarData.navlinks.length)}>
             {/* Mobile Menu Close Icon */}
             <MobileMenuClose onClick={closeMobileMenu}>
               <i className='fa-solid fa-xmark' />
