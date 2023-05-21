@@ -22,4 +22,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 500;
     color: #808080;
   }
+  a, li {
+    text-decoration: none;
+  }
 `;
