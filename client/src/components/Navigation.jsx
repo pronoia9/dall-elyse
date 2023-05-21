@@ -62,4 +62,20 @@ const LinkWrapper = styled.div`
     css`
       margin: 0 auto;
     `}
+
+  &:hover {
+    span {
+      &:first-child {
+        color: rgba(255, 255, 255, 0.8);
+        transform: translateX(-40px);
+        transform: translateX(40px);
+      }
+
+      &:last-child {
+        color: #fff;
+        transform: translateX(-10px);
+        transform: translateX(10px);
+      }
+    }
+  }
 `;
