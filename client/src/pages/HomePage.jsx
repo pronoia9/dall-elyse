@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 import Navigation from '../components/Navigation';
 import { navigationLinks } from '../utils/data';
 import { useStore } from '../store/useStore';
+import { backgroundMotion } from '../utils/motion';
 
 // TODO: Change Background with Canvas (particles)
 
@@ -12,7 +14,7 @@ export default function HomePage() {
   return (
     <>
       {/* Background */}
-      <Background id='background' overlay={overlay} />
+      <Background id='background' overlay={overlay} {...backgroundMotion()} />
       <div style={{ width: '75%', height: '100vh' }} />
       {/* Navigation */}
       <Navigation key={`navigation-gallery`} {...navigationLinks.gallery} position={navigationLinks.positions.leftMiddle} center={true} />
@@ -22,7 +24,7 @@ export default function HomePage() {
 }
 
 // STYLES
-const Background = styled.div`
+const Background = styled(motion.div)`
   opacity: ${(props) => (props.overlay ? 0.25 : 0.75)};
   transition: 0.75s;
   position: fixed;

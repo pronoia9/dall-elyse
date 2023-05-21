@@ -7,6 +7,7 @@ import { easeInOut } from 'framer-motion';
 // duration = 0.5
 // ease = easeInOut
 
+// HOME PAGE
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 + 0.5 = 1
 export const navigationMotion = {
   container: (center) =>
@@ -20,6 +21,7 @@ export const navigationMotion = {
   subtitle: (center) =>
     bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
 };
+export const backgroundMotion = () => bigMotion({ delay: 1, duration: 0.75 });
 
 // NAVBAR ANIMATIONS
 export const navbarMotion = {
