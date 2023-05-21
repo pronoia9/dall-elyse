@@ -8,7 +8,6 @@ import { easeInOut } from 'framer-motion';
 
 // NAVBAR ANIMATIONS
 export const logoMotion = (count = 1) => bigMotion({ direction: 'left', delay: 0.5 * count, duration: 0.75 });
-
 export const navbarMotion = {
   mobile: (count) => bigMotion({ delayOut: (count - 1) * 0.5 }),
 };
@@ -16,7 +15,14 @@ export const navlinksMotion = {
   desktop: (index) => bigMotion({ direction: -10, duration: 0.5 * index }),
   mobile: (index) => bigMotion({ directionIn: 'up', directionOut: 'down', delay: 0.1, duration: 0.5 * index }),
 };
+
+// NAVIGATION ANIMATIONS
 export const navigationMotion = {
+  container: (center) => bigMotion({
+    directionIn: { y: -window.screen.height * 0.25 * (center ? 1 : -1) },
+    directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1), },
+    duration: 1
+  }),
   left: {
     animation: {},
     title1: {},
@@ -50,8 +56,8 @@ export function bigMotion({
     else if (direction === 'right') (options.initial.x = 100), (options.exit.x = 100);
     else if (direction === 'down' || direction === 'bottom') (options.initial.y = -100), (options.exit.y = -100);
     else if (direction === 'left') (options.initial.x = -100), (options.exit.x = -100);
-    else if (direction.x) (options.initial.x = direction.x)((options.exit.x = direction.x));
-    else if (direction.y) (options.initial.y = direction.y)((options.exit.y = direction.y));
+    else if (direction.x) (options.initial.x = direction.x), (options.exit.x = direction.x);
+    else if (direction.y) (options.initial.y = direction.y), (options.exit.y = direction.y);
     else (options.initial.x = direction), (options.exit.x = direction), (options.initial.y = direction), (options.exit.y = direction);
   }
   if (directionIn) {
@@ -59,8 +65,8 @@ export function bigMotion({
     else if (directionIn === 'right') options.initial.x = 100;
     else if (directionIn === 'down' || directionIn === 'bottom') options.initial.y = -100;
     else if (directionIn === 'left') options.initial.x = -100;
-    else if (directionIn.x) (options.initial.x = directionIn.x)((options.exit.x = directionIn.x));
-    else if (directionIn.y) (options.initial.y = directionIn.y)((options.exit.y = directionIn.y));
+    else if (directionIn.x) (options.initial.x = directionIn.x), (options.exit.x = directionIn.x);
+    else if (directionIn.y) (options.initial.y = directionIn.y), (options.exit.y = directionIn.y);
     else (options.initial.x = directionIn), (options.exit.x = directionIn), (options.initial.y = directionIn), (options.exit.y = directionIn);
   }
   if (directionOut) {
@@ -68,8 +74,8 @@ export function bigMotion({
     else if (directionOut === 'right') options.exit.x = 100;
     else if (directionOut === 'down' || directionOut === 'bottom') options.exit.y = -100;
     else if (directionOut === 'left') options.exit.x = -100;
-    else if (directionOut.x) (options.initial.x = directionOut.x)((options.exit.x = directionOut.x));
-    else if (directionOut.y) (options.initial.y = directionOut.y)((options.exit.y = directionOut.y));
+    else if (directionOut.x) (options.initial.x = directionOut.x), (options.exit.x = directionOut.x);
+    else if (directionOut.y) (options.initial.y = directionOut.y), (options.exit.y = directionOut.y);
     else (options.initial.x = directionOut), (options.exit.x = directionOut), (options.initial.y = directionOut), (options.exit.y = directionOut);
   }
 

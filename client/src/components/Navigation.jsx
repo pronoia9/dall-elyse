@@ -4,7 +4,7 @@ import { easeInOut, motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
-import { fadeIn, slideInOut } from '../utils/motion';
+import { navigationMotion } from '../utils/motion';
 
 // TODO: Add animation
 
@@ -12,7 +12,7 @@ export default function Navigation({ title, subtitle, path, position, center }) 
   const toggleOverlay = useStore((state) => state.toggleOverlay);
 
   return (
-    <motion.div {...slideInOut('up')}>
+    <motion.div {...navigationMotion.container(center)}>
       <LinkContainer position={position}>
         <LinkWrapper center={center}>
           <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
@@ -69,12 +69,12 @@ const LinkWrapper = styled.div`
     span {
       &:first-child {
         color: rgba(255, 255, 255, 0.8);
-        transform: translateX(${(props) => props?.center ? -40 : 40}px);
+        transform: translateX(${(props) => (props?.center ? -40 : 40)}px);
       }
 
       &:last-child {
         color: #fff;
-        transform: translateX(${(props) => props?.center ? -10 : 10}px);
+        transform: translateX(${(props) => (props?.center ? -10 : 10)}px);
       }
     }
   }
