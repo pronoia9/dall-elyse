@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
 
 import { Navbar } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
