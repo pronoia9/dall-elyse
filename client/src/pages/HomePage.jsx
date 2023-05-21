@@ -23,8 +23,8 @@ export default function HomePage() {
 
 // STYLES
 const Background = styled.div`
-  opacity: ${(props) => props.overlay ? 0.25 : 0.75};
-  transition: left 0.5s;
+  opacity: ${(props) => (props.overlay ? 0.25 : 0.75)};
+  transition: 0.75s;
   position: fixed;
   left: 0;
   top: 0;
