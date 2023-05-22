@@ -46,8 +46,7 @@ export default CreatePage;
 const Container = styled.div`
   width: 100%;
   height: 100%;
-  background: black;
-  opacity: 0.85;
+  background: rgba(0, 0, 0, 0.85);
 `;
 
 const Wrapper = styled.div`
@@ -97,6 +96,15 @@ const ImageWrapper = styled.div`
 
 const FormContainer = styled.div`
   width: calc(66.66% - 40px);
+
+  input,
+  textarea,
+  button {
+    &:hover {
+      border: 2px solid rgba(255, 255, 255, 0.5);
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }
 `;
 
 const Form = styled.div``;
