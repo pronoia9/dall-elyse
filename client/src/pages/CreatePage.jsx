@@ -7,7 +7,11 @@ const CreatePage = () => {
         {/* Text */}
         <Row className='Row'>
           <TextContainer className='TextContainer'>
-            <p>Generate an imaginative image through DALL-E AI and share it with the community</p>
+            <p>
+              Generate an imaginative image through DALL-E AI and share it with the community.
+              <br />
+              Once you have created the image you want, you can share it with others in the community
+            </p>
           </TextContainer>
         </Row>
 
@@ -73,9 +77,9 @@ const Row = styled.div`
 `;
 
 const TextContainer = styled.div`
-  p {
-    /* margin-bottom: 80px; */
-  }
+  width: 75%;
+  text-align: center;
+  /* margin-bottom: 80px; */
 `;
 
 const ImageContainer = styled.div`
