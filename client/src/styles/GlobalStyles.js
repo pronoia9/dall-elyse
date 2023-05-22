@@ -47,7 +47,7 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 500;
     font-size: 14px;
     line-height: 16px;
-    background: rgba(0, 0, 0, 100);
+    background: rgba(0, 0, 0, 0);
     transition: background 0.3s, border 0.3s;
   }
 
@@ -73,7 +73,7 @@ export const GlobalStyles = createGlobalStyle`
     line-height: 16px;
     cursor: pointer;
     border: 2px solid #313133;
-    background: rgba(0, 0, 0, 100);
+    background: rgba(0, 0, 0, 0);
     transition: background 0.3s, border 0.3s, color 0.3s;
   }
 
