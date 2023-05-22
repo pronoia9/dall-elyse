@@ -42,6 +42,13 @@ const CreatePage = () => {
 export default CreatePage;
 
 const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.85;
+`;
+
+const Wrapper = styled.div`
   width: calc(100% - 374px);
   max-width: 1280px;
   min-height: 100%;
@@ -52,14 +59,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 `;
 
 const Row = styled.div`
