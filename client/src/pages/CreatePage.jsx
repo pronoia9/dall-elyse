@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const CreatePage = () => {
   return (
     <Container className='Container'>
+      {/* Gallery Link */}
       <Wrapper className='Wrapper'>
         {/* Text */}
         <Row className='Row'>
@@ -36,6 +37,7 @@ const CreatePage = () => {
           </FormContainer>
         </Row>
       </Wrapper>
+      {/* Back Link */}
     </Container>
   );
 };
