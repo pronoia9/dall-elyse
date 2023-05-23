@@ -6,10 +6,10 @@ import { contentMotion } from '../utils/motion';
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Container {...contentMotion()} >
+      <Container {...contentMotion()}>
         <Wrapper>
           <Content>
-            <Component />
+            <Component id={idName} />
           </Content>
         </Wrapper>
       </Container>
@@ -19,30 +19,25 @@ const ContentWrapper = (Component, idName) =>
 export default ContentWrapper;
 
 const Container = styled(motion.div)`
-  position: relative;
+  /* position: relative; */
   z-index: 5;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
   transition: transform 0.5s;
-
-  .smooth-scroll {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    z-index: 5;
-    display: block;
-  }
+  /*  */
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: block;
 `;
 
 const Wrapper = styled(motion.div)`
-  .centered {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const Content = styled(motion.div)`
