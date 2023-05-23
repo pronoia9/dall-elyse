@@ -20,14 +20,14 @@ const ContentWrapper = (Component, idName) =>
 export default ContentWrapper;
 
 const Container = styled(motion.div)`
-  /* position: relative; */
+  position: relative;
   z-index: 5;
   /* display: flex; */
   /* flex-direction: column; */
   /* justify-content: center; */
   transition: transform 0.5s;
 
-  position: fixed;
+  /* position: fixed; */
   width: 100%;
   height: 100%;
   left: 0;
