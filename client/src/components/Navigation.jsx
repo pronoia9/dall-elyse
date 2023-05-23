@@ -8,7 +8,7 @@ import { navigationMotion } from '../utils/motion';
 
 // TODO: Add animation
 
-export default function Navigation({ title, subtitle, path, position, center }) {
+export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
 
   return (
