@@ -210,8 +210,6 @@ const MobileMenuClose = styled.div`
   height: 30px;
   z-index: 1001 !important;
   transition: opacity 0.3s;
-  width: 30px;
-  height: 30px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 24px;
   line-height: 30px;
