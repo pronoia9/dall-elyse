@@ -1,11 +1,16 @@
 import styled from 'styled-components';
 
+import { Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
+import { navigationData } from '../utils/data';
 
 const CreatePage = () => {
+  const { left, right } = navigationData.positions;
+
   return (
     <Container className='Container'>
       {/* Gallery Link */}
+      <Navigation {...navigationData.gallery} {...{ position: left, center: true }} />
 
       <Content>
         {/* Text Section */}
@@ -41,6 +46,7 @@ const CreatePage = () => {
       </Content>
 
       {/* Back Link */}
+      <Navigation {...navigationData.return} {...{ position: right, center: true }} />
     </Container>
   );
 };
