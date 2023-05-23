@@ -6,10 +6,10 @@ import { contentMotion } from '../utils/motion';
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Container {...contentMotion()} className='CONTAINER'>
-        <Circle className='CIRCLE' />
-        <Wrapper className='WRAPPER'>
-          <Section className='SECTION'>
+      <Container {...contentMotion()}>
+        <Circle />
+        <Wrapper>
+          <Section>
             <Component id={idName} />
           </Section>
         </Wrapper>
