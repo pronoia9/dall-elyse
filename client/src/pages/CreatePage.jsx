@@ -141,7 +141,7 @@ const FormContainer = styled.div`
 
   @media only screen and (max-width: 960px) {
     width: 100%;
-    margin: 30;
+    margin: 0;
   }
 `;
 
