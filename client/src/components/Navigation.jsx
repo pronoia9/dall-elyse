@@ -36,6 +36,21 @@ const LinkContainer = styled.div`
   /* cursor: default; */
   padding-left: 100px;
   /* text-align: center; */
+
+  span {
+    &:first-child {
+      margin: 0 0 3px 0;
+      color: rgba(255, 255, 255, 0);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    &:last-child {
+      margin: 0;
+      color: rgba(255, 255, 255, 0);
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
   ${(props) =>
     css`
       ${props.position}

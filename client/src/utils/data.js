@@ -23,18 +23,12 @@ export const navigationData = {
           span {
             &:first-child {
               text-align: left;
-              margin: 0 0 3px 0;
               transform: translateX(-100px);
-              color: rgba(255, 255, 255, 0);
-              color: rgba(255, 255, 255, 0.6);
               transform: translateX(-50px);
             }
 
             &:last-child {
-              margin: 0;
-              color: rgba(255, 255, 255, 0);
               transform: translateX(50px);
-              color: rgba(255, 255, 255, 0.5);
               transform: translateX(0px);
             }
           }
@@ -47,18 +41,12 @@ export const navigationData = {
           span {
             &:first-child {
               text-align: right;
-              margin: 0 0 3px 0;
               transform: translateX(100px);
-              color: rgba(255, 255, 255, 0);
-              color: rgba(255, 255, 255, 0.6);
               transform: translateX(50px);
             }
 
             &:last-child {
-              margin: 0;
-              color: rgba(255, 255, 255, 0);
               transform: translateX(-50px);
-              color: rgba(255, 255, 255, 0.5);
               transform: translateX(0px);
             }
           }
