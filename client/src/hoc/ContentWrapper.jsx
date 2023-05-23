@@ -6,66 +6,62 @@ import { contentMotion } from '../utils/motion';
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Container {...contentMotion()}>
-        <Wrapper>
-          <Header />
-          <Content>
-            <Component id={idName} />
-          </Content>
-        </Wrapper>
-      </Container>
+      <>
+        {/* <Header /> */}
+        <Container {...contentMotion()}>
+          <Circle />
+          <Wrapper>
+            <Section>
+              <Component id={idName} />
+            </Section>
+          </Wrapper>
+        </Container>
+      </>
     );
   };
 
 export default ContentWrapper;
 
 const Container = styled(motion.div)`
-  position: relative;
-  z-index: 5;
+  /* position: relative; */
   /* display: flex; */
   /* flex-direction: column; */
   /* justify-content: center; */
-  transition: transform 0.5s;
-
+  z-index: 5;
   position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
-  top: 0;
+  top: 155px;
   display: block;
 
   overflow: scroll;
   scroll-behavior: smooth;
+  background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 150%);
+  transition: transform 0.5s;
 
-  &:before {
-    content: '';
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vh;
-    height: 100vh;
-    z-index: -100;
-    background: radial-gradient(ellipse at left top, #28282e 0%, #000000 70%);
+  @media only screen and (max-width: 960px) {
+    top: 115px;
   }
+`;
+
+const Circle = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: -100;
+  background: radial-gradient(ellipse at left top, #28282e 0%, #000000 70%);
 `;
 
 const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 150%);
 `;
 
-const Header = styled.div`
-  width: 100%;
-  height: 155px;
-
-  @media only screen and (max-width: 960px) {
-    height: 115px;
-  }
-`;
-
-const Content = styled(motion.div)`
+const Section = styled(motion.div)`
   width: calc(100% - 374px);
   max-width: 1280px;
   margin: auto;
