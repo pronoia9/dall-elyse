@@ -14,7 +14,28 @@ export const navigationData = {
   create: { link: 'create', title: 'Create', subtitle: 'Make Your Own AI Image', path: '/create' },
   return: { link: 'return', title: 'Back', subtitle: 'return', path: '/' },
   positions: {
-    left: ``,
+    left: `
+          left: 40px;
+          text-align: center;
+          padding: 0;
+
+          span {
+            &:first-child {
+              text-align: left;
+              transform: translateX(-100px);
+              transform: translateX(-50px);
+            }
+
+            &:last-child {
+              transform: translateX(50px);
+              transform: translateX(0px);
+            }
+          }
+
+          @media only screen and (max-width: 760px) {
+            display: none;
+          }
+    `,
     leftMiddle: `
           left: calc(33.33% - 21px);
           text-align: center;
@@ -33,7 +54,27 @@ export const navigationData = {
             }
           }
         `,
-    right: ``,
+    right: `
+          left: calc(100% - 116px);
+          text-align: left;
+
+          span {
+            &:first-child {
+              text-align: right;
+              transform: translateX(100px);
+              transform: translateX(50px);
+            }
+
+            &:last-child {
+              transform: translateX(-50px);
+              transform: translateX(0px);
+            }
+          }
+
+          @media only screen and (max-width: 960px) {
+            display: none;
+          }
+    `,
     rightMiddle: `
           left: calc(66.66% + 21px);
           text-align: left;
