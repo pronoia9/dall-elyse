@@ -6,36 +6,40 @@ const CreatePage = () => {
   return (
     <Container className='Container'>
       {/* Gallery Link */}
-      {/* Text Section */}
-      <TextContainer className='TextContainer'>
-        <p>
-          Generate an imaginative image through DALL-E AI and share it with the community. <br />
-          Once you have created the image you want, you can share it with others in the community
-        </p>
-      </TextContainer>
 
-      {/* Create/Form Section */}
-      <FormSection className='FormSection'>
-        {/* Image */}
-        <ImageContainer className='ImageContainer'>
-          <ImageWrapper className='ImageWrapper' image={null} />
-          <p>CREATE</p>
-        </ImageContainer>
-        {/* Form */}
-        <FormContainer className='FormContainer'>
-          <FormWrapper className='FormWrapper'>
-            {/* Name */}
-            <input type='text' placeholder='Your Name' />
-            {/* Prompt + Prompt Button */}
-            <textarea placeholder='A futuristic cyborg dance club, neon lights' />
-            <Buttons className='Buttons'>
-              <button>Generate</button>
-              <button>Surprise Me</button>
-              <button>Share</button>
-            </Buttons>
-          </FormWrapper>
-        </FormContainer>
-      </FormSection>
+      <Content>
+        {/* Text Section */}
+        <TextContainer className='TextContainer'>
+          <p>
+            Generate an imaginative image through DALL-E AI and share it with the community. <br />
+            Once you have created the image you want, you can share it with others in the community
+          </p>
+        </TextContainer>
+
+        {/* Create/Form Section */}
+        <FormSection className='FormSection'>
+          {/* Image */}
+          <ImageContainer className='ImageContainer'>
+            <ImageWrapper className='ImageWrapper' image={null} />
+            <p>CREATE</p>
+          </ImageContainer>
+          {/* Form */}
+          <FormContainer className='FormContainer'>
+            <FormWrapper className='FormWrapper'>
+              {/* Name */}
+              <input type='text' placeholder='Your Name' />
+              {/* Prompt + Prompt Button */}
+              <textarea placeholder='A futuristic cyborg dance club, neon lights' />
+              <Buttons className='Buttons'>
+                <button>Generate</button>
+                <button>Surprise Me</button>
+                <button>Share</button>
+              </Buttons>
+            </FormWrapper>
+          </FormContainer>
+        </FormSection>
+      </Content>
+
       {/* Back Link */}
     </Container>
   );
@@ -46,15 +50,16 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: row;
+`;
+
+const Content = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 100px;
-
-  @media only screen and (max-width: 960px) {
-  }
-
-  @media only screen and (max-width: 760px) {
-  }
 `;
 
 /*****************  TEXT SECTION START  *****************/
