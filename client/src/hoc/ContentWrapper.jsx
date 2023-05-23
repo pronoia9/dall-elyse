@@ -50,6 +50,7 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 150%);
 `;
 
 const Header = styled.div`
@@ -66,7 +67,7 @@ const Content = styled(motion.div)`
   /* padding-top: 100px;
    padding-bottom: 90px; */
   padding-top: 50px;
-  padding-bottom: 40px; 
+  padding-bottom: 40px;
 
   div:last-child {
     margin-bottom: 0;
