@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
 import { navigationData } from '../utils/data';
+import placeholder from '../assets/placeholder.png';
 
 const CreatePage = () => {
   const { left, right } = navigationData.positions;
@@ -26,8 +27,9 @@ const CreatePage = () => {
         <FormSection className='FormSection'>
           {/* Image */}
           <ImageContainer className='ImageContainer'>
-            <ImageWrapper className='ImageWrapper' image={null} />
-            <p>CREATE</p>
+            <ImageWrapper className='ImageWrapper'>
+              <img src={placeholder} />
+            </ImageWrapper>
           </ImageContainer>
           {/* Form */}
           <FormContainer className='FormContainer'>
@@ -110,6 +112,7 @@ const FormSection = styled.div`
 const ImageContainer = styled.div`
   margin: 0 20px;
   width: calc(33.33% - 40px);
+  background: #111;
 
   @media only screen and (max-width: 1440px) {
     margin: 0 15px;
@@ -130,7 +133,14 @@ const ImageContainer = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div``;
+const ImageWrapper = styled.div`
+  img {
+    width: 100%;
+    height: 100%;
+    background: url('/src/assets/placeholder.png');
+    background-size: contain;
+  }
+`;
 /*******************  IMAGE AREA END  *******************/
 
 /*********************  FORM START  *********************/
@@ -158,6 +168,16 @@ const FormWrapper = styled.div``;
 
 const Form = styled.div``;
 
-const Buttons = styled.div``;
+const Buttons = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+
+  button {
+    width: 100%;
+  }
+`;
 /**********************  FORM END  **********************/
 /******************  FORM SECTION END  ******************/
