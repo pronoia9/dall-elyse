@@ -8,6 +8,7 @@ const ContentWrapper = (Component, idName) =>
     return (
       <Container {...contentMotion()}>
         <Wrapper>
+          <Header />
           <Content>
             <Component id={idName} />
           </Content>
@@ -25,7 +26,7 @@ const Container = styled(motion.div)`
   /* flex-direction: column; */
   /* justify-content: center; */
   transition: transform 0.5s;
-  /*  */
+
   position: fixed;
   width: 100%;
   height: 100%;
@@ -40,15 +41,21 @@ const Wrapper = styled(motion.div)`
   justify-content: center;
 `;
 
+const Header = styled.div`
+  width: 100%;
+  height: 155px;
+`;
+
 const Content = styled(motion.div)`
   width: calc(100% - 374px);
   max-width: 1280px;
   margin: auto;
-  min-height: 100%;
-  padding-top: 100px;
-  padding-bottom: 90px;
-  /* padding-top: 50px;
-  padding-bottom: 40px; */
+  /* min-height: 100%; */
+  min-height: 100vh;
+  /* padding-top: 100px;
+   padding-bottom: 90px; */
+  padding-top: 50px;
+  padding-bottom: 40px; 
 
   div:last-child {
     margin-bottom: 0;
