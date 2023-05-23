@@ -33,6 +33,15 @@ const Container = styled(motion.div)`
   left: 0;
   top: 0;
   display: block;
+
+  /* Spotlight */
+  content: '';
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vh;
+  height: 100vh;
+  background: radial-gradient(ellipse at left top, #28282e 0%, #000000 70%);
 `;
 
 const Wrapper = styled(motion.div)`
