@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { staggerContainer } from '../utils/motion';
+import { contentMotion } from '../utils/motion';
 
-const SectionWrapper = (Component, idName) =>
+const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Container variants={staggerContainer()} initial='hidden' whileInView='show' viewport={{ once: true, amount: 0.25 }}>
+      <Container {...contentMotion()} >
         <Wrapper>
           <Content>
             <Component />
@@ -16,7 +16,7 @@ const SectionWrapper = (Component, idName) =>
     );
   };
 
-export default SectionWrapper;
+export default ContentWrapper;
 
 const Container = styled(motion.div)`
   position: relative;

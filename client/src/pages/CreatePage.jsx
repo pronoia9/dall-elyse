@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import ContentWrapper from '../hoc/ContentWrapper';
+
 const CreatePage = () => {
   return (
     <Container className='Container'>
@@ -42,7 +44,7 @@ const CreatePage = () => {
     </Container>
   );
 };
-export default CreatePage;
+export default ContentWrapper(CreatePage, 'create');
 
 const Container = styled.div``;
 
