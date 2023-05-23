@@ -45,12 +45,20 @@ const Container = styled(motion.div)`
 const Circle = styled.div`
   width: 100%;
   height: 100%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: -100;
-  background: radial-gradient(ellipse at left top, #28282e 0%, #000000 70%);
   opacity: 0.85;
+  position: fixed;
+  z-index: -100;
+
+  &:before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vh;
+    height: 100vh;
+    background: radial-gradient(ellipse at left top, #28282e 0%, #000000 65%);
+    z-index: -100;
+  }
 `;
 
 const Wrapper = styled(motion.div)`
