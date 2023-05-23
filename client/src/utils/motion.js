@@ -7,6 +7,9 @@ import { easeInOut } from 'framer-motion';
 // duration = 0.5
 // ease = easeInOut
 
+// PAGE WRAPPER
+export const contentMotion = () => bigMotion();
+
 // HOME PAGE
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 + 0.5 = 1
 export const navigationMotion = {
