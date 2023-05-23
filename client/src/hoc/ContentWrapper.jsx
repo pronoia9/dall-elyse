@@ -53,6 +53,7 @@ const Circle = styled.div`
   top: 0;
   z-index: -100;
   background: radial-gradient(ellipse at left top, #28282e 0%, #000000 70%);
+  opacity: 0.85;
 `;
 
 const Wrapper = styled(motion.div)`
