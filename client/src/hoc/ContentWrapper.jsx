@@ -27,12 +27,15 @@ const Container = styled(motion.div)`
   /* justify-content: center; */
   transition: transform 0.5s;
 
-  /* position: fixed; */
+  position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
   top: 0;
   display: block;
+
+  overflow: scroll;
+  scroll-behavior: smooth;
 
   &:before {
     content: '';
