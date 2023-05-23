@@ -56,6 +56,10 @@ const Wrapper = styled(motion.div)`
 const Header = styled.div`
   width: 100%;
   height: 155px;
+
+  @media only screen and (max-width: 960px) {
+    height: 115px;
+  }
 `;
 
 const Content = styled(motion.div)`
