@@ -9,8 +9,9 @@ const CreatePage = () => {
 
   return (
     <Container className='Container'>
-      {/* Gallery Link */}
-      <Navigation {...navigationData.gallery} {...{ position: left, center: true }} />
+      {/* Navigation Links */}
+      <Navigation {...navigationData.return} {...{ position: left, center: true }} />
+      <Navigation {...navigationData.gallery} {...{ position: right, center: false }} />
 
       <Content>
         {/* Text Section */}
@@ -44,9 +45,6 @@ const CreatePage = () => {
           </FormContainer>
         </FormSection>
       </Content>
-
-      {/* Back Link */}
-      <Navigation {...navigationData.return} {...{ position: right, center: true }} />
     </Container>
   );
 };
