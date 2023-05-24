@@ -9,7 +9,7 @@ import placeholder from '../assets/placeholder.png';
 
 const CreatePage = () => {
   return (
-    <Container className='Container'>
+    <Container id='create-page' className='Container'>
       {/* Navigation Links */}
       {Object.values(navigationData.createPage).map((link) => (
         <Navigation key={`navigation-${link.title}`} {...link} />
