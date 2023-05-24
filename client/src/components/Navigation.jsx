@@ -5,6 +5,8 @@ import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
 import { navigationMotion } from '../utils/motion';
 
+// TODO: MOVE HOVER ANIMATION TO FRAMER MOTION
+
 export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile, titleOffset, subtitleOffset }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
   const { containerMotion, titleMotion, subtitleMotion } = navigationMotion;
@@ -31,7 +33,7 @@ const LinkContainer = styled.div`
   transform: rotate(-90deg) translate(0, 0);
   z-index: 15;
   padding-left: 100px;
-  padding: ${(props) => (props.center && '0')};
+  padding: ${(props) => props.center && '0'};
 
   /* Text alignments for centered vs not */
   text-align: ${(props) => (props.center ? 'center' : 'left')};
@@ -72,22 +74,20 @@ const LinkContainer = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-  ${(props) =>
-    props?.center &&
-    css`
-      margin: 0 auto;
-    `}
+  ${(props) => props?.center && css` margin: 0 auto;`}
 
   &:hover {
     span {
       &:first-child {
         color: rgba(255, 255, 255, 0.8);
-        transform: translateX(${(props) => (props?.center ? -40 : 40)}px);
+        transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important;
+        transition: transform 0.5s, z-index 0.6s !important;
       }
 
       &:last-child {
         color: #fff;
-        transform: translateX(${(props) => (props?.center ? -10 : 10)}px);
+        transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important;
+        transition: transform 0.5s, z-index 0.6s !important;
       }
     }
   }
