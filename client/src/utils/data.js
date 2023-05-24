@@ -21,68 +21,47 @@ export const navigationPositions = {
     left: 40px;
     text-align: center;
     padding: 0;
-
-    span {
-      &:first-child {
-        text-align: left;
-        transform: translateX(-100px);
-        transform: translateX(-50px);
-      }
-
-      &:last-child {
-        transform: translateX(50px);
-        transform: translateX(0px);
-      }
-    }
-
-    @media only screen and (max-width: 760px) {
-      display: none;
-    }`,
-  leftMiddle: css`
-    left: calc(33.33% - 21px);
-    text-align: center;
-    padding: 0;
-
     span {
       &:first-child {
         text-align: left;
         transform: translateX(-75px) !important;
       }
-
+      &:last-child {
+        transform: translateX(0px) !important;
+      }
+    }`,
+  
+  leftMiddle: css`
+    left: calc(33.33% - 21px);
+    text-align: center;
+    padding: 0;
+    span {
+      &:first-child {
+        text-align: left;
+        transform: translateX(-75px) !important;
+      }
       &:last-child {
         transform: translateX(0px);
       }
     }`,
+  
   right: css`
     left: calc(100% - 116px);
     text-align: left;
-
     span {
       &:first-child {
         text-align: right;
-        transform: translateX(100px);
-        transform: translateX(50px);
       }
-
-      &:last-child {
-        transform: translateX(-50px);
-        transform: translateX(0px);
-      }
-    }
-
-    @media only screen and (max-width: 960px) {
-      display: none;
     }`,
+  
   rightMiddle: css`
     left: calc(66.66% + 21px);
     text-align: left;
-
     span {
       &:first-child {
         text-align: right;
         transform: translateX(100px) !important;
       }
-
       &:last-child {
         transform: translateX(0px);
       }
