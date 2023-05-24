@@ -19,34 +19,56 @@ export const navigationMotion = {
       directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1) },
       duration: 0.5,
     }),
-  title: (center) =>
-    bigMotion({ directionIn: { x: 50 * (center ? 1 : -1) }, directionOut: { x: -50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
-  subtitle: (center) =>
-    bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
+  // title: (center) => bigMotion({ directionIn: { x: 50 * (center ? 1 : -1) }, directionOut: { x: -50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
+  title: (center, offset = 0) => {
+    const sign = center ? 1 : -1;
+    return {
+      initial: { x: (offset + 50) * sign, y: 0, opacity: 0 },
+      animate: { x: offset * sign, y: 0, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
+      exit: { x: (offset + 50) * sign, y: 0, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
+    };
+  },
+  // subtitle: (center) => bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
+  subtitle: (center, offset = 75) => {
+    const sign = (center ? 1 : -1) * -1;
+    return {
+      initial: { x: (offset + 50) * sign, y: 0, opacity: 0 },
+      animate: { x: (offset) * sign, y: 0, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
+      exit: { x: (offset + 50) * sign, y: 0, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
+    };
+  },
 };
 export const backgroundMotion = () => bigMotion({ delay: 1 });
 
 // NAVBAR ANIMATIONS
 export const navbarMotion = {
-  logo: (count = 3) =>
-    bigMotion({ direction: 'left', delay: 0.25 * count, duration: 0.5 }),
-  desktopLinks: (index) =>
-    bigMotion({ direction: -10, delayIn: 1, duration: 0.25 * index }),
-  mobileMenu: (count = 3) =>
-    bigMotion({ direction: { x: window.screen.width }, delayOut: 0.25 * count, opacity: 1 }),
-  mobileLinks: (index) =>
-    bigMotion({ directionIn: 'up', directionOut: 'down', delayIn: 0.5, duration: 0.25 * index }),
+  logo: (count = 3) => bigMotion({ direction: 'left', delay: 0.25 * count, duration: 0.5 }),
+  desktopLinks: (index) => bigMotion({ direction: -10, delayIn: 1, duration: 0.25 * index }),
+  mobileMenu: (count = 3) => bigMotion({ direction: { x: window.screen.width }, delayOut: 0.25 * count, opacity: 1 }),
+  mobileLinks: (index) => bigMotion({ directionIn: 'up', directionOut: 'down', delayIn: 0.5, duration: 0.25 * index }),
 };
 
 // GENERAL ANIMATIONS
 export function bigMotion(props = {}, extra = {}) {
   const {
-    direction, directionIn, directionOut,
-    opacity, opacityIn, opacityOut,
-    type, typeIn, typeOut,
-    delay, delayIn, delayOut,
-    duration, durationIn, durationOut,
-    ease_, easeIn_, easeOut_,
+    direction,
+    directionIn,
+    directionOut,
+    opacity,
+    opacityIn,
+    opacityOut,
+    type,
+    typeIn,
+    typeOut,
+    delay,
+    delayIn,
+    delayOut,
+    duration,
+    durationIn,
+    durationOut,
+    ease_,
+    easeIn_,
+    easeOut_,
   } = props;
   const options = {
     initial: { x: 0, y: 0, opacity: 0 },
@@ -84,10 +106,10 @@ export function bigMotion(props = {}, extra = {}) {
   }
 
   // OPACITY
-  if (opacity) options.initial.opacity = opacity, options.animate.opacity = opacity, options.exit.opacity = opacity;
+  if (opacity) (options.initial.opacity = opacity), (options.animate.opacity = opacity), (options.exit.opacity = opacity);
 
   // TYPE
-  if (type) options.animate.transition.type = type, options.exit.transition.type = type;
+  if (type) (options.animate.transition.type = type), (options.exit.transition.type = type);
   if (typeIn) options.animate.transition.type = typeIn;
   if (typeOut) options.exit.transition.type = typeOut;
 

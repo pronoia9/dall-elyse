@@ -10,7 +10,7 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
   const toggleOverlay = useStore((state) => state.toggleOverlay);
 
   return (
-    <LinkContainer position={position} mobile={mobile} {...navigationMotion.container(center)}>
+    <LinkContainer position={position} center={center} mobile={mobile} {...navigationMotion.container(center)}>
       <LinkWrapper center={center}>
         <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
           <NavigationSubtitle {...navigationMotion.subtitle(center)}>{subtitle}</NavigationSubtitle>
@@ -24,7 +24,6 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
 const LinkContainer = styled.div`
   position: fixed;
   top: 100%;
-  left: calc(100vw - 182px);
   width: 100vh;
   display: flex;
   justify-content: flex-start;
@@ -32,11 +31,14 @@ const LinkContainer = styled.div`
   transform: rotate(-90deg) translate(0, 0);
   z-index: 15;
   padding-left: 100px;
+  padding: ${(props) => (props.center && '0')};
 
-  ${(props) =>
-    css`
-      ${props.position}
-    `}
+  /* Text alignments for centered vs not */
+  text-align: ${(props) => (props.center ? 'center' : 'left')};
+  span { text-align: ${(props) => (props.center ? 'left' : 'right')}; }
+
+  /* left: calc()s */
+  ${(props) => css`${props.position}`}
 
   &:hover {
     z-index: 25;

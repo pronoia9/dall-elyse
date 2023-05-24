@@ -11,7 +11,6 @@ export const NavigationSubtitle = styled(motion.span)`
   line-height: 18px;
   /* margin: 0 0 -3px 0; */
   margin: 0 0 3px 0;
-  transition: transform 0.5s, color 0.5s;
 
   @media only screen and (max-width: 960px) {
     text-align: center !important;
