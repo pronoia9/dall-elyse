@@ -1,8 +1,8 @@
 import { Canvas, Navigation } from '../components';
-import { navigationData } from '../utils/data';
+import { navigationData, navigationPositions } from '../utils/data';
 
 export default function HomePage() {
-  const { leftMiddle, rightMiddle } = navigationData.positions;
+  const { leftMiddle, rightMiddle } = navigationPositions;
 
   return (
     <>
@@ -10,7 +10,7 @@ export default function HomePage() {
       <Canvas />
       {/* Navigation */}
       <Navigation key='navigation-gallery' {...navigationData.gallery} {...{ position: leftMiddle, center: true }} />
-      <Navigation key='navigation-create' {...navigationData.create} position={rightMiddle} />
+      <Navigation key='navigation-create' {...navigationData.create} {...{ position: rightMiddle, center: false }} />
     </>
   );
 }

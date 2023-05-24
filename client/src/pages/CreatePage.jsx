@@ -2,19 +2,19 @@ import styled from 'styled-components';
 
 import { Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
-import { navigationData } from '../utils/data';
+import { navigationData,navigationPositions } from '../utils/data';
 import placeholder from '../assets/placeholder.png';
 
 // TODO: Add animations
 
 const CreatePage = () => {
-  const { left, right } = navigationData.positions;
+  const { left, right } = navigationPositions;
 
   return (
     <Container className='Container'>
       {/* Navigation Links */}
-      <Navigation {...navigationData.return} {...{ position: left, center: true }} />
-      <Navigation {...navigationData.gallery} {...{ position: right, center: false }} />
+      <Navigation {...navigationData.create} {...{ position: left, center: true }} />
+      <Navigation {...navigationData.return} {...{ position: right, center: false }} />
 
       <Content>
         {/* Text Section */}

@@ -1,4 +1,16 @@
+import styled from 'styled-components';
+
+import { Navigation } from '../components';
+import ContentWrapper from '../hoc/ContentWrapper';
+import { navigationData } from '../utils/data';
+
 const GalleryPage = () => {
-  return <div>GalleryPage</div>;
+  return (
+    <Container>
+      {/* Navigation Links */}
+      <Navigation {...navigationData.return} {...{ position: left, center: true }} />
+      <Navigation {...navigationData.gallery} {...{ position: right, center: false }} />
+    </Container>
+  );
 };
-export default GalleryPage;
+export default ContentWrapper(GalleryPage, 'gallery');
