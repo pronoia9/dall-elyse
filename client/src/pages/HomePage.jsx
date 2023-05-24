@@ -9,9 +9,8 @@ export default function HomePage() {
       {/* Background */}
       <Canvas />
       {/* Navigation */}
-      <Navigation key='navigation-gallery' {...navigationData.gallery} {...{ position: leftMiddle, center: true }} />
-      <Navigation key='navigation-create' {...navigationData.create} {...{ position: rightMiddle, center: false }} />
+      <Navigation key='navigation-gallery' {...navigationData.gallery} position={leftMiddle} center={true} />
+      <Navigation key='navigation-create' {...navigationData.create} position={rightMiddle} />
     </>
   );
 }
-
