@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
-import { navigationData,navigationPositions } from '../utils/data';
+import { navigationData, navigationPositions } from '../utils/data';
 import placeholder from '../assets/placeholder.png';
 
 // TODO: Add animations
@@ -13,16 +13,14 @@ const CreatePage = () => {
   return (
     <Container className='Container'>
       {/* Navigation Links */}
-      <Navigation {...navigationData.create} {...{ position: left, center: true }} />
+      <Navigation {...navigationData.create} {...{ position: left, center: true, mobile: true }} />
       <Navigation {...navigationData.return} {...{ position: right, center: false }} />
 
       <Content>
         {/* Text Section */}
         <TextContainer className='TextContainer'>
-          <p>
-            Generate an imaginative image through DALL-E AI and share it with the community. <br />
-            Once you have created the image you want, you can share it with others in the community
-          </p>
+          <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
+          <p>Once you have created the image you want, you can share it with others in the community</p>
         </TextContainer>
 
         {/* Create/Form Section */}
@@ -58,7 +56,7 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 const Content = styled.div`
@@ -68,6 +66,10 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 100px;
+
+  @media only screen and (max-width: 960px) {
+    gap: 40px;
+  }
 `;
 
 /*****************  TEXT SECTION START  *****************/
@@ -103,6 +105,7 @@ const FormSection = styled.div`
 
   @media only screen and (max-width: 960px) {
     flex-direction: column-reverse;
+    gap: 20px;
   }
 
   @media only screen and (max-width: 760px) {
@@ -179,6 +182,11 @@ const Buttons = styled.div`
 
   button {
     width: 100%;
+  }
+
+  @media only screen and (max-width: 960px) {
+    flex-direction: column;
+    gap: 5px;
   }
 `;
 /**********************  FORM END  **********************/
