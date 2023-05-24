@@ -25,7 +25,7 @@ export const navigationPositions = {
 export const navigationData = {
   homePage: {
     gallery: { ...navigationLinks.gallery, position: navigationPositions.leftMiddle, center: true },
-    create: { ...navigationLinks.create, position: navigationPositions.rightMiddle },
+    create: { ...navigationLinks.create, position: navigationPositions.rightMiddle, subtitleOffset: 100 },
   },
   createPage: {
     create: { ...navigationLinks.create, position: navigationPositions.left, center: true, mobile: true },
