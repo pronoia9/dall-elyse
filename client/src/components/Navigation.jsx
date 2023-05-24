@@ -6,15 +6,16 @@ import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
 import { navigationMotion } from '../utils/motion';
 
-export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile = false }) {
+export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
+  const { containerMotion, titleMotion, subtitleMotion } = navigationMotion;
 
   return (
-    <LinkContainer position={position} center={center} mobile={mobile} {...navigationMotion.container(center)}>
+    <LinkContainer position={position} center={center} mobile={mobile} {...containerMotion(center)}>
       <LinkWrapper center={center}>
         <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
-          <NavigationSubtitle {...navigationMotion.subtitle(center)}>{subtitle}</NavigationSubtitle>
-          <NavigationTitle {...navigationMotion.title(center)}>{title}</NavigationTitle>
+          <NavigationSubtitle {...subtitleMotion(center)}>{subtitle}</NavigationSubtitle>
+          <NavigationTitle {...titleMotion(center)}>{title}</NavigationTitle>
         </Link>
       </LinkWrapper>
     </LinkContainer>

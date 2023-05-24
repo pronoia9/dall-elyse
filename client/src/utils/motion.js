@@ -13,14 +13,14 @@ export const contentMotion = () => bigMotion();
 // HOME PAGE
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 + 0.5 = 1
 export const navigationMotion = {
-  container: (center) =>
+  containerMotion: (center) =>
     bigMotion({
       directionIn: { y: -window.screen.height * 0.25 * (center ? 1 : -1) },
       directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1) },
       duration: 0.5,
     }),
   // title: (center) => bigMotion({ directionIn: { x: 50 * (center ? 1 : -1) }, directionOut: { x: -50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
-  title: (center, offset = 0) => {
+  titleMotion: (center, offset = 0) => {
     const sign = center ? 1 : -1;
     return {
       initial: { x: (offset + 50) * sign, y: 0, opacity: 0 },
@@ -29,7 +29,7 @@ export const navigationMotion = {
     };
   },
   // subtitle: (center) => bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
-  subtitle: (center, offset = 75) => {
+  subtitleMotion: (center, offset = 75) => {
     const sign = (center ? 1 : -1) * -1;
     return {
       initial: { x: (offset + 50) * sign, y: 0, opacity: 0 },
