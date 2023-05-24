@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -8,15 +9,22 @@ import { navigationMotion } from '../utils/motion';
 // TODO: MOVE HOVER ANIMATION TO FRAMER MOTION
 
 export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile, titleOffset, subtitleOffset }) {
-  const toggleOverlay = useStore((state) => state.toggleOverlay);
-  const { containerMotion, titleMotion, subtitleMotion } = navigationMotion;
+  const [isHover, setIsHover] = useState(null); // local state
+  const toggleOverlay = useStore((state) => state.toggleOverlay); // store
+  const { containerMotion, titleMotion, subtitleMotion } = navigationMotion; // data
+
+  const handleHover = (hover) => { toggleOverlay(); setIsHover(hover); }
 
   return (
     <LinkContainer position={position} center={center} mobile={mobile} {...containerMotion(center)}>
       <LinkWrapper center={center}>
-        <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
-          <NavigationSubtitle {...subtitleMotion(center, subtitleOffset)}>{subtitle}</NavigationSubtitle>
-          <NavigationTitle {...titleMotion(center, titleOffset)}>{title}</NavigationTitle>
+        <Link to={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
+          <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover)}>
+            {subtitle}
+          </NavigationSubtitle>
+          <NavigationTitle {...titleMotion(center, titleOffset, isHover)}>
+            {title}
+          </NavigationTitle>
         </Link>
       </LinkWrapper>
     </LinkContainer>
@@ -37,10 +45,15 @@ const LinkContainer = styled.div`
 
   /* Text alignments for centered vs not */
   text-align: ${(props) => (props.center ? 'center' : 'left')};
-  span { text-align: ${(props) => (props.center ? 'left' : 'right')}; }
+  span {
+    text-align: ${(props) => (props.center ? 'left' : 'right')};
+  }
 
   /* left: calc()s */
-  ${(props) => css`${props.position}`}
+  ${(props) =>
+    css`
+      ${props.position}
+    `}
 
   &:hover {
     z-index: 25;
@@ -74,20 +87,24 @@ const LinkContainer = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-  ${(props) => props?.center && css` margin: 0 auto;`}
+  ${(props) =>
+    props?.center &&
+    css`
+      margin: 0 auto;
+    `}
 
   &:hover {
     span {
       &:first-child {
         color: rgba(255, 255, 255, 0.8);
-        transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important;
-        transition: transform 0.5s, z-index 0.6s !important;
+        /* transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important; */
+        /* transition: transform 0.5s, z-index 0.6s !important; */
       }
 
       &:last-child {
         color: #fff;
-        transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important;
-        transition: transform 0.5s, z-index 0.6s !important;
+        /* transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important; */
+        /* transition: transform 0.5s, z-index 0.6s !important; */
       }
     }
   }
