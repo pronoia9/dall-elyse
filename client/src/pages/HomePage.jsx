@@ -9,8 +9,9 @@ export default function HomePage() {
       {/* Background */}
       <Canvas />
       {/* Navigation */}
-      <Navigation key='navigation-gallery' {...navigationData.gallery} position={leftMiddle} center={true} />
-      <Navigation key='navigation-create' {...navigationData.create} position={rightMiddle} />
+      {Object.values(navigationData.homePage).map((link) => (
+        <Navigation key={`navigation-${link.title}`} {...link} />
+      ))}
     </>
   );
 }

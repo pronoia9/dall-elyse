@@ -1,4 +1,3 @@
-import { css } from 'styled-components';
 import logo from '../assets/logo.png';
 
 export const navbarData = {
@@ -10,7 +9,7 @@ export const navbarData = {
   ],
 };
 
-export const navigationData = {
+const navigationLinks = {
   gallery: { link: 'gallery', title: 'Gallery', subtitle: 'Explore From DALL-E', path: '/gallery' },
   create: { link: 'create', title: 'Create', subtitle: 'Make Your Own AI Image', path: '/create' },
   back: { link: 'return', title: 'Back', subtitle: 'return', path: '/' },
@@ -21,6 +20,21 @@ export const navigationPositions = {
   leftMiddle: `left: calc(33.33% - 21px);`,
   right: `left: calc(100% - 116px);`,
   rightMiddle: `left: calc(66.66% + 21px);`,
+};
+
+export const navigationData = {
+  homePage: {
+    gallery: { ...navigationLinks.gallery, position: navigationPositions.leftMiddle, center: true },
+    create: { ...navigationLinks.create, position: navigationPositions.rightMiddle },
+  },
+  createPage: {
+    create: { ...navigationLinks.create, position: navigationPositions.left, center: true, mobile: true },
+    back: { ...navigationLinks.back, position: navigationPositions.right, subtitleOffset: 25 },
+  },
+  galleryPage: {
+    gallery: { ...navigationLinks.gallery, position: navigationPositions.left, center: true, mobile: true },
+    back: { ...navigationLinks.back, position: navigationPositions.right },
+  },
 };
 
 export const surpriseMePrompts = [

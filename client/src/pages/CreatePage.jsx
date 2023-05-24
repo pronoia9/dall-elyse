@@ -2,20 +2,18 @@ import styled from 'styled-components';
 
 import { Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
-import { navigationData, navigationPositions } from '../utils/data';
+import { navigationData } from '../utils/data';
 import placeholder from '../assets/placeholder.png';
 
 // TODO: Add animations
 
 const CreatePage = () => {
-  const { back, create } = navigationData;
-  const { left, right } = navigationPositions;
-
   return (
     <Container className='Container'>
       {/* Navigation Links */}
-      <Navigation {...create} position={left} center={true} mobile={true} />
-      <Navigation {...back} position={right} subtitleOffset={25} />
+      {Object.values(navigationData.createPage).map((link) => (
+        <Navigation key={`navigation-${link.title}`} {...link} />
+      ))}
 
       <Content>
         {/* Text Section */}
