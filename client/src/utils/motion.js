@@ -19,25 +19,36 @@ export const navigationMotion = {
       directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1) },
       duration: 0.5,
     }),
-  // title: (center) => bigMotion({ directionIn: { x: 50 * (center ? 1 : -1) }, directionOut: { x: -50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
-  titleMotion: (center, offset = 0) => {
-    const sign = center ? 1 : -1;
+  titleMotion: (center, titleOffset = 0, hover) => {
+    const sign = center ? 1 : -1, location = titleOffset * sign;
     return {
-      initial: { x: (offset + 50) * sign, y: 0, opacity: 0 },
-      animate: { x: offset * sign, y: 0, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
-      exit: { x: (offset + 50) * sign, y: 0, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
+      initial: { x: location + 100, opacity: 0 },
+      animate: { x: location, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
+      exit: { x: location - 100, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
+      // whileHover: { x: -10 * sign, transition: { duration: 0.5 } },
     };
   },
-  // subtitle: (center) => bigMotion({ directionIn: { x: -50 * (center ? 1 : -1) }, directionOut: { x: 50 * (center ? 1 : -1) }, delay: 0.5, ease: 'linear' }),
-  subtitleMotion: (center, offset = 75) => {
-    const sign = (center ? 1 : -1) * -1;
+  subtitleMotion: (center, subtitleOffset = 75, hover) => {
+    const sign = (center ? 1 : -1) * -1, location = subtitleOffset * sign;
     return {
-      initial: { x: (offset + 50) * sign, y: 0, opacity: 0 },
-      animate: { x: (offset) * sign, y: 0, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
-      exit: { x: (offset + 50) * sign, y: 0, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 1, ease: 'linear' } },
+      initial: { x: location - 100, opacity: 0 },
+      animate: { x: location, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
+      exit: { x: location + 100, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
+      // whileHover: { x: 40 * sign, transition: { duration: 0.5 } },
     };
   },
 };
+
+// &:first-child {
+/* transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important; */
+/* transition: transform 0.5s, z-index 0.6s !important; */
+// }
+// &:last-child {
+/* transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important; */
+/* transition: transform 0.5s, z-index 0.6s !important; */
+// }
+
+// BACKGROUND
 export const backgroundMotion = () => bigMotion({ delay: 1 });
 
 // NAVBAR ANIMATIONS
