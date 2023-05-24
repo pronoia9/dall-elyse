@@ -20,21 +20,19 @@ export const navigationMotion = {
       duration: 0.5,
     }),
   titleMotion: (center, titleOffset = 0, hover) => {
-    const sign = center ? 1 : -1, location = titleOffset * sign;
+    const sign = center ? 1 : -1, location = titleOffset * sign, delay = hover !== null ? 0 : 0.5;
     return {
       initial: { x: location + 100, opacity: 0 },
-      animate: { x: location, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
-      exit: { x: location - 100, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
-      // whileHover: { x: -10 * sign, transition: { duration: 0.5 } },
+      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { type: 'tween', delay, duration: 0.5, ease: 'linear' } },
+      exit: { x: location - 100, opacity: 0, transition: { delay, duration: 0.5, ease: 'linear' } },
     };
   },
   subtitleMotion: (center, subtitleOffset = 75, hover) => {
-    const sign = (center ? 1 : -1) * -1, location = subtitleOffset * sign;
+    const sign = (center ? 1 : -1) * -1, location = subtitleOffset * sign, delay = hover !== null ? 0 : 0.5;
     return {
       initial: { x: location - 100, opacity: 0 },
-      animate: { x: location, opacity: 1, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
-      exit: { x: location + 100, opacity: 0, transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' } },
-      // whileHover: { x: 40 * sign, transition: { duration: 0.5 } },
+      animate: { x: location + (hover ? -40 * sign : 0), opacity: 1, transition: { type: 'tween', delay, duration: 0.5, ease: 'linear' } },
+      exit: { x: location + 100, opacity: 0, transition: { delay, duration: 0.5, ease: 'linear' } },
     };
   },
 };
