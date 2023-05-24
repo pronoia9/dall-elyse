@@ -1,10 +1,8 @@
 import styled from 'styled-components';
 import { Canvas, Navigation } from '../components';
-import { navigationData, navigationPositions } from '../utils/data';
+import { navigationData } from '../utils/data';
 
 export default function HomePage() {
-  const { leftMiddle, rightMiddle } = navigationPositions;
-
   return (
     <Container id='home-page'>
       {/* Background */}
