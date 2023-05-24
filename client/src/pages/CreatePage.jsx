@@ -5,6 +5,8 @@ import ContentWrapper from '../hoc/ContentWrapper';
 import { navigationData } from '../utils/data';
 import placeholder from '../assets/placeholder.png';
 
+// TODO: Add animations
+
 const CreatePage = () => {
   const { left, right } = navigationData.positions;
 
