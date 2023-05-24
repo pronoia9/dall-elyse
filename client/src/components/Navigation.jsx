@@ -6,20 +6,18 @@ import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
 import { navigationMotion } from '../utils/motion';
 
-export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center }) {
+export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile = false }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
 
   return (
-    <motion.div {...navigationMotion.container(center)}>
-      <LinkContainer position={position}>
-        <LinkWrapper center={center}>
-          <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
-            <NavigationSubtitle {...navigationMotion.subtitle(center)}>{subtitle}</NavigationSubtitle>
-            <NavigationTitle {...navigationMotion.title(center)}>{title}</NavigationTitle>
-          </Link>
-        </LinkWrapper>
-      </LinkContainer>
-    </motion.div>
+    <LinkContainer position={position} mobile={mobile} {...navigationMotion.container(center)}>
+      <LinkWrapper center={center}>
+        <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
+          <NavigationSubtitle {...navigationMotion.subtitle(center)}>{subtitle}</NavigationSubtitle>
+          <NavigationTitle {...navigationMotion.title(center)}>{title}</NavigationTitle>
+        </Link>
+      </LinkWrapper>
+    </LinkContainer>
   );
 }
 
@@ -33,23 +31,7 @@ const LinkContainer = styled.div`
   transform-origin: 0% 0%;
   transform: rotate(-90deg) translate(0, 0);
   z-index: 15;
-  /* cursor: default; */
   padding-left: 100px;
-  /* text-align: center; */
-
-  span {
-    &:first-child {
-      margin: 0 0 3px 0;
-      color: rgba(255, 255, 255, 0);
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    &:last-child {
-      margin: 0;
-      color: rgba(255, 255, 255, 0);
-      color: rgba(255, 255, 255, 0.5);
-    }
-  }
 
   ${(props) =>
     css`
@@ -68,6 +50,22 @@ const LinkContainer = styled.div`
     position: absolute;
     left: 0;
     top: 21px;
+  }
+
+  @media only screen and (max-width: 960px) {
+    display: ${(props) => (!props.mobile ? 'none' : 'block')};
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: none;
+    margin-bottom: 50px;
+
+    &:before {
+      width: 200vh;
+      left: -50%;
+      top: 18px;
+    }
   }
 `;
 
