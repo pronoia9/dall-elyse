@@ -15,7 +15,7 @@ const CreatePage = () => {
     <Container className='Container'>
       {/* Navigation Links */}
       <Navigation {...create} position={left} center={true} mobile={true} />
-      <Navigation {...back} position={right} offset={25} />
+      <Navigation {...back} position={right} subtitleOffset={25} />
 
       <Content>
         {/* Text Section */}

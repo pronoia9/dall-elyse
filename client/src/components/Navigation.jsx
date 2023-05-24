@@ -1,12 +1,11 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
-import { easeInOut, motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
 import { navigationMotion } from '../utils/motion';
 
-export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile }) {
+export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile, titleOffset, subtitleOffset }) {
   const toggleOverlay = useStore((state) => state.toggleOverlay);
   const { containerMotion, titleMotion, subtitleMotion } = navigationMotion;
 
@@ -14,8 +13,8 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
     <LinkContainer position={position} center={center} mobile={mobile} {...containerMotion(center)}>
       <LinkWrapper center={center}>
         <Link to={path} onMouseEnter={toggleOverlay} onMouseLeave={toggleOverlay}>
-          <NavigationSubtitle {...subtitleMotion(center)}>{subtitle}</NavigationSubtitle>
-          <NavigationTitle {...titleMotion(center)}>{title}</NavigationTitle>
+          <NavigationSubtitle {...subtitleMotion(center, subtitleOffset)}>{subtitle}</NavigationSubtitle>
+          <NavigationTitle {...titleMotion(center, titleOffset)}>{title}</NavigationTitle>
         </Link>
       </LinkWrapper>
     </LinkContainer>
