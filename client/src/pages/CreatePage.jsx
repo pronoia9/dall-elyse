@@ -8,13 +8,14 @@ import placeholder from '../assets/placeholder.png';
 // TODO: Add animations
 
 const CreatePage = () => {
+  const { back, create } = navigationData;
   const { left, right } = navigationPositions;
 
   return (
     <Container className='Container'>
       {/* Navigation Links */}
-      <Navigation {...navigationData.create} {...{ position: left, center: true, mobile: true }} />
-      <Navigation {...navigationData.return} {...{ position: right, center: false }} />
+      <Navigation {...create} position={left} center={true} mobile={true} />
+      <Navigation {...back} position={right} offset={25} />
 
       <Content>
         {/* Text Section */}
