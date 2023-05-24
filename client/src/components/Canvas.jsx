@@ -9,7 +9,7 @@ import { backgroundMotion } from '../utils/motion';
 const Canvas = () => {
   const overlay = useStore((state) => state.overlay);
 
-  return <Background key='background-canvas' id='background' overlay={overlay} {...backgroundMotion()} />;
+  return <Background key='background-canvas' id='background' overlay={overlay} />;
 };
 export default Canvas;
 
@@ -23,7 +23,7 @@ const Background = styled(motion.div)`
   width: 100%;
   height: 100%;
   background: url('https://images.unsplash.com/photo-1579648999496-65a8fa8d77ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')
-    no-repeat center;
+      no-repeat center;
   background-size: cover;
   z-index: -10;
 `;
