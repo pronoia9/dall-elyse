@@ -1,33 +1,16 @@
 import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
+import { useStore } from '../store/useStore';
 
-const GalleryCard = ({ _id, name, prompt, photo }) => {
-  const [overlay, setOverlay] = useState(false);
-
-  // HANDLE CLICK ELSEWHERE TO CLOSE OVERLAY
-  const overlayRef = useRef();
-  useEffect(() => {
-    const handleClick = (e) => {
-      if (overlay && e.target !== overlayRef.current) setOverlay(false);
-    };
-    document.addEventListener('mousedown', handleClick);
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
-  }, [overlay]);
+const GalleryCard = (props) => {
+  const { /*_id, name, prompt,*/ photo } = props;
+  const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
 
   return (
     <>
-      <Container className='galleryCard-container' onClick={() => setOverlay(true)}>
-        <Wrapper className='galleryCard-wrapper'>
-          <img src={photo} />
-        </Wrapper>
+      <Container className='galleryCard-container' onClick={() => { setPhotoSwipe(props) }}>
+        <img src={photo} />
       </Container>
-
-      <Overlay ref={overlayRef} overlay={overlay}>
-        <p>{name}</p>
-        <p>{prompt}</p>
-      </Overlay>
     </>
   );
 };
@@ -58,15 +41,4 @@ const Container = styled.div`
   @media only screen and (max-width: 760px) {
     width: 100%;
   }
-`;
-
-const Wrapper = styled.div``;
-
-const Overlay = styled.div`
-  display: ${(props) => !props.overlay && 'none'};
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.75);
-  position: absolute;
-  top: 0;
 `;
