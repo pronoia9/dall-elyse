@@ -1,17 +1,21 @@
 import styled from 'styled-components';
 
-import GalleryCard from './GalleryCard';
 import { useStore } from '../store/useStore';
+import { GalleryCard, GalleryCardOverlay } from './';
 
 const Gallery = () => {
-  const data = useStore((state) => state.data);
-  console.log(data);
+  // STORE DATA
+  const data = useStore((state) => state.data),
+    photoSwipe = useStore((state) => state.photoSwipe);
 
   return (
     <Container className='gallery-container'>
+      {/* Gallery Cards */}
       {data?.map((d, i) => (
         <GalleryCard key={`card-${d._id}`} {...d} />
       ))}
+      {/* Gallery Card Overlay */}
+      {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
     </Container>
   );
 };
