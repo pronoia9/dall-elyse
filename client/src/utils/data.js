@@ -11,8 +11,8 @@ export const navbarData = {
 
 const navigationLinks = {
   gallery: { link: 'gallery', title: 'Gallery', subtitle: 'Explore From DALL-E', path: '/gallery' },
-  create: { link: 'create', title: 'Create', subtitle: 'Make Your Own AI Image', path: '/create' },
-  back: { link: 'return', title: 'Back', subtitle: 'return', path: '/' },
+  create: { link: 'create', title: 'Create', subtitle: 'Make Your Own AI Image', path: '/create', subtitleOffset: 100 },
+  back: { link: 'return', title: 'Back', subtitle: 'return', path: '/', subtitleOffset: 25 },
 };
 
 export const navigationPositions = {
@@ -25,11 +25,11 @@ export const navigationPositions = {
 export const navigationData = {
   homePage: {
     gallery: { ...navigationLinks.gallery, position: navigationPositions.leftMiddle, center: true },
-    create: { ...navigationLinks.create, position: navigationPositions.rightMiddle, subtitleOffset: 100 },
+    create: { ...navigationLinks.create, position: navigationPositions.rightMiddle },
   },
   createPage: {
     create: { ...navigationLinks.create, position: navigationPositions.left, center: true, mobile: true },
-    back: { ...navigationLinks.back, position: navigationPositions.right, subtitleOffset: 25 },
+    back: { ...navigationLinks.back, position: navigationPositions.right },
   },
   galleryPage: {
     gallery: { ...navigationLinks.gallery, position: navigationPositions.left, center: true, mobile: true },
