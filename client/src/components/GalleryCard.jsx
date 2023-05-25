@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import { useStore } from '../store/useStore';
 
@@ -7,7 +6,7 @@ const GalleryCard = (props) => {
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
 
   return (
-    <Container className='galleryCard-container' onClick={() => { setPhotoSwipe({...props, index}); }}>
+    <Container className='galleryCard-container' onClick={() => { setPhotoSwipe(index); }}>
       <img src={photo} />
     </Container>
   );
