@@ -2,10 +2,15 @@ import logo from '../assets/logo.png';
 
 export const navbarData = {
   logo,
-  navlinks: [
+  homeLinks: [
     { title: 'Vite', url: 'https://vitejs.dev' },
     { title: 'Vercel', url: 'https://vercel.com' },
     { title: 'Render', url: 'https://render.com' },
+  ],
+  navLinks: [
+    { title: 'Home', url: '/' },
+    { title: 'Gallery', url: '/gallery' },
+    { title: 'Create', url: '/create' },
   ],
 };
 

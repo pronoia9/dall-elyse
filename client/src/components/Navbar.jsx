@@ -1,14 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { navbarData } from '../utils/data';
 import { navbarMotion } from '../utils/motion';
 import { useStore } from '../store/useStore';
-
-// TODO: Fix logo animation on start 'fade in' vs closing mobile menu 'slide in'
-// TODO: Animate desktop menu links 'fade slide right'
-// TODO: Animate mobile menu links 'slide up'
 
 const NavLink = ({ title, url, animation }) => (
   <NavListItem className='navlist-item' {...animation}>
@@ -19,12 +16,15 @@ const NavLink = ({ title, url, animation }) => (
 );
 
 export default function Navbar() {
+  // DATA
+  const { logo, navLinks, homeLinks } = navbarData;
+  // STORE
   const mobileMenuOpen = useStore((state) => state.mobileMenuOpen),
     openMobileMenu = useStore((state) => state.openMobileMenu),
     closeMobileMenu = useStore((state) => state.closeMobileMenu);
   const mobileMenuRef = useRef();
 
-  // Add click event listener
+  // CLICK TO CLOSE MENU
   useEffect(() => {
     // Handle click outside of ref/mobilemenu
     const handleClick = (e) => {
@@ -37,15 +37,23 @@ export default function Navbar() {
     };
   }, []);
 
+  // DYNAMIC NAVLIST
+  const [navlinks, setNavlinks] = useState(homeLinks);
+  const location = useLocation();
+  // Change navlinks on path change
+  useEffect(() => {
+    location.pathname !== '/' ? setNavlinks(navLinks) : setNavlinks(homeLinks);
+  }, [location]);
+
   return (
     <>
       <Container id='navbar'>
         <Wrapper>
           {/* Logo */}
           {!mobileMenuOpen && (
-            <Logo {...navbarMotion.logo(navbarData.navlinks.length)}>
+            <Logo {...navbarMotion.logo(navlinks.length)}>
               <a href='/'>
-                <img src={navbarData.logo} alt='logo' />
+                <img src={logo} alt='logo' />
               </a>
             </Logo>
           )}
@@ -55,7 +63,7 @@ export default function Navbar() {
           <NavWrapper>
             <Nav>
               <NavList>
-                {navbarData.navlinks.map((link, index) => (
+                {navlinks.map((link, index) => (
                   <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navbarMotion.desktopLinks(index + 1) }} />
                 ))}
               </NavList>
@@ -73,7 +81,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...navbarMotion.mobileMenu(navbarData.navlinks.length)}>
+          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...navbarMotion.mobileMenu(navlinks.length)}>
             {/* Mobile Menu Close Icon */}
             <MobileMenuClose onClick={closeMobileMenu}>
               <i className='fa-solid fa-xmark' />
@@ -81,7 +89,7 @@ export default function Navbar() {
             {/* Mobile Menu Links List */}
             <MobileMenuWrapper ref={mobileMenuRef}>
               <MobileMenuNavList>
-                {navbarData.navlinks.map((link, index) => (
+                {navlinks.map((link, index) => (
                   <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navbarMotion.mobileLinks(index + 1) }} />
                 ))}
               </MobileMenuNavList>
