@@ -9,16 +9,24 @@ const Gallery = () => {
 
   return (
     <Container className='gallery-container'>
-      <Wrapper className='gallery-wrapper'>
-        {data?.map((d, i) => (
-          <GalleryCard key={`card-${d._id}`} {...d} />
-        ))}
-      </Wrapper>
+      {data?.map((d, i) => (
+        <GalleryCard key={`card-${d._id}`} {...d} />
+      ))}
     </Container>
   );
 };
 export default Gallery;
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin: -20px;
+  display: flex;
+  flex-wrap: wrap;
 
-const Wrapper = styled.div``;
+  @media only screen and (max-width: 1200px) {
+    margin: -15px;
+  }
+
+  @media only screen and (max-width: 760px) {
+    margin: -15px 0;
+  }
+`;
