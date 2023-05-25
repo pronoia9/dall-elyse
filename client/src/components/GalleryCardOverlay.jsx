@@ -21,21 +21,22 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
       <Overlay className='galleryCardOverlay-overlay'>
         <Container className='galleryCardOverlay-container'>
           {/* TOP (Close Icon) */}
-          <CloseButton className='galleryCardOverlay-top' onClick={() => setPhotoSwipe(null)}>
+          <CloseButton className='galleryCardOverlay-closeButton' onClick={() => setPhotoSwipe(null)}>
             <i className='fa-solid fa-xmark' />
           </CloseButton>
 
           {/* MIDDLE (Image) */}
-          <ImageWrapper className='galleryCardOverlay-middle'>
+          <ImageWrapper className='galleryCardOverlay-imageWrapper'>
             <img src={photo} />
             <p onClick={() => navigator.clipboard.writeText(prompt)}>{prompt}</p>
           </ImageWrapper>
-
-          {/* CONTROLS */}
-          <Controls className='galleryCardOverlay-controls'>
-            <ControlsTop className='galleryCardOverlay-controlsTop'></ControlsTop>
-          </Controls>
         </Container>
+
+        {/* CONTROLS */}
+        <Controls className='galleryCardOverlay-controls'>
+          <i className='fa-solid fa-chevron-left' />
+          <i className='fa-solid fa-chevron-right' />
+        </Controls>
       </Overlay>
     </>
   );
@@ -107,9 +108,6 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const Bottom = styled(CloseButton)``;
-
-/****************  CONTROLS START  ****************/
 const Controls = styled.div``;
 
 const ControlsTop = styled.div``;
