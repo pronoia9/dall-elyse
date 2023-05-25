@@ -3,9 +3,12 @@ import { useStore } from '../store/useStore';
 import { useEffect } from 'react';
 
 // TODO: ADD ANIMATIONS
+// TODO: FIX STYLING FOR 2 LINE PROMPT
 
 const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
-  const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
+  const setPhotoSwipe = useStore((state) => state.setPhotoSwipe),
+    photoSwipePrev = useStore((state) => state.photoSwipePrev),
+    photoSwipeNext = useStore((state) => state.photoSwipeNext);
 
   // EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
   useEffect(() => {
@@ -17,8 +20,6 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
       document.removeEventListener('keydown', (e) => close(e));
     };
   }, []);
-
-  // TODO: NEXT/PREV IMAGE FUNCTIONS
 
   // TODO: EVENT LISTENER FOR LEFT/RIGHT KEYS
 
@@ -40,10 +41,10 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
 
         {/* CONTROLS */}
         <Controls className='galleryCardOverlay-controls'>
-          <ControlButton>
+          <ControlButton onClick={photoSwipePrev}>
             <i className='fa-solid fa-chevron-left' />
           </ControlButton>
-          <ControlButton>
+          <ControlButton onClick={photoSwipeNext}>
             <i className='fa-solid fa-chevron-right' />
           </ControlButton>
         </Controls>
@@ -119,8 +120,7 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const Controls = styled.div`
-`;
+const Controls = styled.div``;
 
 const ControlButton = styled.div`
   position: absolute;
