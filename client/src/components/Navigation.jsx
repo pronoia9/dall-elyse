@@ -26,7 +26,7 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
       <LinkWrapper center={center}>
         {
           <LinkType to={path} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)} ifLink={checkIfLink()}>
-            <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink())}>{subtitle}</NavigationSubtitle>
+            <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobile)}>{subtitle}</NavigationSubtitle>
             <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
           </LinkType>
         }

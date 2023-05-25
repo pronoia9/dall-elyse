@@ -27,8 +27,10 @@ export const navigationMotion = {
       exit: { x: location - 100, opacity: 0, transition: { delay, duration: 0.5, ease: 'linear' } },
     };
   },
-  subtitleMotion: (center, subtitleOffset = 75, hover) => {
-    const sign = (center ? 1 : -1) * -1, location = subtitleOffset * sign, delay = hover !== null ? 0 : 0.5;
+  subtitleMotion: (center, subtitleOffset = 75, hover, mobile) => {
+    const sign = (center ? 1 : -1) * -1,
+      location = !(mobile && window.screen.width < 960) ? (subtitleOffset * sign) : (0),
+      delay = hover !== null ? 0 : 0.5;
     return {
       initial: { x: location - 100, opacity: 0 },
       animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { type: 'tween', delay, duration: 0.5, ease: 'linear' } },
