@@ -30,7 +30,7 @@ const GalleryCardOverlay = (props) => {
           <Middle className='galleryCardOverlay-middle'></Middle>
 
           {/* BOTTOM (Info) */}
-          <Bottom className='galleryCardOverlay-bottom'></Bottom>
+          <Bottom className='galleryCardOverlay-bottom'><p>{props.prompt}</p></Bottom>
 
           {/* CONTROLS */}
           <Controls className='galleryCardOverlay-controls'>
@@ -64,10 +64,9 @@ const Container = styled.div`
 `;
 
 const Top = styled.div`
-  background: none;
-  padding: 12px 0 0 10px;
-  height: 44px;
+  padding: 10px;
   width: 100%;
+  height: 44px;
 
   i {
     cursor: pointer;
@@ -79,10 +78,19 @@ const Top = styled.div`
 
 const Middle = styled.div`
   width: 100%;
+  height: 100%;
 `;
 
 const Bottom = styled.div`
+  padding: 10px;
   width: 100%;
+  height: 44px;
+  background: black;
+  text-align: center;
+
+  p {
+    cursor: pointer;
+  }
 `;
 
 /****************  CONTROLS START  ****************/
