@@ -7,9 +7,13 @@ const GalleryCard = ({ _id, name, prompt, photo }) => {
   // HANDLE CLICK ELSEWHERE TO CLOSE OVERLAY
   const overlayRef = useRef();
   useEffect(() => {
-    const handleClick = (e) => { if (overlay && e.target !== overlayRef.current) setOverlay(false); };
+    const handleClick = (e) => {
+      if (overlay && e.target !== overlayRef.current) setOverlay(false);
+    };
     document.addEventListener('mousedown', handleClick);
-    return () => { document.removeEventListener('mousedown', handleClick); };
+    return () => {
+      document.removeEventListener('mousedown', handleClick);
+    };
   }, [overlay]);
 
   return (
@@ -31,7 +35,7 @@ export default GalleryCard;
 
 const Container = styled.div`
   margin: 20px;
-  width: calc(33.33% - 40px);
+  width: calc(25% - 40px);
 
   display: inline-flex;
   flex-direction: column;
@@ -41,6 +45,18 @@ const Container = styled.div`
     display: block;
     width: 100%;
     height: auto;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    width: calc(33.33% - 40px);
+  }
+
+  @media only screen and (max-width: 960px) {
+    width: calc(50% - 40px);
+  }
+
+  @media only screen and (max-width: 760px) {
+    width: 100%;
   }
 `;
 
