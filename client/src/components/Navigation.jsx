@@ -8,7 +8,16 @@ import { navigationMotion } from '../utils/motion';
 
 const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props}></Link> : <p {...props}></p>);
 
-export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobileTitle, titleOffset, subtitleOffset }) {
+export default function Navigation({
+  title = 'title',
+  subtitle = 'subtitle',
+  path = '/',
+  position,
+  center,
+  mobileTitle,
+  titleOffset,
+  subtitleOffset,
+}) {
   const [isHover, setIsHover] = useState(null); // local state
   const toggleOverlay = useStore((state) => state.toggleOverlay); // store
   const { containerMotion, titleMotion, subtitleMotion } = navigationMotion; // data
@@ -113,19 +122,12 @@ const LinkWrapper = styled.div`
   }
 
   &:hover {
-    a {
-      span {
-        &:first-child {
-          color: rgba(255, 255, 255, 0.8);
-          /* transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important; */
-          /* transition: transform 0.5s, z-index 0.6s !important; */
-        }
-
-        &:last-child {
-          color: #fff;
-          /* transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important; */
-          /* transition: transform 0.5s, z-index 0.6s !important; */
-        }
+    a > span {
+      &:first-child {
+        color: rgba(255, 255, 255, 0.8);
+      }
+      &:last-child {
+        color: #fff;
       }
     }
   }
