@@ -141,8 +141,6 @@ const ImageContainer = styled.div`
     margin: 0 0 30px 0;
   }
 `;
-
-const ImageWrapper = styled.div``;
 /*******************  IMAGE AREA END  *******************/
 
 /*********************  FORM START  *********************/
