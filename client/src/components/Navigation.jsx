@@ -15,7 +15,6 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
   const location = useLocation();
 
   const checkIfLink = () => location.pathname !== path;
-  console.log('checkIfLink("', location.pathname, '" vs "', path, '")', checkIfLink());
 
   const handleHover = (e, hover) => {
     toggleOverlay();
