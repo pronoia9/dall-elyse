@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import { useStore } from '../store/useStore';
 import { useEffect } from 'react';
 
-const GalleryCardOverlay = (props) => {
+const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
-  console.log('gallery card overlay props =>', props);
 
   // EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
   useEffect(() => {
@@ -22,17 +21,15 @@ const GalleryCardOverlay = (props) => {
       <Overlay className='galleryCardOverlay-overlay'>
         <Container className='galleryCardOverlay-container'>
           {/* TOP (Close Icon) */}
-          <Top className='galleryCardOverlay-top' onClick={() => setPhotoSwipe(null)}>
+          <CloseButton className='galleryCardOverlay-top' onClick={() => setPhotoSwipe(null)}>
             <i className='fa-solid fa-xmark' />
-          </Top>
+          </CloseButton>
 
           {/* MIDDLE (Image) */}
-          <Middle className='galleryCardOverlay-middle'></Middle>
-
-          {/* BOTTOM (Info) */}
-          <Bottom className='galleryCardOverlay-bottom'>
-            <p onClick={() => navigator.clipboard.writeText(props.prompt)}>{props.prompt}</p>
-          </Bottom>
+          <ImageWrapper className='galleryCardOverlay-middle'>
+            <img src={photo} />
+            <p onClick={() => navigator.clipboard.writeText(prompt)}>{prompt}</p>
+          </ImageWrapper>
 
           {/* CONTROLS */}
           <Controls className='galleryCardOverlay-controls'>
@@ -49,7 +46,7 @@ const Overlay = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.9);
   z-index: 999;
 `;
 
@@ -60,12 +57,12 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-const Top = styled.div`
+const CloseButton = styled.div`
   padding: 10px;
   width: 100%;
   height: 44px;
@@ -78,23 +75,39 @@ const Top = styled.div`
   }
 `;
 
-const Middle = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+const ImageWrapper = styled.div`
+  max-width: 75%;
+  height: calc(100% - 88px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 
-const Bottom = styled.div`
-  padding: 10px;
-  width: 100%;
-  height: 44px;
-  background: black;
-  text-align: center;
+  img {
+    width: 100%;
+    height: auto;
+    max-height: calc(100% - 44px);
+  }
 
   p {
-    cursor: pointer;
+    min-height: 44px;
+    max-height: 88px;
     overflow: hidden;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: color 0.5s;
+
+    &:hover {
+      color: #fff;
+    }
   }
 `;
+
+const Bottom = styled(CloseButton)``;
 
 /****************  CONTROLS START  ****************/
 const Controls = styled.div``;
