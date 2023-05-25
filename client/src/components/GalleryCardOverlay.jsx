@@ -58,15 +58,14 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
 `;
 
 const Top = styled.div`
   background: none;
-  box-sizing: border-box;
   padding: 12px 0 0 10px;
-  position: absolute;
-  top: 0;
-  left: 0;
   height: 44px;
   width: 100%;
 
