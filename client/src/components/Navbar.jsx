@@ -9,7 +9,7 @@ import { useStore } from '../store/useStore';
 
 const NavLink = ({ title, url, animation }) => (
   <NavListItem className='navlist-item' {...animation}>
-    <a href={url} target='_blank'>
+    <a href={url} target={`${url.includes('http') ? '_blank' : ''}`}>
       {title}
     </a>
   </NavListItem>
