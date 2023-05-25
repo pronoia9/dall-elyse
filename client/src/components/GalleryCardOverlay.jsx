@@ -30,7 +30,9 @@ const GalleryCardOverlay = (props) => {
           <Middle className='galleryCardOverlay-middle'></Middle>
 
           {/* BOTTOM (Info) */}
-          <Bottom className='galleryCardOverlay-bottom'><p>{props.prompt}</p></Bottom>
+          <Bottom className='galleryCardOverlay-bottom'>
+            <p onClick={() => navigator.clipboard.writeText(props.prompt)}>{props.prompt}</p>
+          </Bottom>
 
           {/* CONTROLS */}
           <Controls className='galleryCardOverlay-controls'>
@@ -90,6 +92,7 @@ const Bottom = styled.div`
 
   p {
     cursor: pointer;
+    overflow: hidden;
   }
 `;
 
