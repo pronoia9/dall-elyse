@@ -6,7 +6,7 @@ const GalleryCardOverlay = (props) => {
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
   console.log('gallery card overlay props =>', props);
 
-  // ADD EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
+  // EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
   useEffect(() => {
     const close = (e) => {
       if (e.key === 'Escape') setPhotoSwipe(null);
