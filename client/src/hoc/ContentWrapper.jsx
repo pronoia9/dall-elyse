@@ -6,9 +6,9 @@ import { contentMotion } from '../utils/motion';
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Container {...contentMotion()} className='CONTAINER'>
-        <Circle className='CIRCLE' />
-        <Wrapper className='WRAPPER'>
+      <Container {...contentMotion()} className='contentwrapper-container'>
+        <Circle className='contentwrapper-circle' />
+        <Wrapper className='contentwrapper-wrapper'>
           <Component id={idName} />
         </Wrapper>
       </Container>
