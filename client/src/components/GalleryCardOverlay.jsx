@@ -34,8 +34,12 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
 
         {/* CONTROLS */}
         <Controls className='galleryCardOverlay-controls'>
-          <i className='fa-solid fa-chevron-left' />
-          <i className='fa-solid fa-chevron-right' />
+          <ControlButton>
+            <i className='fa-solid fa-chevron-left' />
+          </ControlButton>
+          <ControlButton>
+            <i className='fa-solid fa-chevron-right' />
+          </ControlButton>
         </Controls>
       </Overlay>
     </>
@@ -61,6 +65,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-around;
 `;
 
 const CloseButton = styled.div`
@@ -108,6 +113,28 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const Controls = styled.div``;
+const Controls = styled.div`
+`;
 
-const ControlsTop = styled.div``;
+const ControlButton = styled.div`
+  position: absolute;
+  top: calc(50% - 22px);
+
+  font-size: 24px;
+  width: 44px;
+  height: 44px;
+  /* background: black; */
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:first-child {
+    left: 0;
+  }
+
+  &:last-child {
+    right: 0;
+  }
+`;
