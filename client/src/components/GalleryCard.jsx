@@ -3,15 +3,13 @@ import styled from 'styled-components';
 import { useStore } from '../store/useStore';
 
 const GalleryCard = (props) => {
-  const { /*_id, name, prompt,*/ photo } = props;
+  const { /*_id, name, prompt,*/ photo, index } = props;
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
 
   return (
-    <>
-      <Container className='galleryCard-container' onClick={() => { setPhotoSwipe(props) }}>
-        <img src={photo} />
-      </Container>
-    </>
+    <Container className='galleryCard-container' onClick={() => { setPhotoSwipe({...props, index}); }}>
+      <img src={photo} />
+    </Container>
   );
 };
 export default GalleryCard;
