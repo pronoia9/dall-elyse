@@ -1,11 +1,14 @@
 import { Routes, Route } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
-import { Navbar } from './components';
+import { GalleryCardOverlay, Navbar } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
+import { useStore } from './store/useStore';
 
 const App = () => {
+  const photoSwipe = useStore((state) => state.photoSwipe);
+
   return (
     <>
       <GlobalStyles />
@@ -17,6 +20,9 @@ const App = () => {
           <Route path='/create' element={<CreatePage />} />
         </Routes>
       </AnimatePresence>
+
+      {/* Gallery Card Overlay */}
+      {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
     </>
   );
 };

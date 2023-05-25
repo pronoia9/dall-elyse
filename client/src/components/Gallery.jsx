@@ -13,8 +13,6 @@ const Gallery = () => {
       {data?.map((d, index) => (
         <GalleryCard key={`card-${d._id}`} {...d} index={index} />
       ))}
-      {/* Gallery Card Overlay */}
-      {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
     </Container>
   );
 };
