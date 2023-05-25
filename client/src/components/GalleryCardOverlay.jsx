@@ -1,9 +1,21 @@
 import styled from 'styled-components';
 import { useStore } from '../store/useStore';
+import { useEffect } from 'react';
 
 const GalleryCardOverlay = (props) => {
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
   console.log('gallery card overlay props =>', props);
+
+  // ADD EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
+  useEffect(() => {
+    const close = (e) => {
+      if (e.key === 'Escape') setPhotoSwipe(null);
+    };
+    document.addEventListener('keydown', (e) => close(e));
+    return () => {
+      document.removeEventListener('keydown', (e) => close(e));
+    };
+  }, []);
 
   return (
     <>
