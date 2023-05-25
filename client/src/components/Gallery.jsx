@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { useStore } from '../store/useStore';
-import { GalleryCard, GalleryCardOverlay } from './';
+import { GalleryCard } from './';
 
 const Gallery = () => {
   const data = useStore((state) => state.data),
@@ -9,7 +9,6 @@ const Gallery = () => {
 
   return (
     <Container className='gallery-container'>
-      {/* Gallery Cards */}
       {data?.map((d, index) => (
         <GalleryCard key={`card-${d._id}`} {...d} index={index} />
       ))}
