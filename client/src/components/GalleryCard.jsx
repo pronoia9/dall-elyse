@@ -1,18 +1,26 @@
-import { useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 
 const GalleryCard = ({ _id, name, prompt, photo }) => {
   const [overlay, setOverlay] = useState(false);
 
+  // HANDLE CLICK ELSEWHERE TO CLOSE OVERLAY
+  const overlayRef = useRef();
+  useEffect(() => {
+    const handleClick = (e) => { if (overlay && e.target !== overlayRef.current) setOverlay(false); };
+    document.addEventListener('mousedown', handleClick);
+    return () => { document.removeEventListener('mousedown', handleClick); };
+  }, [overlay]);
+
   return (
     <>
-      <Container className='galleryCard-container' onClick={() => setOverlay((prev) => !prev)}>
+      <Container className='galleryCard-container' onClick={() => setOverlay(true)}>
         <Wrapper className='galleryCard-wrapper'>
           <img src={photo} />
         </Wrapper>
       </Container>
 
-      <Overlay overlay={overlay}>
+      <Overlay ref={overlayRef} overlay={overlay}>
         <p>{name}</p>
         <p>{prompt}</p>
       </Overlay>
@@ -36,15 +44,13 @@ const Container = styled.div`
   }
 `;
 
-const Wrapper = styled.div`
-  position: relative;
-`;
+const Wrapper = styled.div``;
 
 const Overlay = styled.div`
   display: ${(props) => !props.overlay && 'none'};
-  position: absolute;
-  top: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.75);
+  position: absolute;
+  top: 0;
 `;
