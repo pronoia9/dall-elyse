@@ -9,28 +9,28 @@ import placeholder from '../assets/placeholder.png';
 
 const CreatePage = () => {
   return (
-    <Container id='create-page' className='Container'>
+    <Container id='create-page' className='createPage-container'>
       {/* Navigation Links */}
       {Object.values(navigationData.createPage).map((link) => (
         <Navigation key={`navigation-${link.title}`} {...link} />
       ))}
 
-      <Content>
+      <Content className='createPage-content'>
         {/* Text Section */}
-        <TextContainer className='TextContainer'>
+        <TextContainer className='createPage-textContainer'>
           <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
           <p>Once you have created the image you want, you can share it with others in the community</p>
         </TextContainer>
 
         {/* Create/Form Section */}
-        <FormSection className='FormSection'>
+        <FormSection className='createPage-formSection'>
           {/* Image */}
-          <ImageContainer className='ImageContainer'>
+          <ImageContainer className='createPage-imageContainer'>
             <img src={placeholder} />
           </ImageContainer>
           {/* Form */}
-          <FormContainer className='FormContainer'>
-            <FormWrapper className='FormWrapper'>
+          <FormContainer className='createPage-formContainer'>
+            <FormWrapper className='createPage-formWrapper'>
               {/* Name */}
               <input type='text' placeholder='Your Name' />
               {/* Prompt + Prompt Button */}
