@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useStore } from '../store/useStore';
 import { useEffect } from 'react';
 
+// TODO: ADD ANIMATIONS
+
 const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
 
@@ -15,6 +17,10 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
       document.removeEventListener('keydown', (e) => close(e));
     };
   }, []);
+
+  // TODO: NEXT/PREV IMAGE FUNCTIONS
+
+  // TODO: EVENT LISTENER FOR LEFT/RIGHT KEYS
 
   return (
     <>
