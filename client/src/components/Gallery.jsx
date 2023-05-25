@@ -11,7 +11,7 @@ const Gallery = () => {
     <Container className='gallery-container'>
       <Wrapper className='gallery-wrapper'>
         {data?.map((d, i) => (
-          <GalleryCard key={`card-${i}${d.id}`} {...d} />
+          <GalleryCard key={`card-${d._id}`} {...d} />
         ))}
       </Wrapper>
     </Container>
