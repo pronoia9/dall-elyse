@@ -6,7 +6,7 @@ import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
 import { navigationMotion } from '../utils/motion';
 
-const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props}></Link> : <p {...props}></p>);
+const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props} /> : <p {...props} />);
 
 export default function Navigation({
   title = 'title',
@@ -33,13 +33,10 @@ export default function Navigation({
   return (
     <LinkContainer position={position} center={center} mobileTitle={mobileTitle} {...containerMotion(center)}>
       <LinkWrapper center={center}>
-        {
-          <LinkType to={path} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)} ifLink={checkIfLink()}>
-            <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobileTitle)}>{subtitle}</NavigationSubtitle>
-            <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
-          </LinkType>
-        }
-        <Link to={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}></Link>
+        <LinkType to={path} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)} ifLink={checkIfLink()}>
+          <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobileTitle)}>{subtitle}</NavigationSubtitle>
+          <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
+        </LinkType>
       </LinkWrapper>
     </LinkContainer>
   );
