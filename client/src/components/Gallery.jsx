@@ -4,7 +4,6 @@ import { useStore } from '../store/useStore';
 import { GalleryCard, GalleryCardOverlay } from './';
 
 const Gallery = () => {
-  // STORE DATA
   const data = useStore((state) => state.data),
     photoSwipe = useStore((state) => state.photoSwipe);
 
