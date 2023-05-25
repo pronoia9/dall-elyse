@@ -1,31 +1,37 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
 import { navigationMotion } from '../utils/motion';
 
-// TODO: MOVE HOVER ANIMATION TO FRAMER MOTION
+const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props}></Link> : <p {...props}></p>);
 
 export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile, titleOffset, subtitleOffset }) {
   const [isHover, setIsHover] = useState(null); // local state
   const toggleOverlay = useStore((state) => state.toggleOverlay); // store
   const { containerMotion, titleMotion, subtitleMotion } = navigationMotion; // data
+  const location = useLocation();
 
-  const handleHover = (hover) => { toggleOverlay(); setIsHover(hover); }
+  const checkIfLink = () => location.pathname !== path;
+  console.log('checkIfLink("', location.pathname, '" vs "', path, '")', checkIfLink());
+
+  const handleHover = (e, hover) => {
+    toggleOverlay();
+    setIsHover(hover);
+  };
 
   return (
     <LinkContainer position={position} center={center} mobile={mobile} {...containerMotion(center)}>
       <LinkWrapper center={center}>
-        <Link to={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
-          <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover)}>
-            {subtitle}
-          </NavigationSubtitle>
-          <NavigationTitle {...titleMotion(center, titleOffset, isHover)}>
-            {title}
-          </NavigationTitle>
-        </Link>
+        {
+          <LinkType to={path} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)} ifLink={checkIfLink()}>
+            <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink())}>{subtitle}</NavigationSubtitle>
+            <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
+          </LinkType>
+        }
+        <Link to={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}></Link>
       </LinkWrapper>
     </LinkContainer>
   );
@@ -93,18 +99,24 @@ const LinkWrapper = styled.div`
       margin: 0 auto;
     `}
 
-  &:hover {
-    span {
-      &:first-child {
-        color: rgba(255, 255, 255, 0.8);
-        /* transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important; */
-        /* transition: transform 0.5s, z-index 0.6s !important; */
-      }
+  p {
+    cursor: default;
+  }
 
-      &:last-child {
-        color: #fff;
-        /* transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important; */
-        /* transition: transform 0.5s, z-index 0.6s !important; */
+  &:hover {
+    a {
+      span {
+        &:first-child {
+          color: rgba(255, 255, 255, 0.8);
+          /* transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important; */
+          /* transition: transform 0.5s, z-index 0.6s !important; */
+        }
+
+        &:last-child {
+          color: #fff;
+          /* transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important; */
+          /* transition: transform 0.5s, z-index 0.6s !important; */
+        }
       }
     }
   }
