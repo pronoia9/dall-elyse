@@ -6,12 +6,10 @@ import { contentMotion } from '../utils/motion';
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Container {...contentMotion()}>
-        <Circle />
-        <Wrapper>
-          <Section>
-            <Component id={idName} />
-          </Section>
+      <Container {...contentMotion()} className='CONTAINER'>
+        <Circle className='CIRCLE' />
+        <Wrapper className='WRAPPER'>
+          <Component id={idName} />
         </Wrapper>
       </Container>
     );
@@ -20,10 +18,6 @@ const ContentWrapper = (Component, idName) =>
 export default ContentWrapper;
 
 const Container = styled(motion.div)`
-  /* position: relative; */
-  /* display: flex; */
-  /* flex-direction: column; */
-  /* justify-content: center; */
   z-index: 5;
   position: fixed;
   width: 100%;
@@ -65,18 +59,16 @@ const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
-`;
-
-const Section = styled(motion.div)`
+  align-items: center;
   width: calc(100% - 374px);
   max-width: 1280px;
-  margin: auto;
-  /* min-height: 100%; */
-  min-height: 100vh;
+  min-height: 100%;
   /* padding-top: 100px;
-   padding-bottom: 90px; */
-  padding-top: 50px;
-  padding-bottom: 40px;
+  padding-bottom: 90px; */
+  /* padding-top: 50px;
+  padding-bottom: 40px; */
+  padding: 0;
+  margin: auto;
 
   div:last-child {
     margin-bottom: 0;
