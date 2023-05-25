@@ -26,9 +26,7 @@ const CreatePage = () => {
         <FormSection className='FormSection'>
           {/* Image */}
           <ImageContainer className='ImageContainer'>
-            <ImageWrapper className='ImageWrapper'>
-              <img src={placeholder} />
-            </ImageWrapper>
+            <img src={placeholder} />
           </ImageContainer>
           {/* Form */}
           <FormContainer className='FormContainer'>
@@ -114,18 +112,25 @@ const FormSection = styled.div`
 
 /******************  IMAGE AREA START  ******************/
 const ImageContainer = styled.div`
-  margin: 0 20px;
   width: calc(33.33% - 40px);
   background: #111;
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
 
   @media only screen and (max-width: 1440px) {
-    margin: 0 15px;
     width: calc(33.33% - 30px);
+    margin: 0 15px;
   }
 
   @media only screen and (max-width: 1200px) {
-    margin: 0 10px;
     width: calc(33.33% - 20px);
+    margin: 0 10px;
   }
 
   @media only screen and (max-width: 960px) {
@@ -137,14 +142,7 @@ const ImageContainer = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
-  img {
-    width: 100%;
-    height: 100%;
-    background: url('/src/assets/placeholder.png');
-    background-size: contain;
-  }
-`;
+const ImageWrapper = styled.div``;
 /*******************  IMAGE AREA END  *******************/
 
 /*********************  FORM START  *********************/
