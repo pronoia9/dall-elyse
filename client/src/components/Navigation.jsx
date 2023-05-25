@@ -8,7 +8,7 @@ import { navigationMotion } from '../utils/motion';
 
 const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props}></Link> : <p {...props}></p>);
 
-export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobile, titleOffset, subtitleOffset }) {
+export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobileTitle, titleOffset, subtitleOffset }) {
   const [isHover, setIsHover] = useState(null); // local state
   const toggleOverlay = useStore((state) => state.toggleOverlay); // store
   const { containerMotion, titleMotion, subtitleMotion } = navigationMotion; // data
@@ -22,11 +22,11 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
   };
 
   return (
-    <LinkContainer position={position} center={center} mobile={mobile} {...containerMotion(center)}>
+    <LinkContainer position={position} center={center} mobileTitle={mobileTitle} {...containerMotion(center)}>
       <LinkWrapper center={center}>
         {
           <LinkType to={path} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)} ifLink={checkIfLink()}>
-            <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobile)}>{subtitle}</NavigationSubtitle>
+            <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobileTitle)}>{subtitle}</NavigationSubtitle>
             <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
           </LinkType>
         }
@@ -74,20 +74,30 @@ const LinkContainer = styled.div`
     top: 21px;
   }
 
+  /* TITLE STYLING (MOVE FROM SIDE TO TOP) */
+  /* Must set 'mobile: true/false' in 'data', not setting it is necessary to keep home page links' styling */
   @media only screen and (max-width: 960px) {
-    display: ${(props) => (!props.mobile ? 'none' : 'block')};
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transform: none;
-    margin-bottom: 50px;
+    ${(props) =>
+      props.mobileTitle === false
+        ? css`
+            display: none;
+          `
+        : props.mobileTitle === true &&
+          css`
+            display: block;
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            transform: none;
+            margin-bottom: 50px;
 
-    &:before {
-      width: 200vh;
-      left: -50%;
-      top: 18px;
-    }
+            &:before {
+              width: 200vh;
+              left: -50%;
+              top: 18px;
+            }
+          `}
   }
 `;
 

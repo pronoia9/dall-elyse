@@ -33,12 +33,12 @@ export const navigationData = {
     create: { ...navigationLinks.create, position: navigationPositions.rightMiddle },
   },
   createPage: {
-    create: { ...navigationLinks.create, position: navigationPositions.left, center: true, mobile: true },
-    back: { ...navigationLinks.back, position: navigationPositions.right },
+    create: { ...navigationLinks.create, position: navigationPositions.left, center: true, mobileTitle: true },
+    back: { ...navigationLinks.back, position: navigationPositions.right, mobileTitle: false },
   },
   galleryPage: {
-    gallery: { ...navigationLinks.gallery, position: navigationPositions.left, center: true, mobile: true },
-    back: { ...navigationLinks.back, position: navigationPositions.right },
+    gallery: { ...navigationLinks.gallery, position: navigationPositions.left, center: true, mobileTitle: true },
+    back: { ...navigationLinks.back, position: navigationPositions.right, mobileTitle: false },
   },
 };
 
