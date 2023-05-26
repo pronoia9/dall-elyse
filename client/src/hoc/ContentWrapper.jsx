@@ -65,9 +65,8 @@ const Wrapper = styled(motion.div)`
   min-height: 100%;
   /* padding-top: 100px;
   padding-bottom: 90px; */
-  /* padding-top: 50px;
-  padding-bottom: 40px; */
-  padding: 0;
+  padding-top: 50px;
+  padding-bottom: 40px;
   margin: auto;
 
   & > div:last-child {
