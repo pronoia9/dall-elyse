@@ -144,6 +144,7 @@ const Logo = styled(motion.div)`
     /* height: auto; */
     height: 100%;
     width: auto;
+    opacity: 0.75;
   }
 `;
 
