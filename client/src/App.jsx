@@ -1,5 +1,4 @@
 import { Routes, Route } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
 
 import { GalleryCardOverlay, Navbar } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
@@ -13,15 +12,14 @@ const App = () => {
     <>
       <GlobalStyles />
       <Navbar />
-      <AnimatePresence>
-        <Routes>
-          <Route exact path='/' element={<HomePage />} />
-          <Route path='/gallery' element={<GalleryPage />} />
-          <Route path='/create' element={<CreatePage />} />
-        </Routes>
-      </AnimatePresence>
 
-      {/* Gallery Card Overlay */}
+      <Routes>
+        <Route exact path='/' element={<HomePage />} />
+        <Route path='/gallery' element={<GalleryPage />} />
+        <Route path='/create' element={<CreatePage />} />
+      </Routes>
+
+      {/* Gallery Card Overlay (Had to be here cause of z-index) */}
       {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
     </>
   );
