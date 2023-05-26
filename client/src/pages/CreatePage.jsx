@@ -59,7 +59,7 @@ const CreatePage = () => {
         {/* Text Section */}
         <TextContainer className='createPage-textContainer'>
           <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
-          <p>Once you have created the image you want, you can share it with others in the community</p>
+          <p>Once you have created the image you want, you can share it with others in the community.</p>
         </TextContainer>
 
         {/* Create/Form Section */}
@@ -204,9 +204,11 @@ const FormContainer = styled.div`
   }
 `;
 
-const FormWrapper = styled.div``;
-
-const Form = styled.div``;
+const FormWrapper = styled.div`
+  textarea {
+    max-height: 150px;
+  }
+`;
 
 const Buttons = styled.div`
   width: 100%;
