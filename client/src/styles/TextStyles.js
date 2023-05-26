@@ -12,7 +12,7 @@ export const NavigationSubtitle = styled(motion.span)`
   /* margin: 0 0 -3px 0; */
   margin: 0 0 3px 0;
 
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 760px) {
     text-align: center !important;
     font-family: 'Roboto Condensed', sans-serif;
     font-size: 12px;
@@ -28,7 +28,7 @@ export const NavigationTitle = styled(NavigationSubtitle)`
   /* margin: 0 0 28px 0; */
   margin: 0;
 
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 760px) {
     font-size: 30px;
     line-height: 35px;
   }
