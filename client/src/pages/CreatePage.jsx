@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { Loader, Navigation } from '../components';
@@ -12,7 +11,6 @@ import { getRandomPrompt } from '../utils/utils';
 const defaultForm = { name: '', prompt: '', photo: null };
 
 const CreatePage = () => {
-  const navigate = useNavigate();
   const [form, setForm] = useState(defaultForm);
   const [generating, setGenerating] = useState(false);
   const [sharing, setSharing] = useState(false);
@@ -48,7 +46,6 @@ const CreatePage = () => {
   // HANDLE SHARE
   const handleShare = async () => {
     if (form.prompt && form.photo) {
-      if (!form.name || !form.name.length) setForm({ ...form, name: 'Anonymous' });
       setSharing(true);
       try {
         const response = await fetch(import.meta.env.VITE_POSTS_URL, {
@@ -59,16 +56,12 @@ const CreatePage = () => {
           body: JSON.stringify(form),
         });
         await response.json();
-        navigate('/gallery');
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSharing(false);
       }
-      catch (error) {
-        console.error(error);
-      }
-      finally {
-        setLoading(false);
-        setForm(defaultForm);
-      }
-    }
+    } else alert('Please enter a prompt.');
   }
 
   return (
