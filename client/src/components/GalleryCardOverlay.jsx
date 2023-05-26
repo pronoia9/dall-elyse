@@ -12,16 +12,17 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
 
   // EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
   useEffect(() => {
-    const close = (e) => {
-      if (e.key === 'Escape') setPhotoSwipe(null);
-    };
+    const close = (e) => { e.key === 'Escape' && setPhotoSwipe(null); };
     document.addEventListener('keydown', (e) => close(e));
-    return () => {
-      document.removeEventListener('keydown', (e) => close(e));
-    };
+    return () => { document.removeEventListener('keydown', (e) => close(e)); };
   }, []);
 
-  // TODO: EVENT LISTENER FOR LEFT/RIGHT KEYS
+  // EVENT LISTENER FOR LEFT/RIGHT KEYS
+  useEffect(() => {
+    const arrowKey = (e) => { e.key === 'ArrowLeft' ? photoSwipePrev() : e.key === 'ArrowRight' && photoSwipeNext(); }
+    document.addEventListener('keydown', arrowKey);
+    return () => { document.removeEventListener('keydown', arrowKey) }
+  }, [])
 
   return (
     <>
@@ -45,9 +46,7 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
 
         {/* CONTROLS */}
         <Controls className='galleryCardOverlay-controls'>
-          <ControlButton onClick={photoSwipePrev}>
-            <i className='fa-solid fa-chevron-left' />
-          </ControlButton>
+          <ControlButton onClick={photoSwipePrev}>{index > 0 && <i className='fa-solid fa-chevron-left' />}</ControlButton>
           <ControlButton onClick={photoSwipeNext}>
             <i className='fa-solid fa-chevron-right' />
           </ControlButton>
