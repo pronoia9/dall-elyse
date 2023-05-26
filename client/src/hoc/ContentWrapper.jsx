@@ -58,7 +58,7 @@ const Circle = styled.div`
 const Wrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   width: calc(100% - 374px);
   max-width: 1280px;
