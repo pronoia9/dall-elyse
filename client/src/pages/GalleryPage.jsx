@@ -43,20 +43,49 @@ const GalleryPage = () => {
     <></>
   ) : (
     <>
-      <Container id='gallery-page' className='galleryPage-container'>
+      <div id='gallery-page' className='galleryPage-container'>
         {/* Navigation Links */}
         {Object.values(navigationData.galleryPage).map((link) => (
           <Navigation key={`navigation-${link.title}`} {...link} />
         ))}
 
-        {/* Searchbar maybe? */}
+        <Wrapper>
+          {/* Searchbar maybe? */}
+          <InputWrapper>
+            <input type='text' />
+          </InputWrapper>
 
-        {/* Gallery Grid */}
-        <Gallery />
-      </Container>
+          {/* Gallery Grid */}
+          <Gallery />
+        </Wrapper>
+      </div>
     </>
   );
 };
 export default ContentWrapper(GalleryPage, 'gallery');
 
-const Container = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+`;
+
+const InputWrapper = styled.div`
+  width: 100%;
+
+  @media only screen and (max-width: 1440px) {
+  }
+
+  @media only screen and (max-width: 1200px) {
+  }
+
+  @media only screen and (max-width: 960px) {
+    width: calc(100% - 15px);
+  }
+
+  @media only screen and (max-width: 760px) {
+    width: calc(100% - 40px);
+  }
+`;
