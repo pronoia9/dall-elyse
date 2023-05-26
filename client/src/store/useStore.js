@@ -25,6 +25,9 @@ export const useStore = create(
     isGenerating: false,
 
     // Gallery Page
+    searchKey: '',
+    setSearchKey: (searchKey) => set({ searchKey }),
+
     // Photo Swipe Overlay
     photoSwipe: null,
     setPhotoSwipe: (index) => set(({ data }) => ({ photoSwipe: { ...data[index], index, isLast: !(index < data.length - 1) } })),

@@ -1,18 +1,18 @@
-// import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Gallery, Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
 import { navigationData } from '../utils/data';
 import { useStore } from '../store/useStore';
-import { useEffect } from 'react';
 
 const GalleryPage = () => {
   // STORE
   const loading = useStore((state) => state.loading),
     setLoading = useStore((state) => state.setLoading),
-    data = useStore((state) => state.data),
-    setData = useStore((state) => state.setData);
+    setData = useStore((state) => state.setData),
+    searchKey = useStore((state) => state.searchKey),
+    setSearchKey = useStore((state) => state.setSearchKey);
 
   // FETCHING GALLERY DATA
   const fetchPosts = async () => {
@@ -34,10 +34,7 @@ const GalleryPage = () => {
       setLoading(false);
     }
   };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  useEffect(() => { fetchPosts(); }, []);
 
   return loading ? (
     <></>
@@ -52,7 +49,7 @@ const GalleryPage = () => {
         <Wrapper>
           {/* Searchbar maybe? */}
           <InputWrapper>
-            <input type='text' />
+            <input type='text' name='searchKey' value={searchKey} onChange={(e) => setSearchKey(e.target.value)} />
           </InputWrapper>
 
           {/* Gallery Grid */}
