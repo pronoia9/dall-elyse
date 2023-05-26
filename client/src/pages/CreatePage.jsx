@@ -87,7 +87,11 @@ const CreatePage = () => {
           {/* Image */}
           <ImageContainer className='createPage-imageContainer'>
             <img src={form.photo ?? placeholder} alt={form.prompt} />
-            {generating && <LoaderContainer><Loader /></LoaderContainer>}
+            {generating && (
+              <LoaderContainer>
+                <Loader />
+              </LoaderContainer>
+            )}
           </ImageContainer>
           {/* Form */}
           <FormContainer className='createPage-formContainer'>
@@ -95,11 +99,23 @@ const CreatePage = () => {
               {/* Name */}
               <input id='name' type='text' name='name' placeholder='EX: Jane Doe' value={form.name} onChange={handleChange} />
               {/* Prompt */}
-              <textarea id='prompt' type='text' name='prompt' placeholder='A futuristic cyborg dance club, neon lights' value={form.prompt} onChange={handleChange} required />
+              <textarea
+                id='prompt'
+                type='text'
+                name='prompt'
+                placeholder='A futuristic cyborg dance club, neon lights'
+                value={form.prompt}
+                onChange={handleChange}
+                required
+              />
               <Buttons className='Buttons'>
-                <button onClick={handleGenerate}>{ generating ? 'Generating...' : 'Generate' }</button>
+                <button onClick={handleGenerate} disabled={generating || sharing ? true : false}>
+                  {generating ? 'Generating...' : 'Generate'}
+                </button>
                 <button onClick={handleSurpriseMe}>Surprise Me</button>
-                <button onClick={handleShare}>{ sharing ? 'Sharing...' : form.shared ? 'Shared' : 'Share' }</button>
+                <button onClick={handleShare} disabled={generating || sharing ? true : false}>
+                  {sharing ? 'Sharing...' : form.shared ? 'Shared' : 'Share'}
+                </button>
               </Buttons>
             </FormWrapper>
           </FormContainer>
