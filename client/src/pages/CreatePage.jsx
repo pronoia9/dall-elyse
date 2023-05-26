@@ -15,7 +15,7 @@ const CreatePage = () => {
   const navigate = useNavigate();
   const [form, setForm] = useState(defaultForm);
   const [generating, setGenerating] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [sharing, setSharing] = useState(false);
 
   // HANDLE INPUT CHANGE
   const handleChange = (e) => { setForm((prev) => ({ ...prev, [e.target.name]: e.target.values })); }
@@ -79,7 +79,7 @@ const CreatePage = () => {
               <Buttons className='Buttons'>
                 <button onClick={handleGenerate}>Generate</button>
                 <button onClick={handleSurpriseMe}>Surprise Me</button>
-                <button onClick={handleShare}>Share</button>
+                <button onClick={handleShare}>{ sharing ? 'Sharing...' : 'Share' }</button>
               </Buttons>
             </FormWrapper>
           </FormContainer>
