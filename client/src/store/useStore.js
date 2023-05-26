@@ -5,10 +5,11 @@ export const useStore = create(
   subscribeWithSelector((set) => ({
     // Loading
     loading: true,
-    setloading: (loading) => set({ loading }),
+    setLoading: (loading) => set({ loading }),
 
     // Gallery Data
     data: [],
+    setData: (data) => set({ data }),
 
     // Overlay
     overlay: false,
