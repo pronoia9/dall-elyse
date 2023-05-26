@@ -70,7 +70,7 @@ const Wrapper = styled(motion.div)`
   padding: 0;
   margin: auto;
 
-  div:last-child {
+  & > div:last-child {
     margin-bottom: 0;
   }
 
