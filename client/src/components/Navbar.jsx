@@ -108,7 +108,7 @@ const Container = styled.div`
   top: 0;
   left: 0;
   width: 100%;
-  z-index: 10;
+  z-index: 100;
   transition: z-index 0.5s, transform 0.5s;
 `;
 
