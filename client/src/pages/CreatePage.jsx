@@ -20,11 +20,30 @@ const CreatePage = () => {
   // HANDLE INPUT CHANGE
   const handleChange = (e) => { setForm((prev) => ({ ...prev, [e.target.name]: e.target.values })); }
   
-  // HANDLE GENERATE
-  const handleGenerate = () => {}
-
   // SURPRISE ME BUTTON THAT GENERATED RANDOM PROMPTS
   const handleSurpriseMe = () => { setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) })) }
+  
+  // HANDLE GENERATE
+  const handleGenerate = async () => {
+    if (form.prompt) {
+      try {
+        setGenerating(true);
+        const response = await fetch(import.meta.env.VITE_OPENAI_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt: form.prompt }),
+        });
+        const data = await response.json();
+        setForm((prev) => ({ ...prev, photo: `data:image/jpeg;base64,${data.photo}` }));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setGenerating(false);
+      }
+    } else alert('Need a prompt bro...');
+  }
   
   // HANDLE SHARE
   const handleShare = () => {}
@@ -53,9 +72,9 @@ const CreatePage = () => {
           <FormContainer className='createPage-formContainer'>
             <FormWrapper className='createPage-formWrapper'>
               {/* Name */}
-              <input type='text' placeholder='Your Name' onChange={handleChange} />
+              <input type='text' name='name' placeholder='EX: Jane Doe' value={form.name} onChange={handleChange} />
               {/* Prompt + Prompt Button */}
-              <textarea placeholder='A futuristic cyborg dance club, neon lights' onChange={handleChange} />
+              <textarea type='text' name='prompt' placeholder='A futuristic cyborg dance club, neon lights' value={form.prompt} onChange={handleChange} />
               <Buttons className='Buttons'>
                 <button onClick={handleGenerate}>Generate</button>
                 <button onClick={handleSurpriseMe}>Surprise Me</button>
