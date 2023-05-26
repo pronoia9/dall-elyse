@@ -8,11 +8,11 @@ import placeholder from '../assets/placeholder.png';
 import { getRandomPrompt } from '../utils/utils';
 
 // TODO: Add animations
-const defaultForm = { name: '', prompt: '', photo: null, shared: false };
+const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
 
 const CreatePage = () => {
   const [form, setForm] = useState(defaultForm);
-  const [generating, setGenerating] = useState(true);
+  const [generating, setGenerating] = useState(false);
   const [sharing, setSharing] = useState(false);
 
   // HANDLE INPUT CHANGE
@@ -36,7 +36,7 @@ const CreatePage = () => {
           body: JSON.stringify({ prompt: form.prompt }),
         });
         const data = await response.json();
-        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}`, generationPrompt: form.prompt });
       } catch (error) {
         console.error(error);
       } finally {
@@ -56,7 +56,7 @@ const CreatePage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ ...form, name: !form.name && 'Anonymous' }),
+          body: JSON.stringify({ ...form, prompt: form.generationPrompt, name: !form.name && 'Anonymous' }),
         });
         await response.json();
       } catch (error) {
@@ -97,7 +97,7 @@ const CreatePage = () => {
               {/* Prompt */}
               <textarea id='prompt' type='text' name='prompt' placeholder='A futuristic cyborg dance club, neon lights' value={form.prompt} onChange={handleChange} required />
               <Buttons className='Buttons'>
-                <button onClick={handleGenerate}>{ generating ? 'Generating' : 'Generate' }</button>
+                <button onClick={handleGenerate}>{ generating ? 'Generating...' : 'Generate' }</button>
                 <button onClick={handleSurpriseMe}>Surprise Me</button>
                 <button onClick={handleShare}>{ sharing ? 'Sharing...' : form.shared ? 'Shared' : 'Share' }</button>
               </Buttons>
