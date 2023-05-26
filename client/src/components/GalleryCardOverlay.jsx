@@ -33,10 +33,14 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
           </CloseButton>
 
           {/* MIDDLE (Image) */}
-          <ImageWrapper className='galleryCardOverlay-imageWrapper'>
-            <img src={photo} />
-            <p onClick={() => navigator.clipboard.writeText(prompt)}>{prompt}</p>
-          </ImageWrapper>
+          <ImageContainer className='galleryCardOverlay-imageContainer'>
+            <ImageWrapper>
+              <img src={photo} />
+            </ImageWrapper>
+            <TextWrapper>
+              <p onClick={() => navigator.clipboard.writeText(prompt)}>{prompt}</p>
+            </TextWrapper>
+          </ImageContainer>
         </Container>
 
         {/* CONTROLS */}
@@ -58,7 +62,7 @@ const Overlay = styled.div`
   position: fixed;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 999;
 `;
 
@@ -88,35 +92,49 @@ const CloseButton = styled.div`
   }
 `;
 
-const ImageWrapper = styled.div`
-  max-width: 75%;
-  height: calc(100% - 88px);
+const ImageContainer = styled.div`
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 10px;
+`;
+
+const ImageWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+  padding: 5px 5px 44px 5px;
+  max-width: 55%;
 
   img {
     width: 100%;
     height: auto;
-    max-height: calc(100% - 44px);
   }
+`;
 
-  p {
-    min-height: 44px;
-    max-height: 88px;
-    overflow: hidden;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    transition: color 0.5s;
+const TextWrapper = styled.div`
+  position: relative;
+  bottom: 44px;
+  max-width: 50%;
+  height: 44px;
+  padding: 0 16px;
 
-    &:hover {
-      color: #fff;
-    }
+  font-size: 12px;
+  line-height: 16px;
+  text-align: center;
+  
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: color 0.5s;
+
+  &:hover {
+    color: rgba(255, 255, 255, 0.7);
   }
 `;
 
