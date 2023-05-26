@@ -129,10 +129,14 @@ export const GlobalStyles = createGlobalStyle`
     transition: background 0.3s, border 0.3s, color 0.3s;
   }
 
-  button:hover,
+  button:hover:enabled,
   input[type='button']:hover,
   input[type='reset']:hover,
   input[type='submit']:hover {
     border-color: #ffffff;
+  }
+
+  button:hover:disabled {
+    cursor: default;
   }
 `;
