@@ -12,7 +12,7 @@ const defaultForm = { name: '', prompt: '', photo: null, shared: false };
 
 const CreatePage = () => {
   const [form, setForm] = useState(defaultForm);
-  const [generating, setGenerating] = useState(false);
+  const [generating, setGenerating] = useState(true);
   const [sharing, setSharing] = useState(false);
 
   // HANDLE INPUT CHANGE
@@ -87,7 +87,7 @@ const CreatePage = () => {
           {/* Image */}
           <ImageContainer className='createPage-imageContainer'>
             <img src={form.photo ?? placeholder} alt={form.prompt} />
-            {generating && <Loader />}
+            {generating && <LoaderContainer><Loader /></LoaderContainer>}
           </ImageContainer>
           {/* Form */}
           <FormContainer className='createPage-formContainer'>
@@ -173,6 +173,7 @@ const FormSection = styled.div`
 
 /******************  IMAGE AREA START  ******************/
 const ImageContainer = styled.div`
+  position: relative;
   width: calc(33.33% - 40px);
   background: #111;
   margin: 0 20px;
@@ -201,6 +202,13 @@ const ImageContainer = styled.div`
   @media only screen and (max-width: 760px) {
     margin: 0 0 30px 0;
   }
+`;
+
+const LoaderContainer = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
 `;
 /*******************  IMAGE AREA END  *******************/
 
