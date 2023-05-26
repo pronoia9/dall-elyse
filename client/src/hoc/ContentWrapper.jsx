@@ -6,54 +6,13 @@ import { contentMotion } from '../utils/motion';
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Container {...contentMotion()} className='contentwrapper-container'>
-        <Circle className='contentwrapper-circle' />
-        <Wrapper className='contentwrapper-wrapper'>
-          <Component id={idName} />
-        </Wrapper>
-      </Container>
+      <Wrapper className='contentwrapper-wrapper'>
+        <Component id={idName} />
+      </Wrapper>
     );
   };
 
 export default ContentWrapper;
-
-const Container = styled(motion.div)`
-  z-index: 5;
-  position: fixed;
-  width: 100%;
-  height: calc(100% - 155px);
-  left: 0;
-  bottom: 0;
-  display: block;
-  background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 150%);
-  transition: transform 0.5s;
-
-  overflow: scroll;
-  scroll-behavior: smooth;
-
-  @media only screen and (max-width: 960px) {
-    height: calc(100% - 115px);
-  }
-`;
-
-const Circle = styled.div`
-  width: 100%;
-  height: 100%;
-  opacity: 0.85;
-  position: fixed;
-  z-index: -100;
-
-  &:before {
-    content: '';
-    position: fixed;
-    left: 0;
-    top: 0;
-    width: 100vh;
-    height: 100vh;
-    background: radial-gradient(ellipse at left top, #28282e 0%, #000000 65%);
-    z-index: -100;
-  }
-`;
 
 const Wrapper = styled(motion.div)`
   display: flex;
