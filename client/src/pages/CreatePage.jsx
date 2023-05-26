@@ -53,9 +53,9 @@ const CreatePage = () => {
           <FormContainer className='createPage-formContainer'>
             <FormWrapper className='createPage-formWrapper'>
               {/* Name */}
-              <input type='text' placeholder='Your Name' />
+              <input type='text' placeholder='Your Name' onChange={handleChange} />
               {/* Prompt + Prompt Button */}
-              <textarea placeholder='A futuristic cyborg dance club, neon lights' />
+              <textarea placeholder='A futuristic cyborg dance club, neon lights' onChange={handleChange} />
               <Buttons className='Buttons'>
                 <button onClick={handleGenerate}>Generate</button>
                 <button onClick={handleSurpriseMe}>Surprise Me</button>
