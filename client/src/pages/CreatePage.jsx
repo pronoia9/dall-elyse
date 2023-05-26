@@ -46,7 +46,30 @@ const CreatePage = () => {
   }
   
   // HANDLE SHARE
-  const handleShare = () => {}
+  const handleShare = async () => {
+    if (form.prompt && form.photo) {
+      if (!form.name || !form.name.length) setForm({ ...form, name: 'Anonymous' });
+      setSharing(true);
+      try {
+        const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(form),
+        });
+        await response.json();
+        navigate('/gallery');
+      }
+      catch (error) {
+        console.error(error);
+      }
+      finally {
+        setLoading(false);
+        setForm(defaultForm);
+      }
+    }
+  }
 
   return (
     <Container id='create-page' className='createPage-container'>
