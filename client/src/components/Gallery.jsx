@@ -1,15 +1,25 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { useStore } from '../store/useStore';
 import { GalleryCard } from './';
 
 const Gallery = () => {
-  const data = useStore((state) => state.data),
-    photoSwipe = useStore((state) => state.photoSwipe);
+  // STORE
+  const data = useStore((state) => state.data), searchKey = useStore((state) => state.searchKey);
+  // LOCAL STATE (FILTERED DATA)
+  const [filteredData, setFilteredData] = useState(data);
+
+  useEffect(() => {
+    const check = (a) => `${a}`.toLowerCase().includes(`${searchKey}`.toLowerCase());
+    setTimeout(() => {
+      setFilteredData(data.filter(({ name, prompt }) => check(name) || check(prompt)));
+     }, 500);
+  }, [searchKey]);
 
   return (
     <Container className='gallery-container'>
-      {data?.map((d, index) => (
+      {filteredData?.map((d, index) => (
         <GalleryCard key={`card-${d._id}`} {...d} index={index} />
       ))}
     </Container>
