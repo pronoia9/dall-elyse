@@ -8,7 +8,7 @@ import placeholder from '../assets/placeholder.png';
 import { getRandomPrompt } from '../utils/utils';
 
 // TODO: Add animations
-const defaultForm = { name: '', prompt: '', photo: null };
+const defaultForm = { name: '', prompt: '', photo: null, shared: false };
 
 const CreatePage = () => {
   const [form, setForm] = useState(defaultForm);
@@ -23,7 +23,9 @@ const CreatePage = () => {
   
   // HANDLE GENERATE
   const handleGenerate = async () => {
-    if (form.prompt) {
+    if (generating) alert('Please chill out.');
+    else if (!form.prompt) alert('Need a prompt bro...');
+    else {
       try {
         setGenerating(true);
         const response = await fetch(import.meta.env.VITE_OPENAI_URL, {
@@ -40,12 +42,13 @@ const CreatePage = () => {
       } finally {
         setGenerating(false);
       }
-    } else alert('Need a prompt bro...');
+    } 
   }
   
   // HANDLE SHARE
   const handleShare = async () => {
-    if (form.prompt && form.photo) {
+    if (!form.prompt || !form.photo) alert('Please enter a prompt and generate an image.');
+    else if (!form.shared) {
       setSharing(true);
       try {
         const response = await fetch(import.meta.env.VITE_POSTS_URL, {
@@ -53,15 +56,16 @@ const CreatePage = () => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(form),
+          body: JSON.stringify({ ...form, name: !form.name && 'Anonymous' }),
         });
         await response.json();
       } catch (error) {
         console.log(error);
       } finally {
+        setForm({ ...form, shared: true });
         setSharing(false);
       }
-    } else alert('Please enter a prompt.');
+    }
   }
 
   return (
@@ -93,9 +97,9 @@ const CreatePage = () => {
               {/* Prompt */}
               <textarea id='prompt' type='text' name='prompt' placeholder='A futuristic cyborg dance club, neon lights' value={form.prompt} onChange={handleChange} required />
               <Buttons className='Buttons'>
-                <button onClick={handleGenerate}>Generate</button>
+                <button onClick={handleGenerate}>{ generating ? 'Generating' : 'Generate' }</button>
                 <button onClick={handleSurpriseMe}>Surprise Me</button>
-                <button onClick={handleShare}>{ sharing ? 'Sharing...' : 'Share' }</button>
+                <button onClick={handleShare}>{ sharing ? 'Sharing...' : form.shared ? 'Shared' : 'Share' }</button>
               </Buttons>
             </FormWrapper>
           </FormContainer>
