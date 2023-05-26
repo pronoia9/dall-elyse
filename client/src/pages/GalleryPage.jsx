@@ -34,9 +34,7 @@ const GalleryPage = () => {
       setLoading(false);
     }
   };
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  useEffect(() => { fetchPosts(); }, []);
 
   return loading ? (
     <></>
