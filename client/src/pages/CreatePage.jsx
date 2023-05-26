@@ -18,7 +18,7 @@ const CreatePage = () => {
   const [sharing, setSharing] = useState(false);
 
   // HANDLE INPUT CHANGE
-  const handleChange = (e) => { setForm((prev) => ({ ...prev, [e.target.name]: e.target.values })); }
+  const handleChange = (e) => { setForm({ ...form, [e.target.name]: e.target.value }); }
   
   // SURPRISE ME BUTTON THAT GENERATED RANDOM PROMPTS
   const handleSurpriseMe = () => { setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) })) }
@@ -36,7 +36,7 @@ const CreatePage = () => {
           body: JSON.stringify({ prompt: form.prompt }),
         });
         const data = await response.json();
-        setForm((prev) => ({ ...prev, photo: `data:image/jpeg;base64,${data.photo}` }));
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (error) {
         console.error(error);
       } finally {
