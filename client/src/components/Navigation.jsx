@@ -82,28 +82,28 @@ const LinkContainer = styled.div`
 
   /* TITLE STYLING (MOVE FROM SIDE TO TOP) */
   /* Must set 'mobile: true/false' in 'data', not setting it is necessary to keep home page links' styling */
+  @media only screen and (max-width: 960px) {
+    display: ${(props) => props.mobileTitle === false && 'none'};
+  }
+
   @media only screen and (max-width: 760px) {
     ${(props) =>
-      props.mobileTitle === false
-        ? css`
-            display: none;
-          `
-        : props.mobileTitle === true &&
-          css`
-            display: block;
-            position: relative;
-            top: 0;
-            left: 0;
-            width: 100%;
-            transform: none;
-            margin-bottom: 50px;
+      props.mobileTitle === true &&
+      css`
+        display: block;
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        transform: none;
+        margin-bottom: 50px;
 
-            &:before {
-              width: 200vh;
-              left: -50%;
-              top: 18px;
-            }
-          `}
+        &:before {
+          width: 200vh;
+          left: -50%;
+          top: 18px;
+        }
+      `}
   }
 `;
 
