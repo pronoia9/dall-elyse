@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Loader, Navigation } from '../components';
@@ -19,7 +19,7 @@ const CreatePage = () => {
   const handleChange = (e) => { setForm({ ...form, [e.target.name]: e.target.value }); }
   
   // SURPRISE ME BUTTON THAT GENERATED RANDOM PROMPTS
-  const handleSurpriseMe = () => { setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) })) }
+  const handleSurpriseMe = () => { setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) })); }
   
   // HANDLE GENERATE
   const handleGenerate = async () => {
@@ -89,9 +89,9 @@ const CreatePage = () => {
           <FormContainer className='createPage-formContainer'>
             <FormWrapper className='createPage-formWrapper'>
               {/* Name */}
-              <input type='text' name='name' placeholder='EX: Jane Doe' value={form.name} onChange={handleChange} />
-              {/* Prompt + Prompt Button */}
-              <textarea type='text' name='prompt' placeholder='A futuristic cyborg dance club, neon lights' value={form.prompt} onChange={handleChange} />
+              <input id='name' type='text' name='name' placeholder='EX: Jane Doe' value={form.name} onChange={handleChange} />
+              {/* Prompt */}
+              <textarea id='prompt' type='text' name='prompt' placeholder='A futuristic cyborg dance club, neon lights' value={form.prompt} onChange={handleChange} required />
               <Buttons className='Buttons'>
                 <button onClick={handleGenerate}>Generate</button>
                 <button onClick={handleSurpriseMe}>Surprise Me</button>
