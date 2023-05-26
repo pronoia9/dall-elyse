@@ -55,7 +55,7 @@ const CreatePage = () => {
         <Navigation key={`navigation-${link.title}`} {...link} />
       ))}
 
-      <Content className='createPage-content'>
+      <Wrapper className='createPage-content'>
         {/* Text Section */}
         <TextContainer className='createPage-textContainer'>
           <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
@@ -83,7 +83,7 @@ const CreatePage = () => {
             </FormWrapper>
           </FormContainer>
         </FormSection>
-      </Content>
+      </Wrapper>
     </Container>
   );
 };
@@ -96,7 +96,7 @@ const Container = styled.div`
   flex-direction: column;
 `;
 
-const Content = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
