@@ -42,7 +42,7 @@ const GalleryPage = () => {
     <></>
   ) : (
     <>
-      <div id='gallery-page' className='galleryPage-container'>
+      <Container id='gallery-page' className='galleryPage-container'>
         {/* Navigation Links */}
         {Object.values(navigationData.galleryPage).map((link) => (
           <Navigation key={`navigation-${link.title}`} {...link} />
@@ -55,11 +55,15 @@ const GalleryPage = () => {
 
         {/* Gallery Grid */}
         <Gallery />
-      </div>
+      </Container>
     </>
   );
 };
 export default ContentWrapper(GalleryPage, 'gallery');
+
+const Container = styled.div`
+  width: 100%;
+`;
 
 const InputWrapper = styled.div`
   width: 100%;
