@@ -34,7 +34,9 @@ const GalleryPage = () => {
       setLoading(false);
     }
   };
-  useEffect(() => { fetchPosts(); }, []);
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return loading ? (
     <></>
@@ -46,31 +48,22 @@ const GalleryPage = () => {
           <Navigation key={`navigation-${link.title}`} {...link} />
         ))}
 
-        <Wrapper>
-          {/* Searchbar maybe? */}
-          <InputWrapper>
-            <input type='text' name='searchKey' value={searchKey} onChange={(e) => setSearchKey(e.target.value)} />
-          </InputWrapper>
+        {/* Searchbar maybe? */}
+        <InputWrapper>
+          <input type='text' name='searchKey' value={searchKey} onChange={(e) => setSearchKey(e.target.value)} />
+        </InputWrapper>
 
-          {/* Gallery Grid */}
-          <Gallery />
-        </Wrapper>
+        {/* Gallery Grid */}
+        <Gallery />
       </div>
     </>
   );
 };
 export default ContentWrapper(GalleryPage, 'gallery');
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-`;
-
 const InputWrapper = styled.div`
   width: 100%;
+  margin-bottom: 50px;
 
   @media only screen and (max-width: 1440px) {
   }
