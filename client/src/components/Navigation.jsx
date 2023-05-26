@@ -82,7 +82,7 @@ const LinkContainer = styled.div`
 
   /* TITLE STYLING (MOVE FROM SIDE TO TOP) */
   /* Must set 'mobile: true/false' in 'data', not setting it is necessary to keep home page links' styling */
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 760px) {
     ${(props) =>
       props.mobileTitle === false
         ? css`
