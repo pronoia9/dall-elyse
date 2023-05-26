@@ -16,7 +16,6 @@ const GalleryPage = () => {
 
   // FETCHING GALLERY DATA
   const fetchPosts = async () => {
-    console.log('fetching posts');
     setLoading(true);
     try {
       const response = await fetch(import.meta.env.VITE_POSTS_URL, {
@@ -30,7 +29,6 @@ const GalleryPage = () => {
         setData(result.data.reverse());
       }
     } catch (error) {
-      alert('Something went wrong getting posts.');
       console.error(error);
     } finally {
       setLoading(false);
@@ -41,18 +39,22 @@ const GalleryPage = () => {
     fetchPosts();
   }, []);
 
-  return (
-    <Container id='gallery-page' className='galleryPage-container'>
-      {/* Navigation Links */}
-      {Object.values(navigationData.galleryPage).map((link) => (
-        <Navigation key={`navigation-${link.title}`} {...link} />
-      ))}
+  return loading ? (
+    <></>
+  ) : (
+    <>
+      <Container id='gallery-page' className='galleryPage-container'>
+        {/* Navigation Links */}
+        {Object.values(navigationData.galleryPage).map((link) => (
+          <Navigation key={`navigation-${link.title}`} {...link} />
+        ))}
 
-      {/* Searchbar maybe? */}
+        {/* Searchbar maybe? */}
 
-      {/* Gallery Grid */}
-      <Gallery />
-    </Container>
+        {/* Gallery Grid */}
+        <Gallery />
+      </Container>
+    </>
   );
 };
 export default ContentWrapper(GalleryPage, 'gallery');
