@@ -21,13 +21,19 @@ export const useStore = create(
     isGenerating: false,
 
     // Gallery Page
+    // Photo Swipe Overlay
     photoSwipe: null,
-    setPhotoSwipe: (index) => set((state) => ({ photoSwipe: { ...state.data[index], index: index } })),
+    setPhotoSwipe: (index) => set(({ data }) => ({ photoSwipe: { ...data[index], index, isLast: !(index < data.length - 1) } })),
+    resetPhotoSwipe: () => set({ photoSwipe: null }),
     photoSwipePrev: () =>
-      set(({ data, photoSwipe }) => (photoSwipe.index > 0 ? { photoSwipe: { ...data[photoSwipe.index - 1], index: photoSwipe.index - 1 } } : {})),
+      set(({ data, photoSwipe }) =>
+        photoSwipe.index > 0 ? { photoSwipe: { ...data[photoSwipe.index - 1], index: photoSwipe.index - 1 }, isLast: false } : {}
+      ),
     photoSwipeNext: () =>
       set(({ data, photoSwipe }) =>
-        photoSwipe.index < data.length - 1 ? { photoSwipe: { ...data[photoSwipe.index + 1], index: photoSwipe.index + 1 } } : {}
+        photoSwipe.isLast
+          ? {}
+          : { photoSwipe: { ...data[photoSwipe.index + 1], index: photoSwipe.index + 1, isLast: !(photoSwipe.index + 1 < data.length - 1) } }
       ),
   }))
 );

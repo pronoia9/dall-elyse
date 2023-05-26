@@ -1,18 +1,18 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { useStore } from '../store/useStore';
-import { useEffect } from 'react';
 
 // TODO: ADD ANIMATIONS
-// TODO: FIX STYLING FOR 2 LINE PROMPT
 
-const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
-  const setPhotoSwipe = useStore((state) => state.setPhotoSwipe),
+const GalleryCardOverlay = ({ index, name, photo, prompt, _id, isLast }) => {
+  const resetPhotoSwipe = useStore((state) => state.resetPhotoSwipe),
     photoSwipePrev = useStore((state) => state.photoSwipePrev),
     photoSwipeNext = useStore((state) => state.photoSwipeNext);
 
   // EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
   useEffect(() => {
-    const close = (e) => { e.key === 'Escape' && setPhotoSwipe(null); };
+    const close = (e) => { e.key === 'Escape' && resetPhotoSwipe(); };
     document.addEventListener('keydown', (e) => close(e));
     return () => { document.removeEventListener('keydown', (e) => close(e)); };
   }, []);
@@ -29,7 +29,7 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
       <Overlay className='galleryCardOverlay-overlay'>
         <Container className='galleryCardOverlay-container'>
           {/* TOP (Close Icon) */}
-          <CloseButton className='galleryCardOverlay-closeButton' onClick={() => setPhotoSwipe(null)}>
+          <CloseButton className='galleryCardOverlay-closeButton' onClick={() => resetPhotoSwipe(null)}>
             <i className='fa-solid fa-xmark' />
           </CloseButton>
 
@@ -47,9 +47,7 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id }) => {
         {/* CONTROLS */}
         <Controls className='galleryCardOverlay-controls'>
           <ControlButton onClick={photoSwipePrev}>{index > 0 && <i className='fa-solid fa-chevron-left' />}</ControlButton>
-          <ControlButton onClick={photoSwipeNext}>
-            <i className='fa-solid fa-chevron-right' />
-          </ControlButton>
+          <ControlButton onClick={photoSwipeNext}>{!isLast && <i className='fa-solid fa-chevron-right' />}</ControlButton>
         </Controls>
       </Overlay>
     </>
