@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Navigation } from '../components';
+import { Loader, Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
 import { navigationData } from '../utils/data';
 import placeholder from '../assets/placeholder.png';
@@ -67,6 +67,7 @@ const CreatePage = () => {
           {/* Image */}
           <ImageContainer className='createPage-imageContainer'>
             <img src={form.photo ?? placeholder} alt={form.prompt} />
+            {generating && <Loader />}
           </ImageContainer>
           {/* Form */}
           <FormContainer className='createPage-formContainer'>
