@@ -1,13 +1,34 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
 import { navigationData } from '../utils/data';
 import placeholder from '../assets/placeholder.png';
+import { getRandomPrompt } from '../utils/utils';
 
 // TODO: Add animations
+const defaultForm = { name: '', prompt: '', photo: null };
 
 const CreatePage = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState(defaultForm);
+  const [generating, setGenerating] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  // HANDLE INPUT CHANGE
+  const handleChange = (e) => { setForm((prev) => ({ ...prev, [e.target.name]: e.target.values })); }
+  
+  // HANDLE GENERATE
+  const handleGenerate = () => {}
+
+  // SURPRISE ME BUTTON THAT GENERATED RANDOM PROMPTS
+  const handleSurpriseMe = () => { setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) })) }
+  
+  // HANDLE SHARE
+  const handleShare = () => {}
+
   return (
     <Container id='create-page' className='createPage-container'>
       {/* Navigation Links */}
@@ -26,7 +47,7 @@ const CreatePage = () => {
         <FormSection className='createPage-formSection'>
           {/* Image */}
           <ImageContainer className='createPage-imageContainer'>
-            <img src={placeholder} />
+            <img src={form.photo ?? placeholder} />
           </ImageContainer>
           {/* Form */}
           <FormContainer className='createPage-formContainer'>
@@ -36,9 +57,9 @@ const CreatePage = () => {
               {/* Prompt + Prompt Button */}
               <textarea placeholder='A futuristic cyborg dance club, neon lights' />
               <Buttons className='Buttons'>
-                <button>Generate</button>
-                <button>Surprise Me</button>
-                <button>Share</button>
+                <button onClick={handleGenerate}>Generate</button>
+                <button onClick={handleSurpriseMe}>Surprise Me</button>
+                <button onClick={handleShare}>Share</button>
               </Buttons>
             </FormWrapper>
           </FormContainer>
