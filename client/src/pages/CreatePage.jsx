@@ -66,7 +66,7 @@ const CreatePage = () => {
         <FormSection className='createPage-formSection'>
           {/* Image */}
           <ImageContainer className='createPage-imageContainer'>
-            <img src={form.photo ?? placeholder} />
+            <img src={form.photo ?? placeholder} alt={form.prompt} />
           </ImageContainer>
           {/* Form */}
           <FormContainer className='createPage-formContainer'>
