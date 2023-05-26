@@ -4,7 +4,10 @@ import { subscribeWithSelector } from 'zustand/middleware';
 export const useStore = create(
   subscribeWithSelector((set) => ({
     // Loading
-    isLoading: true,
+    loading: true,
+    setloading: (loading) => set({ loading }),
+
+    // Gallery Data
     data: [],
 
     // Overlay
