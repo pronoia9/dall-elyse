@@ -4,8 +4,6 @@ import { motion } from 'framer-motion';
 import { useStore } from '../store/useStore';
 import { backgroundMotion } from '../utils/motion';
 
-// TODO: Change Background with Canvas (particles)
-
 const Canvas = () => {
   const overlay = useStore((state) => state.overlay);
 
