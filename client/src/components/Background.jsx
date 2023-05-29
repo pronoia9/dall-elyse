@@ -1,46 +1,117 @@
-// The MIT License (MIT)
-
-// Copyright (c) 2023 Dimitra Vasilopoulou (https://codepen.io/mimikos/pen/wKqyqY)
-
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-
-// The above copyright notice and this permission notice shall be included in all
-// copies or substantial portions of the Software.
-
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-// SOFTWARE.
-
+import { useMemo, useState, useRef } from 'react';
+import * as THREE from 'three';
+import { Canvas, createPortal, useFrame } from '@react-three/fiber';
+import { CameraShake, useFBO } from '@react-three/drei';
+import { useControls } from 'leva';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
-import { Canvas } from '@react-three/fiber';
 
+// SHADERS/MATERIALS
+import '../shaders/dofPointsMaterial';
+import '../shaders/simulationMaterial';
+
+const Particles = ({ speed, fov, aperture, focus, curl, size = 512, ...props }) => {
+  // REFS
+  const simRef = useRef(), renderRef = useRef();
+  // SET UP FBO
+  const [scene] = useState(() => new THREE.Scene());
+  const [camera] = useState(() => new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53), 1));
+  const [positions] = useState(() => new Float32Array([-1, -1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, 1, 0, -1, 1, 0]));
+  const [uvs] = useState(() => new Float32Array([0, 1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0]));
+  const target = useFBO(size, size, {
+    minFilter: THREE.NearestFilter,
+    magFilter: THREE.NearestFilter,
+    format: THREE.RGBAFormat,
+    type: THREE.FloatType,
+  });
+  // NORMALIZE POINTS
+  const particles = useMemo(() => {
+    const length = size * size;
+    const particles = new Float32Array(length * 3);
+    for (let i = 0; i < length; i++) {
+      let i3 = i * 3;
+      particles[i3 + 0] = (i % size) / size;
+      particles[i3 + 1] = i / size / size;
+    }
+    return particles;
+  }, [size]);
+
+  // UPDATE FBO AND POINTCLOUD EVERY FRAME
+  useFrame((state) => {
+    state.gl.setRenderTarget(target);
+    state.gl.clear();
+    state.gl.render(scene, camera);
+    state.gl.setRenderTarget(null);
+    renderRef.current.uniforms.positions.value = target.texture;
+    renderRef.current.uniforms.uTime.value = state.clock.elapsedTime;
+    renderRef.current.uniforms.uFocus.value = THREE.MathUtils.lerp(renderRef.current.uniforms.uFocus.value, focus, 0.1);
+    renderRef.current.uniforms.uFov.value = THREE.MathUtils.lerp(renderRef.current.uniforms.uFov.value, fov, 0.1);
+    renderRef.current.uniforms.uBlur.value = THREE.MathUtils.lerp(renderRef.current.uniforms.uBlur.value, (5.6 - aperture) * 9, 0.1);
+    simRef.current.uniforms.uTime.value = state.clock.elapsedTime * speed;
+    simRef.current.uniforms.uCurlFreq.value = THREE.MathUtils.lerp(simRef.current.uniforms.uCurlFreq.value, curl, 0.1);
+  });
+
+  return (
+    <>
+      {/* Simulation goes into a FBO/Off-buffer */}
+      {createPortal(
+        <mesh>
+          <simulationMaterial ref={simRef} />
+          <bufferGeometry>
+            <bufferAttribute attach='attributes-position' count={positions.length / 3} array={positions} itemSize={3} />
+            <bufferAttribute attach='attributes-uv' count={uvs.length / 2} array={uvs} itemSize={2} />
+          </bufferGeometry>
+        </mesh>,
+        scene
+      )}
+      {/* The result of which is forwarded into a pointcloud via data-texture */}
+      <points {...props}>
+        <dofPointsMaterial ref={renderRef} />
+        <bufferGeometry>
+          <bufferAttribute attach='attributes-position' count={particles.length / 3} array={particles} itemSize={3} />
+        </bufferGeometry>
+      </points>
+    </>
+  );
+};
 const Background = () => {
+  // STORE
   const overlay = useStore((state) => state.overlay);
+  // LEVA
+  const options = useControls({
+    focus: { value: 5.4, min: 3, max: 7, step: 0.01 },
+    speed: { value: 16.6, min: 0.1, max: 100, step: 0.1 },
+    aperture: { value: 5.1, min: 1, max: 5.6, step: 0.1 },
+    fov: { value: 0, min: 0, max: 200 },
+    curl: { value: 0.5, min: 0.01, max: 0.5, step: 0.01 },
+  });
 
   return (
     <Container key='background-canvas' id='background' overlay={overlay}>
-      <Canvas>
-        <mesh>
-          <torusGeometry />
-          <meshBasicMaterial />
-        </mesh>
+      <Canvas linear={true} camera={{ fov: 25, position: [0, 0, 6] }}>
+        <CameraShake yawFrequency={1} maxYaw={0.05} pitchFrequency={1} maxPitch={0.05} rollFrequency={0.5} maxRoll={0.5} intensity={0.2} />
+        <Particles {...options} />
       </Canvas>
     </Container>
   );
 };
 export default Background;
+
+
+// UTILS
+function getPoint(v, size, data, offset) {
+  v.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
+  if (v.length() > 1) return getPoint(v, size, data, offset);
+  return v.normalize().multiplyScalar(size).toArray(data, offset);
+}
+
+function getSphere(count, size, p = new THREE.Vector4()) {
+  const data = new Float32Array(count * 4);
+  for (let i = 0; i < count * 4; i += 4) getPoint(p, size, data, i);
+  return data;
+}
 
 // STYLES
 const Container = styled(motion.div)`
@@ -51,8 +122,10 @@ const Container = styled(motion.div)`
   top: 0;
   width: 100%;
   height: 100%;
-  background: url('https://images.unsplash.com/photo-1579648999496-65a8fa8d77ed?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2340&q=80')
-    no-repeat center;
-  background-size: cover;
   z-index: -10;
+
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
 `;
