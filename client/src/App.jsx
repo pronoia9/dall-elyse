@@ -13,7 +13,7 @@ const App = () => {
     setData = useStore((state) => state.setData),
     photoSwipe = useStore((state) => state.photoSwipe);
   // LOCAL STATE
-  const [preloading, setPreloading] = useState(0), [time, setTime] = useState(0);
+  const [preloading, setPreloading] = useState(true), [time, setTime] = useState(0);
   const preloaderTime = 10;
 
   // FETCHING GALLERY DATA
@@ -45,7 +45,7 @@ const App = () => {
     <Container>
       <GlobalStyles />
 
-      {preloading === 0 ? (
+      {preloading ? (
         <Preloader />
       ) : (
         <>
