@@ -3,20 +3,15 @@ import FileSaver from 'file-saver';
 import { surpriseMePrompts } from './data';
 
 export const getPosts = (setData) => {
-  console.log('getting posts....');
   try {
     // Check if data exists in local storage
     const storedData = localStorage.getItem('dall-elyse-data');
     if (storedData) {
-      console.log('we have data in local storage!');
       const parsedData = JSON.parse(storedData);
       setData(parsedData);
-      console.log('returning with a true.');
       return true;
     } else {
-      console.log('no data in local storage, will fetch posts from slow af backend...');
       fetchPosts(setData);
-      console.log('returning with a false.');
       return false;
     }
   } catch (error) {
