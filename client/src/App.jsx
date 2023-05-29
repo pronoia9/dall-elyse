@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Loader, Navbar, GalleryCardOverlay } from './components';
+import { Preloader, Navbar, GalleryCardOverlay } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
@@ -42,7 +42,7 @@ const App = () => {
       <GlobalStyles />
 
       {loading ? (
-        <Loader />
+        <Preloader />
       ) : (
         <>
           <Navbar />
