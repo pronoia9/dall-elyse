@@ -1,12 +1,14 @@
 import styled from 'styled-components';
-import { Background, Navigation } from '../components';
+
+import { ParticlesCanvas, Navigation } from '../components';
 import { navigationData } from '../utils/data';
 
 export default function HomePage() {
   return (
     <Container id='home-page'>
-      {/* Background */}
-      <Background />
+      {/* ThreeJS Particles */}
+      <ParticlesCanvas />
+      
       {/* Navigation */}
       {Object.values(navigationData.homePage).map((link) => (
         <Navigation key={`navigation-${link.title}`} {...link} />

@@ -76,7 +76,8 @@ const Particles = ({ speed, fov, aperture, focus, curl, size = 512, ...props }) 
     </>
   );
 };
-const Background = () => {
+
+export default function ParticlesCanvas () {
   // STORE
   const overlay = useStore((state) => state.overlay);
   // LEVA
@@ -97,7 +98,6 @@ const Background = () => {
     </Container>
   );
 };
-export default Background;
 
 // STYLES
 const Container = styled(motion.div)`
