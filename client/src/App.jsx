@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { GalleryCardOverlay, Navbar } from './components';
+import { Loader, Navbar, GalleryCardOverlay } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
@@ -37,22 +37,27 @@ const App = () => {
     fetchPosts();
   }, []);
 
-  return loading ? (
-    <></>
-  ) : (
+  return (
     <Container>
       <GlobalStyles />
-      <Navbar />
-      <Circle className='contentwrapper-circle' />
 
-      <Routes>
-        <Route exact path='/' element={<HomePage />} />
-        <Route path='/gallery' element={<GalleryPage />} />
-        <Route path='/create' element={<CreatePage />} />
-      </Routes>
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <Navbar />
+          <Circle className='contentwrapper-circle' />
 
-      {/* Gallery Card Overlay (Had to be here cause of z-index) */}
-      {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
+          <Routes>
+            <Route exact path='/' element={<HomePage />} />
+            <Route path='/gallery' element={<GalleryPage />} />
+            <Route path='/create' element={<CreatePage />} />
+          </Routes>
+
+          {/* Gallery Card Overlay (Had to be here cause of z-index) */}
+          {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
+        </>
+      )}
     </Container>
   );
 };
