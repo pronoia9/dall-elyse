@@ -78,7 +78,7 @@ const Container = styled.div`
   background: linear-gradient(-90deg, rgba(0, 0, 0, 0) 0%, #000 150%);
   transition: transform 0.5s;
 
-  overflow: scroll;
+  overflow: hidden;
   scroll-behavior: smooth;
 
   @media only screen and (max-width: 960px) {
