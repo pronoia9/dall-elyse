@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -9,9 +9,9 @@ import { useStore } from '../store/useStore';
 
 const NavLink = ({ title, url, animation }) => (
   <NavListItem className='navlist-item' {...animation}>
-    <a href={url} target={`${url.includes('http') ? '_blank' : ''}`}>
+    <Link to={url} target={`${url.includes('http') ? '_blank' : ''}`}>
       {title}
-    </a>
+    </Link>
   </NavListItem>
 );
 
@@ -52,9 +52,9 @@ export default function Navbar() {
           {/* Logo */}
           {!mobileMenuOpen && (
             <Logo {...navbarMotion.logo(navlinks.length)}>
-              <a href='/'>
+              <Link to='/'>
                 <img src={logo} alt='logo' />
-              </a>
+              </Link>
             </Logo>
           )}
 
