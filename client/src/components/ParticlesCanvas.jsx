@@ -2,7 +2,7 @@ import { useMemo, useState, useRef } from 'react';
 import * as THREE from 'three';
 import { Canvas, createPortal, useFrame } from '@react-three/fiber';
 import { CameraShake, useFBO } from '@react-three/drei';
-import { useControls } from 'leva';
+import { Leva, useControls } from 'leva';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -14,7 +14,8 @@ import { useStore } from '../store/useStore';
 
 const Particles = ({ speed, fov, aperture, focus, curl, size = 512, ...props }) => {
   // REFS
-  const simRef = useRef(), renderRef = useRef();
+  const simRef = useRef(),
+    renderRef = useRef();
   // SET UP FBO
   const [scene] = useState(() => new THREE.Scene());
   const [camera] = useState(() => new THREE.OrthographicCamera(-1, 1, 1, -1, 1 / Math.pow(2, 53), 1));
@@ -77,7 +78,7 @@ const Particles = ({ speed, fov, aperture, focus, curl, size = 512, ...props }) 
   );
 };
 
-export default function ParticlesCanvas () {
+export default function ParticlesCanvas() {
   // STORE
   const overlay = useStore((state) => state.overlay);
   // LEVA
@@ -91,13 +92,14 @@ export default function ParticlesCanvas () {
 
   return (
     <Container key='background-canvas' id='background' overlay={overlay}>
+      <Leva collapsed />
       <Canvas linear={true} camera={{ fov: 25, position: [0, 0, 6] }}>
         <CameraShake yawFrequency={1} maxYaw={0.05} pitchFrequency={1} maxPitch={0.05} rollFrequency={0.5} maxRoll={0.5} intensity={0.2} />
         <Particles {...options} />
       </Canvas>
     </Container>
   );
-};
+}
 
 // STYLES
 const Container = styled(motion.div)`
