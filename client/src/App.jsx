@@ -6,6 +6,7 @@ import { Preloader, Navbar, GalleryCardOverlay } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
+import { fetchPosts } from './utils/utils';
 
 const App = () => {
   // STORE
@@ -17,23 +18,7 @@ const App = () => {
   const preloaderTime = 10;
 
   // FETCHING GALLERY DATA
-  const fetchPosts = async () => {
-    try {
-      const response = await fetch(import.meta.env.VITE_POSTS_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.ok) {
-        const result = await response.json();
-        setData(result.data.reverse());
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  useEffect(() => { fetchPosts(); }, []);
+  useEffect(() => { fetchPosts(setData); }, []);
 
   // SET TIMEOUT FOR THE PRELOADER (10s)
   useEffect(() => { setTimeout(() => { setTime(preloaderTime); }, 1000 * preloaderTime); }, []);
