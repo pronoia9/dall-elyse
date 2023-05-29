@@ -3,10 +3,6 @@ import { subscribeWithSelector } from 'zustand/middleware';
 
 export const useStore = create(
   subscribeWithSelector((set) => ({
-    // Loading
-    loading: true,
-    setLoading: (loading) => set({ loading }),
-
     // Gallery Data
     data: [],
     setData: (data) => set({ data }),
