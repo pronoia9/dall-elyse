@@ -18,9 +18,7 @@ const App = () => {
   const preloaderTime = 10;
 
   // FETCHING GALLERY DATA (End the loading screen in 5s if theres local data and we dont have to fetch it)
-  useEffect(() => {
-    if (getPosts(setData)) setInterval(() => { setTime(preloaderTime); }, 5000);
-  }, []);
+  useEffect(() => { if (getPosts(setData)) setInterval(() => { setTime(preloaderTime); }, 5000); }, []);
 
   // SET TIMEOUT FOR THE PRELOADER (10s)
   useEffect(() => { setTimeout(() => { setTime(preloaderTime); }, 1000 * preloaderTime); }, []);
