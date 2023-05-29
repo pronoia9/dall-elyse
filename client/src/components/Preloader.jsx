@@ -9,70 +9,72 @@
 import styled, { keyframes } from 'styled-components';
 
 const Loader = () => (
-  <Wrapper>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-    <i></i>
-  </Wrapper>
+  <Container>
+    <Wrapper>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+      <i></i>
+    </Wrapper>
+  </Container>
 );
 
 export default Loader;
@@ -85,6 +87,14 @@ const spin = keyframes`
     opacity: 0.6;
     transform: translate3d(-4px, -4px, 570px);
   }
+`;
+
+const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
 `;
 
 const Wrapper = styled.div`
