@@ -6,11 +6,11 @@ import { useControls } from 'leva';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { useStore } from '../store/useStore';
-
 // SHADERS/MATERIALS
 import '../shaders/dofPointsMaterial';
 import '../shaders/simulationMaterial';
+
+import { useStore } from '../store/useStore';
 
 const Particles = ({ speed, fov, aperture, focus, curl, size = 512, ...props }) => {
   // REFS
@@ -98,20 +98,6 @@ const Background = () => {
   );
 };
 export default Background;
-
-
-// UTILS
-function getPoint(v, size, data, offset) {
-  v.set(Math.random() * 2 - 1, Math.random() * 2 - 1, Math.random() * 2 - 1);
-  if (v.length() > 1) return getPoint(v, size, data, offset);
-  return v.normalize().multiplyScalar(size).toArray(data, offset);
-}
-
-function getSphere(count, size, p = new THREE.Vector4()) {
-  const data = new Float32Array(count * 4);
-  for (let i = 0; i < count * 4; i += 4) getPoint(p, size, data, i);
-  return data;
-}
 
 // STYLES
 const Container = styled(motion.div)`
