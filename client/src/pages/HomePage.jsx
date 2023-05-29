@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import { Particles, Navigation } from '../components';
+import { Background, Navigation } from '../components';
 import { navigationData } from '../utils/data';
 
 export default function HomePage() {
   return (
     <Container id='home-page'>
       {/* Background */}
-      <Particles />
+      <Background />
       {/* Navigation */}
       {Object.values(navigationData.homePage).map((link) => (
         <Navigation key={`navigation-${link.title}`} {...link} />
