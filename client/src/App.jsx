@@ -6,7 +6,7 @@ import { Preloader, Navbar, GalleryCardOverlay } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
-import { fetchPosts } from './utils/utils';
+import { getPosts } from './utils/utils';
 
 const App = () => {
   // STORE
@@ -17,8 +17,10 @@ const App = () => {
   const [preloading, setPreloading] = useState(true), [time, setTime] = useState(0);
   const preloaderTime = 10;
 
-  // FETCHING GALLERY DATA
-  useEffect(() => { fetchPosts(setData); }, []);
+  // FETCHING GALLERY DATA (End the loading screen in 5s if theres local data and we dont have to fetch it)
+  useEffect(() => {
+    if (getPosts(setData)) setInterval(() => { setTime(preloaderTime); }, 5000);
+  }, []);
 
   // SET TIMEOUT FOR THE PRELOADER (10s)
   useEffect(() => { setTimeout(() => { setTime(preloaderTime); }, 1000 * preloaderTime); }, []);
