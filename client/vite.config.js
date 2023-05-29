@@ -5,11 +5,6 @@ import glsl from 'vite-plugin-glsl';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), glsl()],
-  build: {
-    outDir: '../dist',
-    emptyOutDir: true,
-    sourcemap: true,
-  },
   define: {
     'process.env': process.env,
     '__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
