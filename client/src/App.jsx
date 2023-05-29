@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -8,14 +8,16 @@ import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
 
 const App = () => {
-  const loading = useStore((state) => state.loading),
-    setLoading = useStore((state) => state.setLoading),
+  // STORE
+  const data = useStore((state) => state.data),
     setData = useStore((state) => state.setData),
     photoSwipe = useStore((state) => state.photoSwipe);
+  // LOCAL STATE
+  const [preloading, setPreloading] = useState(0), [time, setTime] = useState(0);
+  const preloaderTime = 10;
 
   // FETCHING GALLERY DATA
   const fetchPosts = async () => {
-    setLoading(true);
     try {
       const response = await fetch(import.meta.env.VITE_POSTS_URL, {
         method: 'GET',
@@ -29,19 +31,21 @@ const App = () => {
       }
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
     }
   };
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  useEffect(() => { fetchPosts(); }, []);
+
+  // SET TIMEOUT FOR THE PRELOADER (10s)
+  useEffect(() => { setTimeout(() => { setTime(preloaderTime); }, 1000 * preloaderTime); }, []);
+
+  // ONCE BOTH DATA IS SET & TIME IS AT LEAST 10s, DISABLE PRELOADER
+  useEffect(() => { if (data.length && time >= 10) setPreloading(false); }, [data, time]);
 
   return (
     <Container>
       <GlobalStyles />
 
-      {loading ? (
+      {preloading === 0 ? (
         <Preloader />
       ) : (
         <>
