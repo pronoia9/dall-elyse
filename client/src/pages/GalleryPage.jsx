@@ -7,54 +7,24 @@ import { navigationData } from '../utils/data';
 import { useStore } from '../store/useStore';
 
 const GalleryPage = () => {
-  // STORE
-  const loading = useStore((state) => state.loading),
-    setLoading = useStore((state) => state.setLoading),
-    setData = useStore((state) => state.setData),
-    searchKey = useStore((state) => state.searchKey),
+  const searchKey = useStore((state) => state.searchKey),
     setSearchKey = useStore((state) => state.setSearchKey);
 
-  // FETCHING GALLERY DATA
-  const fetchPosts = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(import.meta.env.VITE_POSTS_URL, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (response.ok) {
-        const result = await response.json();
-        setData(result.data.reverse());
-      }
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => { fetchPosts(); }, []);
+  return (
+    <Container id='gallery-page' className='galleryPage-container'>
+      {/* Navigation Links */}
+      {Object.values(navigationData.galleryPage).map((link) => (
+        <Navigation key={`navigation-${link.title}`} {...link} />
+      ))}
 
-  return loading ? (
-    <></>
-  ) : (
-    <>
-      <Container id='gallery-page' className='galleryPage-container'>
-        {/* Navigation Links */}
-        {Object.values(navigationData.galleryPage).map((link) => (
-          <Navigation key={`navigation-${link.title}`} {...link} />
-        ))}
+      {/* Searchbar maybe? */}
+      <InputWrapper>
+        <input type='text' name='searchKey' value={searchKey} onChange={(e) => setSearchKey(e.target.value)} />
+      </InputWrapper>
 
-        {/* Searchbar maybe? */}
-        <InputWrapper>
-          <input type='text' name='searchKey' value={searchKey} onChange={(e) => setSearchKey(e.target.value)} />
-        </InputWrapper>
-
-        {/* Gallery Grid */}
-        <Gallery />
-      </Container>
-    </>
+      {/* Gallery Grid */}
+      <Gallery />
+    </Container>
   );
 };
 export default ContentWrapper(GalleryPage, 'gallery');

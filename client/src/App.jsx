@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -7,9 +8,38 @@ import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
 
 const App = () => {
-  const photoSwipe = useStore((state) => state.photoSwipe);
+  const loading = useStore((state) => state.loading),
+    setLoading = useStore((state) => state.setLoading),
+    setData = useStore((state) => state.setData),
+    photoSwipe = useStore((state) => state.photoSwipe);
 
-  return (
+  // FETCHING GALLERY DATA
+  const fetchPosts = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const result = await response.json();
+        setData(result.data.reverse());
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  return loading ? (
+    <></>
+  ) : (
     <Container>
       <GlobalStyles />
       <Navbar />
