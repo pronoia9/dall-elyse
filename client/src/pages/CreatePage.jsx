@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { Loader, Navigation } from '../components';
+import { Loading, Navigation } from '../components';
 import ContentWrapper from '../hoc/ContentWrapper';
 import { navigationData } from '../utils/data';
 import placeholder from '../assets/placeholder.png';
@@ -89,7 +89,7 @@ const CreatePage = () => {
             <img src={form.photo ?? placeholder} alt={form.prompt} />
             {generating && (
               <LoaderContainer>
-                <Loader />
+                <Loading />
               </LoaderContainer>
             )}
           </ImageContainer>
