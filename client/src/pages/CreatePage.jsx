@@ -6,6 +6,7 @@ import { Loading, Navigation } from '../components';
 import { navigationData } from '../utils/data';
 import { getRandomPrompt } from '../utils/utils';
 import placeholder from '../assets/placeholder.png';
+import { createPageMotion } from '../utils/motion';
 
 // TODO: Add animations
 const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
@@ -79,7 +80,7 @@ export default function CreatePage () {
         <Navigation key={`navigation-${link.title}`} {...link} />
       ))}
 
-      <Wrapper>
+      <Wrapper {...createPageMotion()}>
         {/* Text Section */}
         <TextContainer>
           <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
@@ -129,14 +130,14 @@ export default function CreatePage () {
   );
 };
 
-const Container = styled(motion.div)`
+const Container = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled(motion.div)`
   width: 100%;
   height: 100%;
   display: flex;
