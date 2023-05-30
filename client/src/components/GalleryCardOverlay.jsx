@@ -97,16 +97,12 @@ const CloseButton = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  max-width: 65%;
+  max-width: 85%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
-  @media only screen and (max-width: 760px) {
-    max-width: 90%;
-  }
 `;
 
 const ImageWrapper = styled.div`
@@ -115,16 +111,11 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background: #000;
-  padding: 5px 5px 44px 5px;
-  border: 2px solid #313133;
+  padding: 10px 10px 44px 10px;
 
   img {
     width: 100%;
     height: auto;
-  }
-
-  @media only screen and (max-width: 760px) {
-    border: none;
   }
 `;
 
