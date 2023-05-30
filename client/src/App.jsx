@@ -7,7 +7,7 @@ import { Preloader, Navbar, GalleryCardOverlay } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
-import { contentMotion } from './utils/motion';
+import { contentMotion, circleMotion } from './utils/motion';
 import { getPosts } from './utils/utils';
 
 const App = () => {
@@ -39,7 +39,7 @@ const App = () => {
       ) : (
         <>
           <Navbar />
-          <Circle className='contentwrapper-circle' />
+            <Circle {...circleMotion()} />
 
           <AnimatePresence>
             <motion.main key={location.pathname} {...contentMotion()}>
@@ -79,21 +79,23 @@ const Container = styled.div`
   }
 `;
 
-const Circle = styled.div`
+const Circle = styled(motion.div)`
   width: 100%;
   height: 100%;
   opacity: 0.85;
   position: fixed;
-  z-index: -100;
+  top: 0;
+  left: 0;
+  z-index: -999;
 
   &:before {
     content: '';
     position: fixed;
     left: 0;
     top: 0;
-    width: 100vh;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: radial-gradient(ellipse at left top, #28282e 0%, #000000 65%);
-    z-index: -100;
+    z-index: -999;
   }
 `;
