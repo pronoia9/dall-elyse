@@ -22,6 +22,7 @@ const Container = styled.div`
   justify-content: center;
 
   cursor: pointer;
+  overflow: hidden;
 
   img {
     display: block;
