@@ -97,8 +97,8 @@ const CloseButton = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  max-width: 85%;
-  height: 100%;
+  max-width: 85vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
