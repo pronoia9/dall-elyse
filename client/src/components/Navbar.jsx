@@ -23,6 +23,8 @@ export default function Navbar() {
     openMobileMenu = useStore((state) => state.openMobileMenu),
     closeMobileMenu = useStore((state) => state.closeMobileMenu);
   const mobileMenuRef = useRef();
+  // ANIMATION
+  const { logoMotion, desktopLinksMotion, mobileMenuMotion, mobileLinksMotion } = navbarMotion;
 
   // CLICK TO CLOSE MENU
   useEffect(() => {
@@ -50,13 +52,11 @@ export default function Navbar() {
       <Container id='navbar'>
         <Wrapper>
           {/* Logo */}
-          {!mobileMenuOpen && (
-            <Logo {...navbarMotion.logo(navlinks.length)}>
-              <Link to='/'>
-                <img src={logo} alt='logo' />
-              </Link>
-            </Logo>
-          )}
+          <Logo {...logoMotion(navlinks.length, mobileMenuOpen)}>
+            <Link to='/'>
+              <img src={logo} alt='logo' />
+            </Link>
+          </Logo>
 
           {/* Navigation Links */}
           {/* Desktop Menu */}
@@ -64,7 +64,7 @@ export default function Navbar() {
             <Nav>
               <NavList>
                 {navlinks.map((link, index) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navbarMotion.desktopLinks(index + 1) }} />
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...desktopLinksMotion(index + 1) }} />
                 ))}
               </NavList>
             </Nav>
@@ -81,7 +81,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...navbarMotion.mobileMenu(navlinks.length)}>
+          <MobileMenuContainer id='mobile-menu' key='mobile-menu' {...mobileMenuMotion(navlinks.length)}>
             {/* Mobile Menu Close Icon */}
             <MobileMenuClose onClick={closeMobileMenu}>
               <i className='fa-solid fa-xmark' />
@@ -90,7 +90,7 @@ export default function Navbar() {
             <MobileMenuWrapper ref={mobileMenuRef}>
               <MobileMenuNavList>
                 {navlinks.map((link, index) => (
-                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...navbarMotion.mobileLinks(index + 1) }} />
+                  <NavLink key={`navbar-${link.title}`} {...link} animation={{ ...mobileLinksMotion(index + 1) }} />
                 ))}
               </MobileMenuNavList>
             </MobileMenuWrapper>
