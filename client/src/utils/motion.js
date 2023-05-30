@@ -49,10 +49,10 @@ export const navigationMotion = {
 
 // NAVBAR ANIMATIONS (count: 3) (delay: ) (duration: ) (total duration: )
 export const navbarMotion = {
-  // LOGO
+  // LOGO (delay: 0.75) (duration: 0.5) (total duration: 1.25)
+  // if the mobile menu is open move it to the left (it slides with the mobile menu), also remove any delays
   logoMotion: (count = 3, mobileMenuOpen) => ({
     initial: { x: -100, opacity: 0 },
-    // if the mobile menu is open move it to the left (it slides with the mobile menu), also remove any delays
     animate: {
       x: !mobileMenuOpen ? 0 : -window.screen.width / 2,
       opacity: 1,
@@ -60,7 +60,6 @@ export const navbarMotion = {
     },
     exit: { x: -window.screen.width / 2 },
   }),
-  // bigMotion({ direction: 'left', delay: 0.25 * count, duration: 0.5 }),
   // DESKTOP NAVBAR
   desktopLinksMotion: (index) => bigMotion({ direction: -10, delayIn: 1, duration: 0.25 * index }),
   // MOBILE MENU
