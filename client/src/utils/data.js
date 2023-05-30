@@ -28,15 +28,15 @@ export const navigationPositions = {
 };
 
 export const navigationData = {
-  homePage: {
+  '/': {
     gallery: { ...navigationLinks.gallery, position: navigationPositions.leftMiddle, center: true },
     create: { ...navigationLinks.create, position: navigationPositions.rightMiddle },
   },
-  createPage: {
+  '/create': {
     create: { ...navigationLinks.create, position: navigationPositions.left, center: true, mobileTitle: true },
     back: { ...navigationLinks.back, position: navigationPositions.right, mobileTitle: false },
   },
-  galleryPage: {
+  '/gallery': {
     gallery: { ...navigationLinks.gallery, position: navigationPositions.left, center: true, mobileTitle: true },
     back: { ...navigationLinks.back, position: navigationPositions.right, mobileTitle: false },
   },

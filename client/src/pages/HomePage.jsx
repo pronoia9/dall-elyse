@@ -7,12 +7,7 @@ export default function HomePage() {
   return (
     <Container id='home-page'>
       {/* ThreeJS Particles */}
-      <ParticlesCanvas />
-      
-      {/* Navigation */}
-      {Object.values(navigationData.homePage).map((link) => (
-        <Navigation key={`navigation-${link.title}`} {...link} />
-      ))}
+      {/* <ParticlesCanvas /> */}
     </Container>
   );
 }

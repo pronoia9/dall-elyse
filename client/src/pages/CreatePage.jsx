@@ -74,13 +74,8 @@ export default function CreatePage () {
   };
 
   return (
-    <Container>
-      {/* Navigation Links */}
-      {Object.values(navigationData.createPage).map((link) => (
-        <Navigation key={`navigation-${link.title}`} {...link} />
-      ))}
-
-      <Wrapper {...createPageMotion()}>
+    <Container {...createPageMotion()}>
+      <Wrapper>
         {/* Text Section */}
         <TextContainer>
           <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>

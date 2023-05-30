@@ -4,17 +4,12 @@ import { Gallery, Navigation } from '../components';
 import { navigationData } from '../utils/data';
 import { useStore } from '../store/useStore';
 
-export default function GalleryPage () {
+export default function GalleryPage() {
   const searchKey = useStore((state) => state.searchKey),
     setSearchKey = useStore((state) => state.setSearchKey);
 
   return (
-    <Container id='gallery-page' className='galleryPage-container'>
-      {/* Navigation Links */}
-      {Object.values(navigationData.galleryPage).map((link) => (
-        <Navigation key={`navigation-${link.title}`} {...link} />
-      ))}
-
+    <Container>
       {/* Searchbar maybe? */}
       <InputWrapper>
         <input type='text' name='searchKey' value={searchKey} onChange={(e) => setSearchKey(e.target.value)} />
@@ -24,7 +19,7 @@ export default function GalleryPage () {
       <Gallery />
     </Container>
   );
-};
+}
 
 const Container = styled.div`
   width: 100%;
