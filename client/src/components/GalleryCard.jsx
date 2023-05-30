@@ -21,6 +21,8 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
 
+  cursor: pointer;
+
   img {
     display: block;
     width: 100%;
