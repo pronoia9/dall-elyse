@@ -103,6 +103,10 @@ const ImageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 760px) {
+    max-width: 95%;
+  }
 `;
 
 const ImageWrapper = styled.div`
