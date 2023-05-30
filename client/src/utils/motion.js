@@ -1,14 +1,12 @@
 import merge from 'lodash.merge';
 import { easeInOut } from 'framer-motion';
 
-// DEFAULTS
-// x = 0, y = 0
-// delay = 0
-// duration = 0.5
-// ease = easeInOut
-
 // PAGE WRAPPER
-export const contentMotion = () => bigMotion();
+export const contentMotion = () => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { type: 'tween', delay: 0, duration: 5, ease: 'easeInOut' } },
+  exit: { opacity: 0 },
+});
 
 // HOME PAGE
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 delay + 0.5 duration = 1s
@@ -28,7 +26,7 @@ export const navigationMotion = {
     return {
       initial: { x: location + 100, opacity: 0 },
       animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: navigationMotion.transition },
-      exit: { x: location - 100, opacity: 0, transition: navigationMotion.transition },
+      exit: { x: location - 100, opacity: 0 },
     };
   },
   subtitleMotion: (center, subtitleOffset = 75, hover, mobile) => {
@@ -37,7 +35,7 @@ export const navigationMotion = {
     return {
       initial: { x: location - 100, opacity: 0 },
       animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: navigationMotion.transition },
-      exit: { x: location + 100, opacity: 0, transition: navigationMotion.transition },
+      exit: { x: location + 100, opacity: 0 },
     };
   },
 };
