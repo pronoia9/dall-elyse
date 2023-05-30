@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Wrapper key={`contentwrapper-${idName}`} className='contentwrapper-wrapper'>
+      <Wrapper >
         <Component id={idName} />
       </Wrapper>
     );
