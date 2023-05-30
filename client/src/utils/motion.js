@@ -2,10 +2,10 @@ import { easeInOut } from 'framer-motion';
 
 /*******************************************  APP START  *******************************************/
 // PAGE WRAPPER (delay: 1) (duration: 1) (total duration: 2)
-export const contentMotion = () => ({
-  initial: { y: 50, opacity: 0 },
-  animate: { y: 0, opacity: 1, transition: { type: 'tween', delay: 1, duration: 1, ease: 'easeInOut' } },
-  exit: { y: -50, opacity: 0 },
+export const contentMotion = (path) => ({
+  initial: { y: path !== '/' ? 50 : 0, opacity: 0 },
+  animate: { y: 0, opacity: 1, transition: { type: 'tween', delay: 1, duration: path !== '/' ? 1 : 2.5, ease: easeInOut } },
+  exit: { y: path !== '/' ? -50 : 0, opacity: 0 },
 });
 
 // CIRCLE BACKGROUND (delay: 0) (duration: 0.5)
@@ -86,30 +86,14 @@ export const navbarMotion = {
 };
 /********************************************  APP END  ********************************************/
 
-
 /****************************************  HOME PAGE START  ****************************************/
-// PARTICLES
-export const canvasMotion = () => ({
-  initial: { opacity: 0 },
-  animate: {
-    opacity: 1,
-    scale: [1, 2, 2, 1, 1],
-    rotate: [0, 0, 270, 270, 0],
-    borderRadius: ['20%', '20%', '50%', '50%', '20%'],
-    transition: { delay: 1 },
-  },
-  exit: { opacity: 0 },
-});
 /*****************************************  HOME PAGE END  *****************************************/
-
 
 /***************************************  CREATE PAGE START  ***************************************/
 /****************************************  CREATE PAGE END  ****************************************/
 
-
 /***************************************  GALLERY PAGE START  **************************************/
 /****************************************  GALLERY PAGE END  ***************************************/
-
 
 /******************************************  UTILS START  ******************************************/
 export const textVariant = (delay) => ({
