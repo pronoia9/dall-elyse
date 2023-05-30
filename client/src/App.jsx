@@ -1,20 +1,24 @@
-import { useEffect, useRef, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Preloader, Navbar, GalleryCardOverlay } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
+import { contentMotion } from './utils/motion';
 import { getPosts } from './utils/utils';
 
 const App = () => {
+  const location = useLocation();
   // STORE
   const data = useStore((state) => state.data),
     setData = useStore((state) => state.setData),
     photoSwipe = useStore((state) => state.photoSwipe);
   // LOCAL STATE
-  const [preloading, setPreloading] = useState(true), [time, setTime] = useState(0);
+  const [preloading, setPreloading] = useState(true),
+    [time, setTime] = useState(0);
   const preloaderTime = 10;
 
   // FETCHING GALLERY DATA (End the loading screen in 5s if theres local data and we dont have to fetch it)
@@ -30,18 +34,22 @@ const App = () => {
     <Container>
       <GlobalStyles />
 
-      {preloading ? (
+      {preloading === -1 ? (
         <Preloader />
       ) : (
         <>
           <Navbar />
           <Circle className='contentwrapper-circle' />
 
-          <Routes>
-            <Route exact path='/' element={<HomePage />} />
-            <Route path='/gallery' element={<GalleryPage />} />
-            <Route path='/create' element={<CreatePage />} />
-          </Routes>
+          <AnimatePresence>
+            <motion.main key={location.pathname} {...contentMotion()}>
+              <Routes location={location} key={location.pathname}>
+                <Route exact path='/' element={<HomePage />} />
+                <Route path='/gallery' element={<GalleryPage />} />
+                <Route path='/create' element={<CreatePage />} />
+              </Routes>
+            </motion.main>
+          </AnimatePresence>
 
           {/* Gallery Card Overlay (Had to be here cause of z-index) */}
           {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
