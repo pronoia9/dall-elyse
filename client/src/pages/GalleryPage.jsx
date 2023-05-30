@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Gallery, Navigation } from '../components';
-import ContentWrapper from '../hoc/ContentWrapper';
 import { navigationData } from '../utils/data';
 import { useStore } from '../store/useStore';
 
-const GalleryPage = () => {
+export default function GalleryPage () {
   const searchKey = useStore((state) => state.searchKey),
     setSearchKey = useStore((state) => state.setSearchKey);
 
@@ -27,7 +25,6 @@ const GalleryPage = () => {
     </Container>
   );
 };
-export default ContentWrapper(GalleryPage, 'gallery');
 
 const Container = styled.div`
   width: 100%;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { Preloader, Navbar, GalleryCardOverlay } from './components';
@@ -39,16 +39,16 @@ const App = () => {
       ) : (
         <>
           <Navbar />
-            <Circle {...circleMotion()} />
+          <Circle key={location.pathname} {...circleMotion()} />
 
           <AnimatePresence>
-            <motion.main key={location.pathname} {...contentMotion()}>
+            <Main key={location.pathname} center={location.pathname === '/create'} {...contentMotion()}>
               <Routes location={location} key={location.pathname}>
                 <Route exact path='/' element={<HomePage />} />
                 <Route path='/gallery' element={<GalleryPage />} />
                 <Route path='/create' element={<CreatePage />} />
               </Routes>
-            </motion.main>
+            </Main>
           </AnimatePresence>
 
           {/* Gallery Card Overlay (Had to be here cause of z-index) */}
@@ -97,5 +97,54 @@ const Circle = styled(motion.div)`
     height: 100%;
     background: radial-gradient(ellipse at left top, #28282e 0%, #000000 65%);
     z-index: -999;
+  }
+`;
+
+const Main = styled(motion.main)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(100% - 374px);
+  max-width: 1280px;
+  min-height: 100%;
+  padding-top: 50px;
+  padding-bottom: 40px;
+  margin: auto;
+  ${(props) =>
+    props.center &&
+    css`
+      justify-content: center;
+      padding: 0;
+    `}
+  & > div:last-child {
+    margin-bottom: 0;
+  }
+
+  @media only screen and (max-width: 1800px) {
+    width: calc(100% - 352px);
+  }
+
+  @media only screen and (max-width: 1600px) {
+    width: calc(100% - 312px);
+  }
+
+  @media only screen and (max-width: 1200px) {
+    width: calc(100% - 272px);
+  }
+
+  @media only screen and (max-width: 960px) {
+    width: calc(100% - 176px);
+    margin: auto 40px auto auto;
+    /* width: calc(100% - 280px);
+    margin: auto; */
+  }
+
+  @media only screen and (max-width: 760px) {
+    width: calc(100% - 40px);
+    margin: auto;
+    /* margin: auto auto auto 20px;
+    width: calc(100% - 95px); */
+    /* width: 100%;
+    margin: auto; */
   }
 `;

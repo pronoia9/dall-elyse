@@ -2,7 +2,6 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import ContentWrapper from '../hoc/ContentWrapper';
 import { Loading, Navigation } from '../components';
 import { navigationData } from '../utils/data';
 import { getRandomPrompt } from '../utils/utils';
@@ -11,7 +10,7 @@ import placeholder from '../assets/placeholder.png';
 // TODO: Add animations
 const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
 
-const CreatePage = () => {
+export default function CreatePage () {
   const [form, setForm] = useState(defaultForm);
   const [generating, setGenerating] = useState(false);
   const [sharing, setSharing] = useState(false);
@@ -129,7 +128,6 @@ const CreatePage = () => {
     </Container>
   );
 };
-export default ContentWrapper(CreatePage, 'create');
 
 const Container = styled(motion.div)`
   width: 100%;
@@ -156,7 +154,7 @@ const TextContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 10px;
 
   p {
     text-align: center;
