@@ -7,13 +7,21 @@ import { navbarData } from '../utils/data';
 import { navbarMotion } from '../utils/motion';
 import { useStore } from '../store/useStore';
 
-const NavLink = ({ title, url, animation }) => (
-  <NavListItem className='navlist-item' {...animation}>
-    <Link to={url} target={`${url.includes('http') ? '_blank' : ''}`}>
-      {title}
-    </Link>
-  </NavListItem>
-);
+const NavLink = ({ title, url, animation }) => {
+  const location = useLocation();
+
+  return (
+    <NavListItem className='navlist-item' {...animation}>
+      {url === location.pathname ? (
+        <p>{title}</p>
+      ) : (
+        <Link to={url} target={`${url.includes('http') ? '_blank' : ''}`}>
+          {title}
+        </Link>
+      )}
+    </NavListItem>
+  );
+};
 
 export default function Navbar() {
   // DATA
@@ -172,7 +180,8 @@ const NavListItem = styled(motion.li)`
   margin: 0 0 0 50px;
   list-style: none;
 
-  a {
+  a,
+  p {
     color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
     line-height: 29px;
@@ -181,6 +190,10 @@ const NavListItem = styled(motion.li)`
     text-decoration: none;
     display: block;
     letter-spacing: 0.6px;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 1);
   }
 
   &:hover {
@@ -226,7 +239,8 @@ const MobileMenuContainer = styled(motion.div)`
   display: none;
   opacity: 1;
 
-  a {
+  a,
+  p {
     font-family: 'Roboto', sans-serif;
     font-weight: 700;
     text-transform: uppercase;
@@ -287,7 +301,8 @@ const MobileMenuNavList = styled(motion.ul)`
     list-style: none;
   }
 
-  a {
+  a,
+  p {
     color: rgba(255, 255, 255, 0.5);
     display: block;
   }
