@@ -1,12 +1,9 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
-
-import { contentMotion } from '../utils/motion';
 
 const ContentWrapper = (Component, idName) =>
   function HOC() {
     return (
-      <Wrapper className='contentwrapper-wrapper'>
+      <Wrapper key={`contentwrapper-${idName}`} className='contentwrapper-wrapper'>
         <Component id={idName} />
       </Wrapper>
     );
@@ -14,7 +11,7 @@ const ContentWrapper = (Component, idName) =>
 
 export default ContentWrapper;
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
