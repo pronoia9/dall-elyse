@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { useStore } from '../store/useStore';
-
-// TODO: ADD ANIMATIONS
+import { downloadImage } from '../utils/utils';
 
 const GalleryCardOverlay = ({ index, name, photo, prompt, _id, isLast }) => {
+  // STORE
   const resetPhotoSwipe = useStore((state) => state.resetPhotoSwipe),
     photoSwipePrev = useStore((state) => state.photoSwipePrev),
     photoSwipeNext = useStore((state) => state.photoSwipeNext);
@@ -13,39 +13,40 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id, isLast }) => {
   // EVENT LISTENER FOR ESC BUTTON TO CLOSE OVERLAY
   useEffect(() => {
     const close = (e) => { e.key === 'Escape' && resetPhotoSwipe(); };
-    document.addEventListener('keydown', (e) => close(e));
-    return () => { document.removeEventListener('keydown', (e) => close(e)); };
+    document.addEventListener('keydown', close);
+    return () => { document.removeEventListener('keydown', close); };
   }, []);
 
   // EVENT LISTENER FOR LEFT/RIGHT KEYS
   useEffect(() => {
-    const arrowKey = (e) => { e.key === 'ArrowLeft' ? photoSwipePrev() : e.key === 'ArrowRight' && photoSwipeNext(); }
+    const arrowKey = (e) => { e.key === 'ArrowLeft' ? photoSwipePrev() : e.key === 'ArrowRight' && photoSwipeNext(); };
     document.addEventListener('keydown', arrowKey);
-    return () => { document.removeEventListener('keydown', arrowKey) }
-  }, [])
+    return () => { document.removeEventListener('keydown', arrowKey); };
+  }, []);
 
   return (
     <>
-      <Overlay className='galleryCardOverlay-overlay'>
-        <Container className='galleryCardOverlay-container'>
+      <Overlay>
+        <Container>
           {/* TOP (Close Icon) */}
-          <CloseButton className='galleryCardOverlay-closeButton' onClick={() => resetPhotoSwipe(null)}>
+          <CloseButton onClick={() => resetPhotoSwipe(null)}>
             <i className='fa-solid fa-xmark' />
           </CloseButton>
 
           {/* MIDDLE (Image) */}
-          <ImageContainer className='galleryCardOverlay-imageContainer'>
+          <ImageContainer>
             <ImageWrapper>
               <img src={photo} />
             </ImageWrapper>
             <TextWrapper>
               <p onClick={() => navigator.clipboard.writeText(prompt)}>{prompt}</p>
+              <p onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
             </TextWrapper>
           </ImageContainer>
         </Container>
 
         {/* CONTROLS */}
-        <Controls className='galleryCardOverlay-controls'>
+        <Controls>
           <ControlButton onClick={photoSwipePrev}>{index > 0 && <i className='fa-solid fa-chevron-left' />}</ControlButton>
           <ControlButton onClick={photoSwipeNext}>{!isLast && <i className='fa-solid fa-chevron-right' />}</ControlButton>
         </Controls>
@@ -61,8 +62,12 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.75);
   z-index: 999;
+
+  @media only screen and (max-width: 760px) {
+    background: rgba(0, 0, 0, 0.9);
+  }
 `;
 
 const Container = styled.div`
@@ -92,52 +97,75 @@ const CloseButton = styled.div`
 `;
 
 const ImageContainer = styled.div`
-  width: 100%;
+  max-width: 65%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media only screen and (max-width: 760px) {
+    max-width: 90%;
+  }
 `;
 
 const ImageWrapper = styled.div`
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   background: #000;
   padding: 5px 5px 44px 5px;
-  max-width: 55%;
+  border: 2px solid #313133;
 
   img {
     width: 100%;
     height: auto;
   }
+
+  @media only screen and (max-width: 760px) {
+    border: none;
+  }
 `;
 
 const TextWrapper = styled.div`
+  width: 100%;
+  min-height: 44px;
   position: relative;
   bottom: 44px;
-  max-width: 50%;
-  height: 44px;
-  padding: 0 16px;
+  padding: 16px;
+  background: #000;
 
   font-size: 12px;
   line-height: 16px;
   text-align: center;
-  
-  overflow: hidden;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: color 0.5s;
 
-  &:hover {
+  overflow: hidden;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+
+  p:first-child {
+    width: 100%;
+  }
+
+  P:last-child {
+    padding-right: 10px;
+    font-size: 16px;
+  }
+
+  p:hover {
+    cursor: pointer;
     color: rgba(255, 255, 255, 0.7);
   }
 `;
 
-const Controls = styled.div``;
+const Controls = styled.div`
+  @media only screen and (max-width: 760px) {
+    display: none;
+  }
+`;
 
 const ControlButton = styled.div`
   position: absolute;
