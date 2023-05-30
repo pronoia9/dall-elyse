@@ -13,24 +13,37 @@ export const contentMotion = () => bigMotion();
 // HOME PAGE
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 + 0.5 = 1
 export const navigationMotion = {
+  lineMotion: (center) => {
+    const direction = window.screen.height * 0.75 * (center ? 1 : -1);
+    return {
+      initial: 'initial',
+      animate: 'animate',
+      exit: 'exit',
+      variants: {
+        initial: { x: direction, opacity: 0 },
+        animate: { x: 0, opacity: 1, transition: { delay: 0, duration: 0.5, ease: easeInOut } },
+        exit: { x: -direction, opacity: 0 },
+      },
+    };
+  },
   titleMotion: (center, titleOffset = 0, hover) => {
     const sign = center ? 1 : -1,
       location = titleOffset * sign,
       delay = hover !== null ? 0 : 0.5;
     return {
       initial: { x: location + 100, opacity: 0 },
-      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: { type: 'tween', delay, duration: 5.5, ease: 'linear' } },
-      exit: { x: location - 100, opacity: 0, transition: { delay, duration: 5.5, ease: 'linear' } },
+      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: { type: 'tween', delay, duration: 0.5, ease: 'linear' } },
+      exit: { x: location - 100, opacity: 0, transition: { delay, duration: 0.5, ease: 'linear' } },
     };
   },
   subtitleMotion: (center, subtitleOffset = 75, hover, mobile) => {
-    const sign = (center ? 1 : -1) * -1,
+    const sign = -(center ? 1 : -1),
       location = !(mobile && window.screen.width < 960) ? subtitleOffset * sign : 0,
       delay = hover !== null ? 0 : 0.5;
     return {
       initial: { x: location - 100, opacity: 0 },
-      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { type: 'tween', delay, duration: 5.5, ease: 'linear' } },
-      exit: { x: location + 100, opacity: 0, transition: { delay, duration: 5.5, ease: 'linear' } },
+      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { type: 'tween', delay, duration: 0.5, ease: 'linear' } },
+      exit: { x: location + 100, opacity: 0, transition: { delay, duration: 0.5, ease: 'linear' } },
     };
   },
 };
@@ -147,26 +160,18 @@ export function bigMotion(props = {}, extra = {}) {
 //   };
 // };
 
-// export const fadeIn = (direction, type, delay, duration) => {
-//   return {
-//     hidden: {
-//       x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
-//       y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
-//       opacity: 0,
-//     },
-//     show: {
-//       x: 0,
-//       y: 0,
-//       opacity: 1,
-//       transition: {
-//         type: type,
-//         delay: delay,
-//         duration: duration,
-//         ease: 'easeOut',
-//       },
-//     },
-//   };
-// };
+export const fadeIn = ({ direction = false, type = 'tween', delay = 0, duration = 5, ease = 'easeInOut' } = {}) => ({
+  initial: 'initial',
+  animate: 'animate',
+  variants: {
+    initial: {
+      x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+      y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
+      opacity: 0,
+    },
+    animate: { x: 0, y: 0, opacity: 1, transition: { type, duration, ease } },
+  },
+});
 
 // export const zoomIn = (delay, duration) => {
 //   return {
@@ -218,11 +223,15 @@ export function bigMotion(props = {}, extra = {}) {
 //   };
 // };
 
-export const fadeIn = (direction = '', type = 'tween', delay = 0, duration = 0.5, ease = easeInOut) => ({
-  initial: {
-    x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
-    y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
-    opacity: 0,
-  },
-  animate: { x: 0, y: 0, opacity: 1, transition: { type, delay, duration, ease } },
-});
+// export const fadeIn = (direction = '', type = 'tween', delay = 0, duration = 0.5, ease = easeInOut) => ({
+//   initial: {
+//     x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+//     y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
+//     opacity: 0,
+//   },
+//   animate: { x: 0, y: 0, opacity: 1, transition: { type, delay, duration, ease } },
+// });
+
+function rotateX({ rotate, x }) {
+  return `rotate(${rotate}) translateX(${x})`;
+}
