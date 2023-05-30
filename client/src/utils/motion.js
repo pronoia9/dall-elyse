@@ -16,14 +16,9 @@ export const navigationMotion = {
   lineMotion: (center) => {
     const direction = window.screen.height * 0.75 * (center ? 1 : -1);
     return {
-      initial: 'initial',
-      animate: 'animate',
-      exit: 'exit',
-      variants: {
-        initial: { x: direction, opacity: 0 },
-        animate: { x: 0, opacity: 1, transition: { delay: 0, duration: 0.5, ease: easeInOut } },
-        exit: { x: -direction, opacity: 0 },
-      },
+      initial: { x: direction, opacity: 0 },
+      animate: { x: 0, opacity: 1, transition: { delay: 0, duration: 0.5, ease: easeInOut } },
+      exit: { x: -direction, opacity: 0 },
     };
   },
   titleMotion: (center, titleOffset = 0, hover) => {
