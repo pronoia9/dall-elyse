@@ -2,21 +2,21 @@ import merge from 'lodash.merge';
 import { easeInOut } from 'framer-motion';
 
 /*******************************************  APP START  *******************************************/
-// PAGE WRAPPER
+// PAGE WRAPPER (delay: 0) (duration: 0.5s)
 export const contentMotion = () => ({
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { type: 'tween', delay: 0, duration: 0.5, ease: 'easeInOut' } },
+  animate: { opacity: 1, transition: { type: 'tween', delay: 0, duration: 0.5, ease: easeInOut } },
   exit: { opacity: 0 },
 });
 
-// CIRCLE BACKGROUND = delay: 0, duration: 0.5s
+// CIRCLE BACKGROUND (delay: 0) (duration: 0.5s)
 export const circleMotion = () => ({
   initial: { x: -500, y: -500 },
   animate: { x: 0, y: 0, transition: { type: 'tween', duration: 0.5, ease: easeInOut } },
   exit: { x: 500, y: 500 }, // added key to location so exit animation happens between pages
 });
 
-// NAVIGATION ANIMATIONS - Total Duration: 0.5 delay + 0.5 duration = 1s
+// NAVIGATION ANIMATIONS (delay: 0.5) (duration: 0.5) (total duration: 1s)
 export const navigationMotion = {
   transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' },
   lineMotion: (center) => {
