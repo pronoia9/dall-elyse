@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
@@ -12,14 +13,15 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
   const location = useLocation();
   const [isHover, setIsHover] = useState(null); // local state for hover
   const toggleOverlay = useStore((state) => state.toggleOverlay); // store, toggles overlay on background when hovering
-  const { containerMotion, titleMotion, subtitleMotion } = navigationMotion; // motion data
+  const { lineMotion, titleMotion, subtitleMotion } = navigationMotion; // motion data
 
   const checkIfLink = () => location.pathname !== path; // checks if the links path is the same as the current page
 
   const handleHover = (hover) => { toggleOverlay(); setIsHover(hover); };
 
   return (
-    <LinkContainer position={position} center={center} mobileTitle={mobileTitle} {...fadeIn()}>
+    <LinkContainer position={position} center={center} mobileTitle={mobileTitle}>
+      <Line className='navigation-line' {...lineMotion()} />
       <LinkWrapper center={center}>
         <LinkType to={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ifLink={checkIfLink()}>
           <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobileTitle)}>{subtitle}</NavigationSubtitle>
@@ -58,16 +60,6 @@ const LinkContainer = styled.div`
     z-index: 25;
   }
 
-  &:before {
-    content: '';
-    width: 100%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.15);
-    position: absolute;
-    left: 0;
-    top: 21px;
-  }
-
   /* TITLE STYLING (MOVE FROM SIDE TO TOP) */
   /* Must set 'mobile: true/false' in 'data', not setting it is necessary to keep home page links' styling */
   @media only screen and (max-width: 960px) {
@@ -86,13 +78,23 @@ const LinkContainer = styled.div`
         transform: none;
         margin-bottom: 50px;
 
-        &:before {
+        .navigation-line {
           width: 200vh;
           left: -50%;
           top: 18px;
         }
       `}
   }
+`;
+
+const Line = styled(motion.div)`
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  position: absolute;
+  left: 0;
+  top: 21px;
 `;
 
 const LinkWrapper = styled.div`
