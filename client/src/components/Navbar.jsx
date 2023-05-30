@@ -109,7 +109,6 @@ const Container = styled.div`
   left: 0;
   width: 100%;
   z-index: 100;
-  transition: z-index 0.5s, transform 0.5s;
 `;
 
 const Wrapper = styled.div`
@@ -135,7 +134,6 @@ const Logo = styled(motion.div)`
     max-width: 150px;
     height: 55px;
     opacity: 1;
-    /* transform: translate(0px, 0px); */
   }
 
   img {
@@ -175,7 +173,6 @@ const NavListItem = styled(motion.li)`
   list-style: none;
 
   a {
-    transition: color 0.3s;
     color: rgba(255, 255, 255, 0.5);
     font-size: 12px;
     line-height: 29px;
@@ -218,11 +215,9 @@ const MobileMenuClose = styled.div`
   width: 30px;
   height: 30px;
   z-index: 1001 !important;
-  transition: opacity 0.3s;
   color: rgba(255, 255, 255, 0.5);
   font-size: 24px;
   line-height: 30px;
-  transition: color 0.3s;
   color: #fff;
   text-align: right;
 `;
