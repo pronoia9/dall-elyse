@@ -16,11 +16,15 @@ const CreatePage = () => {
   const [sharing, setSharing] = useState(false);
 
   // HANDLE INPUT CHANGE
-  const handleChange = (e) => { setForm({ ...form, [e.target.name]: e.target.value }); }
-  
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
   // SURPRISE ME BUTTON THAT GENERATED RANDOM PROMPTS
-  const handleSurpriseMe = () => { setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) })); }
-  
+  const handleSurpriseMe = () => {
+    setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) }));
+  };
+
   // HANDLE GENERATE
   const handleGenerate = async () => {
     if (generating) alert('Please chill out.');
@@ -42,9 +46,9 @@ const CreatePage = () => {
       } finally {
         setGenerating(false);
       }
-    } 
-  }
-  
+    }
+  };
+
   // HANDLE SHARE
   const handleShare = async () => {
     if (!form.prompt || !form.photo) alert('Please enter a prompt and generate an image.');
@@ -66,26 +70,26 @@ const CreatePage = () => {
         setSharing(false);
       }
     }
-  }
+  };
 
   return (
-    <Container id='create-page' className='createPage-container'>
+    <Container>
       {/* Navigation Links */}
       {Object.values(navigationData.createPage).map((link) => (
         <Navigation key={`navigation-${link.title}`} {...link} />
       ))}
 
-      <Wrapper className='createPage-content'>
+      <Wrapper>
         {/* Text Section */}
-        <TextContainer className='createPage-textContainer'>
+        <TextContainer>
           <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
           <p>Once you have created the image you want, you can share it with others in the community.</p>
         </TextContainer>
 
         {/* Create/Form Section */}
-        <FormSection className='createPage-formSection'>
+        <FormSection>
           {/* Image */}
-          <ImageContainer className='createPage-imageContainer'>
+          <ImageContainer>
             <img src={form.photo ?? placeholder} alt={form.prompt} />
             {generating && (
               <LoaderContainer>
@@ -94,8 +98,8 @@ const CreatePage = () => {
             )}
           </ImageContainer>
           {/* Form */}
-          <FormContainer className='createPage-formContainer'>
-            <FormWrapper className='createPage-formWrapper'>
+          <FormContainer>
+            <FormWrapper>
               {/* Name */}
               <input id='name' type='text' name='name' placeholder='EX: Jane Doe' value={form.name} onChange={handleChange} />
               {/* Prompt */}
@@ -108,7 +112,7 @@ const CreatePage = () => {
                 onChange={handleChange}
                 required
               />
-              <Buttons className='Buttons'>
+              <Buttons>
                 <button onClick={handleGenerate} disabled={generating || sharing ? true : false}>
                   {generating ? 'Generating...' : 'Generate'}
                 </button>
