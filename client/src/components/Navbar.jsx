@@ -275,6 +275,7 @@ const MobileMenuNavList = styled(motion.ul)`
   padding: 40px 40px;
   margin: auto 0;
   width: 100%;
+  overflow: hidden;
 
   ul {
     padding: 0;
