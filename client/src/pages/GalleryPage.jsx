@@ -1,16 +1,14 @@
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 import { Gallery } from '../components';
 import { useStore } from '../store/useStore';
-import { galleryPageMotion } from '../utils/motion';
 
 export default function GalleryPage() {
   const searchKey = useStore((state) => state.searchKey),
     setSearchKey = useStore((state) => state.setSearchKey);
 
   return (
-    <Container {...galleryPageMotion()}>
+    <Container>
       {/* Searchbar maybe? */}
       <InputWrapper>
         <input type='text' name='searchKey' value={searchKey} onChange={(e) => setSearchKey(e.target.value)} />
@@ -22,7 +20,7 @@ export default function GalleryPage() {
   );
 }
 
-const Container = styled(motion.section)`
+const Container = styled.section`
   width: 100%;
 `;
 

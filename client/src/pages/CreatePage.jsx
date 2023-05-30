@@ -1,10 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 import { Loading } from '../components';
 import { getRandomPrompt } from '../utils/utils';
-import { createPageMotion } from '../utils/motion';
 import placeholder from '../assets/placeholder.png';
 
 const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
@@ -72,7 +70,7 @@ export default function CreatePage () {
   };
 
   return (
-    <Container {...createPageMotion()}>
+    <Container>
       <Wrapper>
         {/* Text Section */}
         <TextContainer>
@@ -123,7 +121,7 @@ export default function CreatePage () {
   );
 };
 
-const Container = styled(motion.section)`
+const Container = styled.section`
   width: 100%;
   height: 100%;
   display: flex;

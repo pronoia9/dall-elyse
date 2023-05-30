@@ -3,9 +3,9 @@ import { easeInOut } from 'framer-motion';
 /*******************************************  APP START  *******************************************/
 // PAGE WRAPPER (delay: 0) (duration: 0.5)
 export const contentMotion = () => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { type: 'tween', delay: 0, duration: 1, ease: easeInOut } },
-  exit: { opacity: 0 },
+  initial: { y: 100, opacity: 0 },
+  animate: { y: 0, opacity: 1, transition: { type: 'tween', delay: 0, duration: 1, ease: 'easeInOut' } },
+  exit: { y: -100, opacity: 0 },
 });
 
 // CIRCLE BACKGROUND (delay: 0) (duration: 0.5)
@@ -104,14 +104,6 @@ export const canvasMotion = () => ({
 
 
 /***************************************  CREATE PAGE START  ***************************************/
-export const createPageMotion = () => {
-  const transition = { type: 'tween', delay: 1, duration: 1, ease: easeInOut };
-  return ({
-    initial: { y: 100, opacity: 0 },
-    animate: { y: 0, opacity: 1, transition },
-    exit: { y: -100, opacity: 0, transition },
-  })
-};
 /****************************************  CREATE PAGE END  ****************************************/
 
 
