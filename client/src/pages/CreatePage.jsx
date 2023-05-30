@@ -2,13 +2,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
-import { Loading, Navigation } from '../components';
-import { navigationData } from '../utils/data';
+import { Loading } from '../components';
 import { getRandomPrompt } from '../utils/utils';
-import placeholder from '../assets/placeholder.png';
 import { createPageMotion } from '../utils/motion';
+import placeholder from '../assets/placeholder.png';
 
-// TODO: Add animations
 const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
 
 export default function CreatePage () {
@@ -125,14 +123,14 @@ export default function CreatePage () {
   );
 };
 
-const Container = styled.div`
+const Container = styled(motion.section)`
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 `;
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
