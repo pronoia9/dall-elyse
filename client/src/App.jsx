@@ -3,12 +3,13 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { Preloader, Navbar, GalleryCardOverlay } from './components';
+import { Preloader, Navbar, GalleryCardOverlay, Navigation } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
 import { contentMotion, circleMotion } from './utils/motion';
 import { getPosts } from './utils/utils';
+import { navigationData } from './utils/data';
 
 const App = () => {
   const location = useLocation();
@@ -41,8 +42,13 @@ const App = () => {
           <Navbar />
           <Circle key={location.pathname} {...circleMotion()} />
 
+          {/* Navigation Links */}
+          {Object.values(navigationData[location.pathname]).map((link) => (
+            <Navigation key={`${location.pathname}-${link.title}`} {...link} />
+          ))}
+
           <AnimatePresence>
-            <Main key={location.pathname} center={location.pathname === '/create'} {...contentMotion()}>
+            <Main key={location.pathname} center={location.pathname === '/create'} {...contentMotion(location.pathname)}>
               <Routes location={location} key={location.pathname}>
                 <Route exact path='/' element={<HomePage />} />
                 <Route path='/gallery' element={<GalleryPage />} />
