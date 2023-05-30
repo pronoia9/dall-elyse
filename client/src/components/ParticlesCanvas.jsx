@@ -4,10 +4,8 @@ import { Canvas, createPortal, useFrame } from '@react-three/fiber';
 import { CameraShake, useFBO } from '@react-three/drei';
 import { Leva, useControls } from 'leva';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
-import { canvasMotion } from '../utils/motion';
 
 // SHADERS/MATERIALS
 import '../shaders/dofPointsMaterial';
@@ -92,25 +90,23 @@ export default function ParticlesCanvas() {
   });
 
   return (
-    <>
-      <Leva collapsed />
-      <Container overlay={overlay} {...canvasMotion()}>
-        <Canvas linear={true} camera={{ fov: 25, position: [0, 0, 6] }}>
-          <CameraShake yawFrequency={1} maxYaw={0.05} pitchFrequency={1} maxPitch={0.05} rollFrequency={0.5} maxRoll={0.5} intensity={0.2} />
-          <Particles {...options} />
-        </Canvas>
-      </Container>
-    </>
+    <Container overlay={overlay}>
+      <Leva hidden />
+      <Canvas linear={true} camera={{ fov: 25, position: [0, 0, 6] }}>
+        <CameraShake yawFrequency={1} maxYaw={0.05} pitchFrequency={1} maxPitch={0.05} rollFrequency={0.5} maxRoll={0.5} intensity={0.2} />
+        <Particles {...options} />
+      </Canvas>
+    </Container>
   );
 }
 
 // STYLES
-const Container = styled(motion.div)`
+const Container = styled.section`
   opacity: ${(props) => (props.overlay ? 0.25 : 0.75)};
   transition: 0.75s;
   position: fixed;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: -10;
