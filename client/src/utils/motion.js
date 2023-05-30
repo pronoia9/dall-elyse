@@ -47,9 +47,9 @@ export const navigationMotion = {
   },
 };
 
-// NAVBAR ANIMATIONS (count: 3) (delay: ) (duration: ) (total duration: )
+// NAVBAR ANIMATIONS (count: 3) (delay: 0.75 - 1) (duration: 0.5 - 0.75) (total duration: 1.75)
 export const navbarMotion = {
-  // LOGO (delay: 0.75) (duration: 0.5) (total duration: 1.25)
+  // LOGO (delay: 0.25 * 3 = 0.75) (duration: 0.5) (total duration: 1.25)
   // if the mobile menu is open move it to the left (it slides with the mobile menu), also remove any delays
   logoMotion: (count = 3, mobileMenuOpen) => ({
     initial: { x: -100, opacity: 0 },
@@ -60,8 +60,13 @@ export const navbarMotion = {
     },
     exit: { x: -window.screen.width / 2 },
   }),
-  // DESKTOP NAVBAR
-  desktopLinksMotion: (index) => bigMotion({ direction: -10, delayIn: 1, duration: 0.25 * index }),
+  // DESKTOP NAVBAR (delay: 1) (duration: 0.25 * 3 = 0.75) (total duration: 1.75)
+  desktopLinksMotion: (index) => ({
+    initial: { x: -25, y: -25, opacity: 0 },
+    animate: { x: 0, y: 0, opacity: 1, transition: { type: 'tween', delay: 1, duration: 0.25 * index, ease: easeInOut },
+    },
+    exit: { x: -25, y: -25, opacity: 0 },
+  }),
   // MOBILE MENU
   mobileMenuMotion: (count = 3) => bigMotion({ direction: { x: window.screen.width }, delayOut: 0.25 * count, opacity: 1 }),
   mobileLinksMotion: (index) => bigMotion({ directionIn: 'up', directionOut: 'down', delayIn: 0.5, duration: 0.25 * index }),
