@@ -9,6 +9,13 @@ export const contentMotion = () => ({
   exit: { opacity: 0 },
 });
 
+// CIRCLE BACKGROUND = delay: 0, duration: 0.5s
+export const circleMotion = () => ({
+  initial: { x: -500, y: -500 },
+  animate: { x: 0, y: 0, transition: { type: 'tween', duration: 0.5, ease: easeInOut } },
+  exit: { x: 500, y: 500 }, // added key to location so exit animation happens between pages
+});
+
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 delay + 0.5 duration = 1s
 export const navigationMotion = {
   transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' },
@@ -49,7 +56,6 @@ export const navbarMotion = {
 };
 /********************************************  APP END  ********************************************/
 
-
 /****************************************  HOME PAGE START  ****************************************/
 // PARTICLES
 export const canvasMotion = () => ({
@@ -65,14 +71,11 @@ export const canvasMotion = () => ({
 });
 /*****************************************  HOME PAGE END  *****************************************/
 
-
 /***************************************  CREATE PAGE START  ***************************************/
 /****************************************  CREATE PAGE END  ****************************************/
 
-
 /***************************************  GALLERY PAGE START  **************************************/
 /****************************************  GALLERY PAGE END  ***************************************/
-
 
 /******************************************  UTILS START  ******************************************/
 export function bigMotion(props = {}, extra = {}) {
