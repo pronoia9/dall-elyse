@@ -4,36 +4,24 @@ import styled, { css } from 'styled-components';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
-import { navigationMotion } from '../utils/motion';
+import { navigationMotion, fadeIn } from '../utils/motion';
 
 const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props} /> : <p {...props} />);
 
-export default function Navigation({
-  title = 'title',
-  subtitle = 'subtitle',
-  path = '/',
-  position,
-  center,
-  mobileTitle,
-  titleOffset,
-  subtitleOffset,
-}) {
-  const [isHover, setIsHover] = useState(null); // local state
-  const toggleOverlay = useStore((state) => state.toggleOverlay); // store
-  const { containerMotion, titleMotion, subtitleMotion } = navigationMotion; // data
+export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobileTitle, titleOffset, subtitleOffset, }) {
   const location = useLocation();
+  const [isHover, setIsHover] = useState(null); // local state for hover
+  const toggleOverlay = useStore((state) => state.toggleOverlay); // store, toggles overlay on background when hovering
+  const { containerMotion, titleMotion, subtitleMotion } = navigationMotion; // motion data
 
-  const checkIfLink = () => location.pathname !== path;
+  const checkIfLink = () => location.pathname !== path; // checks if the links path is the same as the current page
 
-  const handleHover = (e, hover) => {
-    toggleOverlay();
-    setIsHover(hover);
-  };
+  const handleHover = (hover) => { toggleOverlay(); setIsHover(hover); };
 
   return (
-    <LinkContainer position={position} center={center} mobileTitle={mobileTitle} {...containerMotion(center)}>
+    <LinkContainer position={position} center={center} mobileTitle={mobileTitle} {...fadeIn()}>
       <LinkWrapper center={center}>
-        <LinkType to={path} onMouseEnter={(e) => handleHover(e, true)} onMouseLeave={(e) => handleHover(e, false)} ifLink={checkIfLink()}>
+        <LinkType to={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ifLink={checkIfLink()}>
           <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobileTitle)}>{subtitle}</NavigationSubtitle>
           <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
         </LinkType>

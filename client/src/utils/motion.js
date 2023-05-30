@@ -13,40 +13,27 @@ export const contentMotion = () => bigMotion();
 // HOME PAGE
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 + 0.5 = 1
 export const navigationMotion = {
-  containerMotion: (center) =>
-    bigMotion({
-      directionIn: { y: -window.screen.height * 0.25 * (center ? 1 : -1) },
-      directionOut: { y: window.screen.height * 0.25 * (center ? 1 : -1) },
-      duration: 0.5,
-    }),
   titleMotion: (center, titleOffset = 0, hover) => {
-    const sign = center ? 1 : -1, location = titleOffset * sign, delay = hover !== null ? 0 : 0.5;
+    const sign = center ? 1 : -1,
+      location = titleOffset * sign,
+      delay = hover !== null ? 0 : 0.5;
     return {
       initial: { x: location + 100, opacity: 0 },
-      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: { type: 'tween', delay, duration: 0.5, ease: 'linear' } },
-      exit: { x: location - 100, opacity: 0, transition: { delay, duration: 0.5, ease: 'linear' } },
+      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: { type: 'tween', delay, duration: 5.5, ease: 'linear' } },
+      exit: { x: location - 100, opacity: 0, transition: { delay, duration: 5.5, ease: 'linear' } },
     };
   },
   subtitleMotion: (center, subtitleOffset = 75, hover, mobile) => {
     const sign = (center ? 1 : -1) * -1,
-      location = !(mobile && window.screen.width < 960) ? (subtitleOffset * sign) : (0),
+      location = !(mobile && window.screen.width < 960) ? subtitleOffset * sign : 0,
       delay = hover !== null ? 0 : 0.5;
     return {
       initial: { x: location - 100, opacity: 0 },
-      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { type: 'tween', delay, duration: 0.5, ease: 'linear' } },
-      exit: { x: location + 100, opacity: 0, transition: { delay, duration: 0.5, ease: 'linear' } },
+      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { type: 'tween', delay, duration: 5.5, ease: 'linear' } },
+      exit: { x: location + 100, opacity: 0, transition: { delay, duration: 5.5, ease: 'linear' } },
     };
   },
 };
-
-// &:first-child {
-/* transform: translateX(${(props) => (props?.center ? -40 : 40)}px) !important; */
-/* transition: transform 0.5s, z-index 0.6s !important; */
-// }
-// &:last-child {
-/* transform: translateX(${(props) => (props?.center ? -10 : 10)}px) !important; */
-/* transition: transform 0.5s, z-index 0.6s !important; */
-// }
 
 // BACKGROUND
 export const backgroundMotion = () => bigMotion({ delay: 1 });
@@ -230,3 +217,12 @@ export function bigMotion(props = {}, extra = {}) {
 //     },
 //   };
 // };
+
+export const fadeIn = (direction = '', type = 'tween', delay = 0, duration = 0.5, ease = easeInOut) => ({
+  initial: {
+    x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
+    y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
+    opacity: 0,
+  },
+  animate: { x: 0, y: 0, opacity: 1, transition: { type, delay, duration, ease } },
+});
