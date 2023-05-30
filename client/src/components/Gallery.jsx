@@ -18,7 +18,7 @@ const Gallery = () => {
   }, [searchKey]);
 
   return (
-    <Container className='gallery-container'>
+    <Container>
       {filteredData?.map((d, index) => (
         <GalleryCard key={`card-${d._id}`} {...d} index={index} />
       ))}

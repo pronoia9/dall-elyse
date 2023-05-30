@@ -6,7 +6,7 @@ const GalleryCard = (props) => {
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
 
   return (
-    <Container className='galleryCard-container' onClick={() => { setPhotoSwipe(index); }}>
+    <Container onClick={() => { setPhotoSwipe(index); }}>
       <img src={photo} />
     </Container>
   );
