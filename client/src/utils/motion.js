@@ -4,7 +4,7 @@ import { easeInOut } from 'framer-motion';
 // PAGE WRAPPER
 export const contentMotion = () => ({
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { type: 'tween', delay: 0, duration: 5, ease: 'easeInOut' } },
+  animate: { opacity: 1, transition: { type: 'tween', delay: 0, duration: 0.5, ease: 'easeInOut' } },
   exit: { opacity: 0 },
 });
 
