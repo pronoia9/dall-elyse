@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
 import { NavigationSubtitle, NavigationTitle } from '../styles/TextStyles';
-import { navigationMotion, fadeIn } from '../utils/motion';
+import { navigationMotion } from '../utils/motion';
 
 const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props} /> : <p {...props} />);
 
