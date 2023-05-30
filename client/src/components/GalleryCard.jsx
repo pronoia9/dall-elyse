@@ -1,19 +1,22 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
+
 import { useStore } from '../store/useStore';
+import { galleryCardMotion } from '../utils/motion';
 
 const GalleryCard = (props) => {
-  const { /*_id, name, prompt,*/ photo, index } = props;
+  const { _id, name, prompt, photo, index } = props;
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
 
   return (
-    <Container onClick={() => { setPhotoSwipe(index); }}>
+    <Container key={_id} {...galleryCardMotion(index)} onClick={() => { setPhotoSwipe(index); }}>
       <img src={photo} />
     </Container>
   );
 };
 export default GalleryCard;
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   margin: 20px;
   width: calc(25% - 40px);
 
