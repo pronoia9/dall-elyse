@@ -1,18 +1,17 @@
 import styled from 'styled-components';
 
-import { ParticlesCanvas, Navigation } from '../components';
-import { navigationData } from '../utils/data';
+import { ParticlesCanvas } from '../components';
 
 export default function HomePage() {
   return (
-    <Container id='home-page'>
+    <Container>
       {/* ThreeJS Particles */}
-      {/* <ParticlesCanvas /> */}
+      <ParticlesCanvas />
     </Container>
   );
 }
 
-const Container = styled.div`
+const Container = styled.section`
   span:first-child {
     color: rgba(255, 255, 255, 0.6);
   }
