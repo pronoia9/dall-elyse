@@ -34,7 +34,7 @@ const App = () => {
     <Container>
       <GlobalStyles />
 
-      {preloading === -1 ? (
+      {preloading ? (
         <Preloader />
       ) : (
         <>
