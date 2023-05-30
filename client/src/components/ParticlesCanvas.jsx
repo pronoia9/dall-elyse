@@ -6,11 +6,12 @@ import { Leva, useControls } from 'leva';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+import { useStore } from '../store/useStore';
+import { canvasMotion } from '../utils/motion';
+
 // SHADERS/MATERIALS
 import '../shaders/dofPointsMaterial';
 import '../shaders/simulationMaterial';
-
-import { useStore } from '../store/useStore';
 
 const Particles = ({ speed, fov, aperture, focus, curl, size = 512, ...props }) => {
   // REFS
@@ -91,13 +92,15 @@ export default function ParticlesCanvas() {
   });
 
   return (
-    <Container key='background-canvas' id='background' overlay={overlay}>
+    <>
       <Leva collapsed />
-      <Canvas linear={true} camera={{ fov: 25, position: [0, 0, 6] }}>
-        <CameraShake yawFrequency={1} maxYaw={0.05} pitchFrequency={1} maxPitch={0.05} rollFrequency={0.5} maxRoll={0.5} intensity={0.2} />
-        <Particles {...options} />
-      </Canvas>
-    </Container>
+      <Container overlay={overlay} {...canvasMotion()}>
+        <Canvas linear={true} camera={{ fov: 25, position: [0, 0, 6] }}>
+          <CameraShake yawFrequency={1} maxYaw={0.05} pitchFrequency={1} maxPitch={0.05} rollFrequency={0.5} maxRoll={0.5} intensity={0.2} />
+          <Particles {...options} />
+        </Canvas>
+      </Container>
+    </>
   );
 }
 
