@@ -3,9 +3,9 @@ import { easeInOut } from 'framer-motion';
 /*******************************************  APP START  *******************************************/
 // PAGE WRAPPER (delay: 1) (duration: 1) (total duration: 2)
 export const contentMotion = () => ({
-  initial: { y: 100, opacity: 0 },
+  initial: { y: 50, opacity: 0 },
   animate: { y: 0, opacity: 1, transition: { type: 'tween', delay: 1, duration: 1, ease: 'easeInOut' } },
-  exit: { y: -100, opacity: 0 },
+  exit: { y: -50, opacity: 0 },
 });
 
 // CIRCLE BACKGROUND (delay: 0) (duration: 0.5)
