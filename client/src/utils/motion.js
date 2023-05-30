@@ -11,34 +11,33 @@ import { easeInOut } from 'framer-motion';
 export const contentMotion = () => bigMotion();
 
 // HOME PAGE
-// NAVIGATION ANIMATIONS - Total Duration: 0.5 + 0.5 = 1
+// NAVIGATION ANIMATIONS - Total Duration: 0.5 delay + 0.5 duration = 1s
 export const navigationMotion = {
+  transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' },
   lineMotion: (center) => {
     const direction = window.screen.height * 0.75 * (center ? 1 : -1);
     return {
       initial: { x: direction, opacity: 0 },
-      animate: { x: 0, opacity: 1, transition: { delay: 0, duration: 0.5, ease: easeInOut } },
+      animate: { x: 0, opacity: 1, transition: { ...navigationMotion.transition, delay: 0 } },
       exit: { x: -direction, opacity: 0 },
     };
   },
   titleMotion: (center, titleOffset = 0, hover) => {
-    const transition = { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' };
     const sign = center ? 1 : -1,
       location = titleOffset * sign;
     return {
       initial: { x: location + 100, opacity: 0 },
-      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition },
-      exit: { x: location - 100, opacity: 0, transition },
+      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: navigationMotion.transition },
+      exit: { x: location - 100, opacity: 0, transition: navigationMotion.transition },
     };
   },
   subtitleMotion: (center, subtitleOffset = 75, hover, mobile) => {
-    const transition = { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' };
-    const sign = -(center ? 1 : -1),
+    const sign = -(center ? 1 : -1), // reverse sign from title so they animate towards the opposite sides
       location = !(mobile && window.screen.width < 960) ? subtitleOffset * sign : 0;
     return {
       initial: { x: location - 100, opacity: 0 },
-      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition },
-      exit: { x: location + 100, opacity: 0, transition },
+      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: navigationMotion.transition },
+      exit: { x: location + 100, opacity: 0, transition: navigationMotion.transition },
     };
   },
 };
