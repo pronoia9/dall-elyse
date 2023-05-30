@@ -104,6 +104,11 @@ export const canvasMotion = () => ({
 
 
 /***************************************  CREATE PAGE START  ***************************************/
+export const createPageMotion = () => ({
+  initial: { y: 100, opacity: 0 },
+  animate: { y: 0, opacity: 1, transition: { type: 'tween', delay: 1, duration: 1, ease: easeInOut } },
+  exit: { y: -100, opacity: 0 }
+});
 /****************************************  CREATE PAGE END  ****************************************/
 
 
