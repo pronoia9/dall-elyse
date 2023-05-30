@@ -1,10 +1,10 @@
 import { easeInOut } from 'framer-motion';
 
 /*******************************************  APP START  *******************************************/
-// PAGE WRAPPER (delay: 0) (duration: 0.5)
+// PAGE WRAPPER (delay: 1) (duration: 1) (total duration: 2)
 export const contentMotion = () => ({
   initial: { y: 100, opacity: 0 },
-  animate: { y: 0, opacity: 1, transition: { type: 'tween', delay: 0, duration: 1, ease: 'easeInOut' } },
+  animate: { y: 0, opacity: 1, transition: { type: 'tween', delay: 1, duration: 1, ease: 'easeInOut' } },
   exit: { y: -100, opacity: 0 },
 });
 
