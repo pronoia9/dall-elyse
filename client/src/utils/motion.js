@@ -1,6 +1,7 @@
 import merge from 'lodash.merge';
 import { easeInOut } from 'framer-motion';
 
+/*******************************************  APP START  *******************************************/
 // PAGE WRAPPER
 export const contentMotion = () => ({
   initial: { opacity: 0 },
@@ -8,7 +9,6 @@ export const contentMotion = () => ({
   exit: { opacity: 0 },
 });
 
-// HOME PAGE
 // NAVIGATION ANIMATIONS - Total Duration: 0.5 delay + 0.5 duration = 1s
 export const navigationMotion = {
   transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' },
@@ -40,9 +40,6 @@ export const navigationMotion = {
   },
 };
 
-// BACKGROUND
-export const backgroundMotion = () => bigMotion({ delay: 1 });
-
 // NAVBAR ANIMATIONS
 export const navbarMotion = {
   logo: (count = 3) => bigMotion({ direction: 'left', delay: 0.25 * count, duration: 0.5 }),
@@ -50,8 +47,36 @@ export const navbarMotion = {
   mobileMenu: (count = 3) => bigMotion({ direction: { x: window.screen.width }, delayOut: 0.25 * count, opacity: 1 }),
   mobileLinks: (index) => bigMotion({ directionIn: 'up', directionOut: 'down', delayIn: 0.5, duration: 0.25 * index }),
 };
+/********************************************  APP END  ********************************************/
 
-// GENERAL ANIMATIONS
+
+/****************************************  HOME PAGE START  ****************************************/
+// PARTICLES
+export const canvasMotion = () => ({
+  initial: { opacity: 0 },
+  animate: {
+    opacity: 1,
+    scale: [1, 2, 2, 1, 1],
+    rotate: [0, 0, 270, 270, 0],
+    borderRadius: ['20%', '20%', '50%', '50%', '20%'],
+    transition: { delay: 1 },
+  },
+  exit: { opacity: 0 },
+});
+
+
+/*****************************************  HOME PAGE END  *****************************************/
+
+
+/***************************************  CREATE PAGE START  ***************************************/
+/****************************************  CREATE PAGE END  ****************************************/
+
+
+/***************************************  GALLERY PAGE START  **************************************/
+/****************************************  GALLERY PAGE END  ***************************************/
+
+
+/******************************************  UTILS START  ******************************************/
 export function bigMotion(props = {}, extra = {}) {
   const {
     direction,
@@ -134,25 +159,27 @@ export function bigMotion(props = {}, extra = {}) {
   return merge(options, extra);
 }
 
-// export const textVariant = (delay) => {
-//   return {
-//     hidden: {
-//       y: -50,
-//       opacity: 0,
-//     },
-//     show: {
-//       y: 0,
-//       opacity: 1,
-//       transition: {
-//         type: 'spring',
-//         duration: 1.25,
-//         delay: delay,
-//       },
-//     },
-//   };
-// };
+export const textVariant = (delay) => ({
+  initial: 'initial',
+  animate: 'animate',
+  variants: {
+    hidden: {
+      y: -50,
+      opacity: 0,
+    },
+    show: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        duration: 1.25,
+        delay: delay,
+      },
+    },
+  },
+});
 
-export const fadeIn = ({ direction = false, type = 'tween', delay = 0, duration = 5, ease = 'easeInOut' } = {}) => ({
+export const fadeIn = (direction = false, type = 'tween', delay = 0, duration = 5, ease = 'easeInOut') => ({
   initial: 'initial',
   animate: 'animate',
   variants: {
@@ -165,65 +192,59 @@ export const fadeIn = ({ direction = false, type = 'tween', delay = 0, duration 
   },
 });
 
-// export const zoomIn = (delay, duration) => {
-//   return {
-//     hidden: {
-//       scale: 0,
-//       opacity: 0,
-//     },
-//     show: {
-//       scale: 1,
-//       opacity: 1,
-//       transition: {
-//         type: 'tween',
-//         delay: delay,
-//         duration: duration,
-//         ease: 'easeOut',
-//       },
-//     },
-//   };
-// };
+export const zoomIn = (delay, duration) => ({
+  initial: 'initial',
+  animate: 'animate',
+  variants: {
+    initial: {
+      scale: 0,
+      opacity: 0,
+    },
+    animate: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        type: 'tween',
+        delay: delay,
+        duration: duration,
+        ease: 'easeOut',
+      },
+    },
+  },
+});
 
-// export const slideIn = (direction, type, delay, duration) => {
-//   return {
-//     hidden: {
-//       x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : 0,
-//       y: direction === 'up' ? '100%' : direction === 'down' ? '100%' : 0,
-//     },
-//     show: {
-//       x: 0,
-//       y: 0,
-//       transition: {
-//         type: type,
-//         delay: delay,
-//         duration: duration,
-//         ease: 'easeOut',
-//       },
-//     },
-//   };
-// };
+export const slideIn = (direction, type, delay, duration) => ({
+  initial: 'initial',
+  animate: 'animate',
+  variants: {
+    initial: {
+      x: direction === 'left' ? '-100%' : direction === 'right' ? '100%' : 0,
+      y: direction === 'up' ? '100%' : direction === 'down' ? '100%' : 0,
+    },
+    animate: {
+      x: 0,
+      y: 0,
+      transition: {
+        type: type,
+        delay: delay,
+        duration: duration,
+        ease: 'easeOut',
+      },
+    },
+  },
+});
 
-// export const staggerContainer = (staggerChildren, delayChildren) => {
-//   return {
-//     hidden: {},
-//     show: {
-//       transition: {
-//         staggerChildren: staggerChildren,
-//         delayChildren: delayChildren || 0,
-//       },
-//     },
-//   };
-// };
-
-// export const fadeIn = (direction = '', type = 'tween', delay = 0, duration = 0.5, ease = easeInOut) => ({
-//   initial: {
-//     x: direction === 'left' ? 100 : direction === 'right' ? -100 : 0,
-//     y: direction === 'up' ? 100 : direction === 'down' ? -100 : 0,
-//     opacity: 0,
-//   },
-//   animate: { x: 0, y: 0, opacity: 1, transition: { type, delay, duration, ease } },
-// });
-
-function rotateX({ rotate, x }) {
-  return `rotate(${rotate}) translateX(${x})`;
-}
+export const staggerContainer = (staggerChildren, delayChildren) => ({
+  initial: 'initial',
+  animate: 'animate',
+  variants: {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: staggerChildren,
+        delayChildren: delayChildren || 0,
+      },
+    },
+  },
+});
+/*******************************************  UTILS END  *******************************************/
