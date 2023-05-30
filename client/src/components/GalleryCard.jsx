@@ -2,15 +2,15 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { useStore } from '../store/useStore';
-import { galleryCardMotion } from '../utils/motion';
+import { galleryCardMotion, galleryCardImageMotion } from '../utils/motion';
 
 const GalleryCard = (props) => {
   const { _id, name, prompt, photo, index } = props;
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
 
   return (
-    <Container key={_id} {...galleryCardMotion(index)} onClick={() => { setPhotoSwipe(index); }}>
-      <img src={photo} />
+    <Container key={`card-${_id}`} onClick={() => { setPhotoSwipe(index); }} {...galleryCardMotion()}>
+      <motion.img key={`cardimage-${_id}`} src={photo} {...galleryCardImageMotion()} />
     </Container>
   );
 };
