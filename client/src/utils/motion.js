@@ -107,6 +107,11 @@ export const galleryCardImageMotion = (index, loading) => ({
   exit: { opacity: 0 },
   whileHover: { scale: 1.05, transition: { type: 'tween', duration: 0.33, ease: easeInOut } },
 });
+export const galleryCardOverlayMotion = (hover) => ({
+  initial: { opacity: 0 },
+  animate: { opacity: hover ? 1 : 0, transition: { type: 'tween', duration: 0.25, ease: easeInOut } },
+  exit: { opacity: 0 },
+});
 /****************************************  GALLERY PAGE END  ***************************************/
 
 
@@ -131,7 +136,7 @@ export const textVariant = (delay) => ({
   },
 });
 
-export const fadeIn = (direction = false, type = 'tween', delay = 0, duration = 5, ease = 'easeInOut') => ({
+export const fadeIn = (direction = false, type = 'tween', delay = 0, duration = 5, ease = easeInOut) => ({
   initial: 'initial',
   animate: 'animate',
   variants: {
