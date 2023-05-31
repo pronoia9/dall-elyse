@@ -94,14 +94,19 @@ export const navbarMotion = {
 
 /***************************************  GALLERY PAGE START  **************************************/
 // GALLERY CARD (duration: 0.5)
-export const galleryCardMotion = (loading) => {
-  const transition = { type: 'tween', duration: 0.5, ease: easeInOut };
-  return {
-    initial: { opacity: 0 },
-    animate: { opacity: loading ? 0 : 1, transition },
-    exit: { opacity: 0 },
-  };
-};
+export const galleryCardMotion = () => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1, transition: { type: 'tween', duration: 0.5, ease: easeInOut } },
+  exit: { opacity: 0 },
+});
+// GALLERY CARD IMAGE (duration: 0.33)
+export const galleryCardImageMotion = (loading, hover) => ({
+  animate: {
+    opacity: loading ? 0 : 1,
+    scale: hover ? 1.05 : 1,
+    transition: { type: 'tween', delay: 0, duration: 0.33, ease: easeInOut }
+  },
+});
 // GALLERY CARD OVERLAY (duration: 0.25)
 export const galleryCardOverlayMotion = (hover) => ({
   initial: { opacity: 0 },
