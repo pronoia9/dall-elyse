@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 import { Loading } from './';
 import { useStore } from '../store/useStore';
-import { galleryCardMotion, galleryCardImageMotion } from '../utils/motion';
+import { galleryCardMotion, galleryCardImageMotion, galleryCardOverlayMotion } from '../utils/motion';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
 const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
@@ -38,14 +38,14 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
       {loading && <Loading />}
       <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(index, loading)} />
       {(!loading && hover) && (
-        <Overlay hover={hover}>
+        <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
           <ButtonContainer>
             <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
           </ButtonContainer>
           <TextContainer>
             <p>
               <span ref={avatarRef}>{name[0]}</span>
-              <span ref={promptRef} onClick={() => copyToClipboard({prompt})}>{prompt}</span>
+              <span ref={promptRef} onClick={() => copyToClipboard(prompt)}>{prompt}</span>
             </p>
           </TextContainer>
         </Overlay>
@@ -86,7 +86,7 @@ const Container = styled(motion.div)`
   }
 `;
 
-const Overlay = styled.div`
+const Overlay = styled(motion.div)`
   display: ${(props) => !props.hover && 'none'};
   position: absolute;
   top: 0;

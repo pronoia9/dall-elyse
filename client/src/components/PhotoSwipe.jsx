@@ -39,7 +39,7 @@ export default function PhotoSwipe({ index, name, photo, prompt, _id, isLast }) 
               <img src={photo} />
             </ImageWrapper>
             <TextWrapper>
-              <p onClick={() => copyToClipboard({prompt})}>{prompt}</p>
+              <p onClick={() => copyToClipboard(prompt)}>{prompt}</p>
               <p onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
             </TextWrapper>
           </ImageContainer>
