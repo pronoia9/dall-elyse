@@ -51,6 +51,11 @@ export function getRandomPrompt(prompt) {
   return randomPrompt;
 }
 
+// Copy input to clipboard
+export function copyToClipboard(text) {
+  navigator.clipboard.writeText(text);
+}
+
 // Downloads an image with a specified filename
 export async function downloadImage(_id, photo) {
   FileSaver.saveAs(photo, `download-${_id}.jpg`); // Save the photo with the provided filename
