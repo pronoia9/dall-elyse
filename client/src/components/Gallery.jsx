@@ -18,8 +18,6 @@ const Gallery = () => {
      }, 500);
   }, [searchKey]);
 
-  useEffect(() => { console.log(`loaded: ${imagesLoaded}`); }, [imagesLoaded]);
-
   return (
     <Container>
       {filteredData?.map((d, index) => (
