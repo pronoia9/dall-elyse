@@ -33,9 +33,9 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
   };
 
   return (
-    <Container key={`card-${_id}`} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion(index, loading)}>
+    <Container key={`card-${_id}`} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion(loading)}>
       {loading && <Loading />}
-      <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(index, loading)} />
+      <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(hover)} />
 
       {/* OVERLAY ON HOVER */}
       {(!loading && hover) && (

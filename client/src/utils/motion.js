@@ -86,34 +86,33 @@ export const navbarMotion = {
 };
 /********************************************  APP END  ********************************************/
 
-
 /****************************************  HOME PAGE START  ****************************************/
 /*****************************************  HOME PAGE END  *****************************************/
-
 
 /***************************************  CREATE PAGE START  ***************************************/
 /****************************************  CREATE PAGE END  ****************************************/
 
-
 /***************************************  GALLERY PAGE START  **************************************/
-export const galleryCardMotion = (index, loading) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { type: 'tween', delay: 1, duration: 1, ease: easeInOut } },
-  exit: { opacity: 0 },
+// GALLERY CARD (duration: 0.5)
+export const galleryCardMotion = (loading) => {
+  const transition = { type: 'tween', duration: 0.5, ease: easeInOut };
+  return {
+    initial: { opacity: 0 },
+    animate: { opacity: loading ? 0 : 1, transition },
+    exit: { opacity: 0 },
+  };
+};
+// GALLERY CARD IMAGE (duration: 0.33)
+export const galleryCardImageMotion = (hover) => ({
+  animate: { scale: hover ? 1.05 : 1, transition: { type: 'tween', duration: 0.33, ease: easeInOut } },
 });
-export const galleryCardImageMotion = (index, loading) => ({
-  initial: { opacity: 0 },
-  animate: { opacity: loading ? 0 : 1 },
-  exit: { opacity: 0 },
-  whileHover: { scale: 1.05, transition: { type: 'tween', duration: 0.33, ease: easeInOut } },
-});
+// GALLERY CARD OVERLAY (duration: 0.25)
 export const galleryCardOverlayMotion = (hover) => ({
   initial: { opacity: 0 },
   animate: { opacity: hover ? 1 : 0, transition: { type: 'tween', duration: 0.25, ease: easeInOut } },
   exit: { opacity: 0 },
 });
 /****************************************  GALLERY PAGE END  ***************************************/
-
 
 /******************************************  UTILS START  ******************************************/
 export const textVariant = (delay) => ({
