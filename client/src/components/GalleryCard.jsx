@@ -6,7 +6,7 @@ import { Loading } from './';
 import { useStore } from '../store/useStore';
 import { galleryCardMotion, galleryCardImageMotion } from '../utils/motion';
 
-const GalleryCard = ({ _id, name, prompt, photo, index, loaded, setLoaded, ...props }) => {
+const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
   // STORE
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
   // STATES
@@ -15,7 +15,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index, loaded, setLoaded, ...pr
   const handleClick = () => { setPhotoSwipe(index); }
   
   const imageLoaded = () => {
-    setLoaded((prev) => ([prev[0] + 1, prev[1]]));
+    setImagesLoaded((prev) => ([prev[0] + 1, prev[1]]));
     setLoading(false);
   }
   
