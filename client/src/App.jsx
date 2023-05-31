@@ -112,7 +112,7 @@ const Main = styled(motion.main)`
   align-items: center;
   width: calc(100% - 374px);
   max-width: 1280px;
-  min-height: 100%;
+  height: 100%;
   padding-top: 50px;
   padding-bottom: 40px;
   margin: auto;

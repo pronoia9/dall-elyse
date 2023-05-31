@@ -15,13 +15,16 @@ export default function GalleryPage() {
       </InputWrapper>
 
       {/* Gallery Grid */}
-      <Gallery />
+      <GalleryWrapper>
+        <Gallery />
+      </GalleryWrapper>
     </Container>
   );
 }
 
 const Container = styled.section`
   width: 100%;
+  height: 100%;
 `;
 
 const InputWrapper = styled.div`
@@ -41,4 +44,10 @@ const InputWrapper = styled.div`
   @media only screen and (max-width: 760px) {
     width: calc(100% - 40px);
   }
+`;
+
+const GalleryWrapper = styled.div`
+  width: 100%;
+  height: 90%;
+  overflow-y: scroll;
 `;
