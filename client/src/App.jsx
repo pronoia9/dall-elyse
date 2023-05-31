@@ -48,7 +48,7 @@ const App = () => {
           ))}
 
           <AnimatePresence>
-            <Main key={location.pathname} center={location.pathname === '/create'} {...contentMotion(location.pathname)}>
+            <Main key={location.pathname} {...contentMotion(location.pathname)}>
               <Routes location={location} key={location.pathname}>
                 <Route exact path='/' element={<HomePage />} />
                 <Route path='/gallery' element={<GalleryPage />} />
@@ -113,7 +113,7 @@ const Main = styled(motion.main)`
   /* padding-top: 50px; */
   /* padding-bottom: 40px; */
   margin: auto;
-  
+
   & > div:last-child {
     margin-bottom: 0;
   }
