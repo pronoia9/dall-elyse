@@ -130,6 +130,7 @@ const TextContainer = styled.div`
 
   span:last-child {
     cursor: pointer;
+    transition: color cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
 
     &:hover {
       color: rgba(255, 255, 255, 0.65);
