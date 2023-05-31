@@ -61,7 +61,7 @@ const Container = styled(motion.div)`
     height: auto;
   }
 
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1600px) {
     width: calc(33.33% - 40px);
   }
 
