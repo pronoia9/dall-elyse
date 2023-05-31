@@ -96,14 +96,17 @@ export const navbarMotion = {
 
 
 /***************************************  GALLERY PAGE START  **************************************/
-export const galleryCardMotion = (index) => ({
+export const galleryCardMotion = (index, loading) => ({
   initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { type: 'tween', delay: 1 + index, duration: 5 + index, ease: easeInOut } },
-  exit: { opacity: 0 }
+  animate: { opacity: 1, transition: { type: 'tween', delay: 1, duration: 1, ease: easeInOut } },
+  exit: { opacity: 0 },
 });
-export const galleryCardImageMotion = () => ({
-  whileHover: { scale: 1.1, transition: { type: 'tween', duration: 0.33, ease: easeInOut } }
-})
+export const galleryCardImageMotion = (index, loading) => ({
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+  whileHover: { scale: 1.05, transition: { type: 'tween', duration: 0.33, ease: easeInOut } },
+});
 /****************************************  GALLERY PAGE END  ***************************************/
 
 
