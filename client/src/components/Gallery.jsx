@@ -8,7 +8,7 @@ const Gallery = () => {
   // STORE
   const data = useStore((state) => state.data), searchKey = useStore((state) => state.searchKey);
   // LOCAL STATE (FILTERED DATA)
-  const [filteredData, setFilteredData] = useState(data);
+  const [filteredData, setFilteredData] = useState(data), [allLoading, setAllLoading] = useState([0, data.length]);
 
   useEffect(() => {
     const check = (a) => `${a}`.toLowerCase().includes(`${searchKey}`.toLowerCase());
@@ -20,7 +20,7 @@ const Gallery = () => {
   return (
     <Container>
       {filteredData?.map((d, index) => (
-        <GalleryCard key={`card-${d._id}`} {...d} index={index} />
+        <GalleryCard key={`card-${d._id}`} {...d} index={index} allLoading={allLoading} setAllLoading={setAllLoading} />
       ))}
     </Container>
   );
