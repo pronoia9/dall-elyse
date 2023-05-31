@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useStore } from '../store/useStore';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
-const GalleryCardOverlay = ({ index, name, photo, prompt, _id, isLast }) => {
+export default function PhotoSwipe({ index, name, photo, prompt, _id, isLast }) {
   // STORE
   const resetPhotoSwipe = useStore((state) => state.resetPhotoSwipe),
     photoSwipePrev = useStore((state) => state.photoSwipePrev),
@@ -54,7 +54,6 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id, isLast }) => {
     </>
   );
 };
-export default GalleryCardOverlay;
 
 const Overlay = styled.div`
   position: fixed;

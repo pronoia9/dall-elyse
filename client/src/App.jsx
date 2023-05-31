@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { Preloader, Navbar, GalleryCardOverlay, Navigation } from './components';
+import { Preloader, Navbar, PhotoSwipe, Navigation } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
@@ -58,7 +58,7 @@ const App = () => {
           </AnimatePresence>
 
           {/* Gallery Card Overlay (Had to be here cause of z-index) */}
-          {photoSwipe && <GalleryCardOverlay {...photoSwipe} />}
+          {photoSwipe && <PhotoSwipe {...photoSwipe} />}
         </>
       )}
     </Container>
