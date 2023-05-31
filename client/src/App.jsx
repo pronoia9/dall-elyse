@@ -107,21 +107,13 @@ const Circle = styled(motion.div)`
 `;
 
 const Main = styled(motion.main)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: calc(100% - 374px);
   max-width: 1280px;
   height: 100%;
   /* padding-top: 50px; */
   /* padding-bottom: 40px; */
   margin: auto;
-  ${(props) =>
-    props.center &&
-    css`
-      justify-content: center;
-      padding: 0;
-    `}
+  
   & > div:last-child {
     margin-bottom: 0;
   }
