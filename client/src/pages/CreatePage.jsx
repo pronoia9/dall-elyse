@@ -7,7 +7,7 @@ import placeholder from '../assets/placeholder.png';
 
 const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
 
-export default function CreatePage () {
+export default function CreatePage() {
   const [form, setForm] = useState(defaultForm);
   const [generating, setGenerating] = useState(false);
   const [sharing, setSharing] = useState(false);
@@ -71,69 +71,61 @@ export default function CreatePage () {
 
   return (
     <Container>
-      <Wrapper>
-        {/* Text Section */}
-        <TextContainer>
-          <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
-          <p>Once you have created the image you want, you can share it with others in the community.</p>
-        </TextContainer>
+      {/* Text Section */}
+      <TextContainer>
+        <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
+        <p>Once you have created the image you want, you can share it with others in the community.</p>
+      </TextContainer>
 
-        {/* Create/Form Section */}
-        <FormSection>
-          {/* Image */}
-          <ImageContainer>
-            <img src={form.photo ?? placeholder} alt={form.prompt} />
-            {generating && (
-              <LoaderContainer>
-                <Loading />
-              </LoaderContainer>
-            )}
-          </ImageContainer>
-          {/* Form */}
-          <FormContainer>
-            <FormWrapper>
-              {/* Name */}
-              <input id='name' type='text' name='name' placeholder='EX: Jane Doe' value={form.name} onChange={handleChange} />
-              {/* Prompt */}
-              <textarea
-                id='prompt'
-                type='text'
-                name='prompt'
-                placeholder='A futuristic cyborg dance club, neon lights'
-                value={form.prompt}
-                onChange={handleChange}
-                required
-              />
-              <Buttons>
-                <button onClick={handleGenerate} disabled={generating || sharing ? true : false}>
-                  {generating ? 'Generating...' : 'Generate'}
-                </button>
-                <button onClick={handleSurpriseMe}>Surprise Me</button>
-                <button onClick={handleShare} disabled={generating || sharing ? true : false}>
-                  {sharing ? 'Sharing...' : form.shared ? 'Shared' : 'Share'}
-                </button>
-              </Buttons>
-            </FormWrapper>
-          </FormContainer>
-        </FormSection>
-      </Wrapper>
+      {/* Create/Form Section */}
+      <FormSection>
+        {/* Image */}
+        <ImageContainer>
+          <img src={form.photo ?? placeholder} alt={form.prompt} />
+          {generating && (
+            <LoaderContainer>
+              <Loading />
+            </LoaderContainer>
+          )}
+        </ImageContainer>
+        {/* Form */}
+        <FormContainer>
+          <FormWrapper>
+            {/* Name */}
+            <input id='name' type='text' name='name' placeholder='EX: Jane Doe' value={form.name} onChange={handleChange} />
+            {/* Prompt */}
+            <textarea
+              id='prompt'
+              type='text'
+              name='prompt'
+              placeholder='A futuristic cyborg dance club, neon lights'
+              value={form.prompt}
+              onChange={handleChange}
+              required
+            />
+            <Buttons>
+              <button onClick={handleGenerate} disabled={generating || sharing ? true : false}>
+                {generating ? 'Generating...' : 'Generate'}
+              </button>
+              <button onClick={handleSurpriseMe}>Surprise Me</button>
+              <button onClick={handleShare} disabled={generating || sharing ? true : false}>
+                {sharing ? 'Sharing...' : form.shared ? 'Shared' : 'Share'}
+              </button>
+            </Buttons>
+          </FormWrapper>
+        </FormContainer>
+      </FormSection>
     </Container>
   );
-};
+}
 
 const Container = styled.section`
   width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 100px;
 
   @media only screen and (max-width: 960px) {
