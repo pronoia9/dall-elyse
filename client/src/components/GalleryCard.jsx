@@ -39,7 +39,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index }) => {
       {...galleryCardMotion(loading)}
     >
       {loading && <Loading />}
-      <img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} />
+      <img key={`cardimage-${_id}`} src={photo} alt={`image-${index}`} onLoad={imageLoaded} />
 
       {/* OVERLAY ON HOVER */}
       {!loading && hover && (
