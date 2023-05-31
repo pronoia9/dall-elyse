@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { Loading } from './';
 import { useStore } from '../store/useStore';
 import { galleryCardMotion, galleryCardImageMotion } from '../utils/motion';
+import { copyToClipboard, downloadImage } from '../utils/utils';
 
 const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
   // STORE
@@ -12,8 +13,11 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
   // STATES
   const [loading, setLoading] = useState(true);
   const [hover, setHover] = useState(false);
+  // REFS
+  const avatarRef = useRef(), promptRef = useRef(), downloadRef = useRef();
 
-  const handleClick = () => {
+  const handleClick = (e) => {
+    if (e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current)
     setPhotoSwipe(index);
   };
 
@@ -36,10 +40,13 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
       {!loading && (
         <Overlay hover={hover}>
           <ButtonContainer>
-            <p onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
+            <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
           </ButtonContainer>
           <TextContainer>
-            <p><span>{name[0]}</span> {prompt}</p>
+            <p>
+              <span ref={avatarRef}>{name[0]}</span>
+              <span ref={promptRef} onClick={() => copyToClipboard({prompt})}>{prompt}</span>
+            </p>
           </TextContainer>
         </Overlay>
       )}
@@ -91,11 +98,13 @@ const Overlay = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  cursor: default;
 `;
 
 const ButtonContainer = styled.div`
   p {
     float: right;
+    cursor: pointer;
 
     &:hover {
       color: rgba(255, 255, 255, 0.9);
@@ -104,7 +113,7 @@ const ButtonContainer = styled.div`
 `;
 
 const TextContainer = styled.div`
-  span {
+  span:first-child {
     width: 24px;
     height: 24px;
     background: rgba(255, 255, 255, 0.9);
@@ -116,7 +125,9 @@ const TextContainer = styled.div`
     margin-right: 4px;
   }
 
-  p {
+  span:last-child {
+    cursor: pointer;
+
     &:hover {
       color: rgba(255, 255, 255, 0.65);
     }
