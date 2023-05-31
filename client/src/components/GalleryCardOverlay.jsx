@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
 import { useStore } from '../store/useStore';
-import { downloadImage } from '../utils/utils';
+import { copyToClipboard, downloadImage } from '../utils/utils';
 
 const GalleryCardOverlay = ({ index, name, photo, prompt, _id, isLast }) => {
   // STORE
@@ -39,7 +39,7 @@ const GalleryCardOverlay = ({ index, name, photo, prompt, _id, isLast }) => {
               <img src={photo} />
             </ImageWrapper>
             <TextWrapper>
-              <p onClick={() => navigator.clipboard.writeText(prompt)}>{prompt}</p>
+              <p onClick={() => copyToClipboard({prompt})}>{prompt}</p>
               <p onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
             </TextWrapper>
           </ImageContainer>
