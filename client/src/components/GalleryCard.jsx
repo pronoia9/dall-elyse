@@ -37,7 +37,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
     <Container key={`card-${_id}`} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion(index, loading)}>
       {loading && <Loading />}
       <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(index, loading)} />
-      {!loading && (
+      {(!loading && hover) && (
         <Overlay hover={hover}>
           <ButtonContainer>
             <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
