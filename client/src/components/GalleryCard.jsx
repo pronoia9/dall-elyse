@@ -12,32 +12,37 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
   // STATES
   const [loading, setLoading] = useState(true);
   const [hover, setHover] = useState(false);
-  
-  const handleClick = () => { setPhotoSwipe(index); }
+
+  const handleClick = () => {
+    setPhotoSwipe(index);
+  };
 
   const handleHover = (e) => {
     if (!loading) {
       e.type === 'mouseenter' && setHover(true);
       e.type === 'mouseleave' && setHover(false);
     }
-  }
-  
+  };
+
   const imageLoaded = () => {
-    setImagesLoaded((prev) => ([prev[0] + 1, prev[1]]));
+    setImagesLoaded((prev) => [prev[0] + 1, prev[1]]);
     setLoading(false);
-  }
-  
+  };
+
   return (
     <Container key={`card-${_id}`} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion(index, loading)}>
       {loading && <Loading />}
       <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(index, loading)} />
-      <Overlay hover={hover}>
-        <TextContainer>
-          <p>{name}</p>
-          <p>{prompt}</p>
-        </TextContainer>
-
-      </Overlay>
+      {!loading && (
+        <Overlay hover={hover}>
+          <ButtonContainer>
+            <p onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
+          </ButtonContainer>
+          <TextContainer>
+            <p><span>{name[0]}</span> {prompt}</p>
+          </TextContainer>
+        </Overlay>
+      )}
     </Container>
   );
 };
@@ -81,8 +86,39 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: #00000085;
-
+  background: rgba(0, 0, 0, 0.75);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
-const TextContainer = styled.div``;
+const ButtonContainer = styled.div`
+  p {
+    float: right;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+`;
+
+const TextContainer = styled.div`
+  span {
+    width: 24px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 1);
+    border-radius: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 4px;
+  }
+
+  p {
+    &:hover {
+      color: rgba(255, 255, 255, 0.65);
+    }
+  }
+`;
