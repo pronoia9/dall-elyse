@@ -26,7 +26,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index }) => {
     }
   };
 
-  const imageLoaded = () => { setLoading(true); };
+  const imageLoaded = () => { setLoading(false); };
 
   return (
     <Container hover={hover} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
