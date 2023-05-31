@@ -1,10 +1,10 @@
 import { useRef, useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
 import { Loading } from './';
 import { useStore } from '../store/useStore';
-import { galleryCardMotion, galleryCardImageMotion, galleryCardOverlayMotion } from '../utils/motion';
+import { galleryCardMotion, galleryCardOverlayMotion } from '../utils/motion';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
 const GalleryCard = ({ _id, name, prompt, photo, index }) => {
@@ -30,12 +30,19 @@ const GalleryCard = ({ _id, name, prompt, photo, index }) => {
   const imageLoaded = () => { setLoading(false); };
 
   return (
-    <Container key={`card-${_id}`} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion(loading)}>
+    <Container
+      key={`card-${_id}`}
+      hover={hover}
+      onClick={handleClick}
+      onMouseEnter={handleHover}
+      onMouseLeave={handleHover}
+      {...galleryCardMotion(loading)}
+    >
       {loading && <Loading />}
-      <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(hover)} />
+      <img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} />
 
       {/* OVERLAY ON HOVER */}
-      {(!loading && hover) && (
+      {!loading && hover && (
         <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
           {/* DOWNLOAD */}
           <ButtonContainer>
@@ -46,7 +53,9 @@ const GalleryCard = ({ _id, name, prompt, photo, index }) => {
           <TextContainer>
             <p>
               <span ref={avatarRef}>{name[0]}</span>
-              <span ref={promptRef} onClick={() => copyToClipboard(prompt)}>{prompt}</span>
+              <span ref={promptRef} onClick={() => copyToClipboard(prompt)}>
+                {prompt}
+              </span>
             </p>
           </TextContainer>
         </Overlay>
@@ -71,6 +80,10 @@ const Container = styled(motion.div)`
     display: block;
     width: 100%;
     height: auto;
+    transition: all cubic-bezier(0.455, 0.03, 0.515, 0.955) 0.33s;
+    ${(props) => props.hover && css`
+      transform: scale(1.05);
+    `}
   }
 
   @media only screen and (max-width: 1600px) {

@@ -102,10 +102,6 @@ export const galleryCardMotion = (loading) => {
     exit: { opacity: 0 },
   };
 };
-// GALLERY CARD IMAGE (duration: 0.33)
-export const galleryCardImageMotion = (hover) => ({
-  animate: { scale: hover ? 1.05 : 1, transition: { type: 'tween', duration: 0.33, ease: easeInOut } },
-});
 // GALLERY CARD OVERLAY (duration: 0.25)
 export const galleryCardOverlayMotion = (hover) => ({
   initial: { opacity: 0 },
