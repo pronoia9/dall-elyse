@@ -1,16 +1,28 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+import { Loading } from './';
 import { useStore } from '../store/useStore';
 import { galleryCardMotion, galleryCardImageMotion } from '../utils/motion';
 
-const GalleryCard = (props) => {
-  const { _id, name, prompt, photo, index } = props;
+const GalleryCard = ({ _id, name, prompt, photo, index, loaded, setLoaded, ...props }) => {
+  // STORE
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
-
+  // STATES
+  const [loading, setLoading] = useState(true);
+  
+  const handleClick = () => { setPhotoSwipe(index); }
+  
+  const imageLoaded = () => {
+    setLoaded((prev) => ([prev[0] + 1, prev[1]]));
+    setLoading(false);
+  }
+  
   return (
-    <Container key={`card-${_id}`} onClick={() => { setPhotoSwipe(index); }} {...galleryCardMotion()}>
-      <motion.img key={`cardimage-${_id}`} src={photo} {...galleryCardImageMotion()} />
+    <Container key={`card-${_id}`} onClick={handleClick} {...galleryCardMotion(index, loading)}>
+      {loading && <Loading />}
+      <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(index, loading)} />
     </Container>
   );
 };
@@ -26,6 +38,8 @@ const Container = styled(motion.div)`
 
   cursor: pointer;
   overflow: hidden;
+
+  background: #131313;
 
   img {
     display: block;
