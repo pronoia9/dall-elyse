@@ -29,7 +29,7 @@ const Container = styled(motion.div)`
   left: 0;
   width: 100%;
   height: 100%;
-  background: #131313;
+  /* background: #131313; */
 `;
 
 const Wrapper = styled(motion.div)`

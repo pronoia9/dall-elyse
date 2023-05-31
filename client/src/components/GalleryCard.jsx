@@ -32,17 +32,15 @@ const Container = styled(motion.div)`
   position: relative;
   margin: 20px;
   width: calc(25% - 40px);
-
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-
   cursor: pointer;
   overflow: hidden;
-
-  background: #131313;
+  /* background: #131313; */
 
   img {
+    background: none;
     display: block;
     width: 100%;
     height: auto;
