@@ -105,9 +105,12 @@ const ButtonContainer = styled.div`
   p {
     float: right;
     cursor: pointer;
+    color: rgba(255, 255, 255, 0.75);
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.5s;
 
     &:hover {
       color: rgba(255, 255, 255, 0.9);
+      transform: scale(1.1);
     }
   }
 `;
