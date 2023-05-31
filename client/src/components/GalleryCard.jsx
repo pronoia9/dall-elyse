@@ -11,8 +11,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
   // STORE
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
   // STATES
-  const [loading, setLoading] = useState(true);
-  const [hover, setHover] = useState(false);
+  const [loading, setLoading] = useState(true), [hover, setHover] = useState(false);
   // REFS
   const avatarRef = useRef(), promptRef = useRef(), downloadRef = useRef();
 
@@ -37,11 +36,16 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
     <Container key={`card-${_id}`} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion(index, loading)}>
       {loading && <Loading />}
       <motion.img key={`cardimage-${_id}`} src={photo} onLoad={imageLoaded} {...galleryCardImageMotion(index, loading)} />
+
+      {/* OVERLAY ON HOVER */}
       {(!loading && hover) && (
         <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
+          {/* DOWNLOAD */}
           <ButtonContainer>
             <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
           </ButtonContainer>
+
+          {/* FAKE AVATAR & PROMPT */}
           <TextContainer>
             <p>
               <span ref={avatarRef}>{name[0]}</span>
@@ -125,7 +129,7 @@ const TextContainer = styled.div`
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    margin-right: 4px;
+    margin-right: 8px;
   }
 
   span:last-child {
