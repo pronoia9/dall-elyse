@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 
 import { Loading } from './';
 import { useStore } from '../store/useStore';
-import { galleryCardMotion, galleryCardOverlayMotion } from '../utils/motion';
+import { galleryCardImageMotion, galleryCardMotion, galleryCardOverlayMotion } from '../utils/motion';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
 const GalleryCard = ({ _id, name, prompt, photo, index }) => {
@@ -16,8 +16,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index }) => {
   const avatarRef = useRef(), promptRef = useRef(), downloadRef = useRef();
 
   const handleClick = (e) => {
-    if (e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current)
-    setPhotoSwipe(index);
+    if (e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) setPhotoSwipe(index);
   };
 
   const handleHover = (e) => {
@@ -30,16 +29,9 @@ const GalleryCard = ({ _id, name, prompt, photo, index }) => {
   const imageLoaded = () => { setLoading(false); };
 
   return (
-    <Container
-      key={`card-${_id}`}
-      hover={hover}
-      onClick={handleClick}
-      onMouseEnter={handleHover}
-      onMouseLeave={handleHover}
-      {...galleryCardMotion(loading)}
-    >
+    <Container hover={hover} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
       {loading && <Loading />}
-      <img key={`cardimage-${_id}`} src={photo} alt={`image-${index}`} onLoad={imageLoaded} />
+      <motion.img key={`cardimage-${_id}`} src={photo} alt={`image-${index}`} onLoad={imageLoaded} {...galleryCardImageMotion(loading, hover)} />
 
       {/* OVERLAY ON HOVER */}
       {!loading && hover && (
@@ -80,10 +72,6 @@ const Container = styled(motion.div)`
     display: block;
     width: 100%;
     height: auto;
-    transition: all cubic-bezier(0.455, 0.03, 0.515, 0.955) 0.33s;
-    ${(props) => props.hover && css`
-      transform: scale(1.05);
-    `}
   }
 
   @media only screen and (max-width: 1600px) {
