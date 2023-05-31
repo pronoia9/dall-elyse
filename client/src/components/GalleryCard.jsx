@@ -7,7 +7,7 @@ import { useStore } from '../store/useStore';
 import { galleryCardMotion, galleryCardImageMotion, galleryCardOverlayMotion } from '../utils/motion';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
-const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
+const GalleryCard = ({ _id, name, prompt, photo, index }) => {
   // STORE
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
   // STATES
@@ -27,10 +27,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
     }
   };
 
-  const imageLoaded = () => {
-    setImagesLoaded((prev) => [prev[0] + 1, prev[1]]);
-    setLoading(false);
-  };
+  const imageLoaded = () => { setLoading(false); };
 
   return (
     <Container key={`card-${_id}`} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion(loading)}>
