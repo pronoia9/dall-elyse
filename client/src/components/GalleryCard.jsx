@@ -29,6 +29,7 @@ const GalleryCard = ({ _id, name, prompt, photo, index, setImagesLoaded }) => {
 export default GalleryCard;
 
 const Container = styled(motion.div)`
+  position: relative;
   margin: 20px;
   width: calc(25% - 40px);
 
