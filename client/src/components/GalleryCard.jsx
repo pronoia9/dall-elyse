@@ -66,7 +66,6 @@ const Container = styled(motion.div)`
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
-  cursor: pointer;
   overflow: hidden;
   /* background: #131313; */
 
@@ -102,7 +101,6 @@ const Overlay = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  cursor: default;
 `;
 
 const ButtonContainer = styled.div`
