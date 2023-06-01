@@ -19,7 +19,7 @@ export const circleMotion = () => ({
 export const navigationMotion = {
   transition: { type: 'tween', delay: 0.5, duration: 0.5, ease: 'linear' },
   lineMotion: (center) => {
-    const direction = window.screen.height * 0.75 * (center ? 1 : -1);
+    const direction = window.innerHeight * 0.75 * (center ? 1 : -1);
     return {
       initial: { x: direction, opacity: 0 },
       animate: { x: 0, opacity: 1, transition: { ...navigationMotion.transition, delay: 0 } },
@@ -37,7 +37,7 @@ export const navigationMotion = {
   },
   subtitleMotion: (center, subtitleOffset = 75, hover, mobile) => {
     const sign = -(center ? 1 : -1), // reverse sign from title so they animate towards the opposite sides
-      location = !(mobile && window.screen.width < 960) ? subtitleOffset * sign : 0;
+      location = !(mobile && window.innerWidth < 960) ? subtitleOffset * sign : 0;
     return {
       initial: { x: location - 100, opacity: 0 },
       animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { ...navigationMotion.transition, delay: hover ? 0 : 0.5 } },
@@ -53,11 +53,11 @@ export const navbarMotion = {
   logoMotion: (count = 3, mobileMenuOpen) => ({
     initial: { x: -100, opacity: 0 },
     animate: {
-      x: !mobileMenuOpen ? 0 : -window.screen.width / 2,
+      x: !mobileMenuOpen ? 0 : -window.innerWidth / 2,
       opacity: 1,
       transition: { type: 'tween', delay: !mobileMenuOpen ? 0.25 * count : 0, duration: 0.5, ease: easeInOut },
     },
-    exit: { x: -window.screen.width / 2 },
+    exit: { x: -window.innerWidth / 2 },
   }),
   // DESKTOP NAVBAR (delay: 1) (duration: 0.25 * 3 = 0.75) (total duration: 1.75)
   desktopLinksMotion: (index) => ({
@@ -69,9 +69,9 @@ export const navbarMotion = {
   mobileMenuMotion: (count = 3) => {
     const transition = { type: 'tween', delay: 0, duration: 0.5, ease: easeInOut };
     return {
-      initial: { x: window.screen.width },
+      initial: { x: window.innerWidth },
       animate: { x: 0, transition },
-      exit: { x: window.screen.width, transition: { ...transition, delay: 0.25 * count } },
+      exit: { x: window.innerWidth, transition: { ...transition, delay: 0.25 * count } },
     };
   },
   // MOBILE MENU LINKS (delay: 0.5 || 0) (duration: 0.25 * 3 = 0.75) (total duration: 1.25 || 0.75)
