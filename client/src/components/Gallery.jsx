@@ -23,7 +23,7 @@ export default function Gallery() {
 
   return (
     <Container>
-      <PhotoSwipeGallery>
+      <PhotoSwipeGallery withCaption withDownloadButton>
         {filteredData?.map((d, index) => (
           <GalleryCard key={`card-${d._id}`} {...d} index={index} />
         ))}
