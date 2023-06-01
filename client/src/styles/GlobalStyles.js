@@ -104,7 +104,13 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 14px;
     line-height: 16px;
     background: rgba(0, 0, 0, 0);
-    transition: background 0.3s, border 0.3s;
+    transition: all 0.3s;
+
+    &:focus {
+      border: 2px solid #fff;
+      opacity: 0.5;
+      transition: all 1s;
+    }
   }
 
   textarea {
