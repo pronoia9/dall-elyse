@@ -31,7 +31,7 @@ export const navigationMotion = {
       location = titleOffset * sign;
     return {
       initial: { x: location + 100, opacity: 0 },
-      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: navigationMotion.transition },
+      animate: { x: location + (hover ? -5 * sign : location), opacity: 1, transition: { ...navigationMotion.transition, delay: hover ? 0 : 0.5 } },
       exit: { x: location - 100, opacity: 0 },
     };
   },
@@ -40,7 +40,7 @@ export const navigationMotion = {
       location = !(mobile && window.screen.width < 960) ? subtitleOffset * sign : 0;
     return {
       initial: { x: location - 100, opacity: 0 },
-      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: navigationMotion.transition },
+      animate: { x: location + (hover ? -10 * sign : 0), opacity: 1, transition: { ...navigationMotion.transition, delay: hover ? 0 : 0.5 } },
       exit: { x: location + 100, opacity: 0 },
     };
   },
