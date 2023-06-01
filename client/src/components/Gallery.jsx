@@ -4,6 +4,7 @@ import { Gallery as PhotoSwipeGallery } from 'react-photoswipe-gallery';
 
 import { useStore } from '../store/useStore';
 import { GalleryCard } from './';
+import 'photoswipe/dist/photoswipe.css';
 
 export default function Gallery() {
   // STORE
