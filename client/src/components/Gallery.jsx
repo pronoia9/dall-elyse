@@ -26,11 +26,20 @@ export default function Gallery() {
 
   // PHOTOSWIPE OPTIONS
   const options = {
+    pswpModule: () => import('photoswipe'),
     zoom: false,
     close: true,
     counter: true,
     bgOpacity: 0.75,
-    pswpModule: () => import('photoswipe'),
+    loop: true,
+    wheelToZoom: true,
+    pinchToClose: true,
+    preload: [1, 4],
+    closeTitle: 'Close the dialog',
+    zoomTitle: 'Zoom the photo',
+    arrowPrevTitle: 'Go to the previous photo',
+    arrowNextTitle: 'Go to the next photo',
+    errorMsg: 'The photo cannot be loaded',
   };
 
   return (
