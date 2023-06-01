@@ -2,15 +2,19 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { Loading } from '../components';
-import { getRandomPrompt } from '../utils/utils';
+import { fetchPosts, getRandomPrompt } from '../utils/utils';
 import placeholder from '../assets/placeholder.png';
+import { useStore } from '../store/useStore';
 
 const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
 
 export default function CreatePage() {
-  const [form, setForm] = useState(defaultForm);
-  const [generating, setGenerating] = useState(false);
-  const [sharing, setSharing] = useState(false);
+  // STORE
+  const setData = useStore((state) => state.setData);
+  // STATES
+  const [form, setForm] = useState(defaultForm),
+    [generating, setGenerating] = useState(false),
+    [sharing, setSharing] = useState(false);
 
   // HANDLE INPUT CHANGE
   const handleChange = (e) => {
@@ -63,6 +67,8 @@ export default function CreatePage() {
       } catch (error) {
         console.log(error);
       } finally {
+        // Fetch posts again cause... yeah
+        fetchPosts(setData);
         setForm({ ...form, shared: true });
         setSharing(false);
       }
