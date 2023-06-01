@@ -73,6 +73,10 @@ export const GlobalStyles = createGlobalStyle`
     color: #808080;
   }
 
+  *::-webkit-scrollbar{
+    display: none;
+  }
+
   /* Text Styles */
   a, li {
     text-decoration: none;
