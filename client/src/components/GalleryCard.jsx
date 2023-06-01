@@ -7,7 +7,7 @@ import { useStore } from '../store/useStore';
 import { galleryCardImageMotion, galleryCardMotion, galleryCardOverlayMotion } from '../utils/motion';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
-const GalleryCard = ({ _id, name, prompt, photo, index }) => {
+export default function GalleryCard({ _id, name, prompt, photo, index }) {
   // STORE
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe),
     searchKey = useStore((state) => state.searchKey);
@@ -64,7 +64,6 @@ const GalleryCard = ({ _id, name, prompt, photo, index }) => {
     </AnimatePresence>
   );
 };
-export default GalleryCard;
 
 const Container = styled(motion.div)`
   position: relative;
