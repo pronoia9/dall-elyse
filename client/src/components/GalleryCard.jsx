@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Item as PhotoSwipeItem } from 'react-photoswipe-gallery';
 
 import { Loading } from './';
 import { galleryCardImageMotion, galleryCardMotion, galleryCardOverlayMotion } from '../utils/motion';
-import { copyToClipboard, downloadImage } from '../utils/utils';
+import { copyToClipboard, downloadImage, smaller } from '../utils/utils';
 
 export default function GalleryCard({ _id, name, prompt, photo, index, ref, open }) {
   // STATES
@@ -15,7 +15,6 @@ export default function GalleryCard({ _id, name, prompt, photo, index, ref, open
   const avatarRef = useRef(),
     promptRef = useRef(),
     downloadRef = useRef();
-
   // Open photo swipe overlay when clicking on the image and not download link/prompt/etc
   const handleClick = (e, open) => {
     if (!loading && e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) open(e);
@@ -23,20 +22,19 @@ export default function GalleryCard({ _id, name, prompt, photo, index, ref, open
 
   // Handle hover state for overlay when hovering on the container after image has loaded
   const handleHover = (e) => {
-    if (!loading) {
-      e.type === 'mouseenter' && setHover(true);
-      e.type === 'mouseleave' && setHover(false);
-    }
+    (!loading && e.type === 'mouseenter') && setHover(true);
+    (!loading && e.type === 'mouseleave') && setHover(false);
   };
 
   // Function for when the image loads (onLoad)
-  const imageLoaded = () => {
-    setLoading(false);
-  };
+  const imageLoaded = () => { setLoading(false); };
+
+  // PhotoSwipe Image size
+  const imageSize = smaller(window.innerWidth * 0.85, window.innerHeight * 0.85);
 
   return (
     <AnimatePresence>
-      <PhotoSwipeItem original={photo} thumbnail={photo} alt={prompt}>
+      <PhotoSwipeItem original={photo} thumbnail={photo} alt={prompt} width={imageSize} height={imageSize}>
         {({ ref, open }) => (
           <Container ref={ref} onClick={(e) => handleClick(e, open)} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
             {loading && <Loading loader={14} />}
