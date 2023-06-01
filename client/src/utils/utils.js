@@ -60,3 +60,6 @@ export function copyToClipboard(text) {
 export async function downloadImage(_id, photo) {
   FileSaver.saveAs(photo, `download-${_id}.jpg`); // Save the photo with the provided filename
 }
+
+// Returns the smaller number
+export const smaller = (a, b) => (parseInt(a) < parseInt(b) ? a : b);
