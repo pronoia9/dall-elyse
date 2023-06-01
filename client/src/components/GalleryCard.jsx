@@ -18,34 +18,35 @@ const GalleryCard = ({ _id, name, prompt, photo, index, allLoading, setAllLoadin
   const ifAllLoaded = () => allLoading[0] === allLoading[1];
 
   const handleClick = (e) => {
-    if (ifAllLoaded() && e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) setPhotoSwipe(index);
+    if (/* ifAllLoaded() */ !loading && e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) setPhotoSwipe(index);
   };
 
   const handleHover = (e) => {
-    if (ifAllLoaded()) {
+    if (/* ifAllLoaded() */ !loading) {
       e.type === 'mouseenter' && setHover(true);
       e.type === 'mouseleave' && setHover(false);
     }
   };
 
   const imageLoaded = () => {
+    console.log(`loaded image #${index}`);
     setAllLoading((prev) => ([prev[0] + 1, prev[1]]));
     setLoading(false);
   };
 
   return (
-    <Container hover={hover} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
-      {!ifAllLoaded() && <Loading loader={14} />}
+    <Container key={`card-${_id}`} hover={hover} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
+      {/* !ifAllLoaded() */ loading  && <Loading loader={14} />}
       <motion.img
         key={`cardimage-${_id}`}
         src={photo}
         alt={`image-${index}`}
         onLoad={imageLoaded}
-        {...galleryCardImageMotion(hover, index, ifAllLoaded())}
+        {...galleryCardImageMotion(hover, index, ifAllLoaded(), loading)}
       />
 
       {/* OVERLAY ON HOVER */}
-      {ifAllLoaded() && hover && (
+      {/* ifAllLoaded() */ !loading && hover && (
         <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
           {/* DOWNLOAD */}
           <ButtonContainer>
