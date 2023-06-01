@@ -9,8 +9,7 @@ import { copyToClipboard, downloadImage } from '../utils/utils';
 
 export default function GalleryCard({ _id, name, prompt, photo, index }) {
   // STORE
-  const setPhotoSwipe = useStore((state) => state.setPhotoSwipe),
-    searchKey = useStore((state) => state.searchKey);
+  const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
   // STATES
   const [loading, setLoading] = useState(true),
     [hover, setHover] = useState(false);
