@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { Preloader, Navbar, PhotoSwipe, Navigation } from './components';
+import { Preloader, Navbar, Navigation } from './components';
 import { CreatePage, GalleryPage, HomePage } from './pages';
 import { GlobalStyles } from './styles/GlobalStyles';
 import { useStore } from './store/useStore';
@@ -15,8 +15,7 @@ const App = () => {
   const location = useLocation();
   // STORE
   const data = useStore((state) => state.data),
-    setData = useStore((state) => state.setData),
-    photoSwipe = useStore((state) => state.photoSwipe);
+    setData = useStore((state) => state.setData);
   // LOCAL STATE
   const [preloading, setPreloading] = useState(true),
     [time, setTime] = useState(0);
@@ -56,9 +55,6 @@ const App = () => {
               </Routes>
             </Main>
           </AnimatePresence>
-
-          {/* Gallery Card Overlay (Had to be here cause of z-index) */}
-          {photoSwipe && <PhotoSwipe {...photoSwipe} />}
         </>
       )}
     </Container>

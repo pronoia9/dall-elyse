@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Gallery as PhotoSwipeGallery } from 'react-photoswipe-gallery';
 
 import { useStore } from '../store/useStore';
 import { GalleryCard } from './';
 
-const Gallery = () => {
+export default function Gallery() {
   // STORE
   const data = useStore((state) => state.data),
     searchKey = useStore((state) => state.searchKey);
@@ -22,13 +23,14 @@ const Gallery = () => {
 
   return (
     <Container>
+      <PhotoSwipeGallery>
         {filteredData?.map((d, index) => (
           <GalleryCard key={`card-${d._id}`} {...d} index={index} />
         ))}
+      </PhotoSwipeGallery>
     </Container>
   );
-};
-export default Gallery;
+}
 
 const Container = styled.div`
   margin: -20px;

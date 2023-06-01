@@ -1,15 +1,13 @@
 import { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
+import { Item as PhotoSwipeItem } from 'react-photoswipe-gallery';
 
 import { Loading } from './';
-import { useStore } from '../store/useStore';
 import { galleryCardImageMotion, galleryCardMotion, galleryCardOverlayMotion } from '../utils/motion';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
-export default function GalleryCard({ _id, name, prompt, photo, index }) {
-  // STORE
-  const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
+export default function GalleryCard({ _id, name, prompt, photo, index, ref, open }) {
   // STATES
   const [loading, setLoading] = useState(true),
     [hover, setHover] = useState(false);
@@ -19,8 +17,8 @@ export default function GalleryCard({ _id, name, prompt, photo, index }) {
     downloadRef = useRef();
 
   // Open photo swipe overlay when clicking on the image and not download link/prompt/etc
-  const handleClick = (e) => {
-    if (!loading && e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) setPhotoSwipe(index);
+  const handleClick = (e, open) => {
+    if (!loading && e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) open(e);
   };
 
   // Handle hover state for overlay when hovering on the container after image has loaded
@@ -32,37 +30,43 @@ export default function GalleryCard({ _id, name, prompt, photo, index }) {
   };
 
   // Function for when the image loads (onLoad)
-  const imageLoaded = () => { setLoading(false); };
+  const imageLoaded = () => {
+    setLoading(false);
+  };
 
   return (
     <AnimatePresence>
-      <Container onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
-        {loading && <Loading loader={14} />}
-        <motion.img src={photo} alt={`image-${index}`} onLoad={imageLoaded} {...galleryCardImageMotion(hover, index, loading)} />
+      <PhotoSwipeItem original={photo} thumbnail={photo} alt={prompt}>
+        {({ ref, open }) => (
+          <Container ref={ref} onClick={(e) => handleClick(e, open)} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
+            {loading && <Loading loader={14} />}
+            <motion.img src={photo} alt={`image-${index}`} onLoad={imageLoaded} {...galleryCardImageMotion(hover, index, loading)} />
 
-        {/* OVERLAY ON HOVER */}
-        {!loading && hover && (
-          <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
-            {/* DOWNLOAD */}
-            <ButtonContainer>
-              <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
-            </ButtonContainer>
+            {/* OVERLAY ON HOVER */}
+            {!loading && hover && (
+              <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
+                {/* DOWNLOAD */}
+                <ButtonContainer>
+                  <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
+                </ButtonContainer>
 
-            {/* FAKE AVATAR & PROMPT */}
-            <TextContainer>
-              <p>
-                <span ref={avatarRef}>{name[0]}</span>
-                <span ref={promptRef} onClick={() => copyToClipboard(prompt)}>
-                  {prompt}
-                </span>
-              </p>
-            </TextContainer>
-          </Overlay>
+                {/* FAKE AVATAR & PROMPT */}
+                <TextContainer>
+                  <p>
+                    <span ref={avatarRef}>{name[0]}</span>
+                    <span ref={promptRef} onClick={() => copyToClipboard(prompt)}>
+                      {prompt}
+                    </span>
+                  </p>
+                </TextContainer>
+              </Overlay>
+            )}
+          </Container>
         )}
-      </Container>
+      </PhotoSwipeItem>
     </AnimatePresence>
   );
-};
+}
 
 const Container = styled(motion.div)`
   position: relative;

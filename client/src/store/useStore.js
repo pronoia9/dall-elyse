@@ -23,20 +23,5 @@ export const useStore = create(
     // Gallery Page
     searchKey: '',
     setSearchKey: (searchKey) => set({ searchKey }),
-
-    // Photo Swipe Overlay
-    photoSwipe: null,
-    setPhotoSwipe: (index) => set(({ data }) => ({ photoSwipe: { ...data[index], index, isLast: !(index < data.length - 1) } })),
-    resetPhotoSwipe: () => set({ photoSwipe: null }),
-    photoSwipePrev: () =>
-      set(({ data, photoSwipe }) =>
-        photoSwipe.index > 0 ? { photoSwipe: { ...data[photoSwipe.index - 1], index: photoSwipe.index - 1 }, isLast: false } : {}
-      ),
-    photoSwipeNext: () =>
-      set(({ data, photoSwipe }) =>
-        photoSwipe.isLast
-          ? {}
-          : { photoSwipe: { ...data[photoSwipe.index + 1], index: photoSwipe.index + 1, isLast: !(photoSwipe.index + 1 < data.length - 1) } }
-      ),
   }))
 );
