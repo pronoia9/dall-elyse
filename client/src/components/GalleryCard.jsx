@@ -45,7 +45,7 @@ export default function GalleryCard({ _id, name, prompt, photo, index, ref, open
               <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
                 {/* DOWNLOAD */}
                 <ButtonContainer>
-                  <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-cloud-arrow-down' />
+                  <p ref={downloadRef} onClick={() => downloadImage(_id, photo)} className='fa-solid fa-circle-down' />
                 </ButtonContainer>
 
                 {/* FAKE AVATAR & PROMPT */}
@@ -112,6 +112,7 @@ const Overlay = styled(motion.div)`
 
 const ButtonContainer = styled.div`
   p {
+    font-size: 24px;
     float: right;
     cursor: pointer;
     color: rgba(255, 255, 255, 0.75);
