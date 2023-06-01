@@ -25,6 +25,7 @@ export default function GalleryPage() {
 const Container = styled.section`
   width: 100%;
   height: 100%;
+  padding-bottom: 50px;
 `;
 
 const InputWrapper = styled.div`
@@ -50,5 +51,4 @@ const GalleryWrapper = styled.div`
   width: 100%;
   height: 90%;
   overflow-y: scroll;
-  padding-bottom: 20px;
 `;
