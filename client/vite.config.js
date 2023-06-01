@@ -7,6 +7,10 @@ export default defineConfig({
   plugins: [react(), glsl()],
   define: {
     'process.env': process.env,
-    '__APP_VERSION__': JSON.stringify(process.env.npm_package_version),
+    __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
+  },
+  optimizeDeps: {
+    exclude: ['react-photoswipe-gallery'],
+    include: ['prop-types', 'react-dom'],
   },
 });
