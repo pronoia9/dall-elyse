@@ -6,22 +6,25 @@ import { GalleryCard } from './';
 
 const Gallery = () => {
   // STORE
-  const data = useStore((state) => state.data), searchKey = useStore((state) => state.searchKey);
+  const data = useStore((state) => state.data),
+    searchKey = useStore((state) => state.searchKey);
   // LOCAL STATE (FILTERED DATA)
-  const [filteredData, setFilteredData] = useState(data), [allLoading, setAllLoading] = useState([0, data.length]);
+  const [filteredData, setFilteredData] = useState(data);
 
+  const check = (a) => `${a}`.toLowerCase().includes(`${searchKey}`.toLowerCase());
+
+  // SET SEARCH KEY WITH A 0.5s DELAY
   useEffect(() => {
-    const check = (a) => `${a}`.toLowerCase().includes(`${searchKey}`.toLowerCase());
     setTimeout(() => {
       setFilteredData(data.filter(({ name, prompt }) => check(name) || check(prompt)));
-     }, 500);
+    }, 500);
   }, [searchKey]);
 
   return (
     <Container>
-      {filteredData?.map((d, index) => (
-        <GalleryCard key={`card-${d._id}`} {...d} index={index} allLoading={allLoading} setAllLoading={setAllLoading} />
-      ))}
+        {filteredData?.map((d, index) => (
+          <GalleryCard key={`card-${d._id}`} {...d} index={index} />
+        ))}
     </Container>
   );
 };

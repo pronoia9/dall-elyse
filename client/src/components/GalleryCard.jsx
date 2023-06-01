@@ -7,7 +7,7 @@ import { useStore } from '../store/useStore';
 import { galleryCardImageMotion, galleryCardMotion, galleryCardOverlayMotion } from '../utils/motion';
 import { copyToClipboard, downloadImage } from '../utils/utils';
 
-const GalleryCard = ({ _id, name, prompt, photo, index, allLoading, setAllLoading }) => {
+const GalleryCard = ({ _id, name, prompt, photo, index }) => {
   // STORE
   const setPhotoSwipe = useStore((state) => state.setPhotoSwipe);
   // STATES
@@ -15,38 +15,31 @@ const GalleryCard = ({ _id, name, prompt, photo, index, allLoading, setAllLoadin
   // REFS
   const avatarRef = useRef(), promptRef = useRef(), downloadRef = useRef();
 
-  const ifAllLoaded = () => allLoading[0] === allLoading[1];
-
   const handleClick = (e) => {
-    if (/* ifAllLoaded() */ !loading && e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) setPhotoSwipe(index);
+    if (!loading && e.target !== downloadRef.current && e.target !== avatarRef.current && e.target !== promptRef.current) setPhotoSwipe(index);
   };
 
   const handleHover = (e) => {
-    if (/* ifAllLoaded() */ !loading) {
+    if (!loading) {
       e.type === 'mouseenter' && setHover(true);
       e.type === 'mouseleave' && setHover(false);
     }
   };
 
-  const imageLoaded = () => {
-    console.log(`loaded image #${index}`);
-    setAllLoading((prev) => ([prev[0] + 1, prev[1]]));
-    setLoading(false);
-  };
+  const imageLoaded = () => { setLoading(false); };
 
   return (
-    <Container key={`card-${_id}`} hover={hover} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
-      {/* !ifAllLoaded() */ loading  && <Loading loader={14} />}
+    <Container hover={hover} onClick={handleClick} onMouseEnter={handleHover} onMouseLeave={handleHover} {...galleryCardMotion()}>
+      {loading && <Loading loader={14} />}
       <motion.img
-        key={`cardimage-${_id}`}
         src={photo}
         alt={`image-${index}`}
         onLoad={imageLoaded}
-        {...galleryCardImageMotion(hover, index, ifAllLoaded(), loading)}
+        {...galleryCardImageMotion(hover, index, loading)}
       />
 
       {/* OVERLAY ON HOVER */}
-      {/* ifAllLoaded() */ !loading && hover && (
+      {!loading && hover && (
         <Overlay hover={hover} {...galleryCardOverlayMotion(hover)}>
           {/* DOWNLOAD */}
           <ButtonContainer>

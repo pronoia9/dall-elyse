@@ -100,12 +100,14 @@ export const galleryCardMotion = () => ({
   exit: { opacity: 0 },
 });
 // GALLERY CARD IMAGE (duration: 0.33)
-export const galleryCardImageMotion = (hover, index, ifAllLoaded) => ({
-  initial: { opacity: 0, scale: 2 },
+export const galleryCardImageMotion = (hover, index, loading) => ({
+  initial: { opacity: 0, scale: 2, },
   animate: {
-    opacity: ifAllLoaded ? 1 : 0,
+    opacity: !loading ? 1 : 0,
+    transition: { type: 'tween', delay: 0, duration: 0.33, ease: easeInOut },
     scale: hover ? 1.05 : 1,
-    transition: { type: 'tween', delay: hover ? 0 : 0.1 * index, duration: 0.33, ease: easeInOut },
+    // opacity: ifAllLoaded ? 1 : 0,
+    // transition: { type: 'tween', delay: hover ? 0 : 0.1 * index, duration: 0.33, ease: easeInOut },
   },
   exit: { opacity: 0, scale: 0 },
 });
