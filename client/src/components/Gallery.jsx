@@ -17,12 +17,14 @@ export default function Gallery() {
   // Check if input includes the search key
   const check = (a) => `${a}`.toLowerCase().includes(`${searchKey}`.toLowerCase());
 
+    // Filter data
+  const filter = (data) => data.filter(({ name, prompt }) => check(name) || check(prompt));
+
   // SET SEARCH KEY WITH A 0.5s DELAY
-  useEffect(() => {
-    setTimeout(() => {
-      setFilteredData(data.filter(({ name, prompt }) => check(name) || check(prompt)));
-    }, 500);
-  }, [searchKey]);
+  useEffect(() => { setTimeout(() => { setFilteredData(filter(data)); }, 500); }, [searchKey]);
+
+  // Update data
+  useEffect(() => { setFilteredData(filter(data)); }, [data]);
 
   // PHOTOSWIPE OPTIONS
   const options = {
