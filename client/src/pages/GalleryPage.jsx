@@ -30,19 +30,9 @@ const Container = styled.section`
 
 const InputWrapper = styled.div`
   width: 100%;
-  margin-bottom: 50px;
+  margin: 0 auto 50px;
 
-  @media only screen and (max-width: 1440px) {
-  }
-
-  @media only screen and (max-width: 1200px) {
-  }
-
-  @media only screen and (max-width: 960px) {
-    width: calc(100% - 15px);
-  }
-
-  @media only screen and (max-width: 760px) {
+  @media only screen and (max-width: 425px) {
     width: calc(100% - 40px);
   }
 `;
