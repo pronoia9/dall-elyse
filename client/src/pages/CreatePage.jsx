@@ -134,8 +134,18 @@ const Container = styled.section`
   justify-content: center;
   gap: 100px;
 
-  @media only screen and (max-width: 960px) {
+  @media only screen and (max-width: 1024px) {
     gap: 40px;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    height: auto;
+    justify-content: flex-start;
+    margin-bottom: 25px;
+  }
+
+  @media only screen and (max-width: 500px) {
+    margin-bottom: 100px;
   }
 `;
 

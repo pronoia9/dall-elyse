@@ -109,6 +109,7 @@ const Main = styled(motion.main)`
   /* padding-top: 50px; */
   /* padding-bottom: 40px; */
   margin: auto;
+  overflow: scroll;
 
   & > div:last-child {
     margin-bottom: 0;
