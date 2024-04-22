@@ -1,4 +1,5 @@
-import { GlobalStyles } from './GlobalStyles';
-import StyledComponentsRegistry from './StyledComponentsRegistry';
+export * from './GlobalStyles.js';
 
-export { GlobalStyles, StyledComponentsRegistry };
+export { default as StyledComponentsRegistry } from './StyledComponentsRegistry';
+
+export * from './TextStyles.js';
