@@ -21,25 +21,26 @@ export const getPosts = (setData) => {
 
 // Fetches posts from the server and updates the data state
 export const fetchPosts = async (setData) => {
-  try {
-    const response = await fetch(process.env.POSTS_URL, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (response.ok) {
-      const result = await response.json();
-      // Reverse the data array so the newest items are first and update the state
-      const reversedData = result.data.reverse();
-      // Set the store data with the data
-      setData(reversedData);
-      // Store the fetched data in local storage
-      localStorage.setItem('dall-elyse-data', JSON.stringify(reversedData));
-    }
-  } catch (error) {
-    console.error(error);
-  }
+  // TODO
+  // try {
+  //   const response = await fetch(process.env.POSTS_URL, {
+  //     method: 'GET',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (response.ok) {
+  //     const result = await response.json();
+  //     // Reverse the data array so the newest items are first and update the state
+  //     const reversedData = result.data.reverse();
+  //     // Set the store data with the data
+  //     setData(reversedData);
+  //     // Store the fetched data in local storage
+  //     localStorage.setItem('dall-elyse-data', JSON.stringify(reversedData));
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  // }
 };
 
 // Returns a random prompt from the surpriseMePrompts array
