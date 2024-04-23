@@ -53,14 +53,10 @@ export function getRandomPrompt(prompt) {
 }
 
 // Copy input to clipboard
-export function copyToClipboard(text) {
-  navigator.clipboard.writeText(text);
-}
+export const copyToClipboard = (text) => void navigator.clipboard.writeText(text);
 
 // Downloads an image with a specified filename
-export async function downloadImage(_id, photo) {
-  FileSaver.saveAs(photo, `download-${_id}.jpg`); // Save the photo with the provided filename
-}
+export const downloadImage = async (_id, photo) => void FileSaver.saveAs(photo, `download-${_id}.jpg`); // Save the photo with the provided filename
 
 // Returns the smaller number
 export const smaller = (a, b) => (parseInt(a) < parseInt(b) ? a : b);
