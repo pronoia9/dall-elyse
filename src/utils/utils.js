@@ -22,7 +22,7 @@ export const getPosts = (setData) => {
 // Fetches posts from the server and updates the data state
 export const fetchPosts = async (setData) => {
   try {
-    const response = await fetch(import.meta.env.VITE_POSTS_URL, {
+    const response = await fetch(process.env.POSTS_URL, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
