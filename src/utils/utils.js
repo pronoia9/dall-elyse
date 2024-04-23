@@ -1,6 +1,6 @@
 import FileSaver from 'file-saver';
 
-import { surpriseMePrompts } from './data';
+import { surpriseMePrompts } from '@/utils';
 
 export const getPosts = (setData) => {
   try {
