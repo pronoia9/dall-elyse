@@ -4,6 +4,10 @@ const nextConfig = {
     styledComponents: true,
   },
   reactStrictMode: false,
+  experimental: {
+    serverActions: true,
+    serverComponentsExternalPackages: ['mongoose'],
+  },
   webpack: (config, options) => {
     config.module.rules.push({
       test: /\.glsl/,
