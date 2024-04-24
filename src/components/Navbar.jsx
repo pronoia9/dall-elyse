@@ -14,10 +14,10 @@ const NavLink = ({ title, url, animation }) => {
 
   return (
     <NavListItem className='navlist-item' {...animation}>
-      {url === pathname.pathname ? (
+      {url === pathname ? (
         <p>{title}</p>
       ) : (
-        <Link to={url} target={`${url.includes('http') ? '_blank' : ''}`}>
+        <Link href={url} target={`${url.includes('http') ? '_blank' : ''}`}>
           {title}
         </Link>
       )}
@@ -63,7 +63,7 @@ export default function Navbar() {
         <Wrapper>
           {/* Logo */}
           <Logo {...logoMotion(navlinks.length, mobileMenuOpen)}>
-            <Link to='/'>
+            <Link href='/'>
               <img src={logo} alt='logo' />
             </Link>
           </Logo>
