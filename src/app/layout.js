@@ -21,12 +21,15 @@ export default function RootLayout({ children }) {
 
   // FETCHING GALLERY DATA (End the loading screen in 5s if theres local data and we dont have to fetch it)
   useEffect(() => {
-    if (getPosts(setData)) setInterval(() => void setTime(preloaderTime), 5000);
+    let interval;
+    if (getPosts(setData)) interval = setInterval(() => void setTime(preloaderTime), 5000);
+    return () => clearInterval(interval); // Clean up the interval on unmount
   }, []);
 
   // SET TIMEOUT FOR THE PRELOADER (10s)
   useEffect(() => {
-    setTimeout(() => void setTime(preloaderTime), 1000 * preloaderTime);
+    const timeout = setTimeout(() => void setTime(preloaderTime), 1000 * preloaderTime);
+    return () => clearTimeout(timeout); // Clean up the timeout on unmount
   }, []);
 
   // ONCE BOTH DATA IS SET & TIME IS AT LEAST 10s, DISABLE PRELOADER
