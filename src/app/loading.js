@@ -1,6 +1,6 @@
-import Loader from "@/components";
+import { Preloader } from "@/components";
 
 export default function Loading() {
   // You can add any UI inside Loading, including a Skeleton.
-  return <Loader />;
+  return <Preloader />;
 }
