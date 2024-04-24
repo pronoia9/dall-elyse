@@ -17,7 +17,7 @@
     "file-saver": "^2.0.5",
     "framer-motion": "^10.12.12",
     "leva": "^0.9.34",
-    "mongoose": "^8.3.2",
+    "mongoose": "^7.4.2",
     "next": "14.2.2",
     "openai": "^4.38.2",
     "photoswipe": "^5.3.7",
