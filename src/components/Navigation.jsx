@@ -12,7 +12,16 @@ import { navigationMotion } from '@/utils';
 
 const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props} /> : <p {...props} />);
 
-export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobileTitle, titleOffset, subtitleOffset, }) {
+export default function Navigation({
+  title = 'title',
+  subtitle = 'subtitle',
+  path = '/',
+  position,
+  center,
+  mobileTitle,
+  titleOffset,
+  subtitleOffset,
+}) {
   const pathname = usePathname();
   const [isHover, setIsHover] = useState(null); // local state for hover
   const toggleOverlay = useStore((state) => state.toggleOverlay); // store, toggles overlay on background when hovering
@@ -20,12 +29,15 @@ export default function Navigation({ title = 'title', subtitle = 'subtitle', pat
 
   const checkIfLink = () => pathname !== path; // checks if the links path is the same as the current page
 
-  const handleHover = (hover) => { toggleOverlay(); setIsHover(hover); };
+  const handleHover = (hover) => {
+    toggleOverlay();
+    setIsHover(hover);
+  };
 
   return (
-    <LinkContainer position={position} center={center} mobileTitle={mobileTitle}>
+    <LinkContainer $position={position} $center={center} $mobileTitle={mobileTitle}>
       <Line className='navigation-line' {...lineMotion(center)} />
-      <LinkWrapper center={center}>
+      <LinkWrapper $center={center}>
         <LinkType href={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ifLink={checkIfLink()}>
           <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobileTitle)}>{subtitle}</NavigationSubtitle>
           <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
@@ -45,18 +57,18 @@ const LinkContainer = styled.div`
   transform: rotate(-90deg) translate(0, 0);
   z-index: 15;
   padding-left: 100px;
-  padding: ${(props) => props.center && '0'};
+  padding: ${({ $center }) => $center && '0'};
 
   /* Text alignments for centered vs not */
-  text-align: ${(props) => (props.center ? 'center' : 'left')};
+  text-align: ${($center) => ($center ? 'center' : 'left')};
   span {
-    text-align: ${(props) => (props.center ? 'left' : 'right')};
+    text-align: ${($center) => ($center ? 'left' : 'right')};
   }
 
   /* left: calc()s */
-  ${(props) =>
+  ${({ $position }) =>
     css`
-      ${props.position}
+      ${$position}
     `}
 
   &:hover {
@@ -66,12 +78,12 @@ const LinkContainer = styled.div`
   /* TITLE STYLING (MOVE FROM SIDE TO TOP) */
   /* Must set 'mobile: true/false' in 'data', not setting it is necessary to keep home page links' styling */
   @media only screen and (max-width: 960px) {
-    display: ${(props) => props.mobileTitle === false && 'none'};
+    display: ${({ $mobileTitle }) => $mobileTitle === false && 'none'};
   }
 
   @media only screen and (max-width: 760px) {
-    ${(props) =>
-      props.mobileTitle === true &&
+    ${({ $mobileTitle }) =>
+      $mobileTitle === true &&
       css`
         display: block;
         position: relative;
@@ -101,8 +113,8 @@ const Line = styled(motion.div)`
 `;
 
 const LinkWrapper = styled.div`
-  ${(props) =>
-    props?.center &&
+  ${({$center}) =>
+    $center &&
     css`
       margin: 0 auto;
     `}
