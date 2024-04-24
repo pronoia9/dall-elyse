@@ -7,7 +7,7 @@ import { Gallery as PhotoSwipeGallery } from 'react-photoswipe-gallery';
 import { useStore } from '@/store/useStore';
 import { GalleryCard } from '@/components';
 import 'photoswipe/dist/photoswipe.css';
-import '@/styles/default-skin.css';
+import '@/styles/photoswipe.css';
 
 export default function Gallery() {
   // STORE
