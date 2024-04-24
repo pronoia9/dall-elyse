@@ -10,8 +10,6 @@ import { useStore } from '@/store';
 import { NavigationSubtitle, NavigationTitle } from '@/styles';
 import { navigationMotion } from '@/utils';
 
-const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props} /> : <p {...props} />);
-
 export default function Navigation({
   title = 'title',
   subtitle = 'subtitle',
@@ -34,14 +32,16 @@ export default function Navigation({
     setIsHover(hover);
   };
 
+  const Tag = checkIfLink() ? Link : 'p';
+
   return (
     <LinkContainer $position={position} $center={center} $mobileTitle={mobileTitle}>
       <Line className='navigation-line' {...lineMotion(center)} />
       <LinkWrapper $center={center}>
-        <LinkType href={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)} ifLink={checkIfLink()}>
+        <Tag href={path} onMouseEnter={() => handleHover(true)} onMouseLeave={() => handleHover(false)}>
           <NavigationSubtitle {...subtitleMotion(center, subtitleOffset, isHover && checkIfLink(), mobileTitle)}>{subtitle}</NavigationSubtitle>
           <NavigationTitle {...titleMotion(center, titleOffset, isHover && checkIfLink())}>{title}</NavigationTitle>
-        </LinkType>
+        </Tag>
       </LinkWrapper>
     </LinkContainer>
   );
