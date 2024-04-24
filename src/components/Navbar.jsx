@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -9,11 +10,11 @@ import { navbarData, navbarMotion } from '@/utils';
 import { useStore } from '@/store';
 
 const NavLink = ({ title, url, animation }) => {
-  const location = useLocation();
+  const pathname = usePathname();
 
   return (
     <NavListItem className='navlist-item' {...animation}>
-      {url === location.pathname ? (
+      {url === pathname.pathname ? (
         <p>{title}</p>
       ) : (
         <Link to={url} target={`${url.includes('http') ? '_blank' : ''}`}>
@@ -28,9 +29,11 @@ export default function Navbar() {
   // DATA
   const { logo, navLinks, homeLinks } = navbarData;
   // STORE
-  const mobileMenuOpen = useStore((state) => state.mobileMenuOpen),
-    openMobileMenu = useStore((state) => state.openMobileMenu),
-    closeMobileMenu = useStore((state) => state.closeMobileMenu);
+  const { mobileMenuOpen, openMobileMenu, closeMobileMenu } = useStore((state) => ({
+    mobileMenuOpen: state.mobileMenuOpen,
+    openMobileMenu: state.openMobileMenu,
+    closeMobileMenu: state.closeMobileMenu,
+  }));
   const mobileMenuRef = useRef();
   // ANIMATION
   const { logoMotion, desktopLinksMotion, mobileMenuMotion, mobileLinksMotion } = navbarMotion;
@@ -43,18 +46,16 @@ export default function Navbar() {
       if (mobileMenuOpen && mobileMenuRef?.current !== e.target) closeMobileMenu();
     };
     document.addEventListener('mousedown', handleClick);
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-    };
+    return () => void document.removeEventListener('mousedown', handleClick);
   }, []);
 
   // DYNAMIC NAVLIST
   const [navlinks, setNavlinks] = useState(homeLinks);
-  const location = useLocation();
+  const pathname = usePathname();
   // Change navlinks on path change
   useEffect(() => {
-    location.pathname !== '/' ? setNavlinks(navLinks) : setNavlinks(homeLinks);
-  }, [location]);
+    pathname !== '/' ? setNavlinks(navLinks) : setNavlinks(homeLinks);
+  }, [pathname]);
 
   return (
     <>
