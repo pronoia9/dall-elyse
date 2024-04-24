@@ -19,3 +19,11 @@ export const connectToDB = async () => {
     console.error('MongoDB connection error:', error);
   }
 };
+
+const Post = new mongoose.Schema({
+  name: { type: String, required: true },
+  prompt: { type: String, required: true },
+  photo: { type: String, required: true },
+});
+
+export const PostSchema = mongoose.model('Post', Post);
