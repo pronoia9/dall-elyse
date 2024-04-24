@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -21,12 +23,14 @@ export default function GalleryCard({ _id, name, prompt, photo, index, ref, open
 
   // Handle hover state for overlay when hovering on the container after image has loaded
   const handleHover = (e) => {
-    (!loading && e.type === 'mouseenter') && setHover(true);
-    (!loading && e.type === 'mouseleave') && setHover(false);
+    !loading && e.type === 'mouseenter' && setHover(true);
+    !loading && e.type === 'mouseleave' && setHover(false);
   };
 
   // Function for when the image loads (onLoad)
-  const imageLoaded = () => { setLoading(false); };
+  const imageLoaded = () => {
+    setLoading(false);
+  };
 
   // PhotoSwipe Image size
   const imageSize = smaller(window.innerWidth * 0.85, window.innerHeight * 0.85);

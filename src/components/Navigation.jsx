@@ -1,5 +1,8 @@
+'use client';
+
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+//// import { Link, useLocation } from 'react-router-dom';
+import Link from 'next/link';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 
@@ -10,12 +13,12 @@ import { navigationMotion } from '@/utils';
 const LinkType = ({ ifLink, ...props }) => (ifLink ? <Link {...props} /> : <p {...props} />);
 
 export default function Navigation({ title = 'title', subtitle = 'subtitle', path = '/', position, center, mobileTitle, titleOffset, subtitleOffset, }) {
-  const location = useLocation();
+  // const location = useLocation();
   const [isHover, setIsHover] = useState(null); // local state for hover
   const toggleOverlay = useStore((state) => state.toggleOverlay); // store, toggles overlay on background when hovering
   const { lineMotion, titleMotion, subtitleMotion } = navigationMotion; // motion data
 
-  const checkIfLink = () => location.pathname !== path; // checks if the links path is the same as the current page
+  const checkIfLink = () => 'location'?.pathname !== path; // checks if the links path is the same as the current page
 
   const handleHover = (hover) => { toggleOverlay(); setIsHover(hover); };
 
