@@ -9,22 +9,16 @@ import { useStore } from '../store/useStore';
 const defaultForm = { name: '', prompt: '', photo: null, generationPrompt: false, shared: false };
 
 export default function CreatePage() {
-  // STORE
   const setData = useStore((state) => state.setData);
-  // STATES
   const [form, setForm] = useState(defaultForm),
     [generating, setGenerating] = useState(false),
     [sharing, setSharing] = useState(false);
 
   // HANDLE INPUT CHANGE
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const handleChange = (e) => void setForm({ ...form, [e.target.name]: e.target.value });
 
   // SURPRISE ME BUTTON THAT GENERATED RANDOM PROMPTS
-  const handleSurpriseMe = () => {
-    setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) }));
-  };
+  const handleSurpriseMe = () => void setForm((prev) => ({ ...prev, prompt: getRandomPrompt(form.prompt) }));
 
   // HANDLE GENERATE
   const handleGenerate = async () => {
@@ -35,9 +29,7 @@ export default function CreatePage() {
         setGenerating(true);
         const response = await fetch(import.meta.env.VITE_OPENAI_URL, {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ prompt: form.prompt }),
         });
         const data = await response.json();
@@ -81,6 +73,7 @@ export default function CreatePage() {
       <TextContainer>
         <p>Generate an imaginative image through DALL-E AI and share it with the community.</p>
         <p>Once you have created the image you want, you can share it with others in the community.</p>
+        <p style={{ color: 'red', fontSize: '0.8rem' }}>(WARNING: Unfortunately, I do not have any free credits left.)</p>
       </TextContainer>
 
       {/* Create/Form Section */}
